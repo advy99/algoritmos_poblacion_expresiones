@@ -47,6 +47,13 @@ PG normalmente trabaja con programas simples, que no consideran bucles, aunque e
 
 ### Representación basáda en árboles
 
+Los árboles son una representación universal, algunos ejemplos interesantes para los que podemos utilizar esta representación son:
+
+- Fórmulas aritméticas.
+- Fórmulas lógicas.
+- Programas escritos en C (o cualquier otro lenguaje).
+
+
 ### Función de ajuste
 
 ### Generación de la población inicial
