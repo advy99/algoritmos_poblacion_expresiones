@@ -22,6 +22,8 @@ Usaré PG para referirme a Programación Genética y AG para referirme a Algorit
 
 ## Descripción general. Representación y operadores
 
+### Representación de los programas
+
 PG aplica AG en el campo de programas para ordenadores.
 
 Un programa es un lenguaje general para expresar soluciones a gran variedad de problemas.
@@ -41,7 +43,7 @@ La más extendida es la representación basada en árboles.
 PG normalmente trabaja con programas simples, que no consideran bucles, aunque existen implementaciones más avanzadas.
 
 
-### Representación de los programas
+
 
 ### Representación basáda en árboles
 
