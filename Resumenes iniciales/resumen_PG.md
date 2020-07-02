@@ -53,6 +53,35 @@ Los árboles son una representación universal, algunos ejemplos interesantes pa
 - Fórmulas lógicas.
 - Programas escritos en C (o cualquier otro lenguaje).
 
+En lugar de utilizar estructuras lineales para representar cromosómas (vectores de enteros, de bits, de valores reales, etc) como en algoritmos evolutivos, algoritmos genéticos y otras estrategias evolutivas utilizaremos una representación con estructuras no lineales, árboles.
+
+En los modelos que usan representaciones lineales el tamaño de los cromosómas es siempre fijo a un tamaño, en el caso de los árboles en PG puede varirar al modificar la profundidad y anchura del árbol.
+
+
+La representación de programas en forma de árboles se puede realizar utilizando una gramática libre del contexto (definida en la Jerarquía de Chomsky) que defina las sentencias válidas del lenguaje.
+
+PG puede directamente gestionar las expresiones del árbol y las reglas necesarias para evalauarlas, por lo que no será necesario hacer ninguna referencia al lenguaje libre de contexto que la genera.
+
+Un cromosóma codificará la expresión en forma de árbol usando métodos de representación de árboles, normalmente en preorder.
+
+
+Para poder realizar la representación necesitamos definir dos conjuntos:
+
+- Conjunto T: Variables y constantes del problema. Ej: x_1, x_2, constantes, etc.
+- Conjunto S: Funciones e instrucciones del programa. Ej: +, -, \*, /, if-then-else, etc.
+
+S y T deben contener todo lo necesario para resolver el problema en cuestión a resolver. (En mi caso particular tendré que realizar un estudio del problema, un enfoque de como resolverlo, y de ahí obtener todo lo necesario para estos conjuntos).
+
+Se suelen seguir estas reglas generales:
+
+- Toda variable o constante $t \in T$ es una expresión correcta.
+- f(e_1, ..., e_n) es una expresión correcta si $f \in F$, $aridad(f) = n$ y e_1, ... e_n son expresiones correctas.
+- No existen otras formas de expresiones correctas.
+
+En general, las expresiones de PG no están tipadas, como propiedad, toda función debe aceptar cualquier símbolo terminal y cualquier tipo de dato devuelto por otra función como parámetro.
+
+(Mirar ejemplos de todo esto en las diapositivas)
+
 
 ### Función de ajuste
 
