@@ -250,6 +250,45 @@ Esto nos genera el problema de que los valores de estas constantes solo puede se
 
 ## Programación Genética y Algoritmos Genéticos: El modelo GA-P
 
+### Introducción a GA-P
+
+La forma en la que PG trabaja con constantes aleatorias puede ser mejorada utilizando las siguientes medidas:
+
+- Modificar la mutación de PG de forma que los coeficientes reales sean mutados como el operador de mutación de un AG.
+- Incorporar métodos de optimización de coeficientes antes de evaluar las expresiones (PG hibrida).
+- Evaluar de forma conjunta las expresiones (PG) y las constantes (AG) mediante un algoritmo GA-P.
+
+
+### Representación de programas en GA-P
+
+Los algoritmos GA-P son una hibridación entre GA y PG.
+
+Cada individuo contendrá una expresión (PG) y un array de coeficientes (GA), de forma que ambas partes evolucionen a la vez.
+
+### Operadores genéticos en GA-P
+
+Los operadores de cruce y mutación son aplicados de forma independiente en las componenes de AG y PG del algoritmo GA-P. Las probabilidades de cruce y mutación de cada componente son independientes.
+
+Es posible utilizar cualquier tipo de esquema de selección y reemplazamiento. La propuesta original consideraba selección por torneo y reemplazamiento estacionario.
+
+### Ventajas de los algoritmos GA-P
+
+- Pueden gestionar tanto información numérica como simbólica.
+- Mayor precisión en los resultados finales.
+- El tamaño de la población de GA-P puede ser menor que en PG, y por lo tanto mostrará una convergencia más rápida.
+- Representación más compacta, se adapta mejor al problema que PG.
+
+### Algunas consideraciones del comportamiento de los algoritmos GA-P
+
+La población de GA-P evoluciona hasta organizarse en varias subpoblaciones compuestas por individuos con la misma expresión (PG) y distintos coeficientes (AG).
+
+Estos individuos compiten entre si y con individuos de las otras subpoblaciones. Esto hace que el tamaño de la población sea dinámico como en AG, ya que al principio pueden coexistir distintas expresiones, pero finalmente solo la subpoblación con la mejor expresión sobrevive.
+
+Esto hace que al principio el algoritmo se comporte como PG y al final como un AG.
+
+Se puede conseguir un comportamiento más compacto utilizando una aproximación evolutiva multimodal (niching).
+
+
 ## Aplicaciones
 
 
