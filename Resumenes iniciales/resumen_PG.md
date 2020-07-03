@@ -126,7 +126,31 @@ Para añadir más diversidad es posible:
 - Generar árboles totalmente aleatorios haciendo uso de símbolos terminales.
 
 
-### Operadores genéticos en progracación genética
+### Operadores genéticos en programación genética
+
+#### Selección y reemplazamiento
+
+La selección de padres es normalmente proporcional al ajuste (por torneo).
+
+En grandes poblaciones necesitaremos medidas más fuertes para incrementar la eficiencia:
+
+- Ordenar la población por ajuste y dividirla en dos grupos.
+- Grupo 1: x% mejor de la población.
+- Grupo 2: 100-x% de la población.
+- El 80% de los elementos seleccionados será del grupo 1, el 20% restante del grupo 2.
+- Para poblaciones de tamaño 1.000, 2.000, 4.000 y 8.000 normalmente utilizaremos $x = 32%, 16%, 8%, 4%$ respectivamente.
+
+Para el reemplazamiento utilizaremos el esquema generacional (una generación sustituye por completo a la siguiente) con elitismo (mantenemos la mejor solución de la generación anterior en la siguiente).
+
+Recientemente el reemplazamiento estacionario se esta volviendo popular por su elitismo.
+
+Es esquema de generación de hijos es distinto al esquema utilizado por AG. Los AG utilizan un esquema de cruce y mutación, ambos probabilisticos, en PG utilizaremos cruce o mutación, no ambos a la vez, y escogeremos cual de los dos utilizar de forma probabilistica.
+
+Esto tendrá un impacto en como serán los operadores genéticos en PG.
+
+#### Cruce
+
+
 
 ### The bloat problem (no se me ocurre como traducirlo, ¿el problema de la sobrecarga, tal vez?)
 
