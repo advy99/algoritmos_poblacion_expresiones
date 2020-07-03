@@ -209,10 +209,31 @@ La mutación cuenta con dos parámetros:
 
 Usualmente se utiliza un valor de $p_m$ cercano a 0, como 0.05.
 
-El hecho de que la mutación sea menos importante en PG que en AG es que el cruce en PG de por si ya nos asegura una gran diversidad por los motivos ya explicados, de hecho, esta mutación es equivalente a recombinar el árbol acual con otro generado de forma aleatoria.  
+El hecho de que la mutación sea menos importante en PG que en AG es que el cruce en PG de por si ya nos asegura una gran diversidad por los motivos ya explicados, de hecho, esta mutación es equivalente a recombinar el árbol acual con otro generado de forma aleatoria.
+
+
 
 
 ### The bloat problem (no se me ocurre como traducirlo, ¿el problema de la sobrecarga, tal vez?)
+
+Este problema se da cuando sobrevive la solución más sobrecargada, en nuestro caso, cuando sobrevive el árbol con mayor tamaño, y esto hace que con las generaciones el tamaño de las soluciones se vea incrementado de forma significativa.
+
+Necesitamos medidas para paliar este problema:
+
+- Prohibir variaciones de operadores que generen hijos demasiado grandes.
+
+- Ejercer presión sobre estas soluciones: Penalizar el tamaño de una solución por ser demasiado grande, tratando el tamaño como una restricción débil.
+
+
+
+## Ejemplos de aplicación: Regresión simbólica
+
+
+
+
+## Programación Genética y Algoritmos Genéticos: El modelo GA-P
+
+## Aplicaciones
 
 
 ## Bibliografía
