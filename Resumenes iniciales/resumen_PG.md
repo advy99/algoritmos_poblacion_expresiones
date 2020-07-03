@@ -85,7 +85,46 @@ En general, las expresiones de PG no están tipadas, como propiedad, toda funci�
 
 ### Función de ajuste
 
+La función de ajuste en PG debe ser una medida de la habilidad para resolver el problema del programa codificado.
+
+En principio será necesaria una evaluación recursiva de las expresiones de los árboles. Se hará dando valores a las hojas del árbol y aplicando las operaciones del árbol, recorriendolo de abajo hasta arriba y finalmente devolver el valor asociado a la raíz del árbol.
+
+Aun así la evaluación se puede implementar de forma iterativa, utilizando una estructura de datos de tipo pila para recorrer el árbol en preorder y realizar todas las operaciones.
+
+Existe una gran diferencia entre la evaluación de los árboles para ajustar los datos y los árboles (programas) que realmente se pueden ejecutar.
+
+La ejecución puede cambiar el entorno, al calcular el ajuste.
+
+Los cálculos del ajuste realizados en forma de simulaciones requerirán mucha cantidad de tiempo, aunque normalmente las formas evolucionadas (?) son muy buenas.
+
 ### Generación de la población inicial
+
+Esta basada en la generación aleatoria de programas (árboles de expresiones), que pueden ser tanto directos como no directos:
+
+Para generar un árbol aleatorio las reglas de la gramática que generará los árboles serán aplicadas de forma progresiva y aleatoria, de forma directa o implicita.
+
+Los programas generados aleatoriamente son:
+
+- Distintos tamaños y formas.
+- Sintacticamente válidos.
+- Ejecutables.
+
+También es necesario establecer un límite máximo de profundidad para los árboles $D_{max}$.
+
+Existen dos métodos.
+
+- Árboles completos: Todas las ramas tienen profundidad $ = D_{max}$
+	- Nodos con profundidad $d < D_{max}$ escogen un elemento aleatorio de símbolos no terminales (conjunto F).
+	- Nodos con profundidad $d = D_{max}$ escogen un elemento aleatorio de elementos terminales (conjunto T).
+- Árboles incompletos: Todas las ramas tienen una profundidad $\leq D_{max}$.
+	- Nodos con profundidad d < D_{max} escogen un elemento aleatorio de simboles terminales o no terminales. $F \cup T$
+
+Normalmente en PG se suelen utilizar ámbos métodos para mayor diversidad, la mitad de la población será generada con árboles completos y la otra mitad con incompletos.
+
+Para añadir más diversidad es posible:
+- Generar un porcentaje de árboles aleatorios de cada tamaño valido.
+- Generar árboles totalmente aleatorios haciendo uso de símbolos terminales.
+
 
 ### Operadores genéticos en progracación genética
 
