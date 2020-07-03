@@ -150,6 +150,51 @@ Esto tendrá un impacto en como serán los operadores genéticos en PG.
 
 #### Cruce
 
+Normalmente como operador de cruce se suele utilizar una recombinación de subárboles escogidos de forma aleatoria entre los dos padres.
+
+Este método tendrá dos parámetros:
+
+- Probabilidad p_{c} de escoger recombinación contra mutación.
+- Probabilidad de escoger un unto interno de cada padre como punto de cruce( Uno para cada árbol? imagino que si, preguntar aun así. las hojas tambien pueden contar como subárbol? si el punto que escogemos es un símbolo terminal, el del otro árbol también ha de ser terminal, o se puede reparar de alguna forma?).
+
+El tamaño de los hijos generados puede superar el tamaño de los padres.
+
+
+##### Selección de puntos de cruce
+
+El algoritmo para seleccinar el punto de corte es más eficiente si la probabilidad de cada punto no es uniforme, es decir, si la sesgamos siguiendo unos criterios:
+
+- Los arcos conectados a símbolos terminales tendrán una probabilidad menor que los arcos conectados a funciones.
+- La regla general es que la probabilidad de seleccionar arcos con símbolos terminales ha de ser menor a 1/#arcos\_en\_el\_arbol.
+
+Por este motivo los hijos son más distintos de los padres.
+
+Cuando el punto de cruce ha sido seleccionado en el primer árbol una decisión aleatoria queda sesgada de cara a decidir el punto de cruce del segundo árbol para verificar las siguientes restricciones:
+
+- La recombinación ha de ser con un subárbol con tipos compatibles (si es PG tipada).
+- Asegurarse obtener un subárbol de un tamaño apropiado.
+
+##### Aspectos importantes de cara a la implementación del cruce
+
+Existe una dificultad para determinar el subárbol a intercambiar en la codificación de preorder del árbol.
+
+La operación se puede implementar de dos formas distintas.
+
+- Aplicando las producciones de la gramática para obtener la codificación del árbol, deteniendose en un punto aleatorio y considerar que el resto del árbol que queda por generar es el que se va a intercambiar.
+- Escoger un punto aleatorio en la representación, determinar el inicio y fin del subárbol asociado en la representación en preorder y ese será el subárbol a intercambiar.
+
+
+##### Diferencias entre el cruce de AG y PG
+
+El cruce en PG es más brusco que en AG.
+
+Cuando aplicamos el cruce en dos individuos iguales, en PG rara ver se generan dos hijos iguales, mientras que en AG esto suele ocurrir muy a menudo.
+
+Esto implica que la recombinación de dos árboles bien ajustados y que son similares (el algoritmo esta cercano a la convergencia) no implica necesariamente que nos lleve a dos buenos descendientes.
+
+Por estos motivos, el algoritmo explora el espacio de búsqueda de una forma apropiada pero no lo explota tanto como nos gustaría.
+
+Esto nos llevará a que normalmente el tamaño de las poblaciones utilizadas en PG es mucho más grande que en AG.
 
 
 ### The bloat problem (no se me ocurre como traducirlo, ¿el problema de la sobrecarga, tal vez?)
