@@ -75,7 +75,7 @@ S y T deben contener todo lo necesario para resolver el problema en cuestión a 
 Se suelen seguir estas reglas generales:
 
 - Toda variable o constante $t \in T$ es una expresión correcta.
-- f(e_1, ..., e_n) es una expresión correcta si $f \in F$, $aridad(f) = n$ y e_1, ... e_n son expresiones correctas.
+- $f(e_1, ..., e_n)$ es una expresión correcta si $f \in F$, $aridad(f) = n$ y $e_1, ... e_n$ son expresiones correctas.
 - No existen otras formas de expresiones correctas.
 
 En general, las expresiones de PG no están tipadas, como propiedad, toda función debe aceptar cualquier símbolo terminal y cualquier tipo de dato devuelto por otra función como parámetro.
@@ -113,11 +113,11 @@ También es necesario establecer un límite máximo de profundidad para los árb
 
 Existen dos métodos.
 
-- Árboles completos: Todas las ramas tienen profundidad $ = D_{max}$
+- Árboles completos: Todas las ramas tienen profundidad $= D_{max}$
 	- Nodos con profundidad $d < D_{max}$ escogen un elemento aleatorio de símbolos no terminales (conjunto F).
 	- Nodos con profundidad $d = D_{max}$ escogen un elemento aleatorio de elementos terminales (conjunto T).
 - Árboles incompletos: Todas las ramas tienen una profundidad $\leq D_{max}$.
-	- Nodos con profundidad d < D_{max} escogen un elemento aleatorio de simboles terminales o no terminales. $F \cup T$
+	- Nodos con profundidad $d < D_{max}$ escogen un elemento aleatorio de simboles terminales o no terminales. $F \cup T$
 
 Normalmente en PG se suelen utilizar ámbos métodos para mayor diversidad, la mitad de la población será generada con árboles completos y la otra mitad con incompletos.
 
@@ -154,7 +154,7 @@ Normalmente como operador de cruce se suele utilizar una recombinación de subá
 
 Este método tendrá dos parámetros:
 
-- Probabilidad p_{c} de escoger recombinación contra mutación.
+- Probabilidad $p_{c}$ de escoger recombinación contra mutación.
 - Probabilidad de escoger un unto interno de cada padre como punto de cruce( Uno para cada árbol? imagino que si, preguntar aun así. las hojas tambien pueden contar como subárbol? si el punto que escogemos es un símbolo terminal, el del otro árbol también ha de ser terminal, o se puede reparar de alguna forma?).
 
 El tamaño de los hijos generados puede superar el tamaño de los padres.
