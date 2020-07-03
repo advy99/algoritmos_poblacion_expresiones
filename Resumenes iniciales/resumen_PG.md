@@ -196,6 +196,21 @@ Por estos motivos, el algoritmo explora el espacio de búsqueda de una forma apr
 
 Esto nos llevará a que normalmente el tamaño de las poblaciones utilizadas en PG es mucho más grande que en AG.
 
+#### Mutación
+
+La más común suele ser el reemplazamiento de un subárbol por otro árbol generado de forma aleatoria.
+
+El tamaño del hijo puede ser mayor que el tamaño del padre.
+
+La mutación cuenta con dos parámetros:
+
+- Probabilidad $p_m$ de escoger mutación contra recombinación. (debería ser 1-p_c, no? porque si mal no he entendido escogemos uno u otro, nunca ambos).
+- Probabilidad de escoger cierto nodo como raíz del subárbol donde realizar el reemplazamiento.
+
+Usualmente se utiliza un valor de $p_m$ cercano a 0, como 0.05.
+
+El hecho de que la mutación sea menos importante en PG que en AG es que el cruce en PG de por si ya nos asegura una gran diversidad por los motivos ya explicados, de hecho, esta mutación es equivalente a recombinar el árbol acual con otro generado de forma aleatoria.  
+
 
 ### The bloat problem (no se me ocurre como traducirlo, ¿el problema de la sobrecarga, tal vez?)
 
