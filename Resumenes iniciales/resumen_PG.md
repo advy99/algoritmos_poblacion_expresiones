@@ -291,6 +291,17 @@ Se puede conseguir un comportamiento más compacto utilizando una aproximación 
 
 ## Aplicaciones
 
+### En que situaciones ha tenido buen rendimiento la Programación Genética
+
+PG ha sido especialmente productiva en areas con las siguientes propiedades:
+
+- Interrelaciones entre variables relevantes son muy poco o nada conocidas.
+- Encontrar el tamaño y forma de la solución es la mayor parte del problema.
+- Gran cantidad de datos de test están disponibles de una forma que el ordenador pueda leer.
+- Problemas donde conocer si el comportamiento de una solución es bueno o malo, pero no existen métodos para obtener buenas soluciones.
+- Análisis matemático convencional donde no se han obtenido (o no se pueden obtener) soluciones analíticas.
+- Pequeñas mejores de eficiencia son facilmente medibles y con estas obtenemos un gran beneficio.
+
 
 ## Bibliografía
 
