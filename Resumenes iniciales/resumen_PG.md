@@ -228,7 +228,24 @@ Necesitamos medidas para paliar este problema:
 
 ## Ejemplos de aplicación: Regresión simbólica
 
+### Introducción a la regresión simbólica
 
+Las distintas técnicas de regresión nos permiten derivar expresiones matemáticas $g$ que modelan el comportamiento de un sistema del que tenemos su entrada y salida.
+
+Las técnicas clásicas de regresión requieren una expresión especificada a priori, por ejemplo, lineal, cuadrática, exponencial, logarítmica, etc, y simplemente se determinan los coeficientes de la expresión utilizando técnicas de optimización para estimar estos coeficientes.
+
+La regresión simbólica es capaz de automáticamente obtener tanto la estructura de la expresión como el valor de sus coeficientes. Es muy util para sistemas no lineales de identificación (identificación de estructuras y estimación de parámetros).
+
+Las técnicas de inducción de los programas pueden ser aplicadas para determinar la expresión algebráica de $g$, aunque esto requiere que se codifique la expresión de forma adecuada (usando por ejemplo una representación basada en árboles) y aplicar un algoritmo de Programación Genética.
+
+Por este motivo la Regresión Simbólica es la principal aplicación de la Programación Genética.
+
+### Regresión Simbólica utilizando Programación Genética
+
+
+La expresión a encontrar $g$ es más simple si se tienen en cuenta las constantes numéricas, al reducir el número de variables. El valor de estas constantes son escogidos al azar al generar la población inicial de programas.
+
+Esto nos genera el problema de que los valores de estas constantes solo puede ser modificado por las mutaciones. Como consecuencia, el obtener los valores óptimos será mucho más dificil.
 
 
 ## Programación Genética y Algoritmos Genéticos: El modelo GA-P
