@@ -2,6 +2,7 @@
 
 ## Introducción
 
+
 Programación Genética: Puede ser definida como una instancia específica de algoritmo genético para inducir programas en ordenadores de forma automática, no es necesario especificar como ha de hacerlo.
 
 Comenzo sobre 1985, aunque el principal impulso fue por parte de John Koza a principios de los 90.
@@ -23,6 +24,7 @@ Usaré PG para referirme a Programación Genética y AG para referirme a Algorit
 ## Descripción general. Representación y operadores
 
 ### Representación de los programas
+
 
 PG aplica AG en el campo de programas para ordenadores.
 
@@ -47,6 +49,7 @@ PG normalmente trabaja con programas simples, que no consideran bucles, aunque e
 
 ### Representación basáda en árboles
 
+
 Los árboles son una representación universal, algunos ejemplos interesantes para los que podemos utilizar esta representación son:
 
 - Fórmulas aritméticas.
@@ -60,7 +63,7 @@ En los modelos que usan representaciones lineales el tamaño de los cromosómas 
 
 La representación de programas en forma de árboles se puede realizar utilizando una gramática libre del contexto (definida en la Jerarquía de Chomsky) que defina las sentencias válidas del lenguaje.
 
-PG puede directamente gestionar las expresiones del árbol y las reglas necesarias para evalauarlas, por lo que no será necesario hacer ninguna referencia al lenguaje libre de contexto que la genera.
+PG puede directamente gestionar las expresiones del árbol y las reglas necesarias para evaluarlas, por lo que no será necesario hacer ninguna referencia al lenguaje libre de contexto que la genera.
 
 Un cromosóma codificará la expresión en forma de árbol usando métodos de representación de árboles, normalmente en preorder.
 
@@ -85,6 +88,7 @@ En general, las expresiones de PG no están tipadas, como propiedad, toda funci�
 
 ### Función de ajuste
 
+
 La función de ajuste en PG debe ser una medida de la habilidad para resolver el problema del programa codificado.
 
 En principio será necesaria una evaluación recursiva de las expresiones de los árboles. Se hará dando valores a las hojas del árbol y aplicando las operaciones del árbol, recorriendolo de abajo hasta arriba y finalmente devolver el valor asociado a la raíz del árbol.
@@ -98,6 +102,7 @@ La ejecución puede cambiar el entorno, al calcular el ajuste.
 Los cálculos del ajuste realizados en forma de simulaciones requerirán mucha cantidad de tiempo, aunque normalmente las formas evolucionadas (?) son muy buenas.
 
 ### Generación de la población inicial
+
 
 Esta basada en la generación aleatoria de programas (árboles de expresiones), que pueden ser tanto directos como no directos:
 
@@ -130,6 +135,7 @@ Para añadir más diversidad es posible:
 
 #### Selección y reemplazamiento
 
+
 La selección de padres es normalmente proporcional al ajuste (por torneo).
 
 En grandes poblaciones necesitaremos medidas más fuertes para incrementar la eficiencia:
@@ -138,7 +144,7 @@ En grandes poblaciones necesitaremos medidas más fuertes para incrementar la ef
 - Grupo 1: x% mejor de la población.
 - Grupo 2: 100-x% de la población.
 - El 80% de los elementos seleccionados será del grupo 1, el 20% restante del grupo 2.
-- Para poblaciones de tamaño 1.000, 2.000, 4.000 y 8.000 normalmente utilizaremos $x = 32%, 16%, 8%, 4%$ respectivamente.
+- Para poblaciones de tamaño 1.000, 2.000, 4.000 y 8.000 normalmente utilizaremos $x = 32\%, 16\%, 8\%, 4\%$ respectivamente.
 
 Para el reemplazamiento utilizaremos el esquema generacional (una generación sustituye por completo a la siguiente) con elitismo (mantenemos la mejor solución de la generación anterior en la siguiente).
 
@@ -150,17 +156,19 @@ Esto tendrá un impacto en como serán los operadores genéticos en PG.
 
 #### Cruce
 
+
 Normalmente como operador de cruce se suele utilizar una recombinación de subárboles escogidos de forma aleatoria entre los dos padres.
 
 Este método tendrá dos parámetros:
 
 - Probabilidad $p_{c}$ de escoger recombinación contra mutación.
-- Probabilidad de escoger un unto interno de cada padre como punto de cruce( Uno para cada árbol? imagino que si, preguntar aun así. las hojas tambien pueden contar como subárbol? si el punto que escogemos es un símbolo terminal, el del otro árbol también ha de ser terminal, o se puede reparar de alguna forma?).
+- Probabilidad de escoger un punto interno de cada padre como punto de cruce( Uno para cada árbol? imagino que si, preguntar aun así. las hojas tambien pueden contar como subárbol? si el punto que escogemos es un símbolo terminal, el del otro árbol también ha de ser terminal, o se puede reparar de alguna forma?).
 
 El tamaño de los hijos generados puede superar el tamaño de los padres.
 
 
 ##### Selección de puntos de cruce
+
 
 El algoritmo para seleccinar el punto de corte es más eficiente si la probabilidad de cada punto no es uniforme, es decir, si la sesgamos siguiendo unos criterios:
 
@@ -176,6 +184,7 @@ Cuando el punto de cruce ha sido seleccionado en el primer árbol una decisión 
 
 ##### Aspectos importantes de cara a la implementación del cruce
 
+
 Existe una dificultad para determinar el subárbol a intercambiar en la codificación de preorder del árbol.
 
 La operación se puede implementar de dos formas distintas.
@@ -185,6 +194,7 @@ La operación se puede implementar de dos formas distintas.
 
 
 ##### Diferencias entre el cruce de AG y PG
+
 
 El cruce en PG es más brusco que en AG.
 
@@ -197,6 +207,7 @@ Por estos motivos, el algoritmo explora el espacio de búsqueda de una forma apr
 Esto nos llevará a que normalmente el tamaño de las poblaciones utilizadas en PG es mucho más grande que en AG.
 
 #### Mutación
+
 
 La más común suele ser el reemplazamiento de un subárbol por otro árbol generado de forma aleatoria.
 
@@ -216,6 +227,7 @@ El hecho de que la mutación sea menos importante en PG que en AG es que el cruc
 
 ### The bloat problem (no se me ocurre como traducirlo, ¿el problema de la sobrecarga, tal vez?)
 
+
 Este problema se da cuando sobrevive la solución más sobrecargada, en nuestro caso, cuando sobrevive el árbol con mayor tamaño, y esto hace que con las generaciones el tamaño de las soluciones se vea incrementado de forma significativa.
 
 Necesitamos medidas para paliar este problema:
@@ -229,6 +241,7 @@ Necesitamos medidas para paliar este problema:
 ## Ejemplos de aplicación: Regresión simbólica
 
 ### Introducción a la regresión simbólica
+
 
 Las distintas técnicas de regresión nos permiten derivar expresiones matemáticas $g$ que modelan el comportamiento de un sistema del que tenemos su entrada y salida.
 
@@ -252,6 +265,7 @@ Esto nos genera el problema de que los valores de estas constantes solo puede se
 
 ### Introducción a GA-P
 
+
 La forma en la que PG trabaja con constantes aleatorias puede ser mejorada utilizando las siguientes medidas:
 
 - Modificar la mutación de PG de forma que los coeficientes reales sean mutados como el operador de mutación de un AG.
@@ -261,11 +275,13 @@ La forma en la que PG trabaja con constantes aleatorias puede ser mejorada utili
 
 ### Representación de programas en GA-P
 
+
 Los algoritmos GA-P son una hibridación entre GA y PG.
 
 Cada individuo contendrá una expresión (PG) y un array de coeficientes (GA), de forma que ambas partes evolucionen a la vez.
 
 ### Operadores genéticos en GA-P
+
 
 Los operadores de cruce y mutación son aplicados de forma independiente en las componenes de AG y PG del algoritmo GA-P. Las probabilidades de cruce y mutación de cada componente son independientes.
 
@@ -273,12 +289,14 @@ Es posible utilizar cualquier tipo de esquema de selección y reemplazamiento. L
 
 ### Ventajas de los algoritmos GA-P
 
+
 - Pueden gestionar tanto información numérica como simbólica.
 - Mayor precisión en los resultados finales.
 - El tamaño de la población de GA-P puede ser menor que en PG, y por lo tanto mostrará una convergencia más rápida.
 - Representación más compacta, se adapta mejor al problema que PG.
 
 ### Algunas consideraciones del comportamiento de los algoritmos GA-P
+
 
 La población de GA-P evoluciona hasta organizarse en varias subpoblaciones compuestas por individuos con la misma expresión (PG) y distintos coeficientes (AG).
 
@@ -293,6 +311,7 @@ Se puede conseguir un comportamiento más compacto utilizando una aproximación 
 
 ### En que situaciones ha tenido buen rendimiento la Programación Genética
 
+
 PG ha sido especialmente productiva en areas con las siguientes propiedades:
 
 - Interrelaciones entre variables relevantes son muy poco o nada conocidas.
@@ -304,5 +323,6 @@ PG ha sido especialmente productiva en areas con las siguientes propiedades:
 
 
 ## Bibliografía
+
 
 - Diapositivas de Oscar Cordón
