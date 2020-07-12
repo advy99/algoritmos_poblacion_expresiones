@@ -30,3 +30,8 @@ $(OBJ)/main.o: $(SRC)/main.cpp
 clean:
 	-rm $(OBJ)/*.o
 	-rm $(BIN)/*
+
+
+documentacion:
+	doxygen doc/doxys/Doxyfile
+
