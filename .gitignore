@@ -6,3 +6,7 @@
 obj/
 bin/
 lib/
+
+doc/html/
+doc/latex/
+
