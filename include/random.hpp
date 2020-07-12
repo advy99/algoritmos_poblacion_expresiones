@@ -1,7 +1,7 @@
 /* GENERADOR DE NUMEROS ALEATORIOS */
 
-#ifndef __RANDOM_PPIO_H
-#define __RANDOM_PPIO_H
+#ifndef RANDOM_H_INCLUDED
+#define RANDOM_H_INCLUDED
 
 class Random{
 	private:
