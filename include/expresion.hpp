@@ -174,6 +174,7 @@ class Expresion{
 		  * @param posicion Posición del árbol a intercambiar.
 		  * @param subarbol Subárbol a intercambiar.
 		  *
+		  * @pre subarbol No es un subárbol vacio.
 		  */
 
 		void intercambiarSubarbol(const int posicion, Arbol & subarbol);
