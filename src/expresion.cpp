@@ -107,7 +107,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random
 
 	bool exito = ramas_libres == 0;
 
-	if (exito){
+	if (!exito){
 		std::cerr << "Generación incorrecta de expresión aleatoria." << std::endl;
 	}
 
