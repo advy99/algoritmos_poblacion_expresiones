@@ -1,9 +1,11 @@
+#include <iostream>
 #include "expresion.hpp"
 
 
 void Expresion::Expresion inicializarVacia(){
 	arbol = nullptr;
 	longitud_arbol = 0;
+	longitud_reservada = 0;
 	evaluada = false;
 	fitness = std::numeric_limits<double>::quiet_NaN();
 }
@@ -33,6 +35,7 @@ void Expresion::liberarMemoria(){
 
 void Expresion::reservarMemoria(const unsigned tam){
 	arbol = new Nodo[tam];
+	longitud_reservada = 0;
 }
 
 void Expresion::copiarDatos(const Expresion & otra){
@@ -61,5 +64,57 @@ Expresion & Expresion::operator= (const Expresion & otra){
 	}
 
 	return (*this);
+
+}
+
+void Expresion::redimensionar(const unsigned tam){
+
+	Expresion otra = (*this);
+	reservarMemoria(tam);
+	(*this) = otra;
+	longitud_reservada = tam;
+
+}
+
+bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random & generador_aleatorios,
+														const unsigned prob_variable){
+
+	if (longitud_maxima > longitud_reservada){
+		redimensionar(longitud_maxima);
+	}
+
+	unsigned ramas_libres = 1;
+	unsigned i = 0;
+
+	while (i < longitud_maxima && ramas_libres > 0){
+		float prob_operador = (float)(ramas_libres*ramas_libres+1)/(float)(longitud_maxima-i)
+
+		if (generador_aleatorios.getFloat() > prob_operador){
+			arbol[i].tipo_nodo = operadorAleatorio();
+			ramas_libres++;
+
+		} else {
+			if (generador_aleatorios.getFloat() < prob_variable){
+				arbol[i].tipo_nodo = TipoNodo::VARIABLE;
+			} else {
+				arbol[i].tipo_nodo = TipoNodo::NUMERO;
+			}
+
+			arbol[i].valor = terminoAleatorio(arbol[i].tipo_nodo);
+			ramas_libres--;
+		}
+	}
+
+	bool exito = ramas_libres == 0;
+
+	if (exito){
+		std::cerr << "Generación incorrecta de expresión aleatoria." << std::endl;
+	}
+
+	longitud_arbol = i;
+
+	return exito;
+
+
 
 }

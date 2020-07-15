@@ -50,6 +50,7 @@ class Expresion{
 		double fitness;
 		bool evaluada;
 		unsigned longitud_arbol;
+		unsigned longitud_reservada;
 		unsigned profundidad_maxima;
 		Arbol arbol;
 
@@ -92,11 +93,25 @@ class Expresion{
 		/**
 		  * @brief Generar la expresión de forma aleatoria.
 		  *
-		  * @param longitud Longitud de la expresión aleatoria a generar.
+		  * @param longitud_max Longitud máxima de la expresión aleatoria a generar.
+		  * @param generador_aleatorios Generador de numeros aleatorios para generar las probabilidades
+		  * @param prob_variable Probabilidad de que un símbolo terminal sea una variable y no un número
 		  *
+		  * @return Booleano: True si ha conseguido generar la expresion correctamente, false en caso contrario
 		  */
 
-		void generarExpresionAleatoria(const unsigned longitud);
+		bool generarExpresionAleatoria(const unsigned longitud_max);
+
+
+
+		/**
+		  * @brief Redimensionar el tamaño de la expresión
+		  *
+		  * @param tam Nuevo tamaño reservado para la expresion
+		  *
+		  */
+		void redimensionar(const unsigned tam);
+
 
 	public:
 

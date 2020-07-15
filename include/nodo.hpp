@@ -8,7 +8,7 @@
 #define NODO_H_INCLUDED
 
 // aqui faltan tipos, tengo que revisar el paper + los que use
-enum class TipoNodo {Numero, Variable, Mas, Menos, Por, Entre};
+enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 
 /**
   *  @brief Estructura Nodo
