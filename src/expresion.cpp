@@ -112,6 +112,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random
 	}
 
 	longitud_arbol = i;
+	evaluada = false;
 
 	return exito;
 
