@@ -7,6 +7,9 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
+
+#include "random.h"
+
 // aqui faltan tipos, tengo que revisar el paper + los que use
 enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 
@@ -20,10 +23,33 @@ enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
   * @date Julio 2020
   */
 
-struct {
+struct Nodo {
 	TipoNodo tipo_nodo;
 	double valor;
-} Nodo;
+
+	void setTipoNodoOperadorAleatorio(){
+		float aleatorio = Random::getInstance().getFloat();
+
+		if (aleatorio < 0.25){
+			tipo_nodo = TipoNodo::MAS;
+		} else if (aleatorio < 0.5) {
+			tipo_nodo = TipoNodo::MENOS;
+		} else if (aleatorio < 0.75) {
+			tipo_nodo = TipoNodo::POR;
+		} else {
+			tipo_nodo = TipoNodo::ENTRE;
+		}
+	}
+
+	void setTerminoAleatorio(){
+		if (tipo_nodo == TipoNodo::NUMERO){
+			valor = Random::getInstance().getFloat(-10.0f, 10.0f);
+		} else {
+			// TO-DO
+		}
+	}
+
+};
 
 typedef Nodo * Arbol;
 
