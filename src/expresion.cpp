@@ -44,9 +44,8 @@ void Expresion::copiarDatos(const Expresion & otra){
 	longitud_arbol = otra.longitud_arbol;
 	profundidad_maxima = otra.profundidad_maxima;
 
-	for (unsigned i = 0; i < longitud_arbol; i++){
-		arbol[i] = otra.arbol[i];
-	}
+	memcpy(arbol, otra.arbol, longitud_arbol*sizeof(Nodo));
+
 
 }
 

@@ -23,9 +23,9 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 	tam_poblacion = otra.tam_poblacion;
 	mejor_individuo = otra.mejor_individuo;
 
-	for (int i = 0; i < tam_poblacion; i++){
-		poblacion[i] = otra.poblacion[i];
-	}
+
+	memcpy(poblacion, otra.poblacion, otra.tam_poblacion*sizeof(Expresion));
+
 }
 
 void Poblacion::evaluarPoblacion(){
