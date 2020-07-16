@@ -119,3 +119,18 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random
 
 
 }
+
+double Expresion::evaluar(){
+
+	double resultado = fitness;
+
+	if (!evaluada){
+		// TO-DO
+		// implementar error cuadratico u otros metodos
+	}
+
+	fitness = resultado;
+	evaluada = true;
+
+	return resultado;
+}
