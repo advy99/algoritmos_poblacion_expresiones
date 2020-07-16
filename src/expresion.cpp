@@ -90,7 +90,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random
 		float prob_operador = (float)(ramas_libres*ramas_libres+1)/(float)(longitud_maxima-i)
 
 		if (generador_aleatorios.getFloat() > prob_operador){
-			arbol[i].tipo_nodo = operadorAleatorio();
+			arbol[i].setTipoNodoOperadorAleatorio();
 			ramas_libres++;
 
 		} else {
@@ -100,7 +100,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random
 				arbol[i].tipo_nodo = TipoNodo::NUMERO;
 			}
 
-			arbol[i].valor = terminoAleatorio(arbol[i].tipo_nodo);
+			arbol[i].setTerminoAleatorio();
 			ramas_libres--;
 		}
 	}
