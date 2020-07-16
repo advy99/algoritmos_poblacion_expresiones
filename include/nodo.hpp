@@ -38,7 +38,15 @@ struct Nodo {
 	  *
 	  */
 
+	/**
+	  * @brief Tipo de nodo
+	  */
 	TipoNodo tipo_nodo;
+
+	/**
+	  * @brief Valor asociado al nodo
+	  */
+
 	double valor;
 
 	/**
