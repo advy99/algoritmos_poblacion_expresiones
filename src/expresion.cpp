@@ -113,6 +113,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random
 
 	longitud_arbol = i;
 	evaluada = false;
+	fitness = std::numeric_limits<double>::quiet_NaN();
 
 	return exito;
 
@@ -133,4 +134,8 @@ double Expresion::evaluar(){
 	evaluada = true;
 
 	return resultado;
+}
+
+bool Expresion::estaEvaluada() const{
+	return evaluada;
 }
