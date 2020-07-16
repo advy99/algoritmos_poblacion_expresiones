@@ -47,11 +47,36 @@ class Expresion{
 		  *
 		  */
 
+		/**
+		  * @brief Valor de ajuste de la expresión con ciertos datos con los que se ha evaluado.
+		  */
+
 		double fitness;
+
+		/**
+		  * @brief Atributo para comprobar si es necesario reevaluar la expresión de nuevo.
+		  */
+
 		bool evaluada;
+
+		/**
+		  * @brief Longitud del árbol de la expresión.
+		  */
 		unsigned longitud_arbol;
+
+		/**
+		  * @brief Longitud reservada en memoria dinámica para el árbol.
+		  */
 		unsigned longitud_reservada;
+
+		/**
+		  * @brief Profundidad máxima permitida para el árbol.
+		  */
 		unsigned profundidad_maxima;
+
+		/**
+		  * @brief Conjunto de nodos que conformarán la expresión.
+		  */
 		Arbol arbol;
 
 		/**
