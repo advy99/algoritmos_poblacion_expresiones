@@ -8,7 +8,7 @@
 #define NODO_H_INCLUDED
 
 
-#include "random.h"
+#include "random.hpp"
 
 // aqui faltan tipos, tengo que revisar el paper + los que use
 enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
@@ -28,7 +28,7 @@ struct Nodo {
 	double valor;
 
 	void setTipoNodoOperadorAleatorio(){
-		float aleatorio = Random::getInstance().getFloat();
+		float aleatorio = Random::getInstance()->getFloat();
 
 		if (aleatorio < 0.25){
 			tipo_nodo = TipoNodo::MAS;
@@ -43,10 +43,10 @@ struct Nodo {
 
 	void setTerminoAleatorio(){
 		if (tipo_nodo == TipoNodo::NUMERO){
-			valor = Random::getInstance().getFloat(-10.0f, 10.0f);
+			valor = Random::getInstance()->getFloat(-10.0f, 10.0f);
 		} else {
 			// TO-DO
-			valor = Random::getInstance().getInt(GA_P::getNumVariables());
+			valor = Random::getInstance()->getInt(GA_P::getNumVariables());
 		}
 	}
 

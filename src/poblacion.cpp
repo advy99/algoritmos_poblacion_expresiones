@@ -1,5 +1,5 @@
 #include "poblacion.hpp"
-
+#include <cstring>
 
 void Poblacion::liberarMemoria(){
 	if (poblacion != nullptr){

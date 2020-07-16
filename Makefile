@@ -17,13 +17,22 @@ endif
 
 all: $(BIN)/GA_P
 
-$(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/main.o
+$(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/main.o
 	g++ $^ -o $@
 
 $(OBJ)/random.o: $(SRC)/random.cpp
 	g++ -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/main.o: $(SRC)/main.cpp
+	g++ -c $(FLAGS) $^ -I$(INC) -o $@
+
+$(OBJ)/GA-P.o: $(SRC)/GA-P.cpp
+	g++ -c $(FLAGS) $^ -I$(INC) -o $@
+
+$(OBJ)/expresion.o: $(SRC)/expresion.cpp
+	g++ -c $(FLAGS) $^ -I$(INC) -o $@
+
+$(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
 	g++ -c $(FLAGS) $^ -I$(INC) -o $@
 
 

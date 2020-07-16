@@ -94,13 +94,13 @@ class Expresion{
 		  * @brief Generar la expresión de forma aleatoria.
 		  *
 		  * @param longitud_max Longitud máxima de la expresión aleatoria a generar.
-		  * @param generador_aleatorios Generador de numeros aleatorios para generar las probabilidades
 		  * @param prob_variable Probabilidad de que un símbolo terminal sea una variable y no un número
 		  *
 		  * @return Booleano: True si ha conseguido generar la expresion correctamente, false en caso contrario
 		  */
 
-		bool generarExpresionAleatoria(const unsigned longitud_max);
+		bool generarExpresionAleatoria(const unsigned longitud_max,
+			 									 const unsigned prob_variable);
 
 
 

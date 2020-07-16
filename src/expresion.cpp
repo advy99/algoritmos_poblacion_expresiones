@@ -1,8 +1,8 @@
 #include <iostream>
 #include "expresion.hpp"
+#include <cstring>
 
-
-void Expresion::Expresion inicializarVacia(){
+void Expresion::inicializarVacia(){
 	arbol = nullptr;
 	longitud_arbol = 0;
 	longitud_reservada = 0;
@@ -11,16 +11,17 @@ void Expresion::Expresion inicializarVacia(){
 }
 
 Expresion::Expresion(const unsigned prof_maxima){
-	inicializarVacio();
+	inicializarVacia();
 	profundidad_maxima = prof_maxima;
 }
 
 Expresion::Expresion(const unsigned prof_maxima, const unsigned longitud){
 
-	inicializarVacio();
+	inicializarVacia();
 	profundidad_maxima = prof_maxima;
 
-	generarExpresionAleatoria(longitud);
+	// la probabilidad es un placeholder
+	generarExpresionAleatoria(longitud, 0.3);
 
 }
 
@@ -49,7 +50,7 @@ void Expresion::copiarDatos(const Expresion & otra){
 
 }
 
-void Expresion::Expresion(const Expresion & otra){
+Expresion::Expresion(const Expresion & otra){
 	(*this) = otra;
 }
 
@@ -75,25 +76,27 @@ void Expresion::redimensionar(const unsigned tam){
 
 }
 
-bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima, Random & generador_aleatorios,
+bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 														const unsigned prob_variable){
 
 	if (longitud_maxima > longitud_reservada){
 		redimensionar(longitud_maxima);
 	}
 
+	Random * generador_aleatorios = Random::getInstance();
+
 	unsigned ramas_libres = 1;
 	unsigned i = 0;
 
 	while (i < longitud_maxima && ramas_libres > 0){
-		float prob_operador = (float)(ramas_libres*ramas_libres+1)/(float)(longitud_maxima-i)
+		float prob_operador = (float)(ramas_libres*ramas_libres+1)/(float)(longitud_maxima-i);
 
-		if (generador_aleatorios.getFloat() > prob_operador){
+		if (generador_aleatorios->getFloat() > prob_operador){
 			arbol[i].setTipoNodoOperadorAleatorio();
 			ramas_libres++;
 
 		} else {
-			if (generador_aleatorios.getFloat() < prob_variable){
+			if (generador_aleatorios->getFloat() < prob_variable){
 				arbol[i].tipo_nodo = TipoNodo::VARIABLE;
 			} else {
 				arbol[i].tipo_nodo = TipoNodo::NUMERO;
