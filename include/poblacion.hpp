@@ -45,9 +45,31 @@ class Poblacion{
 		  *
 		  */
 
+		/**
+		  * @brief Puntero donde almacenaremos los individuos de la poblacion.
+		  *
+		  */
+
 		Expresion * poblacion;
+
+
+		/**
+		  * @brief Tamaño de elementos dentro de la población
+		  *
+		  *
+		  */
+
 		unsigned tam_poblacion;
+
+		/**
+		  * @brief Tamaño reservado en memoria para almacenar elementos
+		  */
+
 		unsigned tam_reservado;
+
+		/**
+		  * @brief Mejor individuo de la población
+		  */
 		Expresion mejor_individuo;
 
 		/**
