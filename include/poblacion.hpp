@@ -86,7 +86,7 @@ class Poblacion{
 		/**
 		  * @brief Constructor con un parámetro. Generar una población con tam elementos aleatorios.
 		  *
-		  * @para tam Número de individuos con el que generar la población.
+		  * @param tam Número de individuos con el que generar la población.
 		  *
 		  */
 
