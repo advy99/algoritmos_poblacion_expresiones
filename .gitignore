@@ -10,3 +10,5 @@ lib/
 doc/html/
 doc/latex/
 
+.cache
+.fontconfig
