@@ -8,7 +8,12 @@ class Poblacion{
 	private:
 		Expresion * poblacion;
 		unsigned tam_poblacion;
+		unsigned tam_reservado;
 		Expresion mejor_individuo;
+
+		void reservarMemoria(const unsigned tam);
+		void liberarMemoria();
+		void copiarDatos(const Poblacion & otra);
 
 	public:
 		Poblacion();
@@ -18,6 +23,9 @@ class Poblacion{
 		unsigned getTamPoblacion() const;
 		Expresion getIndividuo(const unsigned indice) const;
 		Expresion setIndividuo(const unsigned indice, const Expresion individuo);
+
+		void evaluarPoblacion();
+
 }
 
 
