@@ -24,8 +24,28 @@ enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
   */
 
 struct Nodo {
+
+	/**
+	  * @page repNodo Representación de la estructura nodo
+	  *
+	  * @section faConjunto Función de abstracción
+	  *
+	  * Un objeto valido @e rep de la estructura Nodo viene dado por un tipo de un nodo y su valor.
+	  *
+	  *
+	  * rep.tipo_nodo
+	  * rep.valor
+	  *
+	  */
+
 	TipoNodo tipo_nodo;
 	double valor;
+
+	/**
+	  * @brief Establecer el tipo del nodo a un operador aleatorio entre los posibles operadores.
+	  *
+	  */
+
 
 	void setTipoNodoOperadorAleatorio(){
 		float aleatorio = Random::getInstance()->getFloat();
@@ -40,6 +60,12 @@ struct Nodo {
 			tipo_nodo = TipoNodo::ENTRE;
 		}
 	}
+
+	/**
+	  * @brief Establecer el valor del nodo a un termino aleatorio.
+	  *
+	  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
+	  */
 
 	void setTerminoAleatorio(){
 		if (tipo_nodo == TipoNodo::NUMERO){
