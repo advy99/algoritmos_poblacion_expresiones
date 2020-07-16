@@ -156,7 +156,7 @@ class Expresion{
 		  * @return Booleano: True si esta evaluada y false si no.
 		  */
 
-		bool estaEvaluado() const;
+		bool estaEvaluada() const;
 
 		/**
 		  * @brief Obtener el valor de ajuste de la expresión.
@@ -194,6 +194,15 @@ class Expresion{
 
 		void intercambiarSubarbol(const int posicion, Arbol & subarbol);
 
+
+		/**
+		  * @brief Operador de asignación de una expresión. Asignamos una expresión a otra.
+		  *
+		  * @param otra Expresión a copiar.
+		  *
+		  */
+
+		Expresion & operator= (const Expresion & otra);
 
 };
 
