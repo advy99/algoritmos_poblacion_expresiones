@@ -33,6 +33,4 @@ clean:
 
 
 documentacion:
-	./doc/doxys/m.css/documentation/doxygen.py doc/doxys/Doxyfile-mcss
-	#doxygen doc/doxys/Doxyfile
-
+	doxygen doc/doxys/Doxyfile
