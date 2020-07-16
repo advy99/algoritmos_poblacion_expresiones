@@ -46,6 +46,7 @@ struct Nodo {
 			valor = Random::getInstance().getFloat(-10.0f, 10.0f);
 		} else {
 			// TO-DO
+			valor = Random::getInstance().getInt(GA_P::getNumVariables());
 		}
 	}
 
