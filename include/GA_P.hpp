@@ -10,8 +10,6 @@ class GA_P{
 	private:
 
 		Poblacion poblacion;
-		static int num_variables;
-		static int num_datos;
 
 		static std::vector<std::vector<double> > datos;
 		static std::vector<double> output_datos;
