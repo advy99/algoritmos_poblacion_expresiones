@@ -15,6 +15,10 @@ Poblacion::Poblacion(const unsigned tam, const unsigned prof_max){
 	reservarMemoria(tam);
 }
 
+Poblacion::~Poblacion(){
+	liberarMemoria();
+}
+
 void Poblacion::liberarMemoria(){
 	if (poblacion != nullptr){
 		delete poblacion;
