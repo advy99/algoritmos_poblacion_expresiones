@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cctype>
 #include <sstream>
+#include <cstdlib>
 
 
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario){
@@ -42,15 +43,19 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 				std::vector<double> datos_linea;
 				ss.str(linea);
 
-				double valor;
+				std::string str_valor;
 
-				while (ss >> valor){
-					datos_linea.push_back(valor);
+				std::getline(ss, str_valor, ',');
+
+				while (!ss.eof()){
+
+					datos_linea.push_back(strtod(str_valor.c_str(), nullptr));
+					std::getline(ss, str_valor, ',');
+
 				}
 
-				output_datos.push_back(datos_linea.back());
+				output_datos.push_back(strtod(str_valor.c_str(), nullptr));
 
-				datos_linea.pop_back();
 				datos.push_back(datos_linea);
 
 
@@ -75,11 +80,19 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 
 
 int GA_P::getNumDatos() {
-	return GA_P::datos.size();
+	return datos.size();
 }
 
 int GA_P::getNumVariables() {
 	return datos[0].size();
+}
+
+std::vector<std::vector<double> > GA_P::getDatos(){
+	return datos;
+}
+
+std::vector<double> GA_P::getOutputDatos(){
+	return output_datos;
 }
 
 std::vector<std::vector<double>> GA_P::datos;

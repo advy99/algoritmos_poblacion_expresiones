@@ -25,7 +25,7 @@ class GA_P{
 		static int getNumVariables();
 		static int getNumDatos();
 		static std::vector<std::vector<double> > getDatos();
-
+		static std::vector<double> getOutputDatos();
 
 };
 
