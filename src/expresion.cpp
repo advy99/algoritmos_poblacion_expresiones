@@ -136,11 +136,10 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 }
 
 
-double Expresion::evaluarDato(const std::vector<double> & dato){
-	std::stack<double> pila;
+double Expresion::evaluarDato(std::stack<Nodo> pila, const std::vector<double> & dato){
 
-	// volcamos la expresion en la pila
-
+	// TO-DO funcion recursiva para evaluar
+	double valor
 
 }
 
@@ -155,8 +154,18 @@ double Expresion::evaluarExpresion(){
 	if (!evaluada){
 		// TO-DO
 		// implementar error cuadratico
+
+
+		std::stack<Nodo> pila;
+
+		// volcamos la expresion en la pila
+		for (unsigned i = 0; i < getLongitudArbol(); i++){
+			pila.push(arbol[i]);
+		}
+
+
 		for (int i = 0; i < GA_P::getNumDatos(); i++){
-			valor = evaluarDato(GA_P::getDatos()[i]);
+			valor = evaluarDato(pila, GA_P::getDatos()[i]);
 			suma += std::pow( std::abs(GA_P::getOutputDatos()[i] - valor ) , 2.0);
 		}
 
