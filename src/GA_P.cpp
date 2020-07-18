@@ -22,7 +22,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario){
 
 bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario){
 
-	ifstream file(fichero_datos);
+	std::ifstream file(fichero_datos);
 	bool resultado = true;
 
 	if (!file){
@@ -75,9 +75,12 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 
 
 int GA_P::getNumDatos() {
-	return datos.size();
+	return GA_P::datos.size();
 }
 
 int GA_P::getNumVariables() {
 	return datos[0].size();
 }
+
+std::vector<std::vector<double>> GA_P::datos;
+std::vector<double> GA_P::output_datos;
