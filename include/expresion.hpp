@@ -140,6 +140,8 @@ class Expresion{
 
 	public:
 
+		Expresion();
+
 		/**
 		  * @brief Constructor con un parámetro, genera una expresión vacia.
 		  *

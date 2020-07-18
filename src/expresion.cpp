@@ -2,6 +2,10 @@
 #include "expresion.hpp"
 #include <cstring>
 
+Expresion::Expresion(){
+	inicializarVacia();
+}
+
 void Expresion::inicializarVacia(){
 	arbol = nullptr;
 	longitud_arbol = 0;
@@ -24,6 +28,11 @@ Expresion::Expresion(const unsigned prof_maxima, const unsigned longitud){
 	generarExpresionAleatoria(longitud, 0.3);
 
 }
+
+Expresion::~Expresion(){
+	liberarMemoria();
+}
+
 
 void Expresion::liberarMemoria(){
 	if (arbol != nullptr){
@@ -51,6 +60,7 @@ void Expresion::copiarDatos(const Expresion & otra){
 }
 
 Expresion::Expresion(const Expresion & otra){
+	inicializarVacia();
 	(*this) = otra;
 }
 
@@ -140,4 +150,8 @@ double Expresion::evaluar(){
 
 bool Expresion::estaEvaluada() const{
 	return evaluada;
+}
+
+double Expresion::getFitness() const{
+	return fitness;
 }
