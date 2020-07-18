@@ -5,7 +5,7 @@
   */
 
 #ifndef POBLACION_H_INCLUDED
-#defined POBLACION_H_INCLUDED
+#define POBLACION_H_INCLUDED
 
 #include "expresion.hpp"
 
@@ -70,7 +70,12 @@ class Poblacion{
 		/**
 		  * @brief Mejor individuo de la población
 		  */
-		Expresion mejor_individuo;
+		int mejor_individuo;
+
+		/**
+		  * @brief Profundidad máxima de los individuos.
+		  */
+		unsigned prof_individuos;
 
 		/**
 		  * @brief Reservar memoria para una población de tam individuos.
@@ -99,20 +104,22 @@ class Poblacion{
 	public:
 
 		/**
-		  * @brief Constructor sin parametros, generamos una poblacion vacia.
+		  * @brief Constructor con un parametro, generamos una poblacion vacia.
 		  *
+		  * @param prof_max Profundidad máxima de las expresiones de la poblacion.
 		  */
 
-		Poblacion();
+		Poblacion(const unsigned prof_max = 10);
 
 		/**
 		  * @brief Constructor con un parámetro. Generar una población con tam elementos aleatorios.
 		  *
 		  * @param tam Número de individuos con el que generar la población.
+		  * @param prof_max Profundidad máxima de las expresiones de la poblacion.
 		  *
 		  */
 
-		Poblacion(const unsigned tam);
+		Poblacion(const unsigned tam, const unsigned prof_max = 10);
 
 		/**
 		  * @brief Destructor de la Población
@@ -168,7 +175,7 @@ class Poblacion{
 
 		void evaluarPoblacion();
 
-}
+};
 
 
 

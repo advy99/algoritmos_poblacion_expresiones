@@ -1,6 +1,20 @@
 #include "poblacion.hpp"
 #include <cstring>
 
+
+Poblacion::Poblacion(const unsigned prof_max){
+	prof_individuos = prof_max;
+}
+
+Poblacion::Poblacion(const unsigned tam, const unsigned prof_max){
+	prof_individuos = prof_max;
+	poblacion = nullptr;
+
+	liberarMemoria();
+
+	reservarMemoria(tam);
+}
+
 void Poblacion::liberarMemoria(){
 	if (poblacion != nullptr){
 		delete poblacion;
@@ -8,7 +22,7 @@ void Poblacion::liberarMemoria(){
 
 	tam_reservado = 0;
 	tam_poblacion = 0;
-	mejor_individuo = Expresion();
+	mejor_individuo = -1;
 
 	poblacion = nullptr;
 
@@ -23,13 +37,14 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 	tam_poblacion = otra.tam_poblacion;
 	mejor_individuo = otra.mejor_individuo;
 
-
-	memcpy(poblacion, otra.poblacion, otra.tam_poblacion*sizeof(Expresion));
+	for (unsigned i = 0; i < tam_poblacion; i++){
+		poblacion[i] = otra.poblacion[i];
+	}
 
 }
 
 void Poblacion::evaluarPoblacion(){
-	double valor_mejor = mejor_individuo.getFitness();
+	double valor_mejor = poblacion[mejor_individuo].getFitness();
 	double valor_evaluada;
 
 	for ( unsigned i = 0; i < tam_poblacion; i++){
@@ -37,7 +52,7 @@ void Poblacion::evaluarPoblacion(){
 			valor_evaluada = poblacion[i].evaluar();
 
 			if (valor_evaluada < valor_mejor){
-				mejor_individuo = poblacion[i];
+				mejor_individuo = i;
 				valor_mejor = valor_evaluada;
 			}
 		}
