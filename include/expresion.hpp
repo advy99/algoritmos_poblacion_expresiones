@@ -10,6 +10,7 @@
 #include <cmath>
 #include "nodo.hpp"
 #include <vector>
+#include <stack>
 
 /**
   *  @brief Clase Expresion
@@ -217,7 +218,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(const std::vector<double> & dato);
+		double evaluarDato(std::stack<Nodo> & pila, const std::vector<double> & dato);
 
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.

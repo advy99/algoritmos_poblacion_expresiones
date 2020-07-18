@@ -135,11 +135,53 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
+bool son_iguales(const double & a, const double & b, const double epsilon = 0.005d){
+    return (std::fabs(a - b) < epsilon);
+}
 
-double Expresion::evaluarDato(std::stack<Nodo> pila, const std::vector<double> & dato){
+double Expresion::evaluarDato(std::stack<Nodo> & pila, const std::vector<double> & dato){
 
 	// TO-DO funcion recursiva para evaluar
-	double valor
+	double valor = 0.0d;
+
+	if (pila.empty()){
+		return valor;
+
+	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO){
+		valor = pila.top().valor;
+		pila.pop();
+		return valor;
+
+	} else if (pila.top().tipo_nodo == TipoNodo::VARIABLE){
+		valor = dato[pila.top().valor];
+		pila.pop();
+		return valor;
+
+	} else {
+		pila.pop();
+		double valor_izda = evaluarDato(pila, dato);
+		double valor_dcha = evaluarDato(pila, dato);
+
+		if (pila.top().tipo_nodo == TipoNodo::MAS){
+			valor = valor_izda + valor_dcha;
+
+		} else if (pila.top().tipo_nodo == TipoNodo::MENOS){
+			valor = valor_izda - valor_dcha;
+
+		} else if (pila.top().tipo_nodo == TipoNodo::POR){
+			valor = valor_izda * valor_dcha;
+
+		} else if (pila.top().tipo_nodo == TipoNodo::ENTRE){
+			if (son_iguales(valor_dcha, 0.0d) ){
+				valor = valor_izda / valor_dcha;
+			} else {
+				valor = 1.0f;
+			}
+		}
+
+		return valor;
+
+	}
 
 }
 
@@ -156,15 +198,17 @@ double Expresion::evaluarExpresion(){
 		// implementar error cuadratico
 
 
+		std::stack<Nodo> pila_original;
 		std::stack<Nodo> pila;
 
 		// volcamos la expresion en la pila
-		for (unsigned i = 0; i < getLongitudArbol(); i++){
-			pila.push(arbol[i]);
+		for (unsigned i = getLongitudArbol() - 1; i >= 0; i--){
+			pila_original.push(arbol[i]);
 		}
 
 
 		for (int i = 0; i < GA_P::getNumDatos(); i++){
+			pila = pila_original;
 			valor = evaluarDato(pila, GA_P::getDatos()[i]);
 			suma += std::pow( std::abs(GA_P::getOutputDatos()[i] - valor ) , 2.0);
 		}
@@ -184,4 +228,8 @@ bool Expresion::estaEvaluada() const{
 
 double Expresion::getFitness() const{
 	return fitness;
+}
+
+unsigned Expresion::getLongitudArbol() const{
+	return longitud_arbol;
 }
