@@ -2,6 +2,7 @@
 #define GA_P_H_INCLUDED
 
 #include <vector>
+#include <string>
 #include "random.hpp"
 #include "expresion.hpp"
 #include "poblacion.hpp"
