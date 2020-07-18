@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "random.hpp"
+#include "expresion.hpp"
 #include "poblacion.hpp"
 
 
@@ -20,9 +21,9 @@ class GA_P{
 		GA_P(const std::string fichero_datos, const char char_comentario);
 		~GA_P() = default;
 
-		static int getNumVariables() const;
-		static int getNumDatos() const;
-		static std::vector<std::vector<double> > getDatos() const;
+		static int getNumVariables();
+		static int getNumDatos();
+		static std::vector<std::vector<double> > getDatos();
 
 
 };

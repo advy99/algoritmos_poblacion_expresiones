@@ -74,10 +74,10 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 
 
 
-int GA_P::getNumDatos() const {
+int GA_P::getNumDatos() {
 	return datos.size();
 }
 
-int GA_P::getNumVariables() const {
+int GA_P::getNumVariables() {
 	return datos[0].size();
 }
