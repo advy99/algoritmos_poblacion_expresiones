@@ -54,7 +54,7 @@ void Poblacion::evaluarPoblacion(){
 
 	for ( unsigned i = 0; i < tam_poblacion; i++){
 		if (!poblacion[i].estaEvaluada()){
-			valor_evaluada = poblacion[i].evaluar();
+			valor_evaluada = poblacion[i].evaluarExpresion();
 
 			if (valor_evaluada < valor_mejor){
 				mejor_individuo = i;

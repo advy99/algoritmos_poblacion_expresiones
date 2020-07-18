@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include "nodo.hpp"
+#include <vector>
 
 /**
   *  @brief Clase Expresion
@@ -208,7 +209,15 @@ class Expresion{
 		  * @return Valor de ajuste de la expresión.
 		  */
 
-		double evaluar();
+		double evaluarExpresion();
+
+		/**
+		  * @brief Evaluar la expresión con un dato dado.
+		  *
+		  * @return Valor estimado de la regresión para ese dato.
+		  */
+
+		double evaluarDato(const std::vector<double> & dato);
 
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "expresion.hpp"
+#include "GA_P.hpp"
 #include <cstring>
+#include <stack>
 
 Expresion::Expresion(){
 	inicializarVacia();
@@ -133,13 +135,32 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-double Expresion::evaluar(){
+
+double Expresion::evaluarDato(const std::vector<double> & dato){
+	std::stack<double> pila;
+
+	// volcamos la expresion en la pila
+
+
+}
+
+
+double Expresion::evaluarExpresion(){
 
 	double resultado = fitness;
 
+	double valor = 0.0d;
+	double suma = 0.0d;
+
 	if (!evaluada){
 		// TO-DO
-		// implementar error cuadratico u otros metodos
+		// implementar error cuadratico
+		for (int i = 0; i < GA_P::getNumDatos(); i++){
+			valor = evaluarDato(GA_P::getDatos()[i]);
+			suma += std::pow( std::abs(GA_P::getOutputDatos()[i] - valor ) , 2.0);
+		}
+
+		resultado = suma / (double)(GA_P::getNumDatos()*2);
 	}
 
 	fitness = resultado;
