@@ -26,7 +26,7 @@ $(OBJ)/random.o: $(SRC)/random.cpp
 $(OBJ)/main.o: $(SRC)/main.cpp
 	g++ -c $(FLAGS) $^ -I$(INC) -o $@
 
-$(OBJ)/GA-P.o: $(SRC)/GA-P.cpp
+$(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
 	g++ -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp
