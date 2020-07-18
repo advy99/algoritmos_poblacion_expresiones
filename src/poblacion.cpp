@@ -3,6 +3,7 @@
 
 
 Poblacion::Poblacion(const unsigned prof_max){
+	poblacion = nullptr;
 	prof_individuos = prof_max;
 }
 
@@ -21,7 +22,7 @@ Poblacion::~Poblacion(){
 
 void Poblacion::liberarMemoria(){
 	if (poblacion != nullptr){
-		delete poblacion;
+		delete [] poblacion;
 	}
 
 	tam_reservado = 0;
