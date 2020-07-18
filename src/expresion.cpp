@@ -139,10 +139,9 @@ bool son_iguales(const double & a, const double & b, const double epsilon = 0.00
     return (std::fabs(a - b) < epsilon);
 }
 
-double Expresion::evaluarDato(std::stack<Nodo> & pila, const std::vector<double> & dato){
+double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std::vector<double> & dato){
 
 	// TO-DO funcion recursiva para evaluar
-	double valor = 0.0d;
 
 	if (pila.empty()){
 		return valor;
@@ -158,20 +157,22 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, const std::vector<double>
 		return valor;
 
 	} else {
-		pila.pop();
-		double valor_izda = evaluarDato(pila, dato);
-		double valor_dcha = evaluarDato(pila, dato);
+		TipoNodo operacion = pila.top().tipo_nodo;
 
-		if (pila.top().tipo_nodo == TipoNodo::MAS){
+		pila.pop();
+		double valor_izda = evaluarDato(pila, valor, dato);
+		double valor_dcha = evaluarDato(pila, valor, dato);
+
+		if (operacion == TipoNodo::MAS){
 			valor = valor_izda + valor_dcha;
 
-		} else if (pila.top().tipo_nodo == TipoNodo::MENOS){
+		} else if (operacion == TipoNodo::MENOS){
 			valor = valor_izda - valor_dcha;
 
-		} else if (pila.top().tipo_nodo == TipoNodo::POR){
+		} else if (operacion == TipoNodo::POR){
 			valor = valor_izda * valor_dcha;
 
-		} else if (pila.top().tipo_nodo == TipoNodo::ENTRE){
+		} else if (operacion == TipoNodo::ENTRE){
 			if (son_iguales(valor_dcha, 0.0d) ){
 				valor = valor_izda / valor_dcha;
 			} else {
@@ -202,18 +203,45 @@ double Expresion::evaluarExpresion(){
 		std::stack<Nodo> pila;
 
 		// volcamos la expresion en la pila
-		for (unsigned i = getLongitudArbol() - 1; i >= 0; i--){
-			pila_original.push(arbol[i]);
-		}
+		// for (unsigned i = getLongitudArbol() - 1; i >= 0; i--){
+		// 	pila_original.push(arbol[i]);
+		// }
 
+		Nodo n;
 
-		for (int i = 0; i < GA_P::getNumDatos(); i++){
-			pila = pila_original;
-			valor = evaluarDato(pila, GA_P::getDatos()[i]);
-			suma += std::pow( std::abs(GA_P::getOutputDatos()[i] - valor ) , 2.0);
-		}
+		n.tipo_nodo = TipoNodo::NUMERO;
+		n.valor = 5;
 
-		resultado = suma / (double)(GA_P::getNumDatos()*2);
+		pila_original.push(n);
+
+		n.valor = 3;
+
+		pila_original.push(n);
+
+		n.tipo_nodo = TipoNodo::MAS;
+
+		pila_original.push(n);
+
+		n.tipo_nodo = TipoNodo::NUMERO;
+		n.valor = 20;
+
+		pila_original.push(n);
+
+		n.tipo_nodo = TipoNodo::MENOS;
+		pila_original.push(n);
+
+		//Pila de prueba: 20 - (3 + 5)
+		pila = pila_original;
+		resultado = 0.0d;
+		evaluarDato(pila, resultado, GA_P::getDatos()[0]);
+
+		// for (int i = 0; i < GA_P::getNumDatos(); i++){
+		// 	pila = pila_original;
+		// 	valor = evaluarDato(pila, GA_P::getDatos()[i]);
+		// 	suma += std::pow( std::abs(GA_P::getOutputDatos()[i] - valor ) , 2.0);
+		// }
+		//
+		// resultado = suma / (double)(GA_P::getNumDatos()*2);
 	}
 
 	fitness = resultado;

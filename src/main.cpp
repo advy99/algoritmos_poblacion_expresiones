@@ -15,6 +15,10 @@ int main(int argc, char ** argv){
 		std::cout << std::endl;
 	}
 
+	Expresion miExpresion;
+
+	std::cout << std::endl << miExpresion.evaluarExpresion();
+
 	return 0;
 
 }
