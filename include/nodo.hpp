@@ -7,7 +7,6 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
-
 #include "random.hpp"
 
 // aqui faltan tipos, tengo que revisar el paper + los que use
@@ -55,19 +54,7 @@ struct Nodo {
 	  */
 
 
-	void setTipoNodoOperadorAleatorio(){
-		float aleatorio = Random::getInstance()->getFloat();
-
-		if (aleatorio < 0.25){
-			tipo_nodo = TipoNodo::MAS;
-		} else if (aleatorio < 0.5) {
-			tipo_nodo = TipoNodo::MENOS;
-		} else if (aleatorio < 0.75) {
-			tipo_nodo = TipoNodo::POR;
-		} else {
-			tipo_nodo = TipoNodo::ENTRE;
-		}
-	}
+	void setTipoNodoOperadorAleatorio();
 
 	/**
 	  * @brief Establecer el valor del nodo a un termino aleatorio.
@@ -75,14 +62,7 @@ struct Nodo {
 	  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
 	  */
 
-	void setTerminoAleatorio(){
-		if (tipo_nodo == TipoNodo::NUMERO){
-			valor = Random::getInstance()->getFloat(-10.0f, 10.0f);
-		} else {
-			// TO-DO
-			valor = Random::getInstance()->getInt(GA_P::getNumVariables());
-		}
-	}
+	void setTerminoAleatorio();
 
 };
 

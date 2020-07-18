@@ -17,7 +17,7 @@ endif
 
 all: $(BIN)/GA_P
 
-$(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/main.o
+$(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/GA_P.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/nodo.o $(OBJ)/main.o
 	g++ $^ -o $@
 
 $(OBJ)/random.o: $(SRC)/random.cpp
@@ -33,6 +33,9 @@ $(OBJ)/expresion.o: $(SRC)/expresion.cpp
 	g++ -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
+	g++ -c $(FLAGS) $^ -I$(INC) -o $@
+
+$(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	g++ -c $(FLAGS) $^ -I$(INC) -o $@
 
 
