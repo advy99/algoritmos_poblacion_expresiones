@@ -260,8 +260,9 @@ class Expresion{
 
 
 
+		Expresion obtenerSubarbol(const Arbol subarbol)
 
-		void insertarNodo(const Nodo nodo);
+
 
 };
 

@@ -13,6 +13,13 @@ Expresion::Expresion(const Arbol subarbol){
 	inicializarVacia();
 	profundidad_maxima = 10;
 
+	(*this) = obtenerSubarbol(subarbol);
+
+}
+
+Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
+	Expresion sol;
+
 	unsigned tam = 0;
 	unsigned ramas_libres = 1;
 
@@ -29,19 +36,13 @@ Expresion::Expresion(const Arbol subarbol){
 	}
 
 	for (int i = 0; i < tam; i++){
-		insertarNodo(subarbol[i]);
+		sol.insertarNodo(subarbol[i]);
 	}
 
+	return sol;
 }
 
-void Expresion::insertarNodo(const Nodo nodo){
-	if (arbol == nullptr || longitud_arbol + 1 < longitud_reservada){
-		redimensionar(longitud_arbol + 1);
-	}
 
-	arbol[longitud_arbol] = nodo;
-	longitud_arbol++;
-}
 
 void Expresion::inicializarVacia(){
 	arbol = nullptr;
