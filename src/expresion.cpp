@@ -364,5 +364,8 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 
 	otra = nueva_otra;
 
+	evaluada = false;
+	otra.evaluada = false;
+
 
 }
