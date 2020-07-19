@@ -237,6 +237,7 @@ class Expresion{
 		  *
 		  * @param otra Expresión a copiar.
 		  *
+		  * @return Referencia a la expresion
 		  */
 
 		Expresion & operator= (const Expresion & otra);

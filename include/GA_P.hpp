@@ -98,23 +98,30 @@ class GA_P{
 		/**
 		  * @brief Obtener el numero de variables de los datos
 		  *
+		  * @return Numero de variables del problema
 		  */
 
 		static int getNumVariables();
 
 		/**
 		  * @brief Obtener el numero de datos
+		  *
+		  * @return Numero de datos
 		  */
 
 		static int getNumDatos();
 
 		/**
 		  * @brief Obtener los datos
+		  *
+		  * @return Datos.
 		  */
 		static std::vector<std::vector<double> > getDatos();
 
 		/**
 		  * @brief Obtener las etiquetas asociadas a los datos
+		  *
+		  * @return Etiquetas asociadas a los datos.
 		  */
 
 		static std::vector<double> getOutputDatos();
