@@ -364,8 +364,13 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 
 	otra = nueva_otra;
 
+	dejaEstarEvaluada();
+	otra.dejaEstarEvaluada();
+
+
+}
+
+void Expresion::dejaEstarEvaluada(){
 	evaluada = false;
-	otra.evaluada = false;
-
-
+	fitness = std::numeric_limits<double>::quiet_NaN();
 }

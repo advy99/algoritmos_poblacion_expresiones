@@ -139,6 +139,13 @@ class Expresion{
 		  */
 		void redimensionar(const unsigned tam);
 
+		/**
+		  * @brief Metodo para marcar que la evaluación del fitness de una expresión ya no es valida.
+		  *
+		  */
+
+		void dejaEstarEvaluada();
+
 
 	public:
 
@@ -267,7 +274,6 @@ class Expresion{
 		  */
 
 		Expresion obtenerSubarbol(const Arbol subarbol);
-
 
 
 };
