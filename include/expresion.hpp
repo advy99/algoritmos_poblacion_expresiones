@@ -260,7 +260,7 @@ class Expresion{
 
 
 
-		Expresion obtenerSubarbol(const Arbol subarbol)
+		Expresion obtenerSubarbol(const Arbol subarbol);
 
 
 
