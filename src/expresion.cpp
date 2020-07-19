@@ -202,7 +202,7 @@ double Expresion::evaluarExpresion(){
 		std::stack<Nodo> pila_original;
 		std::stack<Nodo> pila;
 
-		volcamos la expresion en la pila
+		//volcamos la expresion en la pila
 		for (unsigned i = getLongitudArbol() - 1; i >= 0; i--){
 			pila_original.push(arbol[i]);
 		}
@@ -237,7 +237,7 @@ double Expresion::evaluarExpresion(){
 
 		for (int i = 0; i < GA_P::getNumDatos(); i++){
 			pila = pila_original;
-			valor = evaluarDato(pila, GA_P::getDatos()[i]);
+			evaluarDato(pila, valor, GA_P::getDatos()[i]);
 			suma += std::pow( GA_P::getOutputDatos()[i] - valor , 2.0);
 		}
 
