@@ -258,7 +258,13 @@ class Expresion{
 
 		Expresion & operator= (const Expresion & otra);
 
-
+		/**
+		  * @brief Obtener el subarbol dado un punto de un árbol
+		  *
+		  * @param subarbol Inicio del subarbol a buscar
+		  *
+		  * @return Expresion con el subarbol
+		  */
 
 		Expresion obtenerSubarbol(const Arbol subarbol);
 
