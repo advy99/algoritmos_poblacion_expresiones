@@ -6,6 +6,42 @@
 
 Expresion::Expresion(){
 	inicializarVacia();
+	profundidad_maxima = 10;
+}
+
+Expresion::Expresion(const Arbol subarbol){
+	inicializarVacia();
+	profundidad_maxima = 10;
+
+	unsigned tam = 0;
+	unsigned ramas_libres = 1;
+
+	while(ramas_libres > 0){
+		if (subarbol[tam].tipo_nodo == TipoNodo::NUMERO || subarbol[tam].tipo_nodo == TipoNodo::VARIABLE){
+			ramas_libres--;
+			tam++;
+		} else {
+			ramas_libres--;
+
+			// es un operador, tiene dos ramas
+			ramas_libres += 2;
+			tam++;
+		}
+	}
+
+	for (int i = 0; i < tam; i++){
+		insertarNodo(subarbol[i]);
+	}
+
+}
+
+void Expresion::insertarNodo(const Nodo nodo){
+	if (arbol == nullptr || longitud_arbol + 1 < longitud_reservada){
+		redimensionar(longitud_arbol + 1);
+	}
+
+	arbol[longitud_arbol] = nodo;
+	longitud_arbol++;
 }
 
 void Expresion::inicializarVacia(){
@@ -82,6 +118,7 @@ Expresion & Expresion::operator= (const Expresion & otra){
 void Expresion::redimensionar(const unsigned tam){
 
 	Expresion otra = (*this);
+	liberarMemoria();
 	reservarMemoria(tam);
 	(*this) = otra;
 	longitud_reservada = tam;
@@ -260,4 +297,15 @@ double Expresion::getFitness() const{
 
 unsigned Expresion::getLongitudArbol() const{
 	return longitud_arbol;
+}
+
+
+
+void Expresion::intercambiarSubarbol(const int pos, Expresion & otra, const int pos_otra){
+
+	Expresion subarbol(arbol[pos]);
+	Expresion subarbol_otra(otra.arbol[pos]);
+
+	int fin_subarbol = pos + subarbol.getLongitudArbol();
+	int fin_otro_surbarbol = pos_otra + subarbol_otra.getLongitudArbol();
 }

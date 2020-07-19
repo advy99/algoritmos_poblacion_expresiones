@@ -142,7 +142,22 @@ class Expresion{
 
 	public:
 
+		/**
+		  * @brief Constructor sin parámetros.
+		  *
+		  */
+
 		Expresion();
+
+		/**
+		  * @brief Constructor con un parámetro. Crear una expresion con el subarbol dado
+		  *
+		  * @param subarbol Subarbol para crear la expresion
+		  *
+		  * @pre subarbol != nullptr
+		  */
+
+		Expresion(const Arbol subarbol);
 
 		/**
 		  * @brief Constructor con un parámetro, genera una expresión vacia.
@@ -223,13 +238,14 @@ class Expresion{
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.
 		  *
-		  * @param posicion Posición del árbol a intercambiar.
-		  * @param subarbol Subárbol a intercambiar.
+		  * @param pos Posición del árbol a intercambiar.
+		  * @param otra Expresion con la que intercambiar.
+		  * @param pos_otra Posición de la expresión dada a intercambiar.
 		  *
-		  * @pre subarbol No es un subárbol vacio.
+		  * @pre otra No es una expresion vacia.
 		  */
 
-		void intercambiarSubarbol(const int posicion, Arbol & subarbol);
+		  void intercambiarSubarbol(const int pos, Expresion & otra, const int pos_otra);
 
 
 		/**
@@ -241,6 +257,11 @@ class Expresion{
 		  */
 
 		Expresion & operator= (const Expresion & otra);
+
+
+
+
+		void insertarNodo(const Nodo nodo);
 
 };
 
