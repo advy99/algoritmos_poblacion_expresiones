@@ -117,18 +117,6 @@ class Expresion{
 
 		void liberarMemoria();
 
-		/**
-		  * @brief Generar la expresión de forma aleatoria.
-		  *
-		  * @param longitud_max Longitud máxima de la expresión aleatoria a generar.
-		  * @param prob_variable Probabilidad de que un símbolo terminal sea una variable y no un número
-		  *
-		  * @return Booleano: True si ha conseguido generar la expresion correctamente, false en caso contrario
-		  */
-
-		bool generarExpresionAleatoria(const unsigned longitud_max,
-			 									 const unsigned prob_variable);
-
 
 
 		/**
@@ -200,6 +188,19 @@ class Expresion{
 		  */
 
 		~Expresion();
+
+
+		/**
+		  * @brief Generar la expresión de forma aleatoria.
+		  *
+		  * @param longitud_max Longitud máxima de la expresión aleatoria a generar.
+		  * @param prob_variable Probabilidad de que un símbolo terminal sea una variable y no un número
+		  *
+		  * @return Booleano: True si ha conseguido generar la expresion correctamente, false en caso contrario
+		  */
+
+		bool generarExpresionAleatoria(const unsigned longitud_max,
+			 									 const double prob_variable);
 
 		/**
 		  * @brief Consultar si la expresión ha sido evaluada tras ser modificada.

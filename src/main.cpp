@@ -17,7 +17,23 @@ int main(int argc, char ** argv){
 
 	Expresion miExpresion;
 
+	miExpresion.generarExpresionAleatoria(10, 0.4);
+
 	std::cout << std::endl << miExpresion.evaluarExpresion();
+
+
+	Expresion miExpresion2;
+
+	miExpresion2.generarExpresionAleatoria(10, 0.4);
+
+	std::cout << std::endl << miExpresion2.evaluarExpresion();
+
+	miExpresion.intercambiarSubarbol(Random::getInstance()->getInt(miExpresion.getLongitudArbol()), miExpresion2, Random::getInstance()->getInt(miExpresion2.getLongitudArbol()));
+
+	std::cout << std::endl << std::endl << miExpresion.evaluarExpresion();
+
+	std::cout << std::endl << miExpresion2.evaluarExpresion();
+
 
 	return 0;
 

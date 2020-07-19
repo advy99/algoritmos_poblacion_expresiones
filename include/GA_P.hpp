@@ -121,12 +121,36 @@ class GA_P{
 		static std::vector<std::vector<double> > getDatos();
 
 		/**
+		  * @brief Obtener el dato de la fila indice
+		  *
+		  * @param indice Indice del dato a obtener
+		  *
+		  * @pre indice >= 0 && indice < datos.size
+		  *
+		  * @return Dato de la columna indice.
+		  */
+		static std::vector<double > getDato(const unsigned indice);
+
+
+		/**
 		  * @brief Obtener las etiquetas asociadas a los datos
 		  *
 		  * @return Etiquetas asociadas a los datos.
 		  */
 
 		static std::vector<double> getOutputDatos();
+
+		/**
+		  * @brief Obtener la etiqueta asociada al dato indice
+		  *
+		  * @param indice Indice de la etiqueta a obtener
+		  *
+		  * @pre indice >= 0 && indice < output_datos.size
+		  *
+		  * @return Etiqueta asociada al dato indice.
+		  */
+
+		static double getOutputDato(const unsigned indice);
 
 };
 

@@ -91,8 +91,16 @@ std::vector<std::vector<double> > GA_P::getDatos(){
 	return datos;
 }
 
+std::vector<double> GA_P::getDato(const unsigned i){
+	return datos[i];
+}
+
 std::vector<double> GA_P::getOutputDatos(){
 	return output_datos;
+}
+
+double GA_P::getOutputDato(const unsigned indice){
+	return output_datos[indice];
 }
 
 std::vector<std::vector<double>> GA_P::datos;

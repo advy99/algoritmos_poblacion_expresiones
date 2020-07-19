@@ -35,6 +35,7 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 		tam++;
 	}
 
+	sol.redimensionar(tam);
 	for (unsigned i = 0; i < tam; i++){
 		sol.arbol[i] = subarbol[i];
 	}
@@ -81,8 +82,10 @@ void Expresion::liberarMemoria(){
 }
 
 void Expresion::reservarMemoria(const unsigned tam){
-	arbol = new Nodo[tam];
-	longitud_reservada = 0;
+	if (tam > 0){
+		arbol = new Nodo[tam];
+	}
+	longitud_reservada = tam;
 }
 
 void Expresion::copiarDatos(const Expresion & otra){
@@ -119,13 +122,13 @@ void Expresion::redimensionar(const unsigned tam){
 	Expresion otra = (*this);
 	liberarMemoria();
 	reservarMemoria(tam);
-	(*this) = otra;
+	copiarDatos(otra);
 	longitud_reservada = tam;
 
 }
 
 bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
-														const unsigned prob_variable){
+														const double prob_variable){
 
 	if (longitud_maxima > longitud_reservada){
 		redimensionar(longitud_maxima);
@@ -153,6 +156,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 			arbol[i].setTerminoAleatorio();
 			ramas_libres--;
 		}
+		i++;
 	}
 
 	bool exito = ramas_libres == 0;
@@ -239,7 +243,7 @@ double Expresion::evaluarExpresion(){
 		std::stack<Nodo> pila;
 
 		//volcamos la expresion en la pila
-		for (unsigned i = getLongitudArbol() - 1; i >= 0; i--){
+		for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
 			pila_original.push(arbol[i]);
 		}
 
@@ -273,8 +277,8 @@ double Expresion::evaluarExpresion(){
 
 		for (int i = 0; i < GA_P::getNumDatos(); i++){
 			pila = pila_original;
-			evaluarDato(pila, valor, GA_P::getDatos()[i]);
-			suma += std::pow( GA_P::getOutputDatos()[i] - valor , 2.0);
+			evaluarDato(pila, valor, GA_P::getDato(i));
+			suma += std::pow( GA_P::getOutputDato(i) - valor , 2.0);
 		}
 
 		resultado = suma / (double)GA_P::getNumDatos();
