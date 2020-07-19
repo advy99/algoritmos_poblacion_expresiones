@@ -194,7 +194,7 @@ double Expresion::evaluarExpresion(){
 	double valor = 0.0d;
 	double suma = 0.0d;
 
-	if (!evaluada){
+	if (!evaluada && arbol != nullptr){
 		// TO-DO
 		// implementar error cuadratico
 
