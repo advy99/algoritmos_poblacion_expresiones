@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 
-GA_P::GA_P(const std::string fichero_datos, const char char_comentario){
+GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador){
 
 	bool lectura_correcta;
 
@@ -21,7 +21,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario){
 
 }
 
-bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario){
+bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador){
 
 	std::ifstream file(fichero_datos);
 	bool resultado = true;
@@ -45,12 +45,12 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 
 				std::string str_valor;
 
-				std::getline(ss, str_valor, ',');
+				std::getline(ss, str_valor, delimitador);
 
 				while (!ss.eof()){
 
 					datos_linea.push_back(strtod(str_valor.c_str(), nullptr));
-					std::getline(ss, str_valor, ',');
+					std::getline(ss, str_valor, delimitador);
 
 				}
 

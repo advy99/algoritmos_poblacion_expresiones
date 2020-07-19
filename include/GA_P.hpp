@@ -74,7 +74,7 @@ class GA_P{
 		  *
 		  */
 
-		bool leerDatos(const std::string fichero_datos, const char char_comentario);
+		bool leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador = ',');
 
 	public:
 
@@ -86,7 +86,7 @@ class GA_P{
 		  *
 		  */
 
-		GA_P(const std::string fichero_datos, const char char_comentario);
+		GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador = ',');
 
 		/**
 		  * @brief Destructor
