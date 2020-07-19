@@ -241,7 +241,7 @@ double Expresion::evaluarExpresion(){
 			suma += std::pow( GA_P::getOutputDatos()[i] - valor , 2.0);
 		}
 
-		resultado = suma / (double)(GA_P::getNumDatos()*2);
+		resultado = suma / (double)GA_P::getNumDatos();
 	}
 
 	fitness = resultado;
