@@ -48,8 +48,7 @@ void Expresion::inicializarVacia(){
 	arbol = nullptr;
 	longitud_arbol = 0;
 	longitud_reservada = 0;
-	evaluada = false;
-	fitness = std::numeric_limits<double>::quiet_NaN();
+	dejaEstarEvaluada();
 }
 
 Expresion::Expresion(const unsigned prof_maxima){
