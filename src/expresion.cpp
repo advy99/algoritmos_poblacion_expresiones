@@ -173,7 +173,7 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std
 			valor = valor_izda * valor_dcha;
 
 		} else if (operacion == TipoNodo::ENTRE){
-			if (son_iguales(valor_dcha, 0.0d) ){
+			if (!son_iguales(valor_dcha, 0.0d) ){
 				valor = valor_izda / valor_dcha;
 			} else {
 				valor = 1.0f;
