@@ -18,7 +18,7 @@
   *  @brief Clase GA_P
   *
   *  Una instancia del tipo GA_P representará un estimador para los datos dados, utilizando
-  * una población de expresiones.
+  * una Poblacion, conjunto de Expresion.
   *
   *
   * @author Antonio David Villegas Yeguas
