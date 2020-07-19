@@ -17,16 +17,15 @@ Expresion::Expresion(const Arbol subarbol){
 	unsigned ramas_libres = 1;
 
 	while(ramas_libres > 0){
-		if (subarbol[tam].tipo_nodo == TipoNodo::NUMERO || subarbol[tam].tipo_nodo == TipoNodo::VARIABLE){
-			ramas_libres--;
-			tam++;
-		} else {
-			ramas_libres--;
-
+		// si no es ni un numero ni una variable
+		if (subarbol[tam].tipo_nodo != TipoNodo::NUMERO &&
+			 subarbol[tam].tipo_nodo != TipoNodo::VARIABLE){
 			// es un operador, tiene dos ramas
 			ramas_libres += 2;
-			tam++;
 		}
+		// en todo caso, he visitado ese nodo, y el tamaño se incrementa en uno
+		ramas_libres--;
+		tam++;
 	}
 
 	for (int i = 0; i < tam; i++){
