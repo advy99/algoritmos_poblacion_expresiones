@@ -301,11 +301,68 @@ unsigned Expresion::getLongitudArbol() const{
 
 
 
-void Expresion::intercambiarSubarbol(const int pos, Expresion & otra, const int pos_otra){
+void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const unsigned pos_otra){
 
 	Expresion subarbol(&arbol[pos]);
 	Expresion subarbol_otra(&otra.arbol[pos]);
 
 	int fin_subarbol = pos + subarbol.getLongitudArbol();
 	int fin_otro_surbarbol = pos_otra + subarbol_otra.getLongitudArbol();
+
+	Expresion nueva;
+
+	// la nueva tendra dimension la actual, menos el subarbol que eliminamos más el subarbol que añadimos
+	nueva.redimensionar(pos + subarbol_otra.getLongitudArbol() + (*this).getLongitudArbol() - fin_subarbol);
+
+
+	// copiamos la parte que dejamos igual
+	for (unsigned i = 0; i < pos; i++){
+		nueva.arbol[i] = arbol[i];
+	}
+
+	// insertamos la parte del otro subarbol
+	for (unsigned i = 0; i < subarbol_otra.getLongitudArbol(); i++){
+		nueva.arbol[i + pos] = subarbol_otra.arbol[i];
+	}
+
+	// copiamos la parte final del arbol original
+	unsigned pos_nuevo = pos + subarbol_otra.getLongitudArbol();
+	for (unsigned i = fin_subarbol; i < (*this).getLongitudArbol(); i++){
+		nueva.arbol[pos_nuevo] = arbol[i];
+		pos_nuevo++;
+	}
+
+	// actualizamos la longitud
+	nueva.longitud_arbol = pos_nuevo;
+
+	// nuestro arbol pasa a ser el antiguo
+	(*this) = nueva;
+
+
+	// aplicamos lo mismo a la que nos pasan por referencia
+	Expresion nueva_otra;
+
+	nueva_otra.redimensionar(pos_otra + subarbol.getLongitudArbol() + otra.getLongitudArbol() - fin_otro_surbarbol);
+
+	// copiamos la parte que dejamos igual
+	for (unsigned i = 0; i < pos_otra; i++){
+		nueva_otra.arbol[i] = otra.arbol[i];
+	}
+
+	// insertamos la parte del otro subarbol
+	for (unsigned i = 0; i < subarbol.getLongitudArbol(); i++){
+		nueva_otra.arbol[i + pos_otra] = subarbol.arbol[i];
+	}
+
+	unsigned pos_otra_nuevo = pos_otra + subarbol.getLongitudArbol();
+	for (unsigned i = fin_otro_surbarbol; i < otra.getLongitudArbol(); i++){
+		nueva_otra.arbol[pos_otra_nuevo] = arbol[i];
+		pos_otra_nuevo++;
+	}
+
+	nueva_otra.longitud_arbol = pos_otra_nuevo;
+
+	otra = nueva_otra;
+
+
 }

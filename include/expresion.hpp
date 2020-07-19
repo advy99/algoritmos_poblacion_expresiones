@@ -245,7 +245,7 @@ class Expresion{
 		  * @pre otra No es una expresion vacia.
 		  */
 
-		  void intercambiarSubarbol(const int pos, Expresion & otra, const int pos_otra);
+		  void intercambiarSubarbol(const unsigned pos, Expresion & otra, const unsigned pos_otra);
 
 
 		/**
