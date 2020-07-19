@@ -69,6 +69,7 @@ class GA_P{
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
 		  * @param char_comentario Caracter que marca que una linea es un comentario y ha de ser ignorada
+		  * @param delimitador Caracter que marca como están separados los datos de entrada
 		  *
 		  * @pre Los datos han sido preprocesados y los datos a leer vienen dadas separadas por comas. Cada dato es una linea.
 		  *
@@ -83,6 +84,7 @@ class GA_P{
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
 		  * @param char_comentario Caracter que marca que una linea es un comentario y ha de ser ignorada
+		  * @param delimitador Caracter que marca como están separados los datos de entrada
 		  *
 		  */
 
