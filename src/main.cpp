@@ -35,6 +35,10 @@ int main(int argc, char ** argv){
 	std::cout << std::endl << miExpresion2.evaluarExpresion();
 
 
+
+	std::cout << std::endl << "Profundidad: " << miExpresion.calcularProfundidad() << std::endl;
+
+
 	return 0;
 
 }

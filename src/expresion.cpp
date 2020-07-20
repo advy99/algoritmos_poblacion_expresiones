@@ -377,3 +377,71 @@ void Expresion::dejaEstarEvaluada(){
 	evaluada = false;
 	fitness = std::numeric_limits<double>::quiet_NaN();
 }
+
+
+unsigned Expresion::contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const{
+
+	if (pila.empty()){
+		return nivel;
+	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO || pila.top().tipo_nodo == TipoNodo::VARIABLE) {
+		nivel++;
+		pila.pop();
+		return nivel;
+	} else {
+		// es un operador
+		nivel++;
+		pila.pop();
+		unsigned niveles_izda = nivel;
+		unsigned niveles_dcha = nivel;
+		niveles_izda = contarNiveles(pila, nivel);
+		niveles_dcha = contarNiveles(pila, nivel);
+
+		// nos quedamos con el nivel de la rama con mayor profundidad
+		nivel = niveles_izda > niveles_dcha ? niveles_izda : niveles_dcha;
+
+		return nivel;
+	}
+}
+
+unsigned Expresion::calcularProfundidad() const {
+
+	unsigned profundidad = 0;
+	std::stack<Nodo> pila;
+
+	// //volcamos la expresion en la pila
+	// for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+	// 	pila.push(arbol[i]);
+	// }
+
+	Nodo n;
+
+	n.tipo_nodo = TipoNodo::NUMERO;
+	n.valor = 5;
+
+	pila.push(n);
+
+	n.valor = 3;
+
+	pila.push(n);
+
+	n.tipo_nodo = TipoNodo::MAS;
+
+	pila.push(n);
+
+	n.tipo_nodo = TipoNodo::NUMERO;
+	n.valor = 20;
+
+	pila.push(n);
+
+	n.tipo_nodo = TipoNodo::MENOS;
+	pila.push(n);
+
+	//Pila de prueba: 20 - (3 + 5)
+
+
+	profundidad = contarNiveles(pila, profundidad);
+
+
+	return profundidad;
+
+}

@@ -135,6 +135,9 @@ class Expresion{
 		void dejaEstarEvaluada();
 
 
+		unsigned contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const;
+
+
 	public:
 
 		/**
@@ -275,6 +278,14 @@ class Expresion{
 		  */
 
 		Expresion obtenerSubarbol(const Arbol subarbol);
+
+		/**
+		  * @brief Calcular la profundidad de una expresión
+		  *
+		  */
+
+		unsigned calcularProfundidad() const;
+
 
 
 };
