@@ -134,6 +134,14 @@ class Expresion{
 
 		void dejaEstarEvaluada();
 
+		/**
+		  * @brief Contar los niveles de un árbol de Expresion dado en una pila.
+		  *
+		  * @param pila Pila donde esta almacenada la Expresion
+		  * @param nivel Nivel actual de la expresion
+		  *
+		  * @return Número de niveles de la expresión
+		  */
 
 		unsigned contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const;
 
