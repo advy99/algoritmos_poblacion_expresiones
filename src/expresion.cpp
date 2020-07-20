@@ -403,13 +403,13 @@ unsigned Expresion::contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const
 	}
 }
 
-unsigned Expresion::calcularProfundidad() const {
+unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
 
 	unsigned profundidad = 0;
 	std::stack<Nodo> pila;
 
 	//volcamos la expresion en la pila
-	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+	for (int i = (int)getLongitudArbol() - 1; i >= (int)comienzo; i--){
 		pila.push(arbol[i]);
 	}
 	//

@@ -290,9 +290,12 @@ class Expresion{
 		/**
 		  * @brief Calcular la profundidad de una expresión
 		  *
+		  * @param comienzo Nodo por el que comenzar a contar los niveles, para contar niveles de un subarbol
+		  *
+		  * @return Profundidad de la expresión a partir del nodo dado
 		  */
 
-		unsigned calcularProfundidad() const;
+		unsigned calcularProfundidad(const unsigned comienzo = 0) const;
 
 
 
