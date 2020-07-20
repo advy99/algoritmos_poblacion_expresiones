@@ -459,9 +459,9 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::stri
 		return resultado;
 	} else if (pila.top().tipo_nodo == TipoNodo::VARIABLE){
 		if (izda){
-			resultado = "x" + std::to_string(pila.top().valor) + " " + resultado;
+			resultado = "x" + std::to_string((int)pila.top().valor) + " " + resultado;
 		} else {
-			resultado = resultado + " x" + std::to_string(pila.top().valor);
+			resultado = resultado + " x" + std::to_string((int)pila.top().valor);
 		}
 		pila.pop();
 		return resultado;
