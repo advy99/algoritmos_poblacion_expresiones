@@ -445,3 +445,104 @@ unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
 	return profundidad;
 
 }
+
+std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const{
+	if (pila.empty()){
+		return resultado;
+	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO){
+		if (izda){
+			resultado = std::to_string(pila.top().valor) + " " + resultado;
+		} else {
+			resultado = resultado + " " + std::to_string(pila.top().valor);
+		}
+		pila.pop();
+		return resultado;
+	} else if (pila.top().tipo_nodo == TipoNodo::VARIABLE){
+		if (izda){
+			resultado = "x" + std::to_string(pila.top().valor) + " " + resultado;
+		} else {
+			resultado = resultado + " x" + std::to_string(pila.top().valor);
+		}
+		pila.pop();
+		return resultado;
+	} else {
+		std::string valor;
+		if (pila.top().tipo_nodo == TipoNodo::MAS){
+			valor = "+";
+		} else if (pila.top().tipo_nodo == TipoNodo::MENOS){
+			valor = "-";
+		} else if (pila.top().tipo_nodo == TipoNodo::POR){
+			valor = "*";
+		} else if (pila.top().tipo_nodo == TipoNodo::ENTRE){
+			valor = "/";
+		}
+
+
+
+		pila.pop();
+		std::string izquierda;
+		std::string derecha;
+		izquierda = obtenerStringExpresion(pila, "", true) ;
+		derecha = obtenerStringExpresion(pila, "", false);
+
+		std::string total = "( " + izquierda + " " + valor + " " + derecha + " )";
+
+		if (izda){
+			resultado = total + resultado;
+		} else {
+			resultado = resultado + total;
+		}
+
+		return resultado;
+
+	}
+
+
+
+}
+
+std::string Expresion::pintarExpresion() const {
+	std::string resultado = "";
+
+	std::stack<Nodo> pila;
+
+	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+		pila.push(arbol[i]);
+	}
+
+	// Nodo n;
+	//
+	// n.tipo_nodo = TipoNodo::NUMERO;
+	// n.valor = 5;
+	//
+	// pila.push(n);
+	//
+	// n.valor = 3;
+	//
+	// pila.push(n);
+	//
+	// n.tipo_nodo = TipoNodo::MAS;
+	//
+	// pila.push(n);
+	//
+	// n.tipo_nodo = TipoNodo::NUMERO;
+	// n.valor = 20;
+	//
+	// pila.push(n);
+	//
+	// n.tipo_nodo = TipoNodo::MENOS;
+	// pila.push(n);
+
+
+	resultado = obtenerStringExpresion(pila, resultado, true);
+
+	return resultado;
+}
+
+std::ostream & operator<< (std::ostream & os, const Expresion & exp){
+	std::string exp_string = exp.pintarExpresion();
+
+	os << exp_string << std::endl;
+
+	return os;
+}

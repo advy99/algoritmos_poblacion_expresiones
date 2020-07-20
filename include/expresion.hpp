@@ -11,6 +11,7 @@
 #include "nodo.hpp"
 #include <vector>
 #include <stack>
+#include <string>
 
 /**
   *  @brief Clase Expresion
@@ -297,7 +298,11 @@ class Expresion{
 
 		unsigned calcularProfundidad(const unsigned comienzo = 0) const;
 
+		std::string obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const;
 
+		std::string pintarExpresion() const;
+
+		friend std::ostream & operator<< (std::ostream & os, const Expresion & exp);
 
 };
 

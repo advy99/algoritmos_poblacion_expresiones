@@ -17,7 +17,7 @@ int main(int argc, char ** argv){
 
 	Expresion miExpresion;
 
-	miExpresion.generarExpresionAleatoria(10, 0.4);
+	miExpresion.generarExpresionAleatoria(10, 0.1);
 
 	std::cout << std::endl << miExpresion.evaluarExpresion();
 
@@ -37,6 +37,8 @@ int main(int argc, char ** argv){
 
 
 	std::cout << std::endl << "Profundidad: " << miExpresion.calcularProfundidad() << std::endl;
+
+	std::cout << miExpresion << std::endl;
 
 
 	return 0;
