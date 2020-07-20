@@ -408,33 +408,33 @@ unsigned Expresion::calcularProfundidad() const {
 	unsigned profundidad = 0;
 	std::stack<Nodo> pila;
 
-	// //volcamos la expresion en la pila
-	// for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
-	// 	pila.push(arbol[i]);
-	// }
-
-	Nodo n;
-
-	n.tipo_nodo = TipoNodo::NUMERO;
-	n.valor = 5;
-
-	pila.push(n);
-
-	n.valor = 3;
-
-	pila.push(n);
-
-	n.tipo_nodo = TipoNodo::MAS;
-
-	pila.push(n);
-
-	n.tipo_nodo = TipoNodo::NUMERO;
-	n.valor = 20;
-
-	pila.push(n);
-
-	n.tipo_nodo = TipoNodo::MENOS;
-	pila.push(n);
+	//volcamos la expresion en la pila
+	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+		pila.push(arbol[i]);
+	}
+	//
+	// Nodo n;
+	//
+	// n.tipo_nodo = TipoNodo::NUMERO;
+	// n.valor = 5;
+	//
+	// pila.push(n);
+	//
+	// n.valor = 3;
+	//
+	// pila.push(n);
+	//
+	// n.tipo_nodo = TipoNodo::MAS;
+	//
+	// pila.push(n);
+	//
+	// n.tipo_nodo = TipoNodo::NUMERO;
+	// n.valor = 20;
+	//
+	// pila.push(n);
+	//
+	// n.tipo_nodo = TipoNodo::MENOS;
+	// pila.push(n);
 
 	//Pila de prueba: 20 - (3 + 5)
 
