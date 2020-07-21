@@ -26,20 +26,17 @@ int main(int argc, char ** argv){
 
 	miExpresion2.generarExpresionAleatoria(10, 0.4);
 
-	std::cout << std::endl << miExpresion2.evaluarExpresion();
+	std::cout << std::endl;
+	std::cout << "Arbol 1 antes de cruzar: " << std::endl << miExpresion << std::endl;
+	std::cout << "Arbol 2 antes de cruzar: "<< std::endl << miExpresion2 << std::endl;
 
-	miExpresion.intercambiarSubarbol(Random::getInstance()->getInt(miExpresion.getLongitudArbol()), miExpresion2, Random::getInstance()->getInt(miExpresion2.getLongitudArbol()));
+	int punto1 = Random::getInstance()->getInt(miExpresion.getLongitudArbol());
+	int punto2 = Random::getInstance()->getInt(miExpresion2.getLongitudArbol());
 
-	std::cout << std::endl << std::endl << miExpresion.evaluarExpresion();
+	miExpresion.intercambiarSubarbol(punto1, miExpresion2, punto2);
 
-	std::cout << std::endl << miExpresion2.evaluarExpresion();
-
-
-
-	std::cout << std::endl << "Profundidad: " << miExpresion.calcularProfundidad() << std::endl;
-
-	std::cout << miExpresion << std::endl;
-
+	std::cout << "Arbol 1 despues de cruzar: " << std::endl << miExpresion << std::endl;
+	std::cout << "Arbol 2 despues de cruzar: "<< std::endl << miExpresion2 << std::endl;
 
 	return 0;
 
