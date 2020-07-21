@@ -39,6 +39,7 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 	for (unsigned i = 0; i < tam; i++){
 		sol.arbol[i] = subarbol[i];
 	}
+	sol.longitud_arbol = tam;
 
 	return sol;
 }
@@ -307,7 +308,7 @@ unsigned Expresion::getLongitudArbol() const{
 void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const unsigned pos_otra){
 
 	Expresion subarbol(&arbol[pos]);
-	Expresion subarbol_otra(&otra.arbol[pos]);
+	Expresion subarbol_otra(&otra.arbol[pos_otra]);
 
 	int fin_subarbol = pos + subarbol.getLongitudArbol();
 	int fin_otro_surbarbol = pos_otra + subarbol_otra.getLongitudArbol();
