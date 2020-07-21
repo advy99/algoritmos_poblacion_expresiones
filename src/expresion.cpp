@@ -354,7 +354,7 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 
 	unsigned pos_otra_nuevo = pos_otra + subarbol.getLongitudArbol();
 	for (unsigned i = fin_otro_surbarbol; i < otra.getLongitudArbol(); i++){
-		nueva_otra.arbol[pos_otra_nuevo] = arbol[i];
+		nueva_otra.arbol[pos_otra_nuevo] = otra.arbol[i];
 		pos_otra_nuevo++;
 	}
 
