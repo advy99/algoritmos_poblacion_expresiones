@@ -336,12 +336,6 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 		pos_nuevo++;
 	}
 
-	// actualizamos la longitud
-	nueva.longitud_arbol = pos_nuevo;
-
-	// nuestro arbol pasa a ser el antiguo
-	(*this) = nueva;
-
 
 	// aplicamos lo mismo a la que nos pasan por referencia
 	Expresion nueva_otra;
@@ -363,6 +357,14 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 		nueva_otra.arbol[pos_otra_nuevo] = arbol[i];
 		pos_otra_nuevo++;
 	}
+
+	// los intercambiamos al final
+
+	// actualizamos la longitud
+	nueva.longitud_arbol = pos_nuevo;
+
+	// nuestro arbol pasa a ser el antiguo
+	(*this) = nueva;
 
 	nueva_otra.longitud_arbol = pos_otra_nuevo;
 
