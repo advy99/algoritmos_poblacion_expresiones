@@ -248,34 +248,6 @@ double Expresion::evaluarExpresion(){
 			pila_original.push(arbol[i]);
 		}
 
-		// Nodo n;
-		//
-		// n.tipo_nodo = TipoNodo::NUMERO;
-		// n.valor = 5;
-		//
-		// pila_original.push(n);
-		//
-		// n.valor = 3;
-		//
-		// pila_original.push(n);
-		//
-		// n.tipo_nodo = TipoNodo::MAS;
-		//
-		// pila_original.push(n);
-		//
-		// n.tipo_nodo = TipoNodo::NUMERO;
-		// n.valor = 20;
-		//
-		// pila_original.push(n);
-		//
-		// n.tipo_nodo = TipoNodo::MENOS;
-		// pila_original.push(n);
-		//
-		// //Pila de prueba: 20 - (3 + 5)
-		// pila = pila_original;
-		// resultado = 0.0d;
-		// evaluarDato(pila, resultado, GA_P::getDatos()[0]);
-
 		for (int i = 0; i < GA_P::getNumDatos(); i++){
 			pila = pila_original;
 			evaluarDato(pila, valor, GA_P::getDato(i));
@@ -415,32 +387,6 @@ unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
 	for (int i = (int)getLongitudArbol() - 1; i >= (int)comienzo; i--){
 		pila.push(arbol[i]);
 	}
-	//
-	// Nodo n;
-	//
-	// n.tipo_nodo = TipoNodo::NUMERO;
-	// n.valor = 5;
-	//
-	// pila.push(n);
-	//
-	// n.valor = 3;
-	//
-	// pila.push(n);
-	//
-	// n.tipo_nodo = TipoNodo::MAS;
-	//
-	// pila.push(n);
-	//
-	// n.tipo_nodo = TipoNodo::NUMERO;
-	// n.valor = 20;
-	//
-	// pila.push(n);
-	//
-	// n.tipo_nodo = TipoNodo::MENOS;
-	// pila.push(n);
-
-	//Pila de prueba: 20 - (3 + 5)
-
 
 	profundidad = contarNiveles(pila, profundidad);
 
@@ -512,30 +458,6 @@ std::string Expresion::pintarExpresion() const {
 	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
 		pila.push(arbol[i]);
 	}
-
-	// Nodo n;
-	//
-	// n.tipo_nodo = TipoNodo::NUMERO;
-	// n.valor = 5;
-	//
-	// pila.push(n);
-	//
-	// n.valor = 3;
-	//
-	// pila.push(n);
-	//
-	// n.tipo_nodo = TipoNodo::MAS;
-	//
-	// pila.push(n);
-	//
-	// n.tipo_nodo = TipoNodo::NUMERO;
-	// n.valor = 20;
-	//
-	// pila.push(n);
-	//
-	// n.tipo_nodo = TipoNodo::MENOS;
-	// pila.push(n);
-
 
 	resultado = obtenerStringExpresion(pila, resultado, true);
 
