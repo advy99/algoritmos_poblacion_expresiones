@@ -37,12 +37,12 @@ INICIO:
 	@printf "\e[94m$(MENSAJE)\n\n"
 
 $(OBJETIVO): $(OBJETOS)
-	$(eval X=$(shell echo $$(($(X)+1))))
+	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $@ a partir de $^\n"
 	@$(CXX) $^ -o $@
 
 $(OBJ)/random.o: $(SRC)/random.cpp
-	$(eval X=$(shell echo $$(($(X)+1))))
+	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
