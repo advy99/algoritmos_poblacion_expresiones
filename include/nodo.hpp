@@ -46,7 +46,7 @@ struct Nodo {
 	  * @brief Valor asociado al nodo
 	  */
 
-	double valor;
+	int valor;
 
 	/**
 	  * @brief Establecer el tipo del nodo a un operador aleatorio entre los posibles operadores.

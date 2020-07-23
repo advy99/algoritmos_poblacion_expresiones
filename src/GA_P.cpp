@@ -7,11 +7,12 @@
 #include <cstdlib>
 
 
-GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador){
+GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador, const unsigned prof){
 
 	bool lectura_correcta;
 
 	lectura_correcta = leerDatos(fichero_datos, char_comentario);
+	prof_expresiones = prof;
 
 	if (lectura_correcta){
 		// inicilizamos poblacion
@@ -103,5 +104,10 @@ double GA_P::getOutputDato(const unsigned indice){
 	return output_datos[indice];
 }
 
+unsigned GA_P::getMaxProfExpresiones(){
+	return prof_expresiones;
+}
+
 std::vector<std::vector<double>> GA_P::datos;
 std::vector<double> GA_P::output_datos;
+unsigned GA_P::prof_expresiones;

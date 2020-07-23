@@ -3,7 +3,7 @@
 
 void Nodo::setTerminoAleatorio(){
 	if (tipo_nodo == TipoNodo::NUMERO){
-		valor = Random::getInstance()->getFloat(-10.0f, 10.0f);
+		valor = Random::getInstance()->getInt(GA_P::getMaxProfExpresiones());
 	} else {
 		// TO-DO
 		valor = Random::getInstance()->getInt(GA_P::getNumVariables());

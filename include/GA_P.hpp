@@ -65,6 +65,13 @@ class GA_P{
 		static std::vector<double> output_datos;
 
 		/**
+		  * @brief Profundidad maxima de las expresiones utilizadas
+		  *
+		  */
+
+		static unsigned prof_expresiones;
+
+		/**
 		  * @brief Leer datos de entrada para el algoritmo
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
@@ -88,7 +95,7 @@ class GA_P{
 		  *
 		  */
 
-		GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador = ',');
+		GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador = ',', const unsigned prof = 10);
 
 		/**
 		  * @brief Destructor
@@ -151,6 +158,10 @@ class GA_P{
 		  */
 
 		static double getOutputDato(const unsigned indice);
+
+
+
+		static unsigned getMaxProfExpresiones();
 
 };
 
