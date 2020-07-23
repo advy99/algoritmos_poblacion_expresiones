@@ -56,7 +56,7 @@ FIN:
 
 clean:
 	@printf "\e[36mLimpiando el directorio $(OBJ)\n"
-	-@rm $(OBJ)/*.o 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
+	-@rm $(OBJ)/*.o 2> /dev/null || printf "\e[33mEl directorio $(OBJ) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpiando el directorio $(BIN)\n"
 	-@rm $(BIN)/* 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpieza completada\n"
