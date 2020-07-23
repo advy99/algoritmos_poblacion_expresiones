@@ -83,6 +83,6 @@ clean:
 	@printf "\e[36mLimpieza completada\n"
 
 documentacion:
-	@printf "\e[36mComenzando compilación de la documentación del proyecto\n\e[33m"
+	@printf "\e[36mComenzando compilación de la documentación del proyecto\n\e[33m\n"
 	@doxygen doc/doxys/Doxyfile
-	@printf "\e[36mFinalizada compilación de la documentación. Puedes consultarla en doc/html/index.html"
+	@printf "\e[36mFinalizada compilación de la documentación. Puedes consultarla en doc/html/index.html\n"
