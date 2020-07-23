@@ -121,9 +121,11 @@ void Expresion::copiarDatos(const Expresion & otra){
 	longitud_cromosoma = otra.longitud_cromosoma;
 
 	memcpy(arbol, otra.arbol, longitud_arbol*sizeof(Nodo));
-	memcpy(cromosoma, otra.cromosoma, longitud_cromosoma*sizeof(double));
+	copiarCromosoma(otra.cromosoma);
+}
 
-
+void Expresion::copiarCromosoma(const double * otro_cromosoma){
+	memcpy(cromosoma, otro_cromosoma, longitud_cromosoma*sizeof(double));
 }
 
 Expresion::Expresion(const Expresion & otra){
@@ -313,10 +315,17 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 	Expresion subarbol(&arbol[pos]);
 	Expresion subarbol_otra(&otra.arbol[pos_otra]);
 
+	subarbol.copiarCromosoma(cromosoma);
+	subarbol_otra.copiarCromosoma(cromosoma);
+
+
+
 	int fin_subarbol = pos + subarbol.getLongitudArbol();
 	int fin_otro_surbarbol = pos_otra + subarbol_otra.getLongitudArbol();
 
 	Expresion nueva;
+	nueva.copiarCromosoma(cromosoma);
+
 
 	// la nueva tendra dimension la actual, menos el subarbol que eliminamos más el subarbol que añadimos
 	nueva.redimensionar(pos + subarbol_otra.getLongitudArbol() + (*this).getLongitudArbol() - fin_subarbol);
@@ -342,6 +351,8 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 
 	// aplicamos lo mismo a la que nos pasan por referencia
 	Expresion nueva_otra;
+	nueva_otra.copiarCromosoma(otra.cromosoma);
+
 
 	nueva_otra.redimensionar(pos_otra + subarbol.getLongitudArbol() + otra.getLongitudArbol() - fin_otro_surbarbol);
 

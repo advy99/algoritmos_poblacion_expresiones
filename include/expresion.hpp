@@ -174,6 +174,8 @@ class Expresion{
 
 		void inicializarCromosoma();
 
+		void copiarCromosoma(const double * otro_cromosoma);
+
 	public:
 
 		/**
