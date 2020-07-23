@@ -83,6 +83,20 @@ class Expresion{
 		Arbol arbol;
 
 		/**
+		  * @brief Array donde almacenaremos los valores de las constantes numéricas para aprenderlos
+		  *
+		  */
+
+		double * cromosoma;
+
+		/**
+		  * @brief Longitud del array cromosoma
+		  *
+		  */
+
+		unsigned longitud_cromosoma;
+
+		/**
 		  * @brief Inicializar una expresión vacia.
 		  *
 		  * @pre La expresión no tiene memoria dinámica reservada.
@@ -103,13 +117,23 @@ class Expresion{
 
 
 		/**
-		  * @brief Reservar memoria para una expresión de tamaño tam
+		  * @brief Reservar memoria para un árbol de expresión de tamaño tam
 		  *
 		  * @param tam Tamaño a reservar para la expresión.
 		  *
 		  */
 
-		void reservarMemoria(const unsigned tam);
+		void reservarMemoriaArbol(const unsigned tam);
+
+
+		/**
+		  * @brief Reservar memoria para un cromosoma de tamaño tam
+		  *
+		  * @param tam Tamaño a reservar para el cromosoma.
+		  *
+		  */
+
+		void reservarMemoriaCromosoma(const unsigned tam);
 
 		/**
 		  * @brief Liberar la memoria dinámica utilizada y limpiar la expresión.

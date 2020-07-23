@@ -47,8 +47,10 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 
 
 void Expresion::inicializarVacia(){
-	arbol = nullptr;
-	longitud_arbol = 0;
+	arbol              = nullptr;
+	cromosoma          = 0;
+	longitud_cromosoma = 0;
+	longitud_arbol     = 0;
 	longitud_reservada = 0;
 	dejaEstarEvaluada();
 }
@@ -78,24 +80,37 @@ void Expresion::liberarMemoria(){
 		delete [] arbol;
 	}
 
+	if (cromosoma != nullptr){
+		delete [] cromosoma;
+	}
+
 	inicializarVacia();
 
 }
 
-void Expresion::reservarMemoria(const unsigned tam){
+void Expresion::reservarMemoriaArbol(const unsigned tam){
 	if (tam > 0){
 		arbol = new Nodo[tam];
 	}
 	longitud_reservada = tam;
 }
 
+void Expresion::reservarMemoriaCromosoma(const unsigned tam){
+	if (tam > 0){
+		cromosoma = new double[tam];
+	}
+	longitud_cromosoma = tam;
+}
+
 void Expresion::copiarDatos(const Expresion & otra){
-	fitness = otra.fitness;
-	evaluada = otra.evaluada;
-	longitud_arbol = otra.longitud_arbol;
+	fitness            = otra.fitness;
+	evaluada           = otra.evaluada;
+	longitud_arbol     = otra.longitud_arbol;
 	profundidad_maxima = otra.profundidad_maxima;
+	longitud_cromosoma = otra.longitud_cromosoma;
 
 	memcpy(arbol, otra.arbol, longitud_arbol*sizeof(Nodo));
+	memcpy(cromosoma, otra.cromosoma, longitud_cromosoma*sizeof(double));
 
 
 }
@@ -109,7 +124,7 @@ Expresion & Expresion::operator= (const Expresion & otra){
 	if (this != &otra){
 		liberarMemoria();
 
-		reservarMemoria(otra.longitud_arbol);
+		reservarMemoriaArbol(otra.longitud_arbol);
 
 		copiarDatos(otra);
 	}
@@ -122,7 +137,8 @@ void Expresion::redimensionar(const unsigned tam){
 
 	Expresion otra = (*this);
 	liberarMemoria();
-	reservarMemoria(tam);
+	reservarMemoriaArbol(tam);
+	reservarMemoriaCromosoma(otra.profundidad_maxima);
 	copiarDatos(otra);
 	longitud_reservada = tam;
 
