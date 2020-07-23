@@ -32,10 +32,10 @@ make clean
 
 ## Compilación con símbolos de depuración
 
-Para compilar con símbolos de depuración ejecuta:
+Para compilar con símbolos de depuración y sin optimización ejecuta:
 
 ```sh
-make DEBUG=1
+make DEBUG
 ```
 
 ## Compilación con optimización
