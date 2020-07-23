@@ -11,11 +11,23 @@ GRAFICAS = $(HOME)/graficas/datos
 FLAGS = --std=c++17 -O3 -Wall
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 
-all: INICIO $(BIN)/GA_P FIN
+OBJETIVO = $(BIN)/GA_P
+OBJETOS = $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/main.o
+
+N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
+X := 0
+SUMA = $(eval X=$(shell echo $$(($(X)+1))))
+
+
+all: clean INICIO $(OBJETIVO) FIN
 
 DEBUG: FLAGS = --std=c++17 -g -Wall
 DEBUG: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 DEBUG: all
+
+
+
+
 
 
 INICIO:
@@ -24,37 +36,44 @@ INICIO:
 	@printf "\e[94mFlags del compilador: $(FLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
 
-$(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/main.o
-	@printf "\e[31m[7/7] \e[32mCreando el binario $@ a partir de $^\n"
+$(OBJETIVO): $(OBJETOS)
+	$(eval X=$(shell echo $$(($(X)+1))))
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $@ a partir de $^\n"
 	@$(CXX) $^ -o $@
 
 $(OBJ)/random.o: $(SRC)/random.cpp
-	@printf "\e[31m[1/7] \e[32mCreando el objeto $@ a partir de $^\n"
+	$(eval X=$(shell echo $$(($(X)+1))))
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/main.o: $(SRC)/main.cpp
-	@printf "\e[31m[6/7] \e[32mCreando el objeto $@ a partir de $^\n"
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
-	@printf "\e[31m[5/7] \e[32mCreando el objeto $@ a partir de $^\n"
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp
-	@printf "\e[31m[3/7] \e[32mCreando el objeto $@ a partir de $^\n"
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
-	@printf "\e[31m[4/7] \e[32mCreando el objeto $@ a partir de $^\n"
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
-	@printf "\e[31m[2/7] \e[32mCreando el objeto $@ a partir de $^\n"
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
 	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 
 FIN:
-	@printf "\e[36mCompilación finalizada con éxito\n"
+	@printf "\n\e[36mCompilación finalizada con éxito\n"
 
 clean:
 	@printf "\e[36mLimpiando el directorio $(OBJ)\n"
