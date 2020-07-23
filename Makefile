@@ -21,9 +21,9 @@ SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
 all: clean INICIO $(OBJETIVO) FIN
 
-DEBUG: FLAGS = --std=c++17 -g -Wall
-DEBUG: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
-DEBUG: all
+debug: FLAGS = --std=c++17 -g -Wall
+debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
+debug: all
 
 
 
