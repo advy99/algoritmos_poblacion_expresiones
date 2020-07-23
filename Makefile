@@ -11,8 +11,11 @@ DEBUG=0
 
 ifeq ($(DEBUG),0)
 FLAGS = --std=c++17 -O3 -Wall
+MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 else
+#printf "Compilando usando C++17, sin optimización, con todos los warnings activados y con símbolos de depuración"
 FLAGS = --std=c++17 -g -Wall
+MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
 
 all: INICIO $(BIN)/GA_P FIN
@@ -20,6 +23,7 @@ all: INICIO $(BIN)/GA_P FIN
 
 INICIO:
 	@printf "\e[36mComenzando compilación de $(BIN)/GA_P\n"
+	@printf "\e[94m$(MENSAJE)\n\n"
 
 $(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/main.o
 	@printf "\e[31m[7/7] \e[32mCreando el binario $@ a partir de $^\n"
