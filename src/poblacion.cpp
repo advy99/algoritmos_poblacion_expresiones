@@ -49,6 +49,7 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 }
 
 void Poblacion::evaluarPoblacion(){
+	mejor_individuo = 0;
 	double valor_mejor = poblacion[mejor_individuo].getFitness();
 	double valor_evaluada;
 
