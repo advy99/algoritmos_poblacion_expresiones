@@ -7,18 +7,14 @@ LIB      = $(HOME)/lib
 DATOS	   = $(HOME)/datos
 GRAFICAS = $(HOME)/graficas/datos
 
-DEBUG=0
-
-ifeq ($(DEBUG),0)
 FLAGS = --std=c++17 -O3 -Wall
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
-else
-#printf "Compilando usando C++17, sin optimización, con todos los warnings activados y con símbolos de depuración"
-FLAGS = --std=c++17 -g -Wall
-MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
-endif
 
 all: INICIO $(BIN)/GA_P FIN
+
+DEBUG: FLAGS = --std=c++17 -g -Wall
+DEBUG: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
+DEBUG: all
 
 
 INICIO:
@@ -56,7 +52,6 @@ $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 
 FIN:
 	@printf "\e[36mCompilación finalizada con éxito\n"
-
 
 clean:
 	@printf "\e[36mLimpiando el directorio $(OBJ)\n"
