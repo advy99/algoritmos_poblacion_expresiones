@@ -1,3 +1,4 @@
+CXX      = g++
 HOME     = .
 BIN      = $(HOME)/bin
 INC	   = $(HOME)/include
@@ -18,36 +19,38 @@ DEBUG: all
 
 
 INICIO:
-	@printf "\e[36mComenzando compilación de $(BIN)/GA_P\n"
+	@printf "\e[36mComenzando compilación de $(BIN)/GA_P\n\n"
+	@printf "\e[94mCompilador: $(CXX)\n"
+	@printf "\e[94mFlags del compilador: $(FLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
 
 $(BIN)/GA_P: $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/main.o
 	@printf "\e[31m[7/7] \e[32mCreando el binario $@ a partir de $^\n"
-	@g++ $^ -o $@
+	@$(CXX) $^ -o $@
 
 $(OBJ)/random.o: $(SRC)/random.cpp
 	@printf "\e[31m[1/7] \e[32mCreando el objeto $@ a partir de $^\n"
-	@g++ -c $(FLAGS) $^ -I$(INC) -o $@
+	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/main.o: $(SRC)/main.cpp
 	@printf "\e[31m[6/7] \e[32mCreando el objeto $@ a partir de $^\n"
-	@g++ -c $(FLAGS) $^ -I$(INC) -o $@
+	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
 	@printf "\e[31m[5/7] \e[32mCreando el objeto $@ a partir de $^\n"
-	@g++ -c $(FLAGS) $^ -I$(INC) -o $@
+	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp
 	@printf "\e[31m[3/7] \e[32mCreando el objeto $@ a partir de $^\n"
-	@g++ -c $(FLAGS) $^ -I$(INC) -o $@
+	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
 	@printf "\e[31m[4/7] \e[32mCreando el objeto $@ a partir de $^\n"
-	@g++ -c $(FLAGS) $^ -I$(INC) -o $@
+	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	@printf "\e[31m[2/7] \e[32mCreando el objeto $@ a partir de $^\n"
-	@g++ -c $(FLAGS) $^ -I$(INC) -o $@
+	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
 
 
 FIN:
