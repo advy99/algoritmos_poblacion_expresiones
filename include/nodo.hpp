@@ -51,6 +51,7 @@ struct Nodo {
 	/**
 	  * @brief Establecer el tipo del nodo a un operador aleatorio entre los posibles operadores.
 	  *
+	  * @pre tipo_nodo != TipoNodo::NUMERO && tipo_nodo != TipoNodo::VARIABLE
 	  */
 
 
@@ -59,10 +60,13 @@ struct Nodo {
 	/**
 	  * @brief Establecer el valor del nodo a un termino aleatorio.
 	  *
+	  * @param num_numeros Cantidad de numeros a tener en cuenta para escoger el valor
+	  * @param num_variables Cantidad de variables a tener en cuenta para escoger el valor.
+	  *
 	  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
 	  */
 
-	void setTerminoAleatorio();
+	void setTerminoAleatorio(const int num_numeros, const int num_variables);
 
 };
 

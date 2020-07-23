@@ -1,12 +1,12 @@
 #include "nodo.hpp"
 #include "GA_P.hpp"
 
-void Nodo::setTerminoAleatorio(){
+void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	if (tipo_nodo == TipoNodo::NUMERO){
-		valor = Random::getInstance()->getInt(GA_P::getMaxProfExpresiones());
+		valor = Random::getInstance()->getInt(num_numeros);
 	} else {
 		// TO-DO
-		valor = Random::getInstance()->getInt(GA_P::getNumVariables());
+		valor = Random::getInstance()->getInt(num_variables);
 	}
 }
 

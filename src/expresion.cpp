@@ -180,7 +180,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 				arbol[i].tipo_nodo = TipoNodo::NUMERO;
 			}
 
-			arbol[i].setTerminoAleatorio();
+			arbol[i].setTerminoAleatorio(longitud_cromosoma, GA_P::getNumVariables());
 			ramas_libres--;
 		}
 		i++;
