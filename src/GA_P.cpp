@@ -10,17 +10,31 @@
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador, const unsigned prof){
 
 	bool lectura_correcta;
+	poblacion = nullptr;
 
 	lectura_correcta = leerDatos(fichero_datos, char_comentario);
 	prof_expresiones = prof;
 
 	if (lectura_correcta){
 		// inicilizamos poblacion
-
+		poblacion = new Poblacion(200, 0.2);
 
 	}
 
 }
+
+GA_P::~GA_P(){
+	liberarMemoria();
+}
+
+void GA_P::liberarMemoria(){
+	if (poblacion != nullptr){
+		delete poblacion;
+	}
+
+	poblacion = nullptr;
+}
+
 
 bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador){
 

@@ -51,7 +51,7 @@ class GA_P{
 		/**
 		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo GA_P
 		  */
-		Poblacion poblacion;
+		Poblacion * poblacion;
 
 		/**
 		  * @brief Datos con los que ajustar el algoritmo
@@ -84,14 +84,21 @@ class GA_P{
 
 		bool leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador = ',');
 
+		/**
+		  * @brief Liberar la memoria dinámica utilizada por GA_P
+		  */
+
+		void liberarMemoria();
+
 	public:
 
 		/**
 		  * @brief Constructor con dos parámetros
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
-		  * @param char_comentario Caracter que marca que una linea es un comentario y ha de ser ignorada
-		  * @param delimitador Caracter que marca como están separados los datos de entrada
+		  * @param char_comentario Caracter que marca que una linea es un comentario y ha de ser ignorada.
+		  * @param delimitador Caracter que marca como están separados los datos de entrada. Por defecto ','
+		  * @param prof Profundidad máxima de las expresiones con las que aprenderá el algoritmo. Por defecto 10
 		  *
 		  */
 
@@ -102,7 +109,7 @@ class GA_P{
 		  *
 		  */
 
-		~GA_P() = default;
+		~GA_P();
 
 		/**
 		  * @brief Obtener el numero de variables de los datos

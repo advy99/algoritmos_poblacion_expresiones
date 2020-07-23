@@ -1,19 +1,26 @@
 #include "poblacion.hpp"
+#include "GA_P.hpp"
 #include <cstring>
 
 
-Poblacion::Poblacion(const unsigned prof_max){
+Poblacion::Poblacion(){
 	poblacion = nullptr;
-	prof_individuos = prof_max;
 }
 
-Poblacion::Poblacion(const unsigned tam, const unsigned prof_max){
-	prof_individuos = prof_max;
+Poblacion::Poblacion(const unsigned tam):Poblacion(tam, 0.3){
+
+}
+
+Poblacion::Poblacion(const unsigned tam, const double prob_var){
 	poblacion = nullptr;
 
 	liberarMemoria();
 
 	reservarMemoria(tam);
+	tam_poblacion = tam;
+	for (unsigned i = 0; i < tam; i++){
+		poblacion[i] = Expresion(GA_P::getMaxProfExpresiones(), prob_var);
+	}
 }
 
 Poblacion::~Poblacion(){

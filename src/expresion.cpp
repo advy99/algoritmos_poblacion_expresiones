@@ -20,6 +20,15 @@ Expresion::Expresion(const Arbol subarbol){
 
 }
 
+Expresion::Expresion(const unsigned longitud_max, const double prob_variable){
+	inicializarVacia();
+	profundidad_maxima = GA_P::getMaxProfExpresiones();
+
+	reservarMemoriaCromosoma(profundidad_maxima);
+	inicializarCromosoma();
+	generarExpresionAleatoria(longitud_max, prob_variable);
+}
+
 void Expresion::inicializarCromosoma(){
 
 	for (unsigned i = 0; i < longitud_cromosoma; i++){
@@ -66,20 +75,7 @@ void Expresion::inicializarVacia(){
 	dejaEstarEvaluada();
 }
 
-Expresion::Expresion(const unsigned prof_maxima){
-	inicializarVacia();
-	profundidad_maxima = prof_maxima;
-}
 
-Expresion::Expresion(const unsigned prof_maxima, const unsigned longitud){
-
-	inicializarVacia();
-	profundidad_maxima = prof_maxima;
-
-	// la probabilidad es un placeholder
-	generarExpresionAleatoria(longitud, 0.3);
-
-}
 
 Expresion::~Expresion(){
 	liberarMemoria();

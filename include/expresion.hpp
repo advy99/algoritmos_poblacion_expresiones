@@ -207,13 +207,13 @@ class Expresion{
 		/**
 		  * @brief Constructor con dos parámetro, para generar una expresión aleatoria.
 		  *
-		  * @param prof_maxima Profundidad máxima de la expresión.
-		  * @param longitud Longitud de la expresión a generar.
+		  * @param longitud_max Longitud de la expresión a generar.
+		  * @param prob_variable Probabilidad de que al generar la expresion un nodo sea una variable.
 		  *
 		  */
 
-		Expresion(const unsigned prof_maxima, const unsigned longitud);
-
+		Expresion(const unsigned longitud_max, const double prob_variable);
+		
 		/**
 		  * @brief Constructor de copia.
 		  *

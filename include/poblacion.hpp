@@ -73,11 +73,6 @@ class Poblacion{
 		int mejor_individuo;
 
 		/**
-		  * @brief Profundidad máxima de los individuos.
-		  */
-		unsigned prof_individuos;
-
-		/**
 		  * @brief Reservar memoria para una población de tam individuos.
 		  *
 		  * @param tam Tamaño a reservar para la poblacion.
@@ -106,20 +101,29 @@ class Poblacion{
 		/**
 		  * @brief Constructor con un parametro, generamos una poblacion vacia.
 		  *
-		  * @param prof_max Profundidad máxima de las expresiones de la poblacion.
 		  */
 
-		Poblacion(const unsigned prof_max = 10);
+		Poblacion();
 
 		/**
 		  * @brief Constructor con un parámetro. Generar una población con tam elementos aleatorios.
 		  *
 		  * @param tam Número de individuos con el que generar la población.
-		  * @param prof_max Profundidad máxima de las expresiones de la poblacion.
 		  *
 		  */
 
-		Poblacion(const unsigned tam, const unsigned prof_max = 10);
+		Poblacion(const unsigned tam);
+
+		/**
+		  * @brief Constructor con dos parámetros. Generar una población con tam elementos aleatorios.
+		  *
+		  * @param tam Número de individuos con el que generar la población.
+		  * @param prob_var Probabilidad de que un nodo de la expresión sea una variable.
+		  *
+		  */
+
+
+		Poblacion(const unsigned tam, const double prob_var);
 
 		/**
 		  * @brief Destructor de la Población
