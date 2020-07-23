@@ -171,6 +171,9 @@ class Expresion{
 		unsigned contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const;
 
 
+
+		void inicializarCromosoma();
+
 	public:
 
 		/**

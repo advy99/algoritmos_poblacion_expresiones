@@ -6,14 +6,25 @@
 
 Expresion::Expresion(){
 	inicializarVacia();
-	profundidad_maxima = 10;
+	profundidad_maxima = GA_P::getMaxProfExpresiones();
+
+	reservarMemoriaCromosoma(profundidad_maxima);
+	inicializarCromosoma();
 }
 
 Expresion::Expresion(const Arbol subarbol){
 	inicializarVacia();
-	profundidad_maxima = 10;
+	profundidad_maxima = GA_P::getMaxProfExpresiones();
 
 	(*this) = obtenerSubarbol(subarbol);
+
+}
+
+void Expresion::inicializarCromosoma(){
+
+	for (unsigned i = 0; i < longitud_cromosoma; i++){
+		cromosoma[i] = Random::getInstance()->getFloat(-10.0f, 10.0f);
+	}
 
 }
 
@@ -49,7 +60,7 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 void Expresion::inicializarVacia(){
 	arbol              = nullptr;
 	cromosoma          = 0;
-	longitud_cromosoma = 0;
+	longitud_cromosoma = GA_P::getMaxProfExpresiones();
 	longitud_arbol     = 0;
 	longitud_reservada = 0;
 	dejaEstarEvaluada();
@@ -125,6 +136,7 @@ Expresion & Expresion::operator= (const Expresion & otra){
 		liberarMemoria();
 
 		reservarMemoriaArbol(otra.longitud_arbol);
+		reservarMemoriaCromosoma(otra.longitud_cromosoma);
 
 		copiarDatos(otra);
 	}
@@ -186,6 +198,9 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 	evaluada = false;
 	fitness = std::numeric_limits<double>::quiet_NaN();
 
+
+
+
 	return exito;
 
 
@@ -204,7 +219,7 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std
 		return valor;
 
 	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO){
-		valor = pila.top().valor;
+		valor = cromosoma[pila.top().valor];
 		pila.pop();
 		return valor;
 
@@ -416,9 +431,9 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::stri
 		return resultado;
 	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO){
 		if (izda){
-			resultado = std::to_string(pila.top().valor) + " " + resultado;
+			resultado = std::to_string(cromosoma[pila.top().valor]) + " " + resultado;
 		} else {
-			resultado = resultado + " " + std::to_string(pila.top().valor);
+			resultado = resultado + " " + std::to_string(cromosoma[pila.top().valor]);
 		}
 		pila.pop();
 		return resultado;
