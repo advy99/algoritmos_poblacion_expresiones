@@ -488,7 +488,7 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::stri
 
 }
 
-std::string Expresion::pintarExpresion() const {
+std::string Expresion::stringExpresion() const {
 	std::string resultado = "";
 
 	std::stack<Nodo> pila;
@@ -503,7 +503,7 @@ std::string Expresion::pintarExpresion() const {
 }
 
 std::ostream & operator<< (std::ostream & os, const Expresion & exp){
-	std::string exp_string = exp.pintarExpresion();
+	std::string exp_string = exp.stringExpresion();
 
 	os << exp_string << std::endl;
 

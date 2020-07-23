@@ -330,9 +330,36 @@ class Expresion{
 
 		unsigned calcularProfundidad(const unsigned comienzo = 0) const;
 
+
+		/**
+		  * @brief Funcion para obtener una expresión almacenada en una pila en preorder en forma de string
+		  *
+		  * @param pila Contenedor donde esta almacenada la expresión.
+		  * @param resultado Resultado parcial al que añadir la nueva lectura de la pila
+		  * @param izda Booleano true nos indica que estamos leyendo una rama izquierda (va a la parte izquierda del resultado actual) y en otro caso derecha
+		  *
+		  * @return Nuevo resultado tras leer la pila
+		  */
+
+
 		std::string obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const;
 
-		std::string pintarExpresion() const;
+		/**
+		  * @brief Devuelve la cadena asociada a la expresión.
+		  *
+		  * @return Cadena asociada a la expresión
+		  */
+
+		std::string stringExpresion() const;
+
+		/**
+		  * @brief Salida por el operador <<
+		  *
+		  * @param os Flujo de salida por el que mostrar la expresion
+		  * @param exp Expresión a mostrar
+		  *
+		  * @return Referencia al flujo de salida en caso de mostrar varias expresiones con el mismo flujo.
+		  */
 
 		friend std::ostream & operator<< (std::ostream & os, const Expresion & exp);
 
