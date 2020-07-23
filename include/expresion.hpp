@@ -213,7 +213,7 @@ class Expresion{
 		  */
 
 		Expresion(const unsigned longitud_max, const double prob_variable);
-		
+
 		/**
 		  * @brief Constructor de copia.
 		  *
@@ -271,10 +271,13 @@ class Expresion{
 		/**
 		  * @brief Evaluar la expresión con los datos dados.
 		  *
+		  * @param datos Datos con los que evaluar la expresion
+		  * @param etiquetas Etiquetas correspondientes a los datos para evaluar.
+		  *
 		  * @return Valor de ajuste de la expresión.
 		  */
 
-		double evaluarExpresion();
+		double evaluarExpresion(const std::vector<std::vector<double>> & datos, const std::vector<double> & etiquetas);
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.

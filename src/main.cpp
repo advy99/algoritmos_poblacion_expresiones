@@ -19,7 +19,7 @@ int main(int argc, char ** argv){
 
 	miExpresion.generarExpresionAleatoria(10, 0.1);
 
-	std::cout << std::endl << miExpresion.evaluarExpresion();
+	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
 
 
 	Expresion miExpresion2;

@@ -257,7 +257,7 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std
 }
 
 
-double Expresion::evaluarExpresion(){
+double Expresion::evaluarExpresion(const std::vector<std::vector<double>> & datos, const std::vector<double> & etiquetas){
 
 	double resultado = fitness;
 
@@ -277,13 +277,13 @@ double Expresion::evaluarExpresion(){
 			pila_original.push(arbol[i]);
 		}
 
-		for (int i = 0; i < GA_P::getNumDatos(); i++){
+		for (unsigned i = 0; i < datos.size(); i++){
 			pila = pila_original;
-			evaluarDato(pila, valor, GA_P::getDato(i));
-			suma += std::pow( GA_P::getOutputDato(i) - valor , 2.0);
+			evaluarDato(pila, valor, datos[i]);
+			suma += std::pow( etiquetas[i] - valor , 2.0);
 		}
 
-		resultado = suma / (double)GA_P::getNumDatos();
+		resultado = suma / (double)datos.size();
 	}
 
 	fitness = resultado;

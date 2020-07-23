@@ -114,6 +114,19 @@ std::vector<double> GA_P::getOutputDatos(){
 	return output_datos;
 }
 
+
+const std::vector<std::vector<double> > & GA_P::getDatosLectura(){
+	return datos;
+}
+
+const std::vector<double> & GA_P::getDatoLectura(const unsigned i){
+	return datos[i];
+}
+
+const std::vector<double> & GA_P::getOutputDatosLectura(){
+	return output_datos;
+}
+
 double GA_P::getOutputDato(const unsigned indice){
 	return output_datos[indice];
 }

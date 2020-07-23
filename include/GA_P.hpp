@@ -134,6 +134,8 @@ class GA_P{
 		  */
 		static std::vector<std::vector<double> > getDatos();
 
+		static const std::vector<std::vector<double>> & getDatosLectura();
+
 		/**
 		  * @brief Obtener el dato de la fila indice
 		  *
@@ -145,6 +147,9 @@ class GA_P{
 		  */
 		static std::vector<double > getDato(const unsigned indice);
 
+		static const std::vector<double > & getDatoLectura(const unsigned indice);
+
+
 
 		/**
 		  * @brief Obtener las etiquetas asociadas a los datos
@@ -153,6 +158,9 @@ class GA_P{
 		  */
 
 		static std::vector<double> getOutputDatos();
+
+		static const std::vector<double> & getOutputDatosLectura();
+
 
 		/**
 		  * @brief Obtener la etiqueta asociada al dato indice

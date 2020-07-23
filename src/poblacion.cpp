@@ -62,7 +62,7 @@ void Poblacion::evaluarPoblacion(){
 
 	for ( unsigned i = 0; i < tam_poblacion; i++){
 		if (!poblacion[i].estaEvaluada()){
-			valor_evaluada = poblacion[i].evaluarExpresion();
+			valor_evaluada = poblacion[i].evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
 
 			if (valor_evaluada < valor_mejor){
 				mejor_individuo = i;
