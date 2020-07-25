@@ -25,7 +25,17 @@ debug: FLAGS = --std=c++17 -g -Wall
 debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 debug: all
 
+define compilar_objeto
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
+	@$(CXX) -c $(FLAGS) $(1) -I$(INC) -o $(2)
+endef
 
+define compilar_binario
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
+	@$(CXX) $(1) -o $(2)
+endef
 
 
 
@@ -37,39 +47,25 @@ INICIO:
 	@printf "\e[94m$(MENSAJE)\n\n"
 
 $(OBJETIVO): $(OBJETOS)
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $@ a partir de $^\n"
-	@$(CXX) $^ -o $@
+	$(call compilar_binario,$^,$@)
 
 $(OBJ)/random.o: $(SRC)/random.cpp
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
-	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
+	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/main.o: $(SRC)/main.cpp
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
-	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
+	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
-	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
+	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
-	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
+	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
-	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
+	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $@ a partir de $^\n"
-	@$(CXX) -c $(FLAGS) $^ -I$(INC) -o $@
+	$(call compilar_objeto,$^,$@)
 
 
 FIN:
