@@ -9,7 +9,7 @@ DATOS	   = $(HOME)/datos
 DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
-FLAGS = --std=c++17 -O3 -Wall -Wextra
+FLAGS = --std=c++17 -O3 -Wall -Wextra -Wfloat-equal
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/GA_P
