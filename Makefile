@@ -9,7 +9,7 @@ DATOS	   = $(HOME)/datos
 DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
-FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal
+FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/GA_P
@@ -22,7 +22,7 @@ SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
 all: clean INICIO $(OBJETIVO) FIN
 
-debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal
+debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
 debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 debug: all
 
