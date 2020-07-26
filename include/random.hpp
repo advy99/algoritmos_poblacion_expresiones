@@ -35,7 +35,7 @@ class Random{
 		unsigned long SEED;
 		const unsigned long int MASK = 2147483647L;
 		const unsigned long int PRIME = 65539L;
-		const double SCALE = 0.4656612875e-9D;
+		const double SCALE = 0.4656612875e-9;
 
 
 		/**

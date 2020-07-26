@@ -205,7 +205,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-bool son_iguales(const double & a, const double & b, const double epsilon = 0.005d){
+bool son_iguales(const double & a, const double & b, const double epsilon = 0.005){
     return (std::fabs(a - b) < epsilon);
 }
 
@@ -243,7 +243,7 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std
 			valor = valor_izda * valor_dcha;
 
 		} else if (operacion == TipoNodo::ENTRE){
-			if (!son_iguales(valor_dcha, 0.0d) ){
+			if (!son_iguales(valor_dcha, 0.0) ){
 				valor = valor_izda / valor_dcha;
 			} else {
 				valor = 1.0f;
@@ -261,8 +261,8 @@ double Expresion::evaluarExpresion(const std::vector<std::vector<double>> & dato
 
 	double resultado = fitness;
 
-	double valor = 0.0d;
-	double suma = 0.0d;
+	double valor = 0.0;
+	double suma = 0.0;
 
 	if (!evaluada && arbol != nullptr){
 		// TO-DO
