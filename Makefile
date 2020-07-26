@@ -6,6 +6,7 @@ SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
 LIB      = $(HOME)/lib
 DATOS	   = $(HOME)/datos
+DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
 FLAGS = --std=c++17 -O3 -Wall
@@ -78,7 +79,25 @@ clean:
 	-@rm $(BIN)/* 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpieza completada\n"
 
+clean-doc:
+	@printf "\e[36mLimpiando la documentación\n"
+	-@rm $(DOC)/html -r 2> /dev/null || printf "\e[33mNo existe documentación generada en HTML\n"
+	-@rm $(DOC)/html -r 2> /dev/null || printf "\e[33mNo existe documentación generada en LaTeX\n"
+
+
 documentacion:
 	@printf "\e[36mComenzando compilación de la documentación del proyecto\n\e[33m\n"
 	@doxygen doc/doxys/Doxyfile
 	@printf "\e[36mFinalizada compilación de la documentación. Puedes consultarla en doc/html/index.html\n"
+
+mrproper: clean clean-doc
+
+
+help:
+	@printf "\e[36mUso del Makefile:\n"
+	@printf "\t\e[36mCompilar con optimización: \t     \e[94mmake\n"
+	@printf "\t\e[36mCompilar con símbolos de depuración: \e[94mmake \e[0mdebug\n"
+	@printf "\t\e[36mCompilar documentación: \t     \e[94mmake \e[0mdocumentacion\n"
+	@printf "\t\e[36mLimpiar binarios y objetos: \t     \e[94mmake \e[0mclean\n"
+	@printf "\t\e[36mLimpiar documentación: \t\t     \e[94mmake \e[0mclean-doc\n"
+	@printf "\t\e[36mLimpiar todo: \t\t\t     \e[94mmake \e[0mmrproper\n"
