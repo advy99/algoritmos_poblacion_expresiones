@@ -12,7 +12,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const ch
 	bool lectura_correcta;
 	poblacion = nullptr;
 
-	lectura_correcta = leerDatos(fichero_datos, char_comentario);
+	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
 	prof_expresiones = prof;
 
 	if (lectura_correcta){
