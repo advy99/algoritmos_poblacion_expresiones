@@ -46,6 +46,14 @@ Para compilar con optimización ejecuta:
 make
 ```
 
+## Manual make
+
+Puedes consultar todas las opciones del Makefile con el target `help`
+
+```sh
+make help
+```
+
 
 
 (EN CONSTRUCCION)
