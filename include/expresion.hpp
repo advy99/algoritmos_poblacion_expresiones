@@ -123,7 +123,7 @@ class Expresion{
 		  *
 		  */
 
-		void reservarMemoriaArbol(const unsigned tam);
+		void reservarMemoriaArbol(const int tam);
 
 
 		/**
@@ -133,7 +133,7 @@ class Expresion{
 		  *
 		  */
 
-		void reservarMemoriaCromosoma(const unsigned tam);
+		void reservarMemoriaCromosoma(const int tam);
 
 		/**
 		  * @brief Liberar la memoria dinámica utilizada y limpiar la expresión.
@@ -150,7 +150,7 @@ class Expresion{
 		  * @param tam Nuevo tamaño reservado para la expresion
 		  *
 		  */
-		void redimensionar(const unsigned tam);
+		void redimensionar(const int tam);
 
 		/**
 		  * @brief Metodo para marcar que la evaluación del fitness de una expresión ya no es valida.
