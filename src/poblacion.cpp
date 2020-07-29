@@ -4,20 +4,24 @@
 
 
 Poblacion::Poblacion(){
+	// una poblacion vacia no tiene nada
 	poblacion = nullptr;
 }
 
 Poblacion::Poblacion(const unsigned tam):Poblacion(tam, 0.3){
-
+	// la poblacion por defecto tiene probabiliad de variables 0.3, llamamos al otro constructor
 }
 
 Poblacion::Poblacion(const unsigned tam, const double prob_var){
+	// liberamos memoria para inicializar a vacio
 	poblacion = nullptr;
 
 	liberarMemoria();
 
+	// reservamos memoria para tam individuos
 	reservarMemoria(tam);
 	tam_poblacion = tam;
+	// inicializamos todas las expresiones de la poblacion
 	for (unsigned i = 0; i < tam; i++){
 		poblacion[i] = Expresion(GA_P::getMaxProfExpresiones(), prob_var);
 	}
@@ -28,10 +32,12 @@ Poblacion::~Poblacion(){
 }
 
 void Poblacion::liberarMemoria(){
+	// si tiene asignada una direccion de memoria, liberamos la poblacion
 	if (poblacion != nullptr){
 		delete [] poblacion;
 	}
 
+	// establecemos los valores a nulos
 	tam_reservado = 0;
 	tam_poblacion = 0;
 	mejor_individuo = -1;
@@ -46,9 +52,13 @@ void Poblacion::reservarMemoria(const unsigned tam){
 }
 
 void Poblacion::copiarDatos(const Poblacion & otra){
+	// copiamos los atributos
 	tam_poblacion = otra.tam_poblacion;
 	mejor_individuo = otra.mejor_individuo;
 
+	// copiamos los elementos de la poblacion
+	// no podemos usar memcpy ya que estos elementos si que
+	// utilizan memoria dinamica de forma interna
 	for (unsigned i = 0; i < tam_poblacion; i++){
 		poblacion[i] = otra.poblacion[i];
 	}
@@ -56,11 +66,16 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 }
 
 void Poblacion::evaluarPoblacion(){
+	// establecemos el mejor individuo al primero
 	mejor_individuo = 0;
-	double valor_mejor = poblacion[mejor_individuo].getFitness();
+	double valor_mejor;
 	double valor_evaluada;
 
-	for ( unsigned i = 0; i < tam_poblacion; i++){
+	// evaluamos el mejor hasta ahora
+	valor_mejor = poblacion[0].evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
+
+	// evaluamos el resto de individuos
+	for ( unsigned i = 1; i < tam_poblacion; i++){
 		if (!poblacion[i].estaEvaluada()){
 			valor_evaluada = poblacion[i].evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
 
