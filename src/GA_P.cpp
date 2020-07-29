@@ -9,16 +9,22 @@
 
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador, const unsigned prof){
 
-	bool lectura_correcta;
+	// al principio suponemos que se ha leido mal
+	bool lectura_correcta = false;
 	poblacion = nullptr;
 
+	// lemos los datos del fichero de entrada
 	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
 	prof_expresiones = prof;
 
+	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){
 		// inicilizamos poblacion
 		poblacion = new Poblacion(200, 0.2);
 
+	} else {
+		// si no, mostramos un error
+		std::cerr << "Error leyendo los datos de " << fichero_datos << std::endl;
 	}
 
 }
@@ -28,6 +34,7 @@ GA_P::~GA_P(){
 }
 
 void GA_P::liberarMemoria(){
+	// si la poblacion tiene una zona de memoria asignada, la liberamos
 	if (poblacion != nullptr){
 		delete poblacion;
 	}
@@ -37,24 +44,27 @@ void GA_P::liberarMemoria(){
 
 
 bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador){
-
+	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
 	bool resultado = true;
 
+	// mostramos un error si no podemos abrirlo
 	if (!file){
 		std::cerr << "Error al abrir " << fichero_datos << std::endl;
 		resultado = false;
 
 	} else {
+		// leemos una linea
 		std::string linea;
 		std::stringstream ss;
 
 		std::getline(file, linea);
 
+		// mientras no encuentre el EOF
 		while (!file.eof()){
 			// si hemos leido una linea y no es un comentario, la procesamos
 			if (linea.size() > 0 && linea[0] != char_comentario && !isblank(linea[0]) ) {
-
+				// leemos por linea
 				std::vector<double> datos_linea;
 				ss.str(linea);
 
@@ -62,19 +72,22 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 
 				std::getline(ss, str_valor, delimitador);
 
+				// mientras queden valores en la linea
 				while (!ss.eof()){
-
+					// los metemos en ese dato
 					datos_linea.push_back(strtod(str_valor.c_str(), nullptr));
 					std::getline(ss, str_valor, delimitador);
 
 				}
 
+				// el ultimo dato no tiene separador, lo incluimos
 				output_datos.push_back(strtod(str_valor.c_str(), nullptr));
 
-				datos.push_back(datos_linea);
+				// introducimos el dato en la matriz final de datos
+ 				datos.push_back(datos_linea);
 
 
-
+				// reseteamos el lector de strgin para leer la siguiente linea
 				ss.str("");
 				ss.clear();
 
