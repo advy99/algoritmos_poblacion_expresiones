@@ -534,6 +534,32 @@ unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
 
 }
 
+
+
+
+void Expresion::cruceBLXalfa(Expresion & otra){
+
+	if ( otra.longitud_cromosoma != this->longitud_cromosoma ) {
+		std::cerr << "Cruzando dos cromosomas de distinta longitud" << std::endl;
+	}
+
+	double * cromosoma_actual = new double[this->longitud_cromosoma];
+	double * cromosoma_otro = new double[otra.longitud_cromosoma];
+
+	// TODO: Implementar el cruce BLX
+
+
+
+
+	this->copiarCromosoma(cromosoma_actual);
+	otra.copiarCromosoma(cromosoma_otro);
+
+	delete [] cromosoma_actual;
+	delete [] cromosoma_otro;
+}
+
+
+
 std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const{
 	// si la pila esta vacia, devolvemos el resultado
 	if (pila.empty()){

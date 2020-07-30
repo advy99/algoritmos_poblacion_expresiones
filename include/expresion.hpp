@@ -330,6 +330,15 @@ class Expresion{
 
 		unsigned calcularProfundidad(const unsigned comienzo = 0) const;
 
+		/**
+		 * @brief Operador de cruce para los cromosomas de las expresiones.
+		 *
+		 * @param otra Expresion con la que cruzar el cromosoma.
+		 *
+		 */
+
+
+		void cruceBLXalfa(Expresion & otra);
 
 		/**
 		  * @brief Funcion para obtener una expresión almacenada en una pila en preorder en forma de string
