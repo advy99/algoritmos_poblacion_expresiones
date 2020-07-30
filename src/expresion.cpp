@@ -537,7 +537,7 @@ unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
 
 
 
-void Expresion::cruceBLXalfa(Expresion & otra){
+void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 
 	if ( otra.longitud_cromosoma != this->longitud_cromosoma ) {
 		std::cerr << "Cruzando dos cromosomas de distinta longitud" << std::endl;
@@ -547,8 +547,29 @@ void Expresion::cruceBLXalfa(Expresion & otra){
 	double * cromosoma_otro = new double[otra.longitud_cromosoma];
 
 	// TODO: Implementar el cruce BLX
+	double punto_padre, punto_madre, seccion;
 
+	for ( unsigned i = 0; i < longitud_cromosoma; i++){
+		punto_padre = this->cromosoma[i];
+		punto_madre = otra.cromosoma[i];
 
+		if ( punto_madre > punto_padre ) {
+			double intercamio = punto_madre;
+			punto_madre = punto_padre;
+			punto_padre = intercamio;
+		}
+
+		seccion = punto_padre - punto_madre;
+
+		punto_madre = punto_madre - seccion * alfa;
+		punto_padre = punto_padre + seccion * alfa;
+
+		cromosoma_actual[i] = punto_padre + Random::getInstance()->getFloat() *
+														(punto_padre - punto_madre);
+
+		cromosoma_otro[i] = punto_madre + Random::getInstance()->getFloat() *
+														(punto_padre - punto_madre);
+	}
 
 
 	this->copiarCromosoma(cromosoma_actual);

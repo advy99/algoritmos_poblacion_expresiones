@@ -334,11 +334,12 @@ class Expresion{
 		 * @brief Operador de cruce para los cromosomas de las expresiones.
 		 *
 		 * @param otra Expresion con la que cruzar el cromosoma.
+		 * @param alfa Valor alfa del metodo BLX-alfa, posible extension del rango entre dos valores
 		 *
 		 */
 
 
-		void cruceBLXalfa(Expresion & otra);
+		void cruceBLXalfa(Expresion & otra, const double alfa = 0.3);
 
 		/**
 		  * @brief Funcion para obtener una expresión almacenada en una pila en preorder en forma de string
