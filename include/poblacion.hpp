@@ -114,25 +114,23 @@ class Poblacion{
 
 		Poblacion();
 
-		/**
-		  * @brief Constructor con un parámetro. Generar una población con tam elementos aleatorios.
-		  *
-		  * @param tam Número de individuos con el que generar la población.
-		  *
-		  */
 
-		Poblacion(const unsigned tam);
 
 		/**
 		  * @brief Constructor con dos parámetros. Generar una población con tam elementos aleatorios.
 		  *
 		  * @param tam Número de individuos con el que generar la población.
+		  * @param lon_expre Longitud máxima de las expresiones a generar
 		  * @param prob_var Probabilidad de que un nodo de la expresión sea una variable.
+		  * @param num_vars Número de variables que utilizarán las expresiones de la población
+		  * @param prof_expre Profundidad máxima de las expresiones de la población
 		  *
 		  */
 
 
-		Poblacion(const unsigned tam, const double prob_var);
+		Poblacion(const unsigned tam, const unsigned lon_expre,
+					 const double prob_var, const unsigned num_vars,
+					 const unsigned prof_expre);
 
 		/**
 		  * @brief Destructor de la Población
@@ -186,7 +184,8 @@ class Poblacion{
 		  *
 		  */
 
-		void evaluarPoblacion();
+		void evaluarPoblacion(const std::vector<std::vector<double> > & datos,
+									 const std::vector<double> & etiquetas);
 
 		/**
 		 * @brief Seleccionar un individuo de la población

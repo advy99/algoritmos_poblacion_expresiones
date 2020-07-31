@@ -23,14 +23,14 @@ int main(int argc, char ** argv){
 
 	Expresion miExpresion;
 
-	miExpresion.generarExpresionAleatoria(10, 0.1);
+	miExpresion.generarExpresionAleatoria(10, 0.1, 2);
 
 	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
 
 
 	Expresion miExpresion2;
 
-	miExpresion2.generarExpresionAleatoria(10, 0.4);
+	miExpresion2.generarExpresionAleatoria(10, 0.4, 2);
 
 	std::cout << std::endl;
 	std::cout << "Arbol 1 antes de cruzar: " << std::endl << miExpresion << std::endl;

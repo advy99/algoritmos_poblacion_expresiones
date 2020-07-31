@@ -1,18 +1,19 @@
 #include "poblacion.hpp"
-#include "GA_P.hpp"
 #include <cstring>
 
 
 Poblacion::Poblacion(){
 	// una poblacion vacia no tiene nada
 	poblacion = nullptr;
+	tam_poblacion = 0;
+	tam_reservado = 0;
+	mejor_individuo = -1;
 }
 
-Poblacion::Poblacion( const unsigned tam):Poblacion(tam, 0.3){
-	// la poblacion por defecto tiene probabiliad de variables 0.3, llamamos al otro constructor
-}
 
-Poblacion::Poblacion(const unsigned tam, const double prob_var){
+Poblacion::Poblacion(const unsigned tam, const unsigned lon_expre,
+							const double prob_var, const unsigned num_vars,
+							const unsigned prof_expre){
 	// liberamos memoria para inicializar a vacio
 	poblacion = nullptr;
 
@@ -23,7 +24,7 @@ Poblacion::Poblacion(const unsigned tam, const double prob_var){
 	tam_poblacion = tam;
 	// inicializamos todas las expresiones de la poblacion
 	for (unsigned i = 0; i < tam; i++){
-		poblacion[i] = Expresion(GA_P::getMaxProfExpresiones(), prob_var);
+		poblacion[i] = Expresion(lon_expre, prob_var, num_vars, prof_expre);
 	}
 }
 
@@ -65,20 +66,20 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 	}
 }
 
-void Poblacion::evaluarPoblacion(){
+void Poblacion::evaluarPoblacion(const std::vector<std::vector<double> > & datos,
+											const std::vector<double> & etiquetas){
 	// establecemos el mejor individuo al primero
 	mejor_individuo = 0;
 	double valor_mejor;
 	double valor_evaluada;
 
 	// evaluamos el mejor hasta ahora
-	valor_mejor = poblacion[0].evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
+	valor_mejor = poblacion[0].evaluarExpresion(datos, etiquetas);
 
 	// evaluamos el resto de individuos
 	for ( unsigned i = 1; i < tam_poblacion; i++){
 		if (!poblacion[i].estaEvaluada()){
-			valor_evaluada = poblacion[i].evaluarExpresion(GA_P::getDatosLectura(),
-																	     GA_P::getOutputDatosLectura());
+			valor_evaluada = poblacion[i].evaluarExpresion(datos, etiquetas);
 
 			if (valor_evaluada < valor_mejor){
 				mejor_individuo = i;

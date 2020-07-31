@@ -179,40 +179,39 @@ class Expresion{
 	public:
 
 		/**
-		  * @brief Constructor sin parámetros.
+		  * @brief Constructor con un parámetro, genera una expresión vacia.
+		  *
+		  * @param prof_max Profundidad máxima de la expresión.
 		  *
 		  */
 
-		Expresion();
+		Expresion(const unsigned prof_max = 10);
 
 		/**
 		  * @brief Constructor con un parámetro. Crear una expresion con el subarbol dado
 		  *
 		  * @param subarbol Subarbol para crear la expresion
+		  * @param prof_max Profundidad máxima de la Expresion a crear a partir de subarbol
 		  *
 		  * @pre subarbol != nullptr
 		  */
 
-		Expresion(const Arbol subarbol);
+		Expresion(const Arbol subarbol, const unsigned prof_max = 10);
 
-		/**
-		  * @brief Constructor con un parámetro, genera una expresión vacia.
-		  *
-		  * @param prof_maxima Profundidad máxima de la expresión.
-		  *
-		  */
 
-		Expresion(const unsigned prof_maxima);
 
 		/**
 		  * @brief Constructor con dos parámetro, para generar una expresión aleatoria.
 		  *
 		  * @param longitud_max Longitud de la expresión a generar.
 		  * @param prob_variable Probabilidad de que al generar la expresion un nodo sea una variable.
+		  * @param num_vars Numero de variables que podrá usar la expresion a generar
+		  * @param prof_max Profundidad máxima de la Expresion a crear a partir de subarbol
 		  *
 		  */
 
-		Expresion(const unsigned longitud_max, const double prob_variable);
+		Expresion(const unsigned longitud_max, const double prob_variable,
+					 const unsigned num_vars, const unsigned prof_max = 10);
 
 		/**
 		  * @brief Constructor de copia.
@@ -236,12 +235,14 @@ class Expresion{
 		  *
 		  * @param longitud_max Longitud máxima de la expresión aleatoria a generar.
 		  * @param prob_variable Probabilidad de que un símbolo terminal sea una variable y no un número
+		  * @param num_variables Número de varíables disponibles para usar en la expresión
 		  *
 		  * @return Booleano: True si ha conseguido generar la expresion correctamente, false en caso contrario
 		  */
 
 		bool generarExpresionAleatoria(const unsigned longitud_max,
-			 									 const double prob_variable);
+			 									 const double prob_variable,
+												 const unsigned num_variables);
 
 		/**
 		  * @brief Consultar si la expresión ha sido evaluada tras ser modificada.

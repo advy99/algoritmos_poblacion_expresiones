@@ -1,15 +1,15 @@
 #include <iostream>
 #include "expresion.hpp"
-#include "GA_P.hpp"
 #include <cstring>
 #include <stack>
 
-Expresion::Expresion(){
+Expresion::Expresion(const unsigned prof_max){
+
+	// establecemos la profundidad a la maxima dada
+	profundidad_maxima = prof_max;
+
 	// inicilizamos la expresion vacia
 	inicializarVacia();
-
-	// establecemos la profundidad a la maxima dada por GA_P
-	profundidad_maxima = GA_P::getMaxProfExpresiones();
 
 	// reservamos memoria para el cromosoma
 	reservarMemoriaCromosoma(profundidad_maxima);
@@ -18,21 +18,25 @@ Expresion::Expresion(){
 	inicializarCromosoma();
 }
 
-Expresion::Expresion(const Arbol subarbol){
+Expresion::Expresion(const Arbol subarbol, const unsigned prof_max){
+
+	// establecemos la profundidad maxima a la dada
+	profundidad_maxima = prof_max;
+
 	// inicializamos la expresion vacia
 	inicializarVacia();
-
-	// establecemos la profundidad maxima a la dada por GA_P
-	profundidad_maxima = GA_P::getMaxProfExpresiones();
 
 	// obtenemos el subarbol
 	(*this) = obtenerSubarbol(subarbol);
 
 }
 
-Expresion::Expresion(const unsigned longitud_max, const double prob_variable){
+Expresion::Expresion(const unsigned longitud_max, const double prob_variable,
+							const unsigned num_vars, const unsigned prof_max){
+
+	profundidad_maxima = prof_max;
+
 	inicializarVacia();
-	profundidad_maxima = GA_P::getMaxProfExpresiones();
 
 	// reservamos la profundidad maxima
 	reservarMemoriaCromosoma(profundidad_maxima);
@@ -41,7 +45,7 @@ Expresion::Expresion(const unsigned longitud_max, const double prob_variable){
 	inicializarCromosoma();
 
 	// generamos una expresion aleatoria
-	generarExpresionAleatoria(longitud_max, prob_variable);
+	generarExpresionAleatoria(longitud_max, prob_variable, num_vars);
 }
 
 void Expresion::inicializarCromosoma(){
@@ -94,7 +98,7 @@ void Expresion::inicializarVacia(){
 	// una expresion vacia no tiene arbol
 	arbol              = nullptr;
 	cromosoma          = 0;
-	longitud_cromosoma = GA_P::getMaxProfExpresiones();
+	longitud_cromosoma = profundidad_maxima;
 	longitud_arbol     = 0;
 	longitud_reservada = 0;
 	dejaEstarEvaluada();
@@ -164,6 +168,9 @@ void Expresion::copiarCromosoma(const double * otro_cromosoma){
 }
 
 Expresion::Expresion(const Expresion & otra){
+	// al inicializar vacia mantenemos la prfuncidad que queramos
+	profundidad_maxima = otra.profundidad_maxima;
+
 	// inicializamos vacia
 	inicializarVacia();
 
@@ -211,7 +218,8 @@ void Expresion::redimensionar(const int tam){
 }
 
 bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
-														const double prob_variable){
+														const double prob_variable,
+														const unsigned num_variables){
 
 	// si no tenemos espacio, redimensionamos
 	if (longitud_maxima > longitud_reservada){
@@ -247,7 +255,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 			// generamos el termino aleatorio entre los posibles valores, ya sean
 			// una variable o un numero
-			arbol[i].setTerminoAleatorio(longitud_cromosoma, GA_P::getNumVariables());
+			arbol[i].setTerminoAleatorio(longitud_cromosoma, num_variables);
 
 			// al ser un terminal, esta rama ya no esta libre y quitamos una
 			ramas_libres--;
@@ -398,10 +406,10 @@ unsigned Expresion::getLongitudArbol() const{
 void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const unsigned pos_otra){
 
 	// obtenemos el subarbol de la expresion actual
-	Expresion subarbol(&arbol[pos]);
+	Expresion subarbol(&arbol[pos], profundidad_maxima);
 
 	// obtenemos el subarbol de la otra expresion
-	Expresion subarbol_otra(&otra.arbol[pos_otra]);
+	Expresion subarbol_otra(&otra.arbol[pos_otra], otra.profundidad_maxima);
 
 	// copiamos los cromosomas para mantenerlos
 	subarbol.copiarCromosoma(cromosoma);

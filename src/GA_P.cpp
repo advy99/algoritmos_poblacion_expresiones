@@ -20,7 +20,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const ch
 	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){
 		// inicilizamos poblacion
-		poblacion = new Poblacion(200, 0.2);
+		poblacion = new Poblacion(200, 10, 0.3, getNumVariables(), getMaxProfExpresiones());
 
 	} else {
 		// si no, mostramos un error
