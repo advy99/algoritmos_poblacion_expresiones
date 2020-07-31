@@ -20,7 +20,7 @@ X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
 
-all: clean INICIO $(OBJETIVO) FIN
+all: clean INICIO $(OBJETIVO) documentacion FIN
 
 debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
 debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
@@ -36,6 +36,7 @@ define compilar_binario
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
 	@$(CXX) $(1) -o $(2)
+	@printf "\n\e[36mCompilación de $(BIN)/GA_P finalizada con exito.\n\n"
 endef
 
 
