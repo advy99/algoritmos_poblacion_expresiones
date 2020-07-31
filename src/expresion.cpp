@@ -49,9 +49,10 @@ Expresion::Expresion(const unsigned longitud_max, const double prob_variable,
 }
 
 void Expresion::inicializarCromosoma(){
+	Random * generador_aleatorios = Random::getInstance();
 	// para cada elemento del cromosoma escogemos un numero aleatorio en [-10, 10]
 	for (unsigned i = 0; i < longitud_cromosoma; i++){
-		cromosoma[i] = Random::getInstance()->getFloat(-10.0f, 10.0f);
+		cromosoma[i] = generador_aleatorios->getFloat(-10.0f, 10.0f);
 	}
 
 }
