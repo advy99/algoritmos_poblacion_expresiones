@@ -1,24 +1,24 @@
 #include <ctime>
 #include "random.hpp"
 
-Random * Random::getInstance(){
-	if (instancia == nullptr){
-		instancia = new Random;
-	}
+Random & Random::getInstance(){
+	static Random instancia;
+
 	return instancia;
 }
 
-Random * Random::getInstance(const unsigned seed){
-	if (instancia == nullptr){
-		instancia = new Random(seed);
-	}
+Random & Random::getInstance(const unsigned long seed){
+	static Random instancia(seed);
+
 	return instancia;
 }
 
 Random::Random():SEED(std::time(NULL)){
+	instancia = nullptr;
 }
 
 Random::Random(const unsigned long semilla):SEED(semilla){
+	instancia = nullptr;
 }
 
 Random::~Random(){

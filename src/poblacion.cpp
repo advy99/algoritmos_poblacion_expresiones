@@ -115,7 +115,7 @@ unsigned Poblacion::seleccionIndividuo() const {
 	// evitamos errores de redondeo
 	probabilidad[tam_poblacion - 1] = 1.0;
 
-	double aleatorio = Random::getInstance()->getFloat();
+	double aleatorio = Random::getInstance().getFloat();
 
 	unsigned indice = 0;
 

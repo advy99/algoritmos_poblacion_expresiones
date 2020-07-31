@@ -62,7 +62,7 @@ class Random{
 		  * @post Si no existia una instancia del generador, se crea una con una semilla aleatoria.
 		  */
 
-		static Random * getInstance();
+		static Random & getInstance();
 
 		/**
 		  * @brief Obtener la instancia del generador de números, al ser un singleton.
@@ -72,7 +72,7 @@ class Random{
 		  * @post Si ya existe una instancia no se establecerá la semilla.
 		  */
 
-		static Random * getInstance(const unsigned seed);
+		static Random & getInstance(const unsigned long seed);
 
 		/**
 		  * @brief Destructor de la clase Random
