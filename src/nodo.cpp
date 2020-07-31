@@ -1,5 +1,4 @@
 #include "nodo.hpp"
-#include "GA_P.hpp"
 
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores dados
