@@ -8,7 +8,7 @@ Poblacion::Poblacion(){
 	poblacion = nullptr;
 }
 
-Poblacion::Poblacion(const unsigned tam):Poblacion(tam, 0.3){
+Poblacion::Poblacion( const unsigned tam):Poblacion(tam, 0.3){
 	// la poblacion por defecto tiene probabiliad de variables 0.3, llamamos al otro constructor
 }
 
@@ -61,8 +61,8 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 	// utilizan memoria dinamica de forma interna
 	for (unsigned i = 0; i < tam_poblacion; i++){
 		poblacion[i] = otra.poblacion[i];
-	}
 
+	}
 }
 
 void Poblacion::evaluarPoblacion(){
@@ -77,7 +77,8 @@ void Poblacion::evaluarPoblacion(){
 	// evaluamos el resto de individuos
 	for ( unsigned i = 1; i < tam_poblacion; i++){
 		if (!poblacion[i].estaEvaluada()){
-			valor_evaluada = poblacion[i].evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
+			valor_evaluada = poblacion[i].evaluarExpresion(GA_P::getDatosLectura(),
+																	     GA_P::getOutputDatosLectura());
 
 			if (valor_evaluada < valor_mejor){
 				mejor_individuo = i;
@@ -85,4 +86,46 @@ void Poblacion::evaluarPoblacion(){
 			}
 		}
 	}
+}
+
+
+double Poblacion::sumaFitness() const {
+	double suma = 0.0;
+
+	for (unsigned i = 0; i < tam_poblacion; i++){
+		suma += poblacion[i].getFitness();
+	}
+
+	return suma;
+}
+
+unsigned Poblacion::seleccionIndividuo() const {
+
+	double * probabilidad = new double [tam_poblacion];
+
+	double fitnessPoblacion = sumaFitness();
+
+	probabilidad[0] = poblacion[0].getFitness() / fitnessPoblacion;
+
+	for (unsigned i = 1; i < tam_poblacion; i++){
+		probabilidad[i] = probabilidad[i-1] +
+								(poblacion[i].getFitness() / fitnessPoblacion);
+	}
+	// evitamos errores de redondeo
+	probabilidad[tam_poblacion - 1] = 1.0;
+
+	double aleatorio = Random::getInstance()->getFloat();
+
+	unsigned indice = 0;
+
+	while (aleatorio > probabilidad[indice] && indice < tam_poblacion){
+		indice++;
+	}
+
+
+	delete [] probabilidad;
+
+	return indice;
+
+
 }

@@ -96,6 +96,15 @@ class Poblacion{
 
 		void copiarDatos(const Poblacion & otra);
 
+
+		/**
+		 * @brief Obtener la suma del fitness de todos los elementos de la poblacion
+		 *
+		 * @return Sumatoria del fitness de todos los individuos
+		 */
+
+		double sumaFitness() const;
+
 	public:
 
 		/**
@@ -178,6 +187,16 @@ class Poblacion{
 		  */
 
 		void evaluarPoblacion();
+
+		/**
+		 * @brief Seleccionar un individuo de la población
+		 *
+		 *
+		 */
+
+		unsigned seleccionIndividuo() const;
+
+
 
 };
 
