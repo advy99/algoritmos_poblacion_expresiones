@@ -20,7 +20,9 @@ Existen dos opciones de compilación.
 - Compilación con símbolos de depuración (pensado para depurar).
 - Compilación con optimización (pensado para ejecutar).
 
-Siempre que cambies de forma de compilar es recomendable limpiar objetos y binarios anteriores.
+Siempre que compiles se limpiarán los objetos y binarios anteriores.
+
+También se compilará la documentación al compilar con ambas formas.
 
 ## Limpiar
 
@@ -35,7 +37,7 @@ make clean
 Para compilar con símbolos de depuración y sin optimización ejecuta:
 
 ```sh
-make DEBUG
+make debug
 ```
 
 ## Compilación con optimización
