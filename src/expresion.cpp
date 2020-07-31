@@ -546,7 +546,7 @@ void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 	double * cromosoma_actual = new double[this->longitud_cromosoma];
 	double * cromosoma_otro = new double[otra.longitud_cromosoma];
 
-	// TODO: Implementar el cruce BLX
+	// TODO: Comprobar que el cruce BLX-alfa es correcto
 	double punto_padre, punto_madre, seccion;
 
 	for ( unsigned i = 0; i < longitud_cromosoma; i++){
