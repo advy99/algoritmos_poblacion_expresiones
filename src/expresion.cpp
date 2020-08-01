@@ -586,6 +586,15 @@ void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 }
 
 
+bool Expresion::mismoNicho(const Expresion & otra) const {
+	bool resultado = longitud_arbol == otra.longitud_arbol;
+
+	for (unsigned i = 0; i < longitud_arbol && resultado; i++){
+		resultado = arbol[i] == otra.arbol[i];
+	}
+
+	return resultado;
+}
 
 std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const{
 	// si la pila esta vacia, devolvemos el resultado
