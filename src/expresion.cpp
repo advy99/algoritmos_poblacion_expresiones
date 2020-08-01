@@ -49,10 +49,9 @@ Expresion::Expresion(const unsigned longitud_max, const double prob_variable,
 }
 
 void Expresion::inicializarCromosoma(){
-	Random  & generador_aleatorios = Random::getInstance();
 	// para cada elemento del cromosoma escogemos un numero aleatorio en [-10, 10]
 	for (unsigned i = 0; i < longitud_cromosoma; i++){
-		cromosoma[i] = generador_aleatorios.getFloat(-10.0f, 10.0f);
+		cromosoma[i] = Random::getFloat(-10.0f, 10.0f);
 	}
 
 }
@@ -227,8 +226,6 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 		redimensionar(longitud_maxima);
 	}
 
-	// obtenemos la instancia del generador de aleatorios
-	Random & generador_aleatorios = Random::getInstance();
 
 	// comenzamos con una rama libre
 	int ramas_libres = 1;
@@ -240,7 +237,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 		float prob_operador = (float)(ramas_libres*ramas_libres+1)/(float)(longitud_maxima-i);
 
 		// si es un operador, lo generamos
-		if (generador_aleatorios.getFloat() > prob_operador){
+		if (Random::getFloat() > prob_operador){
 			arbol[i].setTipoNodoOperadorAleatorio();
 			// tenemos una rama más libre, la actual que sería el termino de la izquierda
 			// y una más para el termino de la derecha
@@ -248,7 +245,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 		} else {
 			// si es un simbolo terminal, generamos un aleatorio para ver si es variable o numero
-			if (generador_aleatorios.getFloat() < prob_variable){
+			if (Random::getFloat() < prob_variable){
 				arbol[i].tipo_nodo = TipoNodo::VARIABLE;
 			} else {
 				arbol[i].tipo_nodo = TipoNodo::NUMERO;
@@ -573,10 +570,10 @@ void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 		punto_madre = punto_madre - seccion * alfa;
 		punto_padre = punto_padre + seccion * alfa;
 
-		cromosoma_actual[i] = punto_padre + Random::getInstance().getFloat() *
+		cromosoma_actual[i] = punto_padre + Random::getFloat() *
 														(punto_padre - punto_madre);
 
-		cromosoma_otro[i] = punto_madre + Random::getInstance().getFloat() *
+		cromosoma_otro[i] = punto_madre + Random::getFloat() *
 														(punto_padre - punto_madre);
 	}
 

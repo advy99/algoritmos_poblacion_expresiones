@@ -3,17 +3,17 @@
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores dados
 	if (tipo_nodo == TipoNodo::NUMERO){
-		valor = Random::getInstance().getInt(num_numeros);
+		valor = Random::getInt(num_numeros);
 	} else {
 		// TO-DO
 		// si no, escogemos un aleatorio entre las posibles variables
-		valor = Random::getInstance().getInt(num_variables);
+		valor = Random::getInt(num_variables);
 	}
 }
 
 void Nodo::setTipoNodoOperadorAleatorio(){
 	// obtenemos un aleatorio
-	float aleatorio = Random::getInstance().getFloat();
+	float aleatorio = Random::getFloat();
 
 	// le damos la misma probabilidad a cada operador
 	if (aleatorio < 0.25){

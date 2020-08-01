@@ -36,8 +36,8 @@ int main(int argc, char ** argv){
 	std::cout << "Arbol 1 antes de cruzar: " << std::endl << miExpresion << std::endl;
 	std::cout << "Arbol 2 antes de cruzar: "<< std::endl << miExpresion2 << std::endl;
 
-	int punto1 = Random::getInstance().getInt(miExpresion.getLongitudArbol());
-	int punto2 = Random::getInstance().getInt(miExpresion2.getLongitudArbol());
+	int punto1 = Random::getInt(miExpresion.getLongitudArbol());
+	int punto2 = Random::getInt(miExpresion2.getLongitudArbol());
 
 	miExpresion.intercambiarSubarbol(punto1, miExpresion2, punto2);
 
