@@ -78,14 +78,54 @@ class Nodo {
 
 		void setTerminoAleatorio(const int num_numeros, const int num_variables);
 
+		/**
+		 * @brief Obtener el tipo del nodo asociado al Nodo.
+		 *
+		 * @return Tipo del nodo.
+		 *
+		 */
 
 		TipoNodo getTipoNodo() const;
 
+		/**
+		 * @brief Obtener el valor asociado al Nodo.
+		 *
+		 * @pre tipo_nodo == NUMERO || tipo_nodo == VARIABLE
+		 *
+		 * @return Valor asociado al nodo
+		 */
+
 		int getValor() const;
+
+
+		/**
+		 *
+		 * @brief Establecer el tipo del Nodo.
+		 *
+		 * @param tipo Nuevo tipo del Nodo
+		 *
+		 *
+		 */
 
 		void setTipoNodo(const TipoNodo tipo);
 
+
+		/**
+		 * @brief Establecer el valor del Nodo.
+		 *
+		 * @param val Valor a establecer en el Nodo.
+		 *
+		 */
+
 		void setValor(const int val);
+
+		/**
+		 * @brief Operador de comparación con otro Nodo
+		 *
+		 * @param otro Nodo con el que comparar
+		 *
+		 * @return Verdadero si ambos objetos Nodo son iguales, falso en caso contrario
+		 */
 
 		bool operator==(const Nodo & otro) const;
 
