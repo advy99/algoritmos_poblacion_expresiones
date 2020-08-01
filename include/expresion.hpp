@@ -170,9 +170,20 @@ class Expresion{
 
 		unsigned contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const;
 
-
+		/**
+		 * @brief Inicializar el cromosoma de constantes asociadas a la Expresion.
+		 *
+		 *
+		 */
 
 		void inicializarCromosoma();
+
+		/**
+		 * @brief Copiar cromosoma dado al cromosoma de la Expresion actual
+		 *
+		 * @param otro_cromosoma Cromosoma a copiar
+		 *
+		 */
 
 		void copiarCromosoma(const double * otro_cromosoma);
 
