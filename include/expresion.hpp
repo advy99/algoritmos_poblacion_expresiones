@@ -354,6 +354,17 @@ class Expresion{
 		void cruceBLXalfa(Expresion & otra, const double alfa = 0.3);
 
 		/**
+		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho
+		 *
+		 * @param otra Expresion con la que comprobar si esta en el mismo nicho
+		 *
+		 * @return Verdadero si están en el mismo nicho, falso si no.
+		 *
+		 */
+
+		bool mismoNicho(const Expresion & otra) const;
+
+		/**
 		  * @brief Funcion para obtener una expresión almacenada en una pila en preorder en forma de string
 		  *
 		  * @param pila Contenedor donde esta almacenada la expresión.
