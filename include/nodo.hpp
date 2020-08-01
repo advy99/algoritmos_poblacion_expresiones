@@ -90,7 +90,7 @@ class Nodo {
 		/**
 		 * @brief Obtener el valor asociado al Nodo.
 		 *
-		 * @pre tipo_nodo == NUMERO || tipo_nodo == VARIABLE
+		 * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
 		 *
 		 * @return Valor asociado al nodo
 		 */
