@@ -31,3 +31,25 @@ void Nodo::setTipoNodoOperadorAleatorio(){
 		tipo_nodo = TipoNodo::ENTRE;
 	}
 }
+
+
+bool Nodo::operator==(const Nodo & otro) const {
+	bool resultado = false;
+
+	if (this->tipo_nodo == otro.tipo_nodo){
+		if (this->tipo_nodo == TipoNodo::NUMERO ||
+			 this->tipo_nodo == TipoNodo::VARIABLE){
+			// si el tipo es el mismo y es un numero o variable, el valor ha de ser el mismo
+			resultado = this->valor == otro.valor;
+		} else {
+			// si el tipo del nodo es el mismo y es un operador, nos da
+			// igual el valor, es el mismo nodo
+			resultado = true;
+		}
+	}
+	// si no es el mismo tipo de nodo, no es el mismo nodo
+
+
+	return resultado;
+
+}

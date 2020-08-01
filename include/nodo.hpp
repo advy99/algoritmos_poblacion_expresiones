@@ -50,6 +50,12 @@ class Nodo {
 
 	public:
 
+		/**
+		 * @brief Constructor sin argumentos. Creamos Nodo vacio.
+		 *
+		 *
+		 */
+
 		Nodo();
 
 		/**
@@ -71,6 +77,9 @@ class Nodo {
 		  */
 
 		void setTerminoAleatorio(const int num_numeros, const int num_variables);
+
+
+		bool operator==(const Nodo & otro) const;
 
 };
 
