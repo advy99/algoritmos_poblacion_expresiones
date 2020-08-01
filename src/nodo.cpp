@@ -1,5 +1,10 @@
 #include "nodo.hpp"
 
+Nodo::Nodo(){
+	tipo_nodo = TipoNodo::NUMERO;
+	valor = 0;
+}
+
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores dados
 	if (tipo_nodo == TipoNodo::NUMERO){

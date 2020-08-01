@@ -1,6 +1,6 @@
 /**
   * @file nodo.hpp
-  * @brief Fichero cabecera de la estructura Nodo
+  * @brief Fichero cabecera de la clase Nodo
   *
   */
 
@@ -13,7 +13,7 @@
 enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 
 /**
-  *  @brief Estructura Nodo
+  *  @brief Clase Nodo
   *
   * Una instancia del tipo Nodo sera una representacion del tipo del nodo y un valor de dicho nodo.
   *
@@ -22,51 +22,55 @@ enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
   * @date Julio 2020
   */
 
-struct Nodo {
+class Nodo {
+	private:
+		/**
+		  * @page repNodo Representación de la estructura nodo
+		  *
+		  * @section faConjunto Función de abstracción
+		  *
+		  * Un objeto valido @e rep de la estructura Nodo viene dado por un tipo de un nodo y su valor.
+		  *
+		  *
+		  * rep.tipo_nodo
+		  * rep.valor
+		  *
+		  */
 
-	/**
-	  * @page repNodo Representación de la estructura nodo
-	  *
-	  * @section faConjunto Función de abstracción
-	  *
-	  * Un objeto valido @e rep de la estructura Nodo viene dado por un tipo de un nodo y su valor.
-	  *
-	  *
-	  * rep.tipo_nodo
-	  * rep.valor
-	  *
-	  */
+		/**
+		  * @brief Tipo de nodo
+		  */
+		TipoNodo tipo_nodo;
 
-	/**
-	  * @brief Tipo de nodo
-	  */
-	TipoNodo tipo_nodo;
+		/**
+		  * @brief Valor asociado al nodo
+		  */
 
-	/**
-	  * @brief Valor asociado al nodo
-	  */
+		int valor;
 
-	int valor;
+	public:
 
-	/**
-	  * @brief Establecer el tipo del nodo a un operador aleatorio entre los posibles operadores.
-	  *
-	  * @pre tipo_nodo != TipoNodo::NUMERO && tipo_nodo != TipoNodo::VARIABLE
-	  */
+		Nodo();
+
+		/**
+		  * @brief Establecer el tipo del nodo a un operador aleatorio entre los posibles operadores.
+		  *
+		  * @pre tipo_nodo != TipoNodo::NUMERO && tipo_nodo != TipoNodo::VARIABLE
+		  */
 
 
-	void setTipoNodoOperadorAleatorio();
+		void setTipoNodoOperadorAleatorio();
 
-	/**
-	  * @brief Establecer el valor del nodo a un termino aleatorio.
-	  *
-	  * @param num_numeros Cantidad de numeros a tener en cuenta para escoger el valor
-	  * @param num_variables Cantidad de variables a tener en cuenta para escoger el valor.
-	  *
-	  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
-	  */
+		/**
+		  * @brief Establecer el valor del nodo a un termino aleatorio.
+		  *
+		  * @param num_numeros Cantidad de numeros a tener en cuenta para escoger el valor
+		  * @param num_variables Cantidad de variables a tener en cuenta para escoger el valor.
+		  *
+		  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
+		  */
 
-	void setTerminoAleatorio(const int num_numeros, const int num_variables);
+		void setTerminoAleatorio(const int num_numeros, const int num_variables);
 
 };
 
