@@ -67,8 +67,8 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 	// mientras tenga ramas que visitar
 	while(ramas_libres > 0){
 		// si no es ni un numero ni una variable
-		if (subarbol[tam].tipo_nodo != TipoNodo::NUMERO &&
-			 subarbol[tam].tipo_nodo != TipoNodo::VARIABLE){
+		if (subarbol[tam].getTipoNodo() != TipoNodo::NUMERO &&
+			 subarbol[tam].getTipoNodo() != TipoNodo::VARIABLE){
 			// es un operador, tiene dos ramas
 			ramas_libres += 2;
 		}
@@ -246,9 +246,9 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 		} else {
 			// si es un simbolo terminal, generamos un aleatorio para ver si es variable o numero
 			if (Random::getFloat() < prob_variable){
-				arbol[i].tipo_nodo = TipoNodo::VARIABLE;
+				arbol[i].setTipoNodo(TipoNodo::VARIABLE);
 			} else {
-				arbol[i].tipo_nodo = TipoNodo::NUMERO;
+				arbol[i].setTipoNodo(TipoNodo::NUMERO);
 			}
 
 			// generamos el termino aleatorio entre los posibles valores, ya sean
@@ -291,25 +291,25 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std
 	if (pila.empty()){
 		return valor;
 
-	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO){
+	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
 		// posicion del cromosoma correspondiente
-		valor = cromosoma[pila.top().valor];
+		valor = cromosoma[pila.top().getValor()];
 
 		// eliminamos de la pila, y lo devolvemos
 		pila.pop();
 		return valor;
 
-	} else if (pila.top().tipo_nodo == TipoNodo::VARIABLE){
+	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
 		// si es una variable, la consultamos en el dato dado, eliminamos el nodo
 		// de la pila y devolvemos el valor del dato
-		valor = dato[pila.top().valor];
+		valor = dato[pila.top().getValor()];
 		pila.pop();
 		return valor;
 
 	} else {
 		// si es un operador, guardamos la operacion
-		TipoNodo operacion = pila.top().tipo_nodo;
+		TipoNodo operacion = pila.top().getTipoNodo();
 
 		// la eliminamos de la pila
 		pila.pop();
@@ -498,7 +498,7 @@ unsigned Expresion::contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const
 	// si la pila esta vacia, devolvemos el nivel actual
 	if (pila.empty()){
 		return nivel;
-	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO || pila.top().tipo_nodo == TipoNodo::VARIABLE) {
+	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO || pila.top().getTipoNodo() == TipoNodo::VARIABLE) {
 		// si en el tope hay un simbolo terminal, eso cuenta como un nivel,
 		// eliminamos el nodo de la pila, y devolvemos ese valor del nivel
 		nivel++;
@@ -591,29 +591,29 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::stri
 	// si la pila esta vacia, devolvemos el resultado
 	if (pila.empty()){
 		return resultado;
-	} else if (pila.top().tipo_nodo == TipoNodo::NUMERO){
+	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si es un numero, lo consultamos en el cromosoma
 		// dependiendo de si estamos mirando el nodo de la izquierda o de la derecha
 		// ponemos primero el numero y lo que llevamos
 		// o lo que llevamos y el numero
 		if (izda){
-			resultado = std::to_string(cromosoma[pila.top().valor]) + " " + resultado;
+			resultado = std::to_string(cromosoma[pila.top().getValor()]) + " " + resultado;
 		} else {
-			resultado = resultado + " " + std::to_string(cromosoma[pila.top().valor]);
+			resultado = resultado + " " + std::to_string(cromosoma[pila.top().getValor()]);
 		}
 
 		// eliminamos el nodo de la pila y devolvemos el resultado
 		pila.pop();
 		return resultado;
 
-	} else if (pila.top().tipo_nodo == TipoNodo::VARIABLE){
+	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
 		// si es una variable, ponemos xN
 		// de nuevo, dependiendo de si miramos el nodo de la izquierda o el de la derecha
 		// lo ponemos aun ladou a otro
 		if (izda){
-			resultado = "x" + std::to_string((int)pila.top().valor) + " " + resultado;
+			resultado = "x" + std::to_string((int)pila.top().getValor()) + " " + resultado;
 		} else {
-			resultado = resultado + " x" + std::to_string((int)pila.top().valor);
+			resultado = resultado + " x" + std::to_string((int)pila.top().getValor());
 		}
 
 		// eliminamos el nodo y devolvemos el resultado
@@ -623,13 +623,13 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::stri
 
 		// sies un operador, obtenemos el valor
 		std::string valor;
-		if (pila.top().tipo_nodo == TipoNodo::MAS){
+		if (pila.top().getTipoNodo() == TipoNodo::MAS){
 			valor = "+";
-		} else if (pila.top().tipo_nodo == TipoNodo::MENOS){
+		} else if (pila.top().getTipoNodo() == TipoNodo::MENOS){
 			valor = "-";
-		} else if (pila.top().tipo_nodo == TipoNodo::POR){
+		} else if (pila.top().getTipoNodo() == TipoNodo::POR){
 			valor = "*";
-		} else if (pila.top().tipo_nodo == TipoNodo::ENTRE){
+		} else if (pila.top().getTipoNodo() == TipoNodo::ENTRE){
 			valor = "/";
 		}
 
