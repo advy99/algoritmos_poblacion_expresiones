@@ -79,6 +79,14 @@ class Nodo {
 		void setTerminoAleatorio(const int num_numeros, const int num_variables);
 
 
+		TipoNodo getTipoNodo() const;
+
+		int getValor() const;
+
+		void setTipoNodo(const TipoNodo tipo);
+
+		void setValor(const int val);
+
 		bool operator==(const Nodo & otro) const;
 
 };

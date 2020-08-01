@@ -33,6 +33,22 @@ void Nodo::setTipoNodoOperadorAleatorio(){
 }
 
 
+TipoNodo Nodo::getTipoNodo() const {
+	return tipo_nodo;
+}
+
+int Nodo::getValor() const {
+	return valor;
+}
+
+void Nodo::setTipoNodo(const TipoNodo tipo){
+	tipo_nodo = tipo;
+}
+
+void Nodo::setValor(const int val){
+	valor = val;
+}
+
 bool Nodo::operator==(const Nodo & otro) const {
 	bool resultado = false;
 
