@@ -36,7 +36,8 @@ class Expresion{
 		  *
 		  * @section faConjunto Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la clase Expresion representa la expresion dada en
+		  * Un objeto valido @e rep de la clase Expresion representa
+		  * la expresion dada en
 		  *
 		  * rep.arbol
 		  *
@@ -51,13 +52,15 @@ class Expresion{
 		  */
 
 		/**
-		  * @brief Valor de ajuste de la expresión con ciertos datos con los que se ha evaluado.
+		  * @brief Valor de ajuste de la expresión con ciertos datos con los
+		  * que se ha evaluado.
 		  */
 
 		double fitness;
 
 		/**
-		  * @brief Atributo para comprobar si es necesario reevaluar la expresión de nuevo.
+		  * @brief Atributo para comprobar si es necesario reevaluar la
+		  * expresión de nuevo.
 		  */
 
 		bool evaluada;
@@ -83,7 +86,8 @@ class Expresion{
 		Arbol arbol;
 
 		/**
-		  * @brief Array donde almacenaremos los valores de las constantes numéricas para aprenderlos
+		  * @brief Array donde almacenaremos los valores de las constantes
+		  * numéricas para aprenderlos
 		  *
 		  */
 
@@ -153,7 +157,8 @@ class Expresion{
 		void redimensionar(const int tam);
 
 		/**
-		  * @brief Metodo para marcar que la evaluación del fitness de una expresión ya no es valida.
+		  * @brief Metodo para marcar que la evaluación del fitness de una
+		  * expresión ya no es valida.
 		  *
 		  */
 
@@ -199,10 +204,11 @@ class Expresion{
 		Expresion(const unsigned prof_max = 10);
 
 		/**
-		  * @brief Constructor con un parámetro. Crear una expresion con el subarbol dado
+		  * @brief Constructor con un parámetro. Crear una expresion a partir del
+		  * subarbol dado
 		  *
 		  * @param subarbol Subarbol para crear la expresion
-		  * @param prof_max Profundidad máxima de la Expresion a crear a partir de subarbol
+		  * @param prof_max Profundidad máxima de la Expresion a crear
 		  *
 		  * @pre subarbol != nullptr
 		  */
@@ -212,12 +218,12 @@ class Expresion{
 
 
 		/**
-		  * @brief Constructor con dos parámetro, para generar una expresión aleatoria.
+		  * @brief Constructor con dos parámetro, generar una expresión aleatoria.
 		  *
 		  * @param longitud_max Longitud de la expresión a generar.
-		  * @param prob_variable Probabilidad de que al generar la expresion un nodo sea una variable.
-		  * @param num_vars Numero de variables que podrá usar la expresion a generar
-		  * @param prof_max Profundidad máxima de la Expresion a crear a partir de subarbol
+		  * @param prob_variable Probabilidad de que un nodo sea una variable.
+		  * @param num_vars Numero de variables que podrá usar la expresion
+		  * @param prof_max Profundidad máxima de la Expresion a crear
 		  *
 		  */
 
@@ -244,11 +250,14 @@ class Expresion{
 		/**
 		  * @brief Generar la expresión de forma aleatoria.
 		  *
-		  * @param longitud_max Longitud máxima de la expresión aleatoria a generar.
-		  * @param prob_variable Probabilidad de que un símbolo terminal sea una variable y no un número
-		  * @param num_variables Número de varíables disponibles para usar en la expresión
+		  * @param longitud_max Longitud máxima de la expresión aleatoria
+		  * @param prob_variable Probabilidad de que un símbolo terminal
+		  * sea una variable y no un número
+		  * @param num_variables Número de varíables disponibles para usar
+		  * en la expresión
 		  *
-		  * @return Booleano: True si ha conseguido generar la expresion correctamente, false en caso contrario
+		  * @return Booleano: True si ha conseguido generar la expresion
+		  * correctamente, false en caso contrario
 		  */
 
 		bool generarExpresionAleatoria(const unsigned longitud_max,
@@ -289,7 +298,8 @@ class Expresion{
 		  * @return Valor de ajuste de la expresión.
 		  */
 
-		double evaluarExpresion(const std::vector<std::vector<double>> & datos, const std::vector<double> & etiquetas);
+		double evaluarExpresion(const std::vector<std::vector<double>> & datos,
+										const std::vector<double> & etiquetas);
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.
@@ -297,7 +307,8 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(std::stack<Nodo> & pila, double & val, const std::vector<double> & dato);
+		double evaluarDato(std::stack<Nodo> & pila, double & val,
+								 const std::vector<double> & dato);
 
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.
@@ -309,11 +320,13 @@ class Expresion{
 		  * @pre otra No es una expresion vacia.
 		  */
 
-		void intercambiarSubarbol(const unsigned pos, Expresion & otra, const unsigned pos_otra);
+		void intercambiarSubarbol(const unsigned pos, Expresion & otra,
+										  const unsigned pos_otra);
 
 
 		/**
-		  * @brief Operador de asignación de una expresión. Asignamos una expresión a otra.
+		  * @brief Operador de asignación de una expresión. Asignamos una
+		  * expresión a otra.
 		  *
 		  * @param otra Expresión a copiar.
 		  *
@@ -335,7 +348,8 @@ class Expresion{
 		/**
 		  * @brief Calcular la profundidad de una expresión
 		  *
-		  * @param comienzo Nodo por el que comenzar a contar los niveles, para contar niveles de un subarbol
+		  * @param comienzo Nodo por el que comenzar a contar los niveles,
+		  * para contar niveles de un subarbol
 		  *
 		  * @return Profundidad de la expresión a partir del nodo dado
 		  */
@@ -346,7 +360,8 @@ class Expresion{
 		 * @brief Operador de cruce para los cromosomas de las expresiones.
 		 *
 		 * @param otra Expresion con la que cruzar el cromosoma.
-		 * @param alfa Valor alfa del metodo BLX-alfa, posible extension del rango entre dos valores
+		 * @param alfa Valor alfa del metodo BLX-alfa, posible extension del
+		 * rango entre dos valores
 		 *
 		 */
 
@@ -365,17 +380,23 @@ class Expresion{
 		bool mismoNicho(const Expresion & otra) const;
 
 		/**
-		  * @brief Funcion para obtener una expresión almacenada en una pila en preorder en forma de string
+		  * @brief Funcion para obtener una expresión almacenada en una pila en
+		  * preorder en forma de string
 		  *
 		  * @param pila Contenedor donde esta almacenada la expresión.
-		  * @param resultado Resultado parcial al que añadir la nueva lectura de la pila
-		  * @param izda Booleano true nos indica que estamos leyendo una rama izquierda (va a la parte izquierda del resultado actual) y en otro caso derecha
+		  * @param resultado Resultado parcial al que añadir la nueva lectura de
+		  * la pila
+		  * @param izda Booleano true nos indica que estamos leyendo una rama
+		  * izquierda (va a la parte izquierda del resultado actual)
+		  * y en otro caso derecha
 		  *
 		  * @return Nuevo resultado tras leer la pila
 		  */
 
 
-		std::string obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const;
+		std::string obtenerStringExpresion(std::stack<Nodo> & pila,
+													  std::string resultado,
+													  const bool izda) const;
 
 		/**
 		  * @brief Devuelve la cadena asociada a la expresión.
@@ -391,10 +412,12 @@ class Expresion{
 		  * @param os Flujo de salida por el que mostrar la expresion
 		  * @param exp Expresión a mostrar
 		  *
-		  * @return Referencia al flujo de salida en caso de mostrar varias expresiones con el mismo flujo.
+		  * @return Referencia al flujo de salida en caso de mostrar varias
+		  * expresiones con el mismo flujo.
 		  */
 
-		friend std::ostream & operator<< (std::ostream & os, const Expresion & exp);
+		friend std::ostream & operator<< (std::ostream & os,
+													 const Expresion & exp);
 
 };
 
