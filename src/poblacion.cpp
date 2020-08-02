@@ -4,9 +4,9 @@
 
 Poblacion::Poblacion(){
 	// una poblacion vacia no tiene nada
-	poblacion = nullptr;
-	tam_poblacion = 0;
-	tam_reservado = 0;
+	poblacion       = nullptr;
+	tam_poblacion   = 0;
+	tam_reservado   = 0;
 	mejor_individuo = -1;
 }
 
@@ -39,16 +39,15 @@ void Poblacion::liberarMemoria(){
 	}
 
 	// establecemos los valores a nulos
-	tam_reservado = 0;
-	tam_poblacion = 0;
+	tam_reservado   = 0;
+	tam_poblacion   = 0;
 	mejor_individuo = -1;
-
-	poblacion = nullptr;
+	poblacion       = nullptr;
 
 }
 
 void Poblacion::reservarMemoria(const unsigned tam){
-	poblacion = new Expresion[tam];
+	poblacion     = new Expresion[tam];
 	tam_reservado = tam;
 }
 

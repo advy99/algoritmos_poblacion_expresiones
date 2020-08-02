@@ -6,7 +6,7 @@ Nodo::Nodo(){
 }
 
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
-	// si es un numero, escogemos un aleatorio entre todos los posibles valores dados
+	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo == TipoNodo::NUMERO){
 		valor = Random::getInt(num_numeros);
 	} else {
@@ -55,7 +55,8 @@ bool Nodo::operator==(const Nodo & otro) const {
 	if (this->tipo_nodo == otro.tipo_nodo){
 		if (this->tipo_nodo == TipoNodo::NUMERO ||
 			 this->tipo_nodo == TipoNodo::VARIABLE){
-			// si el tipo es el mismo y es un numero o variable, el valor ha de ser el mismo
+			// si el tipo es el mismo y es un numero o variable,
+			// el valor ha de ser el mismo
 			resultado = this->valor == otro.valor;
 		} else {
 			// si el tipo del nodo es el mismo y es un operador, nos da

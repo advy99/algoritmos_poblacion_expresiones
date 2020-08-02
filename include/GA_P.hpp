@@ -17,8 +17,8 @@
 /**
   *  @brief Clase GA_P
   *
-  *  Una instancia del tipo GA_P representará un estimador para los datos dados, utilizando
-  * una Poblacion, conjunto de Expresion.
+  *  Una instancia del tipo GA_P representará un estimador para los datos
+  *  dados, utilizando una Poblacion, conjunto de Expresion.
   *
   *
   * @author Antonio David Villegas Yeguas
@@ -37,7 +37,8 @@ class GA_P{
 		  *
 		  * @section faConjunto Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la clase GA_P representa un conjunto de datos con sus respectivas etiquetas
+		  * Un objeto valido @e rep de la clase GA_P representa un conjunto de
+		  * datos con sus respectivas etiquetas
 		  *
 		  * rep.datos
 		  * rep.output_datos
@@ -49,7 +50,8 @@ class GA_P{
 		  */
 
 		/**
-		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo GA_P
+		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
+		  * GA_P
 		  */
 		Poblacion * poblacion;
 
@@ -75,14 +77,18 @@ class GA_P{
 		  * @brief Leer datos de entrada para el algoritmo
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
-		  * @param char_comentario Caracter que marca que una linea es un comentario y ha de ser ignorada
-		  * @param delimitador Caracter que marca como están separados los datos de entrada
+		  * @param char_comentario Caracter que marca que una linea es un
+		  * comentario y ha de ser ignorada
+		  * @param delimitador Caracter que marca como están separados los
+		  * datos de entrada
 		  *
-		  * @pre Los datos han sido preprocesados y los datos a leer vienen dados separados por delimitador. Cada dato es una linea.
+		  * @pre Los datos han sido preprocesados y los datos a leer vienen
+		  * dados separados por delimitador. Cada dato es una linea.
 		  *
 		  */
 
-		bool leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador = ',');
+		bool leerDatos(const std::string fichero_datos,
+							const char char_comentario, const char delimitador = ',');
 
 		/**
 		  * @brief Liberar la memoria dinámica utilizada por GA_P
@@ -96,13 +102,17 @@ class GA_P{
 		  * @brief Constructor con dos parámetros
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
-		  * @param char_comentario Caracter que marca que una linea es un comentario y ha de ser ignorada.
-		  * @param delimitador Caracter que marca como están separados los datos de entrada. Por defecto ','
-		  * @param prof Profundidad máxima de las expresiones con las que aprenderá el algoritmo. Por defecto 10
+		  * @param char_comentario Caracter que marca que una linea es un
+		  * comentario y ha de ser ignorada.
+		  * @param delimitador Caracter que marca como están separados los
+		  * datos de entrada. Por defecto ','
+		  * @param prof Profundidad máxima de las expresiones con las que
+		  * aprenderá el algoritmo. Por defecto 10
 		  *
 		  */
 
-		GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador = ',', const unsigned prof = 10);
+		GA_P(const std::string fichero_datos, const char char_comentario,
+			  const char delimitador = ',', const unsigned prof = 10);
 
 		/**
 		  * @brief Destructor
@@ -134,6 +144,13 @@ class GA_P{
 		  */
 		static std::vector<std::vector<double> > getDatos();
 
+		/**
+		 * @brief Obtener los datos para solo lectura.
+		 *
+		 * @return Referencia constante a los datos.
+		 *
+		 */
+
 		static const std::vector<std::vector<double>> & getDatosLectura();
 
 		/**
@@ -147,6 +164,16 @@ class GA_P{
 		  */
 		static std::vector<double > getDato(const unsigned indice);
 
+
+		/**
+		 * @brief Obtener un dato para solo lectura.
+		 *
+		 * @param indice Indice del dato a leer
+		 *
+		 * @return Referencia constante al dato de la posicion indice.
+		 *
+		 */
+
 		static const std::vector<double > & getDatoLectura(const unsigned indice);
 
 
@@ -158,6 +185,14 @@ class GA_P{
 		  */
 
 		static std::vector<double> getOutputDatos();
+
+
+		/**
+		 * @brief Obtener las etiquetas para solo lectura.
+		 *
+		 * @return Referencia constante a las etiquetas.
+		 *
+		 */
 
 		static const std::vector<double> & getOutputDatosLectura();
 
@@ -174,7 +209,11 @@ class GA_P{
 
 		static double getOutputDato(const unsigned indice);
 
-
+		/**
+		 * @brief Obtener la profundidad máxima de las expresiones
+		 *
+		 * @return Profundidad máxima de las expresiones
+		 */
 
 		static unsigned getMaxProfExpresiones();
 

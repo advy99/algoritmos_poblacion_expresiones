@@ -12,8 +12,9 @@
 /**
   *  @brief Clase Poblacion
   *
-  *  Una instancia del tipo Poblacion representará un conjunto de individuos que serán expresiones,
-  * también podrá indicar cual es el mejor individuo de la población.
+  *  Una instancia del tipo Poblacion representará un conjunto de individuos
+  *  que serán expresiones, también podrá indicar cual es el mejor
+  *  individuo de la población.
   *
   * @author Antonio David Villegas Yeguas
   * @date Julio 2020
@@ -31,7 +32,7 @@ class Poblacion{
 		  *
 		  * @section faConjunto Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la clase Poblacion representa la poblacion en
+		  * Un objeto valido @e rep de la clase Poblacion representa la poblacion
 		  *
 		  * rep.poblacion
 		  *
@@ -98,7 +99,7 @@ class Poblacion{
 
 
 		/**
-		 * @brief Obtener la suma del fitness de todos los elementos de la poblacion
+		 * @brief Obtener la suma del fitness de todos los individuos
 		 *
 		 * @return Sumatoria del fitness de todos los individuos
 		 */
@@ -117,13 +118,17 @@ class Poblacion{
 
 
 		/**
-		  * @brief Constructor con dos parámetros. Generar una población con tam elementos aleatorios.
+		  * @brief Constructor con dos parámetros. Generar una población
+		  * con tam elementos aleatorios.
 		  *
 		  * @param tam Número de individuos con el que generar la población.
 		  * @param lon_expre Longitud máxima de las expresiones a generar
-		  * @param prob_var Probabilidad de que un nodo de la expresión sea una variable.
-		  * @param num_vars Número de variables que utilizarán las expresiones de la población
-		  * @param prof_expre Profundidad máxima de las expresiones de la población
+		  * @param prob_var Probabilidad de que un nodo de la expresión sea
+		  * una variable.
+		  * @param num_vars Número de variables que utilizarán las expresiones
+		  * de la población
+		  * @param prof_expre Profundidad máxima de las expresiones de
+		  * la población
 		  *
 		  */
 
@@ -168,9 +173,11 @@ class Poblacion{
 
 
 		/**
-		  * @brief Modificar el individuo en la posición indice de la poblacion por otro individuo.
+		  * @brief Modificar el individuo en la posición indice de la poblacion
+		  * por otro individuo.
 		  *
-		  * @param indice Posición del individuo a sustituir dentro de la población.
+		  * @param indice Posición del individuo a sustituir dentro de
+		  * la población.
 		  * @param n_individuo Nuevo individuo a introducir en la población.
 		  *
 		  */

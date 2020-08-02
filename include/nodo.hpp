@@ -15,7 +15,8 @@ enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 /**
   *  @brief Clase Nodo
   *
-  * Una instancia del tipo Nodo sera una representacion del tipo del nodo y un valor de dicho nodo.
+  * Una instancia del tipo Nodo sera una representacion del tipo del nodo
+  * y un valor de dicho nodo.
   *
   *
   * @author Antonio David Villegas Yeguas
@@ -29,7 +30,8 @@ class Nodo {
 		  *
 		  * @section faConjunto Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la estructura Nodo viene dado por un tipo de un nodo y su valor.
+		  * Un objeto valido @e rep de la estructura Nodo viene dado por un
+		  * tipo de un nodo y su valor.
 		  *
 		  *
 		  * rep.tipo_nodo
@@ -59,7 +61,8 @@ class Nodo {
 		Nodo();
 
 		/**
-		  * @brief Establecer el tipo del nodo a un operador aleatorio entre los posibles operadores.
+		  * @brief Establecer el tipo del nodo a un operador aleatorio entre los
+		  * posibles operadores.
 		  *
 		  * @pre tipo_nodo != TipoNodo::NUMERO && tipo_nodo != TipoNodo::VARIABLE
 		  */
@@ -70,8 +73,10 @@ class Nodo {
 		/**
 		  * @brief Establecer el valor del nodo a un termino aleatorio.
 		  *
-		  * @param num_numeros Cantidad de numeros a tener en cuenta para escoger el valor
-		  * @param num_variables Cantidad de variables a tener en cuenta para escoger el valor.
+		  * @param num_numeros Cantidad de numeros a tener en cuenta para
+		  * escoger el valor
+		  * @param num_variables Cantidad de variables a tener en cuenta para
+		  * escoger el valor.
 		  *
 		  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
 		  */
@@ -124,7 +129,8 @@ class Nodo {
 		 *
 		 * @param otro Nodo con el que comparar
 		 *
-		 * @return Verdadero si ambos objetos Nodo son iguales, falso en caso contrario
+		 * @return Verdadero si ambos objetos Nodo son iguales, falso en caso
+		 * contrario
 		 */
 
 		bool operator==(const Nodo & otro) const;

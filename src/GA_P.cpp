@@ -7,7 +7,8 @@
 #include <cstdlib>
 
 
-GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const char delimitador, const unsigned prof){
+GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
+			  const char delimitador, const unsigned prof){
 
 	// al principio suponemos que se ha leido mal
 	bool lectura_correcta = false;
@@ -20,7 +21,8 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario, const ch
 	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){
 		// inicilizamos poblacion
-		poblacion = new Poblacion(200, 10, 0.3, getNumVariables(), getMaxProfExpresiones());
+		poblacion = new Poblacion(200, 10, 0.3, getNumVariables(),
+										  getMaxProfExpresiones());
 
 	} else {
 		// si no, mostramos un error
@@ -43,7 +45,8 @@ void GA_P::liberarMemoria(){
 }
 
 
-bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario, const char delimitador){
+bool GA_P::leerDatos(const std::string fichero_datos,
+							const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
 	bool resultado = true;
@@ -63,7 +66,8 @@ bool GA_P::leerDatos(const std::string fichero_datos, const char char_comentario
 		// mientras no encuentre el EOF
 		while (!file.eof()){
 			// si hemos leido una linea y no es un comentario, la procesamos
-			if (linea.size() > 0 && linea[0] != char_comentario && !isblank(linea[0]) ) {
+			if (linea.size() > 0 && linea[0] != char_comentario &&
+				 !isblank(linea[0]) ) {
 				// leemos por linea
 				std::vector<double> datos_linea;
 				ss.str(linea);
