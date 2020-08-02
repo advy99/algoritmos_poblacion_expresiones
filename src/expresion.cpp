@@ -49,7 +49,7 @@ Expresion::Expresion(const unsigned longitud_max, const double prob_variable,
 }
 
 void Expresion::inicializarCromosoma(){
-	// para cada elemento del cromosoma escogemos un numero aleatorio en [-10, 10]
+	// para cada elemento escogemos un numero aleatorio en [-10, 10]
 	for (unsigned i = 0; i < longitud_cromosoma; i++){
 		cromosoma[i] = Random::getFloat(-10.0f, 10.0f);
 	}
@@ -155,7 +155,7 @@ void Expresion::copiarDatos(const Expresion & otra){
 	profundidad_maxima = otra.profundidad_maxima;
 	longitud_cromosoma = otra.longitud_cromosoma;
 
-	// el array, al ser de elementos basicos sin memoria dinamica, podemos usar memcpy
+	// son elementos básicos sin memoria dinamica, podemos usar memcpy
 	memcpy(arbol, otra.arbol, longitud_arbol*sizeof(Nodo));
 
 	// copiamos el cromosoma de la otra expresion
@@ -234,17 +234,19 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 	// mientras tengamos longitud y tengamos ramas sueltas
 	while (i < longitud_maxima && ramas_libres > 0){
 		// obtenemos la probabilidad de que sea un operador
-		float prob_operador = (float)(ramas_libres*ramas_libres+1)/(float)(longitud_maxima-i);
+		float prob_operador = (float)(ramas_libres*ramas_libres+1) /
+									 (float)(longitud_maxima-i);
 
 		// si es un operador, lo generamos
 		if (Random::getFloat() > prob_operador){
 			arbol[i].setTipoNodoOperadorAleatorio();
-			// tenemos una rama más libre, la actual que sería el termino de la izquierda
-			// y una más para el termino de la derecha
+			// tenemos una rama más libre, la actual que sería el
+			// termino de la izquierda y una más para el termino de la derecha
 			ramas_libres++;
 
 		} else {
-			// si es un simbolo terminal, generamos un aleatorio para ver si es variable o numero
+			// si es un simbolo terminal, generamos un aleatorio
+			// para ver si es variable o numero
 			if (Random::getFloat() < prob_variable){
 				arbol[i].setTipoNodo(TipoNodo::VARIABLE);
 			} else {
@@ -281,11 +283,13 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-bool son_iguales(const double & a, const double & b, const double epsilon = 0.005){
+bool son_iguales(const double & a, const double & b,
+					  const double epsilon = 0.005){
     return (std::fabs(a - b) < epsilon);
 }
 
-double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std::vector<double> & dato){
+double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor,
+										const std::vector<double> & dato){
 
 	// si la pila esta vacia, devolvemos el valor
 	if (pila.empty()){
@@ -343,7 +347,8 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor, const std
 }
 
 
-double Expresion::evaluarExpresion(const std::vector<std::vector<double>> & datos, const std::vector<double> & etiquetas){
+double Expresion::evaluarExpresion(const std::vector<std::vector<double>> &datos,
+											  const std::vector<double> & etiquetas){
 
 	// almacenamos como resultado el valor de fitness
 	double resultado = fitness;
@@ -401,7 +406,8 @@ unsigned Expresion::getLongitudArbol() const{
 
 
 
-void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const unsigned pos_otra){
+void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra,
+												 const unsigned pos_otra){
 
 	// obtenemos el subarbol de la expresion actual
 	Expresion subarbol(&arbol[pos], profundidad_maxima);
@@ -423,8 +429,10 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 	nueva.copiarCromosoma(cromosoma);
 
 
-	// la nueva tendra dimension la actual, menos el subarbol que eliminamos más el subarbol que añadimos
-	nueva.redimensionar(pos + subarbol_otra.getLongitudArbol() + (*this).getLongitudArbol() - fin_subarbol);
+	// la nueva tendra dimension la actual, menos el subarbol que
+	// eliminamos más el subarbol que añadimos
+	nueva.redimensionar(pos + subarbol_otra.getLongitudArbol() +
+							  (*this).getLongitudArbol() - fin_subarbol);
 
 
 	// copiamos la parte que dejamos igual
@@ -450,7 +458,8 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra, const
 	nueva_otra.copiarCromosoma(otra.cromosoma);
 
 
-	nueva_otra.redimensionar(pos_otra + subarbol.getLongitudArbol() + otra.getLongitudArbol() - fin_otro_surbarbol);
+	nueva_otra.redimensionar(pos_otra + subarbol.getLongitudArbol() +
+									 otra.getLongitudArbol() - fin_otro_surbarbol);
 
 	// copiamos la parte que dejamos igual
 	for (unsigned i = 0; i < pos_otra; i++){
@@ -498,7 +507,8 @@ unsigned Expresion::contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const
 	// si la pila esta vacia, devolvemos el nivel actual
 	if (pila.empty()){
 		return nivel;
-	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO || pila.top().getTipoNodo() == TipoNodo::VARIABLE) {
+	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO ||
+				  pila.top().getTipoNodo() == TipoNodo::VARIABLE) {
 		// si en el tope hay un simbolo terminal, eso cuenta como un nivel,
 		// eliminamos el nodo de la pila, y devolvemos ese valor del nivel
 		nivel++;
@@ -596,19 +606,23 @@ bool Expresion::mismoNicho(const Expresion & otra) const {
 	return resultado;
 }
 
-std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::string resultado, const bool izda) const{
+std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila,
+															 std::string resultado,
+															 const bool izda) const{
 	// si la pila esta vacia, devolvemos el resultado
 	if (pila.empty()){
 		return resultado;
 	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si es un numero, lo consultamos en el cromosoma
-		// dependiendo de si estamos mirando el nodo de la izquierda o de la derecha
-		// ponemos primero el numero y lo que llevamos
+		// dependiendo de si estamos mirando el nodo de la izquierda o de
+		// la derecha ponemos primero el numero y lo que llevamos
 		// o lo que llevamos y el numero
 		if (izda){
-			resultado = std::to_string(cromosoma[pila.top().getValor()]) + " " + resultado;
+			resultado = std::to_string(cromosoma[pila.top().getValor()]) +
+							" " + resultado;
 		} else {
-			resultado = resultado + " " + std::to_string(cromosoma[pila.top().getValor()]);
+			resultado = resultado + " " +
+							std::to_string(cromosoma[pila.top().getValor()]);
 		}
 
 		// eliminamos el nodo de la pila y devolvemos el resultado
@@ -617,12 +631,14 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila, std::stri
 
 	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
 		// si es una variable, ponemos xN
-		// de nuevo, dependiendo de si miramos el nodo de la izquierda o el de la derecha
-		// lo ponemos aun ladou a otro
+		// de nuevo, dependiendo de si miramos el nodo de la izquierda o el
+		// de la derecha lo ponemos aun ladou a otro
 		if (izda){
-			resultado = "x" + std::to_string((int)pila.top().getValor()) + " " + resultado;
+			resultado = "x" + std::to_string((int)pila.top().getValor()) +
+							" " + resultado;
 		} else {
-			resultado = resultado + " x" + std::to_string((int)pila.top().getValor());
+			resultado = resultado + " x" +
+							std::to_string((int)pila.top().getValor());
 		}
 
 		// eliminamos el nodo y devolvemos el resultado
