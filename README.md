@@ -8,7 +8,7 @@ Este repositorio contiene mi trabajo de fin de grado en Ingeniería Informática
 Puedes compilar la documentación ejecutando:
 
 ```sh
-make documentacion
+make doc
 ```
 
 Puedes consultarla abriendo `doc/html/index.html` en tu navegador.
