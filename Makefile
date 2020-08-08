@@ -19,8 +19,9 @@ N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
+.PHONY: all debug INICIO FIN doc clean-doc mrproper help
 
-all: clean INICIO $(OBJETIVO) documentacion FIN
+all: clean INICIO $(OBJETIVO) doc FIN
 
 debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
 debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
@@ -86,7 +87,7 @@ clean-doc:
 	-@rm $(DOC)/html -r 2> /dev/null || printf "\e[33mNo existe documentación generada en LaTeX\n"
 
 
-documentacion:
+doc:
 	@printf "\e[36mComenzando compilación de la documentación del proyecto\n\e[33m\n"
 	@doxygen doc/doxys/Doxyfile
 	@printf "\e[36mFinalizada compilación de la documentación. Puedes consultarla en doc/html/index.html\n"
