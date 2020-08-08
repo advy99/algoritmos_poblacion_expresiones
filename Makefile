@@ -19,9 +19,9 @@ N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
-.PHONY: all debug INICIO FIN doc clean-doc mrproper help
+.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help
 
-all: clean INICIO $(OBJETIVO) doc FIN
+all: clean crear-carpetas INICIO $(OBJETIVO) doc FIN
 
 debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
 debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
@@ -44,7 +44,7 @@ endef
 
 
 INICIO:
-	@printf "\e[36mComenzando compilación de $(BIN)/GA_P\n\n"
+	@printf "\n\e[36mComenzando compilación de $(BIN)/GA_P\n\n"
 	@printf "\e[94mCompilador: $(CXX)\n"
 	@printf "\e[94mFlags del compilador: $(FLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
@@ -76,21 +76,26 @@ FIN:
 
 clean:
 	@printf "\e[36mLimpiando el directorio $(OBJ)\n"
-	-@rm $(OBJ)/*.o 2> /dev/null || printf "\e[33mEl directorio $(OBJ) está vacio, nada que limpiar\n"
+	-@rm $(OBJ)/*.o 2> /dev/null || printf "\t\e[33mEl directorio $(OBJ) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpiando el directorio $(BIN)\n"
-	-@rm $(BIN)/* 2> /dev/null || printf "\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
+	-@rm $(BIN)/* 2> /dev/null || printf "\t\e[33mEl directorio $(BIN) está vacio, nada que limpiar\n"
 	@printf "\e[36mLimpieza completada\n"
 
 clean-doc:
 	@printf "\e[36mLimpiando la documentación\n"
-	-@rm $(DOC)/html -r 2> /dev/null || printf "\e[33mNo existe documentación generada en HTML\n"
-	-@rm $(DOC)/html -r 2> /dev/null || printf "\e[33mNo existe documentación generada en LaTeX\n"
+	-@rm $(DOC)/html -r 2> /dev/null || printf "\t\e[33mNo existe documentación generada en HTML\n"
+	-@rm $(DOC)/html -r 2> /dev/null || printf "\t\e[33mNo existe documentación generada en LaTeX\n"
 
 
 doc:
 	@printf "\e[36mComenzando compilación de la documentación del proyecto\n\e[33m\n"
 	@doxygen doc/doxys/Doxyfile
 	@printf "\e[36mFinalizada compilación de la documentación. Puedes consultarla en doc/html/index.html\n"
+
+crear-carpetas:
+	@printf "\e[36mCreando carpetas necesarias\e[0m\n"
+	-@mkdir $(OBJ) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(OBJ)\n"
+	-@mkdir $(BIN) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(BIN)\n"
 
 mrproper: clean clean-doc
 
