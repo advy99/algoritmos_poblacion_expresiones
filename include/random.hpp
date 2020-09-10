@@ -41,11 +41,16 @@ class Random{
 		  * @brief Constructor sin parámetros que iniciliza la semilla a un valor aleatorio
 		  */
 
-		Random();
+		Random() = delete;
 
 
 
 	public:
+
+		/**
+		 * @brief Inicializar la semilla
+		 *
+		 */
 
 		static void setSeed(const unsigned long seed);
 

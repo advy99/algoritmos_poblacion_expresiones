@@ -10,7 +10,7 @@ int main(int argc, char ** argv){
 	}
 
 
-	GA_P myGAP (argv[1], '@');
+	GA_P myGAP (argv[1], '@', 1);
 
 	for (int i = 0; i < GA_P::getNumDatos(); i++){
 		for (int j = 0; j < GA_P::getNumVariables(); j++){

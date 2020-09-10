@@ -8,6 +8,7 @@
 
 
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
+			  const unsigned long seed,
 			  const char delimitador, const unsigned prof){
 
 	// al principio suponemos que se ha leido mal
@@ -17,6 +18,10 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 	// lemos los datos del fichero de entrada
 	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
 	prof_expresiones = prof;
+
+
+	// inicializamos la semilla
+	Random::setSeed(seed);
 
 	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){

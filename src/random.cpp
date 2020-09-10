@@ -12,9 +12,6 @@ void Random::setSeed(const unsigned long semilla){
 }
 
 
-Random::Random(){
-
-}
 
 
 Random::~Random(){

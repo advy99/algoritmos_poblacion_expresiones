@@ -102,16 +102,23 @@ class GA_P{
 		  * @brief Constructor con dos parámetros
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
+		  *
 		  * @param char_comentario Caracter que marca que una linea es un
 		  * comentario y ha de ser ignorada.
+		  *
 		  * @param delimitador Caracter que marca como están separados los
 		  * datos de entrada. Por defecto ','
+		  *
 		  * @param prof Profundidad máxima de las expresiones con las que
 		  * aprenderá el algoritmo. Por defecto 10
+		  *
+		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * la semilla ya ha sido inicializada antes
 		  *
 		  */
 
 		GA_P(const std::string fichero_datos, const char char_comentario,
+			  const unsigned long seed = time(nullptr),
 			  const char delimitador = ',', const unsigned prof = 10);
 
 		/**
