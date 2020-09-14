@@ -1,6 +1,6 @@
-# Trabajo de Fin de Grado
+# GA_P
 
-Este repositorio contiene mi trabajo de fin de grado en Ingeniería Informática en la UGR.
+Este repositorio contiene mi implementación del algoritmo GA_P en C++, utilizado en mi Trabajo de Fin de Grado en Ingeniería Informática en la UGR.
 
 
 # Documentación
