@@ -1,6 +1,7 @@
 #include "poblacion.hpp"
 #include <cstring>
 
+namespace GA_P {
 
 Poblacion::Poblacion(){
 	// una poblacion vacia no tiene nada
@@ -129,3 +130,6 @@ unsigned Poblacion::seleccionIndividuo() const {
 
 
 }
+
+}
+

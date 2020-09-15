@@ -13,6 +13,8 @@
 #include <stack>
 #include <string>
 
+namespace GA_P {
+
 /**
   *  @brief Clase Expresion
   *
@@ -421,5 +423,6 @@ class Expresion{
 
 };
 
+}
 
 #endif

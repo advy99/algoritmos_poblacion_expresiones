@@ -1,5 +1,7 @@
 #include "nodo.hpp"
 
+namespace GA_P {
+
 Nodo::Nodo(){
 	tipo_nodo = TipoNodo::NUMERO;
 	valor = 0;
@@ -70,3 +72,6 @@ bool Nodo::operator==(const Nodo & otro) const {
 	return resultado;
 
 }
+
+}
+

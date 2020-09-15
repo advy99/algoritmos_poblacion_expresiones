@@ -13,6 +13,13 @@
 #include "expresion.hpp"
 #include "poblacion.hpp"
 
+/**
+ * @brief Clases, definiciones y estructuras necesarias para el algoritmo GA_P
+ *
+ */
+
+
+namespace GA_P {
 
 /**
   *  @brief Clase GA_P
@@ -225,5 +232,7 @@ class GA_P{
 		static unsigned getMaxProfExpresiones();
 
 };
+
+}
 
 #endif

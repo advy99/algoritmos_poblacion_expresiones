@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cstdlib>
 
+namespace GA_P{
 
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned long seed,
@@ -160,3 +161,5 @@ unsigned GA_P::getMaxProfExpresiones(){
 std::vector<std::vector<double>> GA_P::datos;
 std::vector<double> GA_P::output_datos;
 unsigned GA_P::prof_expresiones;
+
+}
