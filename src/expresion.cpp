@@ -3,6 +3,8 @@
 #include <cstring>
 #include <stack>
 
+namespace GA_P {
+
 Expresion::Expresion(const unsigned prof_max){
 
 	// establecemos la profundidad a la maxima dada
@@ -710,4 +712,6 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	os << exp_string << std::endl;
 
 	return os;
+}
+
 }

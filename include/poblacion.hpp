@@ -9,6 +9,9 @@
 
 #include "expresion.hpp"
 
+namespace GA_P {
+
+
 /**
   *  @brief Clase Poblacion
   *
@@ -207,5 +210,6 @@ class Poblacion{
 };
 
 
+}
 
 #endif

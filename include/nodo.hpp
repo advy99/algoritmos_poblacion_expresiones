@@ -9,6 +9,8 @@
 
 #include "random.hpp"
 
+namespace GA_P {
+
 // aqui faltan tipos, tengo que revisar el paper + los que use
 enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 
@@ -138,5 +140,7 @@ class Nodo {
 };
 
 typedef Nodo * Arbol;
+
+}
 
 #endif

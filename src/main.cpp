@@ -10,25 +10,25 @@ int main(int argc, char ** argv){
 	}
 
 
-	GA_P myGAP (argv[1], '@', 1);
+	GA_P::GA_P myGAP (argv[1], '@', 1);
 
-	for (int i = 0; i < GA_P::getNumDatos(); i++){
-		for (int j = 0; j < GA_P::getNumVariables(); j++){
-			std::cout << GA_P::getDatos()[i][j] << " ";
+	for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
+		for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
+			std::cout << GA_P::GA_P::getDatos()[i][j] << " ";
 		}
-		std::cout << "\t\t" << GA_P::getOutputDatos()[i];
+		std::cout << "\t\t" << GA_P::GA_P::getOutputDatos()[i];
 
 		std::cout << std::endl;
 	}
 
-	Expresion miExpresion;
+	GA_P::Expresion miExpresion;
 
 	miExpresion.generarExpresionAleatoria(10, 0.1, 2);
 
-	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::getDatosLectura(), GA_P::getOutputDatosLectura());
+	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::GA_P::getDatosLectura(), GA_P::GA_P::getOutputDatosLectura());
 
 
-	Expresion miExpresion2;
+	GA_P::Expresion miExpresion2;
 
 	miExpresion2.generarExpresionAleatoria(10, 0.4, 2);
 
