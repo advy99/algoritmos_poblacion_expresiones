@@ -50,11 +50,11 @@ class Poblacion{
 		  */
 
 		/**
-		  * @brief Puntero donde almacenaremos los individuos de la poblacion.
+		  * @brief Expresiones que conforman los individuos de la poblacion.
 		  *
 		  */
 
-		Expresion * poblacion;
+		Expresion * expresiones;
 
 
 		/**

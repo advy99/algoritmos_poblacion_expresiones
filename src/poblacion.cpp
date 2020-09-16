@@ -5,7 +5,7 @@ namespace GA_P {
 
 Poblacion::Poblacion(){
 	// una poblacion vacia no tiene nada
-	poblacion       = nullptr;
+	expresiones     = nullptr;
 	tam_poblacion   = 0;
 	tam_reservado   = 0;
 	mejor_individuo = -1;
@@ -16,7 +16,7 @@ Poblacion::Poblacion(const unsigned tam, const unsigned lon_expre,
 							const double prob_var, const unsigned num_vars,
 							const unsigned prof_expre){
 	// liberamos memoria para inicializar a vacio
-	poblacion = nullptr;
+	expresiones = nullptr;
 
 	liberarMemoria();
 
@@ -25,7 +25,7 @@ Poblacion::Poblacion(const unsigned tam, const unsigned lon_expre,
 	tam_poblacion = tam;
 	// inicializamos todas las expresiones de la poblacion
 	for (unsigned i = 0; i < tam; i++){
-		poblacion[i] = Expresion(lon_expre, prob_var, num_vars, prof_expre);
+		expresiones[i] = Expresion(lon_expre, prob_var, num_vars, prof_expre);
 	}
 }
 
@@ -35,20 +35,20 @@ Poblacion::~Poblacion(){
 
 void Poblacion::liberarMemoria(){
 	// si tiene asignada una direccion de memoria, liberamos la poblacion
-	if (poblacion != nullptr){
-		delete [] poblacion;
+	if (expresiones != nullptr){
+		delete [] expresiones;
 	}
 
 	// establecemos los valores a nulos
 	tam_reservado   = 0;
 	tam_poblacion   = 0;
 	mejor_individuo = -1;
-	poblacion       = nullptr;
+	expresiones     = nullptr;
 
 }
 
 void Poblacion::reservarMemoria(const unsigned tam){
-	poblacion     = new Expresion[tam];
+	expresiones   = new Expresion[tam];
 	tam_reservado = tam;
 }
 
@@ -61,7 +61,7 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 	// no podemos usar memcpy ya que estos elementos si que
 	// utilizan memoria dinamica de forma interna
 	for (unsigned i = 0; i < tam_poblacion; i++){
-		poblacion[i] = otra.poblacion[i];
+		expresiones[i] = otra.expresiones[i];
 
 	}
 }
@@ -74,12 +74,12 @@ void Poblacion::evaluarPoblacion(const std::vector<std::vector<double> > & datos
 	double valor_evaluada;
 
 	// evaluamos el mejor hasta ahora
-	valor_mejor = poblacion[0].evaluarExpresion(datos, etiquetas);
+	valor_mejor = expresiones[0].evaluarExpresion(datos, etiquetas);
 
 	// evaluamos el resto de individuos
 	for ( unsigned i = 1; i < tam_poblacion; i++){
-		if (!poblacion[i].estaEvaluada()){
-			valor_evaluada = poblacion[i].evaluarExpresion(datos, etiquetas);
+		if (!expresiones[i].estaEvaluada()){
+			valor_evaluada = expresiones[i].evaluarExpresion(datos, etiquetas);
 
 			if (valor_evaluada < valor_mejor){
 				mejor_individuo = i;
@@ -94,7 +94,7 @@ double Poblacion::sumaFitness() const {
 	double suma = 0.0;
 
 	for (unsigned i = 0; i < tam_poblacion; i++){
-		suma += poblacion[i].getFitness();
+		suma += expresiones[i].getFitness();
 	}
 
 	return suma;
@@ -106,11 +106,11 @@ unsigned Poblacion::seleccionIndividuo() const {
 
 	double fitnessPoblacion = sumaFitness();
 
-	probabilidad[0] = poblacion[0].getFitness() / fitnessPoblacion;
+	probabilidad[0] = expresiones[0].getFitness() / fitnessPoblacion;
 
 	for (unsigned i = 1; i < tam_poblacion; i++){
 		probabilidad[i] = probabilidad[i-1] +
-								(poblacion[i].getFitness() / fitnessPoblacion);
+								(expresiones[i].getFitness() / fitnessPoblacion);
 	}
 	// evitamos errores de redondeo
 	probabilidad[tam_poblacion - 1] = 1.0;
