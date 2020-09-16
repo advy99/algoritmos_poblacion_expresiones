@@ -13,7 +13,7 @@ FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/GA_P
-OBJETOS = $(LIB)/libGA_P.a $(OBJ)/random.o $(OBJ)/main.o
+OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
 X := 0
@@ -46,7 +46,7 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o $(OBJ)/random.o -o $@ -L$(LIB) -lGA_P
+	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 $(OBJ)/random.o: $(SRC)/random.cpp
@@ -67,7 +67,7 @@ $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	$(call compilar_objeto,$^,$@)
 
-$(LIB)/libGA_P.a: $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
+$(LIB)/libGA_P.a: $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
 	@ar rs $@ $^
 
 
