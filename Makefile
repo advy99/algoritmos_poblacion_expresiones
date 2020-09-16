@@ -13,9 +13,10 @@ FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 
 OBJETIVO = $(BIN)/GA_P
-OBJETOS = $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/main.o
+OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
+OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
 
-N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -33,12 +34,6 @@ define compilar_objeto
 	@$(CXX) -c $(FLAGS) $(1) -I$(INC) -o $(2)
 endef
 
-define compilar_binario
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(2) a partir de $(1)\n"
-	@$(CXX) $(1) -o $(2)
-	@printf "\n\e[36mCompilación de $(BIN)/GA_P finalizada con exito.\n\n"
-endef
 
 
 
@@ -50,7 +45,10 @@ INICIO:
 	@printf "\e[94m$(MENSAJE)\n\n"
 
 $(OBJETIVO): $(OBJETOS)
-	$(call compilar_binario,$^,$@)
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
+	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P
+	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 $(OBJ)/random.o: $(SRC)/random.cpp
 	$(call compilar_objeto,$^,$@)
@@ -69,6 +67,12 @@ $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
 
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	$(call compilar_objeto,$^,$@)
+
+$(LIB)/libGA_P.a: $(OBJETOS_LIB_GAP)
+	$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
+	@ar rs $@ $^
+
 
 
 FIN:
