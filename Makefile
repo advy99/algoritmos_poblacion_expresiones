@@ -14,8 +14,9 @@ MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y
 
 OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
+OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
 
-N := $(shell echo $(OBJETIVO) $(OBJETOS) | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -67,7 +68,7 @@ $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	$(call compilar_objeto,$^,$@)
 
-$(LIB)/libGA_P.a: $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
+$(LIB)/libGA_P.a: $(OBJETOS_LIB_GAP)
 	$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
 	@ar rs $@ $^
