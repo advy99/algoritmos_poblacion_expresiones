@@ -68,6 +68,8 @@ $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(LIB)/libGA_P.a: $(OBJ)/random.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
+	$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
 	@ar rs $@ $^
 
 
