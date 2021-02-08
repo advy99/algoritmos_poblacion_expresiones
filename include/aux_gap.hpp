@@ -9,6 +9,19 @@
 
 namespace GA_P {
 
+/**
+  * @brief Comparar si dos números reales son iguales teniendo en cuenta la falta
+  *   de precisión al representar números reales en C++
+  *
+  * @param a Número a comparar.
+  * @param b Número a comparar.
+  * @param epsilon Precisión con la que comparar. Por defecto 0.005
+  *
+  * @return Booleano: Verdadero si los dos reales son iguales con precisión epsilon
+  * falso en otro caso.
+  *
+  */
+
 bool comparar_reales(const double a, const double b, const double epsilon = 0.005);
 
 }
