@@ -100,6 +100,8 @@ crear-carpetas:
 	@printf "\e[36mCreando carpetas necesarias\e[0m\n"
 	-@mkdir $(OBJ) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(OBJ)\n"
 	-@mkdir $(BIN) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(BIN)\n"
+	-@mkdir $(LIB) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(LIB)\n"
+
 
 mrproper: clean clean-doc
 
