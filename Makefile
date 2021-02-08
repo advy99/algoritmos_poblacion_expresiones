@@ -14,7 +14,7 @@ MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y
 
 OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
-OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o
+OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) | wc -w )
 X := 0
@@ -68,6 +68,10 @@ $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp
 	$(call compilar_objeto,$^,$@)
 
+$(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp
+	$(call compilar_objeto,$^,$@)
+
+
 $(LIB)/libGA_P.a: $(OBJETOS_LIB_GAP)
 	$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
@@ -100,6 +104,8 @@ crear-carpetas:
 	@printf "\e[36mCreando carpetas necesarias\e[0m\n"
 	-@mkdir $(OBJ) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(OBJ)\n"
 	-@mkdir $(BIN) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(BIN)\n"
+	-@mkdir $(LIB) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(LIB)\n"
+
 
 mrproper: clean clean-doc
 

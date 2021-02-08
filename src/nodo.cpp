@@ -1,4 +1,5 @@
 #include "nodo.hpp"
+#include "aux_gap.hpp"
 
 namespace GA_P {
 
@@ -10,11 +11,10 @@ Nodo::Nodo(){
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo == TipoNodo::NUMERO){
-		valor = Random::getInt(num_numeros);
+		valor = Random::getFloat(num_numeros);
 	} else {
-		// TO-DO
 		// si no, escogemos un aleatorio entre las posibles variables
-		valor = Random::getInt(num_variables);
+		num_variable = Random::getInt(num_variables);
 	}
 }
 
@@ -47,31 +47,33 @@ void Nodo::setTipoNodo(const TipoNodo tipo){
 	tipo_nodo = tipo;
 }
 
-void Nodo::setValor(const int val){
+void Nodo::setValor(const double val){
 	valor = val;
 }
 
+void Nodo::setNumVariable(const int n_var) {
+	num_variable = n_var;
+}
+
 bool Nodo::operator==(const Nodo & otro) const {
-	bool resultado = false;
 
-	if (this->tipo_nodo == otro.tipo_nodo){
-		if (this->tipo_nodo == TipoNodo::NUMERO ||
-			 this->tipo_nodo == TipoNodo::VARIABLE){
-			// si el tipo es el mismo y es un numero o variable,
-			// el valor ha de ser el mismo
-			resultado = this->valor == otro.valor;
-		} else {
-			// si el tipo del nodo es el mismo y es un operador, nos da
-			// igual el valor, es el mismo nodo
-			resultado = true;
-		}
+	// si no son el mismo tipo, directamente es false
+	bool resultado = this->tipo_nodo == otro.tipo_nodo;
+
+	// si es el mismo tipo y es NUMERO comprobamos el valor
+	if ( resultado && this->tipo_nodo == TipoNodo::NUMERO ) {
+		resultado = comparar_reales(this->valor, otro.valor);
+
+	// si es el mismo tipo y es VARIABLE comprobamos que el numero de variable
+	// sea el mismo
+	} else if ( resultado && this->tipo_nodo == TipoNodo::VARIABLE) {
+		resultado = this->num_variable == otro.num_variable;
 	}
-	// si no es el mismo tipo de nodo, no es el mismo nodo
-
+	// si el tipo del nodo es el mismo y es un operador, nos da
+	// igual el valor, es el mismo nodo
 
 	return resultado;
 
 }
 
 }
-
