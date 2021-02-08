@@ -1,4 +1,5 @@
 #include "nodo.hpp"
+#include "aux_gap.hpp"
 
 namespace GA_P {
 
@@ -61,7 +62,7 @@ bool Nodo::operator==(const Nodo & otro) const {
 
 	// si es el mismo tipo y es NUMERO comprobamos el valor
 	if ( resultado && this->tipo_nodo == TipoNodo::NUMERO ) {
-		resultado = this->valor == otro.valor;
+		resultado = comparar_reales(this->valor, otro.valor);
 
 	// si es el mismo tipo y es VARIABLE comprobamos que el numero de variable
 	// sea el mismo
