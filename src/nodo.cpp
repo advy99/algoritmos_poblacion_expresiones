@@ -10,11 +10,10 @@ Nodo::Nodo(){
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo == TipoNodo::NUMERO){
-		valor = Random::getInt(num_numeros);
+		valor = Random::getFloat(num_numeros);
 	} else {
-		// TO-DO
 		// si no, escogemos un aleatorio entre las posibles variables
-		valor = Random::getInt(num_variables);
+		num_variable = Random::getInt(num_variables);
 	}
 }
 
@@ -47,8 +46,12 @@ void Nodo::setTipoNodo(const TipoNodo tipo){
 	tipo_nodo = tipo;
 }
 
-void Nodo::setValor(const int val){
+void Nodo::setValor(const double val){
 	valor = val;
+}
+
+void Nodo::setNumVariable(const int n_var) {
+	num_variable = n_var;
 }
 
 bool Nodo::operator==(const Nodo & otro) const {
@@ -74,4 +77,3 @@ bool Nodo::operator==(const Nodo & otro) const {
 }
 
 }
-
