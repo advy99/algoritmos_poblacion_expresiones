@@ -14,7 +14,7 @@ MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y
 
 OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
-OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o
+OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o
 
 N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) | wc -w )
 X := 0
