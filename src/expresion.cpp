@@ -2,6 +2,7 @@
 #include "expresion.hpp"
 #include <cstring>
 #include <stack>
+#include "aux_gap.hpp"
 
 namespace GA_P {
 
@@ -99,7 +100,7 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 void Expresion::inicializarVacia(){
 	// una expresion vacia no tiene arbol
 	arbol              = nullptr;
-	cromosoma          = 0;
+	cromosoma          = nullptr;
 	longitud_cromosoma = profundidad_maxima;
 	longitud_arbol     = 0;
 	longitud_reservada = 0;
@@ -145,8 +146,8 @@ void Expresion::reservarMemoriaArbol(const int tam){
 void Expresion::reservarMemoriaCromosoma(const int tam){
 	if (tam > 0){
 		cromosoma = new double[tam];
+		longitud_cromosoma = tam;
 	}
-	longitud_cromosoma = tam;
 }
 
 void Expresion::copiarDatos(const Expresion & otra){
@@ -173,7 +174,7 @@ Expresion::Expresion(const Expresion & otra){
 	// al inicializar vacia mantenemos la prfuncidad que queramos
 	profundidad_maxima = otra.profundidad_maxima;
 
-	// inicializamos vacia
+	// inicializamos vacia para poner punteros a nullptr
 	inicializarVacia();
 
 	// copiamos la otra con el operador = ya implementado
@@ -285,11 +286,6 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-bool son_iguales(const double & a, const double & b,
-					  const double epsilon = 0.005){
-    return (std::fabs(a - b) < epsilon);
-}
-
 double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor,
 										const std::vector<double> & dato){
 
@@ -335,7 +331,7 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor,
 			valor = valor_izda * valor_dcha;
 
 		} else if (operacion == TipoNodo::ENTRE){
-			if (!son_iguales(valor_dcha, 0.0) ){
+			if (!comparar_reales(valor_dcha, 0.0) ){
 				valor = valor_izda / valor_dcha;
 			} else {
 				valor = 1.0f;
