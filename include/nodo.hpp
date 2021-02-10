@@ -11,6 +11,10 @@
 
 namespace GA_P {
 
+/**
+  * @brief Posibles tipos de nodo que utilizaremos en el GA_P
+  */
+
 // aqui faltan tipos, tengo que revisar el paper + los que use
 enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 

@@ -2,6 +2,7 @@
 #include "expresion.hpp"
 #include <cstring>
 #include <stack>
+#include "aux_gap.hpp"
 
 namespace GA_P {
 
@@ -99,7 +100,7 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 void Expresion::inicializarVacia(){
 	// una expresion vacia no tiene arbol
 	arbol              = nullptr;
-	cromosoma          = 0;
+	cromosoma          = nullptr;
 	longitud_cromosoma = profundidad_maxima;
 	longitud_arbol     = 0;
 	longitud_reservada = 0;
@@ -145,8 +146,8 @@ void Expresion::reservarMemoriaArbol(const int tam){
 void Expresion::reservarMemoriaCromosoma(const int tam){
 	if (tam > 0){
 		cromosoma = new double[tam];
+		longitud_cromosoma = tam;
 	}
-	longitud_cromosoma = tam;
 }
 
 void Expresion::copiarDatos(const Expresion & otra){
@@ -173,7 +174,7 @@ Expresion::Expresion(const Expresion & otra){
 	// al inicializar vacia mantenemos la prfuncidad que queramos
 	profundidad_maxima = otra.profundidad_maxima;
 
-	// inicializamos vacia
+	// inicializamos vacia para poner punteros a nullptr
 	inicializarVacia();
 
 	// copiamos la otra con el operador = ya implementado
@@ -285,33 +286,28 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-bool son_iguales(const double & a, const double & b,
-					  const double epsilon = 0.005){
-    return (std::fabs(a - b) < epsilon);
-}
-
-double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor,
+double Expresion::evaluarDato(std::stack<Nodo> & pila,
 										const std::vector<double> & dato){
+
+	double resultado = 0.0;
 
 	// si la pila esta vacia, devolvemos el valor
 	if (pila.empty()){
-		return valor;
+		resultado = 0.0;
 
 	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
 		// posicion del cromosoma correspondiente
-		valor = cromosoma[pila.top().getValor()];
+		resultado = cromosoma[pila.top().getValor()];
 
 		// eliminamos de la pila, y lo devolvemos
 		pila.pop();
-		return valor;
 
 	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
 		// si es una variable, la consultamos en el dato dado, eliminamos el nodo
 		// de la pila y devolvemos el valor del dato
-		valor = dato[pila.top().getValor()];
+		resultado = dato[pila.top().getValor()];
 		pila.pop();
-		return valor;
 
 	} else {
 		// si es un operador, guardamos la operacion
@@ -321,30 +317,30 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila, double & valor,
 		pila.pop();
 
 		// consultamos el valor de la rama izquierda y la derecha
-		double valor_izda = evaluarDato(pila, valor, dato);
-		double valor_dcha = evaluarDato(pila, valor, dato);
+		double valor_izda = evaluarDato(pila, dato);
+		double valor_dcha = evaluarDato(pila, dato);
 
 		// aplicamos el operador con ambas ramas y devolvemos el resultado
 		if (operacion == TipoNodo::MAS){
-			valor = valor_izda + valor_dcha;
+			resultado = valor_izda + valor_dcha;
 
 		} else if (operacion == TipoNodo::MENOS){
-			valor = valor_izda - valor_dcha;
+			resultado = valor_izda - valor_dcha;
 
 		} else if (operacion == TipoNodo::POR){
-			valor = valor_izda * valor_dcha;
+			resultado = valor_izda * valor_dcha;
 
 		} else if (operacion == TipoNodo::ENTRE){
-			if (!son_iguales(valor_dcha, 0.0) ){
-				valor = valor_izda / valor_dcha;
+			if (!comparar_reales(valor_dcha, 0.0) ){
+				resultado = valor_izda / valor_dcha;
 			} else {
-				valor = 1.0f;
+				resultado = 1.0f;
 			}
 		}
 
-		return valor;
-
 	}
+
+	return resultado;
 
 }
 
@@ -373,11 +369,12 @@ double Expresion::evaluarExpresion(const std::vector<std::vector<double>> &datos
 
 		// para cada dato
 		for (unsigned i = 0; i < datos.size(); i++){
+
 			// reseteamos la pila con la expresion
 			pila = pila_original;
 
 			// la evaluamos para el dato i
-			evaluarDato(pila, valor, datos[i]);
+			valor = evaluarDato(pila, datos[i]);
 
 			// lo sumamos al cuadrado
 			suma += std::pow( etiquetas[i] - valor , 2.0);

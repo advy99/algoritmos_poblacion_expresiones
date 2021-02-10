@@ -117,6 +117,8 @@ class Expresion{
 		  *
 		  * @param otra Expresión de donde copiar los datos.
 		  *
+		  * @pre La expresión está vacia: arbol == nullptr && cromosoma == nullptr
+		  *
 		  */
 
 		void copiarDatos(const Expresion & otra);
@@ -127,6 +129,8 @@ class Expresion{
 		  *
 		  * @param tam Tamaño a reservar para la expresión.
 		  *
+		  * @pre arbol == nullptr
+		  *
 		  */
 
 		void reservarMemoriaArbol(const int tam);
@@ -136,6 +140,8 @@ class Expresion{
 		  * @brief Reservar memoria para un cromosoma de tamaño tam
 		  *
 		  * @param tam Tamaño a reservar para el cromosoma.
+		  *
+		  * @pre cromosoma == nullptr
 		  *
 		  */
 
@@ -309,7 +315,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(std::stack<Nodo> & pila, double & val,
+		double evaluarDato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato);
 
 		/**
