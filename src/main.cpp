@@ -23,7 +23,7 @@ int main(int argc, char ** argv){
 
 	GA_P::Expresion miExpresion;
 
-	miExpresion.generarExpresionAleatoria(10, 0.1, 2);
+	miExpresion.generarExpresionAleatoria(20, 1, 20);
 
 	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::GA_P::getDatosLectura(), GA_P::GA_P::getOutputDatosLectura());
 

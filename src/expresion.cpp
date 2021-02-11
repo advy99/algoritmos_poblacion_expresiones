@@ -633,11 +633,11 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila,
 		// de nuevo, dependiendo de si miramos el nodo de la izquierda o el
 		// de la derecha lo ponemos aun ladou a otro
 		if (izda){
-			resultado = "x" + std::to_string((int)pila.top().getValor()) +
+			resultado = "x" + std::to_string(pila.top().getValor()) +
 							" " + resultado;
 		} else {
 			resultado = resultado + " x" +
-							std::to_string((int)pila.top().getValor());
+							std::to_string(pila.top().getValor());
 		}
 
 		// eliminamos el nodo y devolvemos el resultado

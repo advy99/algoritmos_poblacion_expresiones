@@ -54,8 +54,7 @@ class Nodo {
 		  * @brief Valor asociado al nodo
 		  */
 
-		double valor;
-		int num_variable;
+		int valor;
 
 	public:
 
@@ -133,16 +132,6 @@ class Nodo {
 
 		void setValor(const double val);
 
-		/**
-		 * @brief Establecer numero de la variable del Nodo.
-		 *
-		 * @pre tipo_nodo == TipoNodo::VARIABLE
-		 *
-		 * @param n_var Valor a establecer para el numero de variable en el Nodo.
-		 *
-		 */
-
-		void setNumVariable(const int n_var);
 
 		/**
 		 * @brief Operador de comparación con otro Nodo
