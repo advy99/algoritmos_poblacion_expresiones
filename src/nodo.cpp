@@ -39,9 +39,14 @@ TipoNodo Nodo::getTipoNodo() const {
 	return tipo_nodo;
 }
 
-int Nodo::getValor() const {
+double Nodo::getValor() const {
 	return valor;
 }
+
+int Nodo::getNumVariable() const {
+	return num_variable;
+}
+
 
 void Nodo::setTipoNodo(const TipoNodo tipo){
 	tipo_nodo = tipo;

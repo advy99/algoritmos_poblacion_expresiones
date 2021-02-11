@@ -102,12 +102,22 @@ class Nodo {
 		/**
 		 * @brief Obtener el valor asociado al Nodo.
 		 *
-		 * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
+		 * @pre tipo_nodo == TipoNodo::NUMERO
 		 *
 		 * @return Valor asociado al nodo
 		 */
 
-		int getValor() const;
+		double getValor() const;
+
+		/**
+		 * @brief Obtener el número de variable asociado al Nodo.
+		 *
+		 * @pre tipo_nodo == TipoNodo::VARIABLE
+		 *
+		 * @return Valor asociado al nodo
+		 */
+
+		int getNumVariable() const;
 
 
 		/**
