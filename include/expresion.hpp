@@ -315,7 +315,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(std::stack<Nodo> & pila, double & val,
+		double evaluarDato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato);
 
 		/**
