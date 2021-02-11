@@ -11,10 +11,10 @@ Nodo::Nodo(){
 void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo == TipoNodo::NUMERO){
-		valor = Random::getFloat(num_numeros);
+		valor = Random::getInt(num_numeros);
 	} else {
 		// si no, escogemos un aleatorio entre las posibles variables
-		num_variable = Random::getInt(num_variables);
+		valor = Random::getInt(num_variables);
 	}
 }
 
@@ -39,13 +39,10 @@ TipoNodo Nodo::getTipoNodo() const {
 	return tipo_nodo;
 }
 
-double Nodo::getValor() const {
+int Nodo::getValor() const {
 	return valor;
 }
 
-int Nodo::getNumVariable() const {
-	return num_variable;
-}
 
 
 void Nodo::setTipoNodo(const TipoNodo tipo){
@@ -56,9 +53,6 @@ void Nodo::setValor(const double val){
 	valor = val;
 }
 
-void Nodo::setNumVariable(const int n_var) {
-	num_variable = n_var;
-}
 
 bool Nodo::operator==(const Nodo & otro) const {
 
@@ -66,13 +60,9 @@ bool Nodo::operator==(const Nodo & otro) const {
 	bool resultado = this->tipo_nodo == otro.tipo_nodo;
 
 	// si es el mismo tipo y es NUMERO comprobamos el valor
-	if ( resultado && this->tipo_nodo == TipoNodo::NUMERO ) {
-		resultado = comparar_reales(this->valor, otro.valor);
-
-	// si es el mismo tipo y es VARIABLE comprobamos que el numero de variable
-	// sea el mismo
-	} else if ( resultado && this->tipo_nodo == TipoNodo::VARIABLE) {
-		resultado = this->num_variable == otro.num_variable;
+	if ( resultado && (this->tipo_nodo == TipoNodo::NUMERO ||
+	 	  this->tipo_nodo == TipoNodo::VARIABLE) ) {
+		resultado = this->valor == otro.valor;
 	}
 	// si el tipo del nodo es el mismo y es un operador, nos da
 	// igual el valor, es el mismo nodo
