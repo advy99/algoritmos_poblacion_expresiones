@@ -12,11 +12,11 @@ int main(int argc, char ** argv){
 
 	GA_P::GA_P myGAP (argv[1], '@', 1);
 
-	for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
-		for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
-			std::cout << GA_P::GA_P::getDatos()[i][j] << " ";
+	for (int i = 0; i < myGAP.getNumDatos(); i++){
+		for (int j = 0; j < myGAP.getNumVariables(); j++){
+			std::cout << myGAP.getDatos()[i][j] << " ";
 		}
-		std::cout << "\t\t" << GA_P::GA_P::getOutputDatos()[i];
+		std::cout << "\t\t" << myGAP.getOutputDatos()[i];
 
 		std::cout << std::endl;
 	}
@@ -25,7 +25,7 @@ int main(int argc, char ** argv){
 
 	miExpresion.generarExpresionAleatoria(20, 1, 20);
 
-	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::GA_P::getDatosLectura(), GA_P::GA_P::getOutputDatosLectura());
+	std::cout << std::endl << miExpresion.evaluarExpresion(myGAP.getDatosLectura(), myGAP.getOutputDatosLectura());
 
 
 	GA_P::Expresion miExpresion2;
