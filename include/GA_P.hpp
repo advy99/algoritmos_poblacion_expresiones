@@ -66,19 +66,19 @@ class GA_P{
 		  * @brief Datos con los que ajustar el algoritmo
 		  *
 		  */
-		static std::vector<std::vector<double> > datos;
+		std::vector<std::vector<double> > datos;
 
 		/**
 		  * @brief Etiquetas para comprobar el error de la estimación.
 		  */
-		static std::vector<double> output_datos;
+		std::vector<double> output_datos;
 
 		/**
 		  * @brief Profundidad maxima de las expresiones utilizadas
 		  *
 		  */
 
-		static unsigned prof_expresiones;
+		unsigned prof_expresiones;
 
 		/**
 		  * @brief Leer datos de entrada para el algoritmo
@@ -141,7 +141,7 @@ class GA_P{
 		  * @return Numero de variables del problema
 		  */
 
-		static int getNumVariables();
+		int getNumVariables();
 
 		/**
 		  * @brief Obtener el numero de datos
@@ -149,14 +149,14 @@ class GA_P{
 		  * @return Numero de datos
 		  */
 
-		static int getNumDatos();
+		int getNumDatos();
 
 		/**
 		  * @brief Obtener los datos
 		  *
 		  * @return Datos.
 		  */
-		static std::vector<std::vector<double> > getDatos();
+		std::vector<std::vector<double> > getDatos();
 
 		/**
 		 * @brief Obtener los datos para solo lectura.
@@ -165,7 +165,7 @@ class GA_P{
 		 *
 		 */
 
-		static const std::vector<std::vector<double>> & getDatosLectura();
+		const std::vector<std::vector<double>> & getDatosLectura();
 
 		/**
 		  * @brief Obtener el dato de la fila indice
@@ -176,7 +176,7 @@ class GA_P{
 		  *
 		  * @return Dato de la columna indice.
 		  */
-		static std::vector<double > getDato(const unsigned indice);
+		std::vector<double > getDato(const unsigned indice);
 
 
 		/**
@@ -188,7 +188,7 @@ class GA_P{
 		 *
 		 */
 
-		static const std::vector<double > & getDatoLectura(const unsigned indice);
+		const std::vector<double > & getDatoLectura(const unsigned indice);
 
 
 
@@ -198,7 +198,7 @@ class GA_P{
 		  * @return Etiquetas asociadas a los datos.
 		  */
 
-		static std::vector<double> getOutputDatos();
+		std::vector<double> getOutputDatos();
 
 
 		/**
@@ -208,7 +208,7 @@ class GA_P{
 		 *
 		 */
 
-		static const std::vector<double> & getOutputDatosLectura();
+		const std::vector<double> & getOutputDatosLectura();
 
 
 		/**
@@ -221,7 +221,7 @@ class GA_P{
 		  * @return Etiqueta asociada al dato indice.
 		  */
 
-		static double getOutputDato(const unsigned indice);
+		double getOutputDato(const unsigned indice);
 
 		/**
 		 * @brief Obtener la profundidad máxima de las expresiones
@@ -229,7 +229,7 @@ class GA_P{
 		 * @return Profundidad máxima de las expresiones
 		 */
 
-		static unsigned getMaxProfExpresiones();
+		unsigned getMaxProfExpresiones();
 
 };
 
