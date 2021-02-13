@@ -1,16 +1,26 @@
 #include <iostream>
 #include "GA_P.hpp"
+#include <ctime>
 #include "random.hpp"
 
 int main(int argc, char ** argv){
 
-	if ( argc != 2 ) {
-		std::cerr << "Error en el número de parámetros: " << std::endl;
+	if ( argc < 2 || argc > 3 ) {
+		std::cerr << "Error en el número de parámetros\n"
+					 << "\t Uso: " << argv[0] << " <fichero_datos> [semilla]"
+					 << std::endl;
 		exit(-1);
 	}
 
+	int semilla;
 
-	GA_P::GA_P myGAP (argv[1], '@', 23);
+	if ( argc == 3 ){
+		semilla = atoi(argv[2]);
+	} else {
+		semilla = std::time(nullptr);
+	}
+
+	GA_P::GA_P myGAP (argv[1], '@', semilla);
 
 	// for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
 	// 	for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
