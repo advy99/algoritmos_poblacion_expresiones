@@ -344,6 +344,24 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila,
 
 }
 
+double Expresion::evaluarDato(const std::vector<double> & dato){
+	double resultado;
+
+	// pila donde almacenaremos la expresion
+	std::stack<Nodo> pila;
+
+	//volcamos la expresion en la pila
+	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+		pila.push(arbol[i]);
+	}
+
+	// la evaluamos para el dato i
+	resultado = evaluarDato(pila, dato);
+
+	return resultado;
+
+}
+
 
 double Expresion::evaluarExpresion(const std::vector<std::vector<double>> &datos,
 											  const std::vector<double> & etiquetas){
@@ -356,25 +374,12 @@ double Expresion::evaluarExpresion(const std::vector<std::vector<double>> &datos
 
 	// si no esta evaluada y el arbol contiene una expresion
 	if (!evaluada && arbol != nullptr){
-		// implementar error cuadratico
-
-		// pilas donde almacenaremos la expresion
-		std::stack<Nodo> pila_original;
-		std::stack<Nodo> pila;
-
-		//volcamos la expresion en la pila
-		for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
-			pila_original.push(arbol[i]);
-		}
 
 		// para cada dato
 		for (unsigned i = 0; i < datos.size(); i++){
 
-			// reseteamos la pila con la expresion
-			pila = pila_original;
-
 			// la evaluamos para el dato i
-			valor = evaluarDato(pila, datos[i]);
+			valor = evaluarDato(datos[i]);
 
 			// lo sumamos al cuadrado
 			suma += std::pow( etiquetas[i] - valor , 2.0);
