@@ -10,20 +10,30 @@ int main(int argc, char ** argv){
 	}
 
 
-	GA_P::GA_P myGAP (argv[1], '@', 1);
+	GA_P::GA_P myGAP (argv[1], '@', 23);
 
-	for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
-		for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
-			std::cout << GA_P::GA_P::getDatos()[i][j] << " ";
-		}
-		std::cout << "\t\t" << GA_P::GA_P::getOutputDatos()[i];
-
-		std::cout << std::endl;
-	}
+	// for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
+	// 	for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
+	// 		std::cout << GA_P::GA_P::getDatos()[i][j] << " ";
+	// 	}
+	// 	std::cout << "\t\t" << GA_P::GA_P::getOutputDatos()[i];
+	//
+	// 	std::cout << std::endl;
+	// }
 
 	GA_P::Expresion miExpresion;
 
-	miExpresion.generarExpresionAleatoria(20, 1, 20);
+	miExpresion.generarExpresionAleatoria(13, 0.3, 3);
+
+	std::vector<double> dato_prueba;
+
+	dato_prueba.push_back(3.23);
+	dato_prueba.push_back(286.7835);
+	dato_prueba.push_back(32.019);
+
+	std::cout << "Expresión 1:" << miExpresion << std::endl;
+	std::cout << std::endl << "Evaluacion del dato: x0 = 3.23 \t x1 = 286.7835 \t x2 = 32.019: "
+				 << std::endl << miExpresion.evaluarDato(dato_prueba) << std::endl;
 
 	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::GA_P::getDatosLectura(), GA_P::GA_P::getOutputDatosLectura());
 
