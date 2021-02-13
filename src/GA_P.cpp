@@ -158,8 +158,5 @@ unsigned GA_P::getMaxProfExpresiones(){
 	return prof_expresiones;
 }
 
-std::vector<std::vector<double>> GA_P::datos;
-std::vector<double> GA_P::output_datos;
-unsigned GA_P::prof_expresiones;
 
 }

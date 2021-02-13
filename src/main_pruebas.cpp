@@ -1,16 +1,26 @@
 #include <iostream>
 #include "GA_P.hpp"
+#include <ctime>
 #include "random.hpp"
 
 int main(int argc, char ** argv){
 
-	if ( argc != 2 ) {
-		std::cerr << "Error en el número de parámetros: " << std::endl;
+	if ( argc < 2 || argc > 3 ) {
+		std::cerr << "Error en el número de parámetros\n"
+					 << "\t Uso: " << argv[0] << " <fichero_datos> [semilla]"
+					 << std::endl;
 		exit(-1);
 	}
 
+	int semilla;
 
-	GA_P::GA_P myGAP (argv[1], '@', 23);
+	if ( argc == 3 ){
+		semilla = atoi(argv[2]);
+	} else {
+		semilla = std::time(nullptr);
+	}
+
+	GA_P::GA_P myGAP (argv[1], '@', semilla);
 
 	// for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
 	// 	for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
@@ -35,7 +45,7 @@ int main(int argc, char ** argv){
 	std::cout << std::endl << "Evaluacion del dato: x0 = 3.23 \t x1 = 286.7835 \t x2 = 32.019: "
 				 << std::endl << miExpresion.evaluarDato(dato_prueba) << std::endl;
 
-	std::cout << std::endl << miExpresion.evaluarExpresion(GA_P::GA_P::getDatosLectura(), GA_P::GA_P::getOutputDatosLectura());
+	std::cout << std::endl << miExpresion.evaluarExpresion(myGAP.getDatosLectura(), myGAP.getOutputDatosLectura());
 
 
 	GA_P::Expresion miExpresion2;
