@@ -200,6 +200,16 @@ class Expresion{
 
 		void copiarCromosoma(const double * otro_cromosoma);
 
+		/**
+		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
+		  * la expresión.
+		  *
+		  * @return Valor estimado de la regresión para ese dato.
+		  */
+
+		double evaluarDato(std::stack<Nodo> & pila,
+								 const std::vector<double> & dato);
+
 	public:
 
 		/**
@@ -315,8 +325,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(std::stack<Nodo> & pila,
-								 const std::vector<double> & dato);
+		double evaluarDato(const std::vector<double> & dato);
 
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.
