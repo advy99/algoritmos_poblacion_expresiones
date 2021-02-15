@@ -20,7 +20,7 @@ int main(int argc, char ** argv){
 		semilla = std::time(nullptr);
 	}
 
-	GA_P::GA_P myGAP (argv[1], '@', semilla);
+	GA_P::GA_P myGAP (argv[1], '@', 50, 0.3, semilla);
 
 	// for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
 	// 	for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
@@ -45,7 +45,7 @@ int main(int argc, char ** argv){
 	std::cout << std::endl << "Evaluacion del dato: x0 = 3.23 \t x1 = 286.7835 \t x2 = 32.019: "
 				 << std::endl << miExpresion.evaluarDato(dato_prueba) << std::endl;
 
-	std::cout << std::endl << miExpresion.evaluarExpresion(myGAP.getDatosLectura(), myGAP.getOutputDatosLectura());
+	std::cout << std::endl << miExpresion.evaluarExpresion(myGAP.getDatos(), myGAP.getOutputDatos());
 
 
 	GA_P::Expresion miExpresion2;

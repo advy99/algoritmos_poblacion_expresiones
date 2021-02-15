@@ -113,6 +113,11 @@ class GA_P{
 		  * @param char_comentario Caracter que marca que una linea es un
 		  * comentario y ha de ser ignorada.
 		  *
+		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
+		  *
+		  * @param prob_var Probabilidad de que en una expresión de la población
+		  * un nodo hoja sea una variable.
+		  *
 		  * @param delimitador Caracter que marca como están separados los
 		  * datos de entrada. Por defecto ','
 		  *
@@ -125,6 +130,7 @@ class GA_P{
 		  */
 
 		GA_P(const std::string fichero_datos, const char char_comentario,
+			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed = time(nullptr),
 			  const char delimitador = ',', const unsigned prof = 10);
 
@@ -141,7 +147,7 @@ class GA_P{
 		  * @return Numero de variables del problema
 		  */
 
-		int getNumVariables();
+		int getNumVariables() const ;
 
 		/**
 		  * @brief Obtener el numero de datos
@@ -149,23 +155,15 @@ class GA_P{
 		  * @return Numero de datos
 		  */
 
-		int getNumDatos();
+		int getNumDatos() const;
 
 		/**
 		  * @brief Obtener los datos
 		  *
 		  * @return Datos.
 		  */
-		std::vector<std::vector<double> > getDatos();
+		std::vector<std::vector<double> > getDatos() const;
 
-		/**
-		 * @brief Obtener los datos para solo lectura.
-		 *
-		 * @return Referencia constante a los datos.
-		 *
-		 */
-
-		const std::vector<std::vector<double>> & getDatosLectura();
 
 		/**
 		  * @brief Obtener el dato de la fila indice
@@ -176,20 +174,7 @@ class GA_P{
 		  *
 		  * @return Dato de la columna indice.
 		  */
-		std::vector<double > getDato(const unsigned indice);
-
-
-		/**
-		 * @brief Obtener un dato para solo lectura.
-		 *
-		 * @param indice Indice del dato a leer
-		 *
-		 * @return Referencia constante al dato de la posicion indice.
-		 *
-		 */
-
-		const std::vector<double > & getDatoLectura(const unsigned indice);
-
+		std::vector<double > getDato(const unsigned indice) const;
 
 
 		/**
@@ -198,17 +183,7 @@ class GA_P{
 		  * @return Etiquetas asociadas a los datos.
 		  */
 
-		std::vector<double> getOutputDatos();
-
-
-		/**
-		 * @brief Obtener las etiquetas para solo lectura.
-		 *
-		 * @return Referencia constante a las etiquetas.
-		 *
-		 */
-
-		const std::vector<double> & getOutputDatosLectura();
+		std::vector<double> getOutputDatos() const;
 
 
 		/**
@@ -221,7 +196,7 @@ class GA_P{
 		  * @return Etiqueta asociada al dato indice.
 		  */
 
-		double getOutputDato(const unsigned indice);
+		double getOutputDato(const unsigned indice) const ;
 
 		/**
 		 * @brief Obtener la profundidad máxima de las expresiones
@@ -229,7 +204,7 @@ class GA_P{
 		 * @return Profundidad máxima de las expresiones
 		 */
 
-		unsigned getMaxProfExpresiones();
+		unsigned getMaxProfExpresiones() const;
 
 };
 
