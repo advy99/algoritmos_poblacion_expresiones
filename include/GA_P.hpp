@@ -113,6 +113,11 @@ class GA_P{
 		  * @param char_comentario Caracter que marca que una linea es un
 		  * comentario y ha de ser ignorada.
 		  *
+		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
+		  *
+		  * @param prob_var Probabilidad de que en una expresión de la población
+		  * un nodo hoja sea una variable.
+		  *
 		  * @param delimitador Caracter que marca como están separados los
 		  * datos de entrada. Por defecto ','
 		  *
@@ -125,6 +130,7 @@ class GA_P{
 		  */
 
 		GA_P(const std::string fichero_datos, const char char_comentario,
+			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed = time(nullptr),
 			  const char delimitador = ',', const unsigned prof = 10);
 

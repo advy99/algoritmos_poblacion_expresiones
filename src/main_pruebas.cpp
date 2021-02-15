@@ -20,7 +20,7 @@ int main(int argc, char ** argv){
 		semilla = std::time(nullptr);
 	}
 
-	GA_P::GA_P myGAP (argv[1], '@', semilla);
+	GA_P::GA_P myGAP (argv[1], '@', semilla, 50, 0.3);
 
 	// for (int i = 0; i < GA_P::GA_P::getNumDatos(); i++){
 	// 	for (int j = 0; j < GA_P::GA_P::getNumVariables(); j++){
