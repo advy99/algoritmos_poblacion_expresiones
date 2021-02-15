@@ -117,44 +117,33 @@ bool GA_P::leerDatos(const std::string fichero_datos,
 
 
 
-int GA_P::getNumDatos() {
+int GA_P::getNumDatos() const {
 	return datos.size();
 }
 
-int GA_P::getNumVariables() {
+int GA_P::getNumVariables() const {
 	return datos[0].size();
 }
 
-std::vector<std::vector<double> > GA_P::getDatos(){
+std::vector<std::vector<double> > GA_P::getDatos() const {
 	return datos;
 }
 
-std::vector<double> GA_P::getDato(const unsigned i){
+std::vector<double> GA_P::getDato(const unsigned i) const {
 	return datos[i];
 }
 
-std::vector<double> GA_P::getOutputDatos(){
+std::vector<double> GA_P::getOutputDatos() const {
 	return output_datos;
 }
 
 
-const std::vector<std::vector<double> > & GA_P::getDatosLectura(){
-	return datos;
-}
 
-const std::vector<double> & GA_P::getDatoLectura(const unsigned i){
-	return datos[i];
-}
-
-const std::vector<double> & GA_P::getOutputDatosLectura(){
-	return output_datos;
-}
-
-double GA_P::getOutputDato(const unsigned indice){
+double GA_P::getOutputDato(const unsigned indice) const {
 	return output_datos[indice];
 }
 
-unsigned GA_P::getMaxProfExpresiones(){
+unsigned GA_P::getMaxProfExpresiones() const {
 	return prof_expresiones;
 }
 
