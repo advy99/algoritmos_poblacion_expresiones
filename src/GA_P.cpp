@@ -67,6 +67,10 @@ void GA_P::liberarMemoria(){
 	poblacion = nullptr;
 }
 
+void GA_P::cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
+	datos = caracteristicas;
+	output_datos = etiquetas;
+}
 
 bool GA_P::leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador){

@@ -158,6 +158,17 @@ class GA_P{
 		bool leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');
 
+		/**
+		  * @brief Cargar vectores de datos y etiquetas en GA_P
+		  *
+		  * @param caracteristicas Matriz de caracteristicas de cada dato
+		  *
+		  * @param etiquetas Vector de etiquetas, asociadas a cada fila de la matriz de datos
+		  *
+		  *
+		 */
+
+		 void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
 
 		/**
 		  * @brief Obtener el numero de variables de los datos
