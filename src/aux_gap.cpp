@@ -8,4 +8,4 @@ bool comparar_reales(const double a, const double b, const double epsilon) {
 }
 
 
-}
+} // namespace GA_P

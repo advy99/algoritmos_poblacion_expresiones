@@ -131,5 +131,4 @@ unsigned Poblacion::seleccionIndividuo() const {
 
 }
 
-}
-
+} // namespace GA_P

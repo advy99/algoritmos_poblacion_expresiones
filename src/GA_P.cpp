@@ -8,13 +8,30 @@
 
 namespace GA_P{
 
+GA_P::GA_P(const unsigned long seed) {
+
+	// inicializamos la semilla
+	Random::setSeed(seed);
+
+	inicializarVacio();
+
+}
+
+void GA_P::inicializarVacio() {
+	prof_expresiones = 0;
+	datos.clear();
+	output_datos.clear();
+	poblacion = nullptr;
+}
+
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
 	// al principio suponemos que se ha leido mal
 	bool lectura_correcta = false;
-	poblacion = nullptr;
+
+	inicializarVacio();
 
 	// lemos los datos del fichero de entrada
 	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
@@ -27,8 +44,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){
 		// inicilizamos poblacion
-		poblacion = new Poblacion(tam_poblacion, prof, prob_var, getNumVariables(),
-										  getMaxProfExpresiones());
+		generarPoblacion(tam_poblacion, prof, prob_var);
 
 	} else {
 		// si no, mostramos un error
@@ -37,11 +53,31 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 
 }
 
+
+void GA_P::generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
+									 const double prob_var, const bool sustituir_actual) {
+	if ( poblacion == nullptr || sustituir_actual ) {
+		if ( poblacion != nullptr ) {
+			liberarPoblacion();
+		}
+
+		poblacion = new Poblacion(tam_poblacion, profundidad_exp, prob_var,
+										  getNumVariables(), getMaxProfExpresiones());
+
+	}
+
+}
+
 GA_P::~GA_P(){
 	liberarMemoria();
 }
 
-void GA_P::liberarMemoria(){
+void GA_P::liberarMemoria() {
+	liberarPoblacion();
+	inicializarVacio();
+}
+
+void GA_P::liberarPoblacion(){
 	// si la poblacion tiene una zona de memoria asignada, la liberamos
 	if (poblacion != nullptr){
 		delete poblacion;
@@ -50,6 +86,10 @@ void GA_P::liberarMemoria(){
 	poblacion = nullptr;
 }
 
+void GA_P::cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
+	datos = caracteristicas;
+	output_datos = etiquetas;
+}
 
 bool GA_P::leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador){
@@ -148,4 +188,4 @@ unsigned GA_P::getMaxProfExpresiones() const {
 }
 
 
-}
+} // namespace GA_P

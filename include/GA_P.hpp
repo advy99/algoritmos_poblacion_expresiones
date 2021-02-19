@@ -81,6 +81,73 @@ class GA_P{
 		unsigned prof_expresiones;
 
 		/**
+		  * @brief Liberar la memoria dinámica utilizada por GA_P
+		  */
+
+		void liberarMemoria();
+
+		/**
+		  * @brief Liberar la memoria dinámica utilizada por la población
+		  */
+
+		void liberarPoblacion();
+
+		/**
+		  * @brief Inicializar GA_P vacio
+		  *
+		 */
+
+		 void inicializarVacio();
+
+	public:
+
+		/**
+		  * @brief Constructor con un parámetro
+		  *
+		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * la semilla ya ha sido inicializada antes
+		  */
+
+		GA_P(const unsigned long seed = time(nullptr));
+
+		/**
+		  * @brief Constructor con dos parámetros
+		  *
+		  * @param fichero_datos Fichero donde se almacenan los datos
+		  *
+		  * @param char_comentario Caracter que marca que una linea es un
+		  * comentario y ha de ser ignorada.
+		  *
+		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
+		  *
+		  * @param prob_var Probabilidad de que en una expresión de la población
+		  * un nodo hoja sea una variable.
+		  *
+		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * la semilla ya ha sido inicializada antes
+		  *
+		  * @param delimitador Caracter que marca como están separados los
+		  * datos de entrada. Por defecto ','
+		  *
+		  * @param prof Profundidad máxima de las expresiones con las que
+		  * aprenderá el algoritmo. Por defecto 10
+		  *
+		  *
+		  */
+
+		GA_P(const std::string fichero_datos, const char char_comentario,
+			  const unsigned tam_poblacion, const double prob_var,
+			  const unsigned long seed = time(nullptr),
+			  const char delimitador = ',', const unsigned prof = 10);
+
+		/**
+		  * @brief Destructor
+		  *
+		  */
+
+		~GA_P();
+
+		/**
 		  * @brief Leer datos de entrada para el algoritmo
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
@@ -98,48 +165,33 @@ class GA_P{
 							const char char_comentario, const char delimitador = ',');
 
 		/**
-		  * @brief Liberar la memoria dinámica utilizada por GA_P
-		  */
+		  * @brief Cargar vectores de datos y etiquetas en GA_P
+		  *
+		  * @param caracteristicas Matriz de caracteristicas de cada dato
+		  *
+		  * @param etiquetas Vector de etiquetas, asociadas a cada fila de la matriz de datos
+		  *
+		  *
+		 */
 
-		void liberarMemoria();
-
-	public:
-
-		/**
-		  * @brief Constructor con dos parámetros
-		  *
-		  * @param fichero_datos Fichero donde se almacenan los datos
-		  *
-		  * @param char_comentario Caracter que marca que una linea es un
-		  * comentario y ha de ser ignorada.
-		  *
-		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
-		  *
-		  * @param prob_var Probabilidad de que en una expresión de la población
-		  * un nodo hoja sea una variable.
-		  *
-		  * @param delimitador Caracter que marca como están separados los
-		  * datos de entrada. Por defecto ','
-		  *
-		  * @param prof Profundidad máxima de las expresiones con las que
-		  * aprenderá el algoritmo. Por defecto 10
-		  *
-		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
-		  * la semilla ya ha sido inicializada antes
-		  *
-		  */
-
-		GA_P(const std::string fichero_datos, const char char_comentario,
-			  const unsigned tam_poblacion, const double prob_var,
-			  const unsigned long seed = time(nullptr),
-			  const char delimitador = ',', const unsigned prof = 10);
+		void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
 
 		/**
-		  * @brief Destructor
+		  * @brief Generar la población en base a los datos cargados
+		  *
+		  * @param tam_poblacion Tamaño de la poblacion a generar
+		  *
+		  * @param profundidad_exp Profundidad máxima de las expresiones de la población
+		  *
+		  * @param prob_var Probabilidad de que un nodo terminal sea una variable
+		  *
+		  * @param sustituir_actual Booleano para sustituir la población por una nueva, en caso de que ya exista una población
+		  *
+		  * @pre datos.size != 0
 		  *
 		  */
 
-		~GA_P();
+		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
 
 		/**
 		  * @brief Obtener el numero de variables de los datos
