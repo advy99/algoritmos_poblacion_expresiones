@@ -16,22 +16,33 @@ OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main_pruebas.o
 OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
 
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) | wc -w )
+OBJETIVO_TEST = $(BIN)/main_test
+OBJETOS_TEST = $(OBJ)/main_pruebas.o
+
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
-.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests
+.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests compilar-tests
 
 # GoogleTest options --> https://github.com/google/googletest
 gtest      = /usr/include/gtest/
 gtestlibs  = /usr/lib/libgtest.so
 gtestflags = -I$(gtest) $(gtestlibs)
 
-all: clean crear-carpetas INICIO $(OBJETIVO) doc FIN
+all: clean crear-carpetas INICIO ejecutar-tests $(OBJETIVO) doc FIN
 
-tests: clean crear-carpetas INICIO compilar-tests FIN
+tests: clean crear-carpetas INICIO $(OBJETIVO_TEST) FIN
 
-compilar-tests: $(LIB)/libGA_P.a $(OBJ)/main_test.o
+
+
+ejecutar-tests: $(OBJETIVO_TEST)
+	@$(OBJETIVO_TEST) || (printf "\e[31mERROR: No se ha conseguido pasar todos los tests, abortando la compilación\n"; false)
+	@printf "\n\e[32mTests ejecutados correctamente\n\n"
+
+
+
+$(BIN)/main_test: $(LIB)/libGA_P.a $(OBJ)/main_test.o
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
 	@$(CXX) $(OBJ)/main_test.o -o $(BIN)/main_test $(gtestflags) -L$(LIB) -lGA_P
