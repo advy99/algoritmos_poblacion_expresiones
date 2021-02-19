@@ -148,4 +148,4 @@ unsigned GA_P::getMaxProfExpresiones() const {
 }
 
 
-}
+} // namespace GA_P

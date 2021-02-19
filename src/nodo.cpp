@@ -71,4 +71,4 @@ bool Nodo::operator==(const Nodo & otro) const {
 
 }
 
-}
+} // namespace GA_P

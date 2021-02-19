@@ -716,4 +716,4 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	return os;
 }
 
-}
+} // namespace GA_P
