@@ -144,6 +144,17 @@ class Nodo {
 
 		bool operator==(const Nodo & otro) const;
 
+		/**
+		 * @brief Operador de comparación con otro Nodo
+		 *
+		 * @param otro Nodo con el que comparar
+		 *
+		 * @return Verdadero si ambos objetos Nodo son distintos, falso en caso
+		 * contrario
+		 */
+
+		bool operator!=(const Nodo & otro) const;
+
 };
 
 typedef Nodo * Arbol;
