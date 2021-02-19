@@ -70,7 +70,7 @@ TEST (Nodo, DistintoTipoValorIgual) {
 
 	otro.setValor(1);
 
-	EXPECT_EQ(nodo, otro);
+	EXPECT_NE(nodo, otro);
 }
 
 #endif
