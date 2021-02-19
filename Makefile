@@ -20,9 +20,22 @@ N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
-.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help
+.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests
+
+# GoogleTest options --> https://github.com/google/googletest
+gtest      = /usr/include/gtest/
+gtestlibs  = /usr/lib/libgtest.so
+gtestflags = -I$(gtest) $(gtestlibs)
 
 all: clean crear-carpetas INICIO $(OBJETIVO) doc FIN
+
+tests: clean crear-carpetas INICIO compilar-tests FIN
+
+compilar-tests: $(LIB)/libGA_P.a $(OBJ)/main_test.o
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
+	@$(CXX) $(OBJ)/main_test.o -o $(BIN)/main_test $(gtestflags) -L$(LIB) -lGA_P
+	@printf "\n\e[36mCompilación de $(BIN)/main_test finalizada con exito.\n\n"
 
 debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
 debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
@@ -31,7 +44,7 @@ debug: all
 define compilar_objeto
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
-	@$(CXX) -c $(FLAGS) $(1) -I$(INC) -o $(2)
+	@$(CXX) -c $(FLAGS) $(1) -I$(INC) -I. -o $(2)
 endef
 
 
@@ -54,6 +67,9 @@ $(OBJ)/random.o: $(SRC)/random.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp
+	$(call compilar_objeto,$^,$@)
+
+$(OBJ)/main_test.o: $(SRC)/main_test.cpp
 	$(call compilar_objeto,$^,$@)
 
 $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
