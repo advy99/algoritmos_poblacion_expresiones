@@ -87,6 +87,12 @@ class GA_P{
 		void liberarMemoria();
 
 		/**
+		  * @brief Liberar la memoria dinámica utilizada por la población
+		  */
+
+		void liberarPoblacion();
+
+		/**
 		  * @brief Inicializar GA_P vacio
 		  *
 		 */
@@ -168,7 +174,24 @@ class GA_P{
 		  *
 		 */
 
-		 void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
+		void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
+
+		/**
+		  * @brief Generar la población en base a los datos cargados
+		  *
+		  * @param tam_poblacion Tamaño de la poblacion a generar
+		  *
+		  * @param profundidad_exp Profundidad máxima de las expresiones de la población
+		  *
+		  * @param prob_var Probabilidad de que un nodo terminal sea una variable
+		  *
+		  * @param sustituir_actual Booleano para sustituir la población por una nueva, en caso de que ya exista una población
+		  *
+		  * @pre datos.size != 0
+		  *
+		  */
+
+		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
 
 		/**
 		  * @brief Obtener el numero de variables de los datos

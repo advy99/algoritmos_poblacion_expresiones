@@ -44,8 +44,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){
 		// inicilizamos poblacion
-		poblacion = new Poblacion(tam_poblacion, prof, prob_var, getNumVariables(),
-										  getMaxProfExpresiones());
+		generarPoblacion(tam_poblacion, prof, prob_var);
 
 	} else {
 		// si no, mostramos un error
@@ -54,11 +53,31 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 
 }
 
+
+void GA_P::generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
+									 const double prob_var, const bool sustituir_actual) {
+	if ( poblacion == nullptr || sustituir_actual ) {
+		if ( poblacion != nullptr ) {
+			liberarPoblacion();
+		}
+
+		poblacion = new Poblacion(tam_poblacion, profundidad_exp, prob_var,
+										  getNumVariables(), getMaxProfExpresiones());
+
+	}
+
+}
+
 GA_P::~GA_P(){
 	liberarMemoria();
 }
 
-void GA_P::liberarMemoria(){
+void GA_P::liberarMemoria() {
+	liberarPoblacion();
+	inicializarVacio();
+}
+
+void GA_P::liberarPoblacion(){
 	// si la poblacion tiene una zona de memoria asignada, la liberamos
 	if (poblacion != nullptr){
 		delete poblacion;
