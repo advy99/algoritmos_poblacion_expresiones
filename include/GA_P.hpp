@@ -81,6 +81,67 @@ class GA_P{
 		unsigned prof_expresiones;
 
 		/**
+		  * @brief Liberar la memoria dinámica utilizada por GA_P
+		  */
+
+		void liberarMemoria();
+
+		/**
+		  * @brief Inicializar GA_P vacio
+		  *
+		 */
+
+		 void inicializarVacio();
+
+	public:
+
+		/**
+		  * @brief Constructor con un parámetro
+		  *
+		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * la semilla ya ha sido inicializada antes
+		  */
+
+		GA_P(const unsigned long seed = time(nullptr));
+
+		/**
+		  * @brief Constructor con dos parámetros
+		  *
+		  * @param fichero_datos Fichero donde se almacenan los datos
+		  *
+		  * @param char_comentario Caracter que marca que una linea es un
+		  * comentario y ha de ser ignorada.
+		  *
+		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
+		  *
+		  * @param prob_var Probabilidad de que en una expresión de la población
+		  * un nodo hoja sea una variable.
+		  *
+		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * la semilla ya ha sido inicializada antes
+		  *
+		  * @param delimitador Caracter que marca como están separados los
+		  * datos de entrada. Por defecto ','
+		  *
+		  * @param prof Profundidad máxima de las expresiones con las que
+		  * aprenderá el algoritmo. Por defecto 10
+		  *
+		  *
+		  */
+
+		GA_P(const std::string fichero_datos, const char char_comentario,
+			  const unsigned tam_poblacion, const double prob_var,
+			  const unsigned long seed = time(nullptr),
+			  const char delimitador = ',', const unsigned prof = 10);
+
+		/**
+		  * @brief Destructor
+		  *
+		  */
+
+		~GA_P();
+
+		/**
 		  * @brief Leer datos de entrada para el algoritmo
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
@@ -97,49 +158,6 @@ class GA_P{
 		bool leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');
 
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por GA_P
-		  */
-
-		void liberarMemoria();
-
-	public:
-
-		/**
-		  * @brief Constructor con dos parámetros
-		  *
-		  * @param fichero_datos Fichero donde se almacenan los datos
-		  *
-		  * @param char_comentario Caracter que marca que una linea es un
-		  * comentario y ha de ser ignorada.
-		  *
-		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
-		  *
-		  * @param prob_var Probabilidad de que en una expresión de la población
-		  * un nodo hoja sea una variable.
-		  *
-		  * @param delimitador Caracter que marca como están separados los
-		  * datos de entrada. Por defecto ','
-		  *
-		  * @param prof Profundidad máxima de las expresiones con las que
-		  * aprenderá el algoritmo. Por defecto 10
-		  *
-		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
-		  * la semilla ya ha sido inicializada antes
-		  *
-		  */
-
-		GA_P(const std::string fichero_datos, const char char_comentario,
-			  const unsigned tam_poblacion, const double prob_var,
-			  const unsigned long seed = time(nullptr),
-			  const char delimitador = ',', const unsigned prof = 10);
-
-		/**
-		  * @brief Destructor
-		  *
-		  */
-
-		~GA_P();
 
 		/**
 		  * @brief Obtener el numero de variables de los datos

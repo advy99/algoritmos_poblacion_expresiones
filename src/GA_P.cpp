@@ -8,13 +8,30 @@
 
 namespace GA_P{
 
+GA_P::GA_P(const unsigned long seed) {
+
+	// inicializamos la semilla
+	Random::setSeed(seed);
+
+	inicializarVacio();
+
+}
+
+void GA_P::inicializarVacio() {
+	prof_expresiones = 0;
+	datos.clear();
+	output_datos.clear();
+	poblacion = nullptr;
+}
+
 GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
 	// al principio suponemos que se ha leido mal
 	bool lectura_correcta = false;
-	poblacion = nullptr;
+
+	inicializarVacio();
 
 	// lemos los datos del fichero de entrada
 	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
