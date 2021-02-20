@@ -14,6 +14,12 @@ GRAFICAS = $(HOME)/graficas/datos
 FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 
+ifeq ($(debug), 1)
+# target para debug (cambiamos flags y el mensaje)
+FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
+MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
+endif
+
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main_pruebas.o
@@ -41,10 +47,6 @@ gtestflags = -I$(gtest) $(gtestlibs)
 # target por defecto
 all: clean crear-carpetas INICIO ejecutar-tests $(OBJETIVO) doc FIN
 
-# target para debug (cambiamos flags y el mensaje)
-debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
-debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
-debug: all
 
 # target para compilar solo los tests
 tests: clean crear-carpetas INICIO $(OBJETIVO_TEST) ejecutar-tests FIN
