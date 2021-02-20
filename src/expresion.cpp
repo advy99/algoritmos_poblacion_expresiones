@@ -113,18 +113,22 @@ Expresion::~Expresion(){
 	liberarMemoria();
 }
 
-
-void Expresion::liberarMemoria(){
+void Expresion::liberarMemoriaArbol() {
 	// si el arbol tiene asociado alguna direccion de memoria
 	if (arbol != nullptr){
 		// la liberamos
 		delete [] arbol;
 	}
+}
 
+void Expresion::liberarMemoriaCromosoma() {
 	// y lo mismo con el cromosoma
 	if (cromosoma != nullptr){
 		delete [] cromosoma;
 	}
+}
+
+void Expresion::liberarMemoria(){
 
 	// una vez esta liberada la memoria, la expresion esta vacia, luego
 	// la ponemos a vacio
@@ -500,6 +504,30 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra,
 
 }
 
+void Expresion::asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n_arbol) {
+
+	liberarMemoriaArbol();
+
+	reservarMemoriaArbol(longitud_n_arbol);
+
+	memcpy(arbol, nuevo_arbol, longitud_n_arbol*sizeof(Nodo));
+
+	longitud_arbol = longitud_n_arbol;
+
+}
+
+void Expresion::asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud){
+
+	liberarMemoriaCromosoma();
+
+	reservarMemoriaCromosoma(longitud);
+
+	memcpy(cromosoma, nuevo_cromosoma, longitud*sizeof(double));
+
+	longitud_cromosoma = longitud;
+
+}
+
 void Expresion::dejaEstarEvaluada(){
 	// ponemos la flag a false y establecemos el fitness a NaN
 	evaluada = false;
@@ -601,13 +629,7 @@ void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 
 
 bool Expresion::mismoNicho(const Expresion & otra) const {
-	bool resultado = longitud_arbol == otra.longitud_arbol;
-
-	for (unsigned i = 0; i < longitud_arbol && resultado; i++){
-		resultado = arbol[i] == otra.arbol[i];
-	}
-
-	return resultado;
+	return (*this == otra);
 }
 
 std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila,
@@ -714,6 +736,21 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	os << exp_string << std::endl;
 
 	return os;
+}
+
+bool Expresion::operator == ( const Expresion & otra) const {
+
+	bool resultado = longitud_arbol == otra.longitud_arbol;
+
+	for (unsigned i = 0; i < longitud_arbol && resultado; i++){
+		resultado = arbol[i] == otra.arbol[i];
+	}
+
+	return resultado;
+}
+
+bool Expresion::operator != ( const Expresion & otra) const {
+	return !(*this == otra);
 }
 
 } // namespace GA_P

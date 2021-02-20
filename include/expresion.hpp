@@ -154,6 +154,19 @@ class Expresion{
 
 		void liberarMemoria();
 
+		/**
+		  * @brief Liberar la memoria dinámica utilizada por el arbol.
+		  *
+		  */
+
+		void liberarMemoriaArbol();
+
+		/**
+		  * @brief Liberar la memoria dinámica utilizada por el cromosoma.
+		  *
+		  */
+
+		void liberarMemoriaCromosoma();
 
 
 		/**
@@ -307,6 +320,28 @@ class Expresion{
 
 		unsigned getLongitudArbol() const;
 
+		/*
+		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
+		 *
+		 * @param nuevo_arbol Arbol que formará la expresion
+		 *
+		 * @param longitud_n_arbol Longitud del nuevo arbol dado
+		 *
+		 */
+
+		void asignarArbol ( const Arbol nuevo_arbol, const unsigned longitud_n_arbol);
+
+		/*
+		 * @brief Dado un cromosoma, asignar dicho cromosoma a la expresion actual
+		 *
+		 * @param nuevo_cromosoma Cromosoma que formará la expresion
+		 *
+		 * @param longitud Longitud del nuevo cromosoma dado
+		 *
+		 */
+
+		void asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud);
+
 		/**
 		  * @brief Evaluar la expresión con los datos dados.
 		  *
@@ -422,6 +457,24 @@ class Expresion{
 		  */
 
 		std::string stringExpresion() const;
+
+		/*
+		 * @brief Operador para comparar si dos expresiones son iguales
+		 *
+		 * @param otra Expresión a comparar con la actual
+		 *
+		 */
+
+		bool operator== (const Expresion & otra) const;
+
+		/*
+		 * @brief Operador para comparar si dos expresiones son distintas
+		 *
+		 * @param otra Expresión a comparar con la actual
+		 *
+		 */
+
+		bool operator!= (const Expresion & otra) const;
 
 		/**
 		  * @brief Salida por el operador <<
