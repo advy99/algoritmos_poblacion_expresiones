@@ -113,18 +113,22 @@ Expresion::~Expresion(){
 	liberarMemoria();
 }
 
-
-void Expresion::liberarMemoria(){
+void Expresion::liberarMemoriaArbol() {
 	// si el arbol tiene asociado alguna direccion de memoria
 	if (arbol != nullptr){
 		// la liberamos
 		delete [] arbol;
 	}
+}
 
+void Expresion::liberarMemoriaCromosoma() {
 	// y lo mismo con el cromosoma
 	if (cromosoma != nullptr){
 		delete [] cromosoma;
 	}
+}
+
+void Expresion::liberarMemoria(){
 
 	// una vez esta liberada la memoria, la expresion esta vacia, luego
 	// la ponemos a vacio
@@ -497,6 +501,30 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra,
 	dejaEstarEvaluada();
 	otra.dejaEstarEvaluada();
 
+
+}
+
+void Expresion::asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n_arbol) {
+
+	liberarMemoriaArbol();
+
+	reservarMemoriaArbol(longitud_n_arbol);
+
+	memcpy(arbol, nuevo_arbol, longitud_n_arbol*sizeof(Nodo));
+
+	longitud_arbol = longitud_n_arbol;
+
+}
+
+void Expresion::asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud){
+
+	liberarMemoriaCromosoma();
+
+	reservarMemoriaCromosoma(longitud);
+
+	memcpy(cromosoma, nuevo_cromosoma, longitud*sizeof(double));
+
+	longitud_cromosoma = longitud;
 
 }
 
