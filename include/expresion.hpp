@@ -423,6 +423,24 @@ class Expresion{
 
 		std::string stringExpresion() const;
 
+		/*
+		 * @brief Operador para comparar si dos expresiones son iguales
+		 *
+		 * @param otra Expresión a comparar con la actual
+		 *
+		 */
+
+		bool operator== (const Expresion & otra) const;
+
+		/*
+		 * @brief Operador para comparar si dos expresiones son distintas
+		 *
+		 * @param otra Expresión a comparar con la actual
+		 *
+		 */
+
+		bool operator!= (const Expresion & otra) const;
+
 		/**
 		  * @brief Salida por el operador <<
 		  *

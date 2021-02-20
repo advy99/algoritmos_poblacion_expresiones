@@ -601,13 +601,7 @@ void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 
 
 bool Expresion::mismoNicho(const Expresion & otra) const {
-	bool resultado = longitud_arbol == otra.longitud_arbol;
-
-	for (unsigned i = 0; i < longitud_arbol && resultado; i++){
-		resultado = arbol[i] == otra.arbol[i];
-	}
-
-	return resultado;
+	return (*this == otra);
 }
 
 std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila,
@@ -714,6 +708,21 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	os << exp_string << std::endl;
 
 	return os;
+}
+
+bool Expresion::operator == ( const Expresion & otra) const {
+
+	bool resultado = longitud_arbol == otra.longitud_arbol;
+
+	for (unsigned i = 0; i < longitud_arbol && resultado; i++){
+		resultado = arbol[i] == otra.arbol[i];
+	}
+
+	return resultado;
+}
+
+bool Expresion::operator != ( const Expresion & otra) const {
+	return !(*this == otra);
 }
 
 } // namespace GA_P
