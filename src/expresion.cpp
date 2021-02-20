@@ -130,6 +130,9 @@ void Expresion::liberarMemoriaCromosoma() {
 
 void Expresion::liberarMemoria(){
 
+	liberarMemoriaArbol();
+	liberarMemoriaCromosoma();
+
 	// una vez esta liberada la memoria, la expresion esta vacia, luego
 	// la ponemos a vacio
 	inicializarVacia();

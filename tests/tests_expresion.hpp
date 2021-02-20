@@ -86,6 +86,9 @@ TEST (Expresion, EvaluarDato) {
 	exp1.asignarArbol(arbol_tmp, 5);
 	exp1.asignarCromosoma(n_cromosoma, 5);
 
+	delete [] arbol_tmp;
+	delete [] n_cromosoma;
+
 	std::vector<double> dato = {2.5, 3.2};
 
 	double resultado = exp1.evaluarDato(dato);
