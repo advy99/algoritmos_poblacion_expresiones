@@ -1,4 +1,6 @@
 #include "tests/tests_nodo.hpp"
+#include "tests/tests_expresion.hpp"
+
 #include <string>
 
 int main(int argc, char ** argv) {
