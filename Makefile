@@ -87,28 +87,9 @@ $(OBJETIVO): $(OBJETOS)
 	@$(CXX) $(OBJ)/main_pruebas.o -o $@ -L$(LIB) -lGA_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
-$(OBJ)/random.o: $(SRC)/random.cpp
-	$(call compilar_objeto,$^,$@)
 
-$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp
-	$(call compilar_objeto,$^,$@)
-
-$(OBJ)/main_test.o: $(SRC)/main_test.cpp
-	$(call compilar_objeto,$^,$@)
-
-$(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
-	$(call compilar_objeto,$^,$@)
-
-$(OBJ)/expresion.o: $(SRC)/expresion.cpp
-	$(call compilar_objeto,$^,$@)
-
-$(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
-	$(call compilar_objeto,$^,$@)
-
-$(OBJ)/nodo.o: $(SRC)/nodo.cpp
-	$(call compilar_objeto,$^,$@)
-
-$(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp
+# compilacion de cualquier objeto
+$(OBJ)/%.o: $(SRC)/%.cpp
 	$(call compilar_objeto,$^,$@)
 
 
