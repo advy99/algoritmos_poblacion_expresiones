@@ -3,6 +3,7 @@
 #include <cstring>
 #include <stack>
 #include "aux_gap.hpp"
+#include "random.hpp"
 
 namespace GA_P {
 
