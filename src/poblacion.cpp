@@ -1,4 +1,5 @@
 #include "poblacion.hpp"
+#include "random.hpp"
 #include <cstring>
 
 namespace GA_P {

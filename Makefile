@@ -11,8 +11,14 @@ DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
 # flags de compilacion por defecto
-FLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
+CXXFLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
+
+ifeq ($(debug), 1)
+# target para debug (cambiamos flags y el mensaje)
+CXXFLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
+MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
+endif
 
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
@@ -20,6 +26,8 @@ OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main_pruebas.o
 
 # objetivos de la biblioteca GA_P
 OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
+
+GAP_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_gap.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
@@ -41,10 +49,6 @@ gtestflags = -I$(gtest) $(gtestlibs)
 # target por defecto
 all: clean crear-carpetas INICIO ejecutar-tests $(OBJETIVO) doc FIN
 
-# target para debug (cambiamos flags y el mensaje)
-debug: FLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
-debug: MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
-debug: all
 
 # target para compilar solo los tests
 tests: clean crear-carpetas INICIO $(OBJETIVO_TEST) ejecutar-tests FIN
@@ -67,7 +71,7 @@ $(OBJETIVO_TEST): $(LIB)/libGA_P.a $(OBJETOS_TEST)
 define compilar_objeto
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el objeto $(2) a partir de $(1)\n"
-	@$(CXX) -c $(FLAGS) $(1) -I$(INC) -I. -o $(2)
+	@$(CXX) -c $(CXXFLAGS) $(1) -I$(INC) -I. -o $(2)
 endef
 
 
@@ -76,7 +80,7 @@ endef
 INICIO:
 	@printf "\n\e[36mComenzando compilación de $(BIN)/GA_P\n\n"
 	@printf "\e[94mCompilador: $(CXX)\n"
-	@printf "\e[94mFlags del compilador: $(FLAGS)\n\n"
+	@printf "\e[94mFlags del compilador: $(CXXFLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
 
 $(OBJETIVO): $(OBJETOS)
@@ -85,35 +89,39 @@ $(OBJETIVO): $(OBJETOS)
 	@$(CXX) $(OBJ)/main_pruebas.o -o $@ -L$(LIB) -lGA_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
-$(OBJ)/random.o: $(SRC)/random.cpp
-	$(call compilar_objeto,$^,$@)
 
-$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp
-	$(call compilar_objeto,$^,$@)
 
-$(OBJ)/main_test.o: $(SRC)/main_test.cpp
-	$(call compilar_objeto,$^,$@)
+$(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/GA_P.o: $(SRC)/GA_P.cpp
-	$(call compilar_objeto,$^,$@)
+$(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/expresion.o: $(SRC)/expresion.cpp
-	$(call compilar_objeto,$^,$@)
+$(OBJ)/poblacion.o: $(SRC)/poblacion.cpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/poblacion.o: $(SRC)/poblacion.cpp
-	$(call compilar_objeto,$^,$@)
+$(OBJ)/GA_P.o: $(SRC)/GA_P.cpp $(INC)/GA_P.hpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/nodo.o: $(SRC)/nodo.cpp
-	$(call compilar_objeto,$^,$@)
+$(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp $(INC)/aux_gap.hpp
+	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp
-	$(call compilar_objeto,$^,$@)
 
 
 $(LIB)/libGA_P.a: $(OBJETOS_LIB_GAP)
 	$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
 	@ar rs $@ $^
+
+$(OBJ)/random.o: $(SRC)/random.cpp $(INC)/random.hpp
+	$(call compilar_objeto,$<,$@)
+
+
+$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
+	$(call compilar_objeto,$<,$@)
 
 
 

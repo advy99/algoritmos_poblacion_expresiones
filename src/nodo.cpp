@@ -1,5 +1,6 @@
 #include "nodo.hpp"
 #include "aux_gap.hpp"
+#include "random.hpp"
 
 namespace GA_P {
 
