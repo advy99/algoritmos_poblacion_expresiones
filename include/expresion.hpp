@@ -178,14 +178,6 @@ class Expresion{
 		void redimensionar(const int tam);
 
 		/**
-		  * @brief Metodo para marcar que la evaluación del fitness de una
-		  * expresión ya no es valida.
-		  *
-		  */
-
-		void dejaEstarEvaluada();
-
-		/**
 		  * @brief Contar los niveles de un árbol de Expresion dado en una pila.
 		  *
 		  * @param pila Pila donde esta almacenada la Expresion
@@ -386,6 +378,13 @@ class Expresion{
 										  const unsigned pos_otra,
 										  Expresion & hijo1, Expresion & hijo2) const;
 
+		/**
+		  * @brief Metodo para marcar que la evaluación del fitness de una
+		  * expresión ya no es valida.
+		  *
+		  */
+
+		void dejaEstarEvaluada();
 
 		/**
 		  * @brief Operador de asignación de una expresión. Asignamos una
