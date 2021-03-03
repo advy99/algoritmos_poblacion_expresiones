@@ -62,7 +62,7 @@ int main(int argc, char ** argv){
 	GA_P::Expresion hijo1 = miExpresion;
 	GA_P::Expresion hijo2 = miExpresion2;
 
-	miExpresion.intercambiarSubarbol(punto1, miExpresion2, hijo1, hijo2, punto2);
+	miExpresion.intercambiarSubarbol(punto1, miExpresion2, punto2, hijo1, hijo2);
 
 	std::cout << "Arbol 1 despues de cruzar: " << std::endl << hijo1 << std::endl;
 	std::cout << "Arbol 2 despues de cruzar: "<< std::endl << hijo2 << std::endl;

@@ -368,13 +368,15 @@ class Expresion{
 		  * @param pos Posición del árbol a intercambiar.
 		  * @param otra Expresion con la que intercambiar.
 		  * @param pos_otra Posición de la expresión dada a intercambiar.
+		  * @param hijo1 Expresión donde se almacenará el resultado del cruce.
+		  * @param hijo2 Expresión donde se almacenará el resultado del cruce.
 		  *
 		  * @pre otra No es una expresion vacia.
 		  */
 
 		void intercambiarSubarbol(const unsigned pos, const Expresion & otra,
-										  Expresion & hijo1, Expresion & hijo2,
-										  const unsigned pos_otra) const;
+										  const unsigned pos_otra,
+										  Expresion & hijo1, Expresion & hijo2) const;
 
 
 		/**
