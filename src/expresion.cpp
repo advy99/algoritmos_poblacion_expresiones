@@ -418,8 +418,9 @@ unsigned Expresion :: getLongitudArbol() const{
 
 
 
-void Expresion :: intercambiarSubarbol(const unsigned pos, Expresion & otra,
-												 const unsigned pos_otra){
+void Expresion :: intercambiarSubarbol(const unsigned pos, const Expresion & otra,
+												   Expresion & hijo1, Expresion & hijo2,
+													const unsigned pos_otra) const {
 
 	// obtenemos el subarbol de la expresion actual
 	Expresion subarbol(&arbol[pos], profundidad_maxima);
@@ -494,17 +495,16 @@ void Expresion :: intercambiarSubarbol(const unsigned pos, Expresion & otra,
 	// actualizamos la longitud
 	nueva.longitud_arbol = pos_nuevo;
 
-	// nuestro arbol pasa a ser el antiguo
-	(*this) = nueva;
+	// asignamos el nuevo arbol al primer hijo
+	hijo1 = nueva;
 
 	nueva_otra.longitud_arbol = pos_otra_nuevo;
 
-	otra = nueva_otra;
+	hijo2 = nueva_otra;
 
 	// ambas dejan de estar evaluadas
-	dejaEstarEvaluada();
-	otra.dejaEstarEvaluada();
-
+	hijo1.dejaEstarEvaluada();
+	hijo2.dejaEstarEvaluada();
 
 }
 
