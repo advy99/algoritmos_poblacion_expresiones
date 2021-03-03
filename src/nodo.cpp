@@ -4,12 +4,12 @@
 
 namespace GA_P {
 
-Nodo::Nodo(){
+Nodo :: Nodo(){
 	tipo_nodo = TipoNodo::NUMERO;
 	valor = 0;
 }
 
-void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
+void Nodo :: setTerminoAleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo == TipoNodo::NUMERO){
 		valor = Random::getInt(num_numeros);
@@ -19,7 +19,7 @@ void Nodo::setTerminoAleatorio(const int num_numeros, const int num_variables){
 	}
 }
 
-void Nodo::setTipoNodoOperadorAleatorio(){
+void Nodo :: setTipoNodoOperadorAleatorio(){
 	// obtenemos un aleatorio
 	float aleatorio = Random::getFloat();
 
@@ -36,26 +36,26 @@ void Nodo::setTipoNodoOperadorAleatorio(){
 }
 
 
-TipoNodo Nodo::getTipoNodo() const {
+TipoNodo Nodo :: getTipoNodo() const {
 	return tipo_nodo;
 }
 
-int Nodo::getValor() const {
+int Nodo :: getValor() const {
 	return valor;
 }
 
 
 
-void Nodo::setTipoNodo(const TipoNodo tipo){
+void Nodo :: setTipoNodo(const TipoNodo tipo){
 	tipo_nodo = tipo;
 }
 
-void Nodo::setValor(const double val){
+void Nodo :: setValor(const double val){
 	valor = val;
 }
 
 
-bool Nodo::operator==(const Nodo & otro) const {
+bool Nodo :: operator==(const Nodo & otro) const {
 
 	// si no son el mismo tipo, directamente es false
 	bool resultado = this->tipo_nodo == otro.tipo_nodo;
@@ -72,7 +72,7 @@ bool Nodo::operator==(const Nodo & otro) const {
 
 }
 
-bool Nodo::operator!=(const Nodo & otro) const {
+bool Nodo :: operator!=(const Nodo & otro) const {
 	return !(*this == otro);
 }
 

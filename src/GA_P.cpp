@@ -8,7 +8,7 @@
 
 namespace GA_P{
 
-GA_P::GA_P(const unsigned long seed) {
+GA_P :: GA_P(const unsigned long seed) {
 
 	// inicializamos la semilla
 	Random::setSeed(seed);
@@ -17,14 +17,14 @@ GA_P::GA_P(const unsigned long seed) {
 
 }
 
-void GA_P::inicializarVacio() {
+void GA_P :: inicializarVacio() {
 	prof_expresiones = 0;
 	datos.clear();
 	output_datos.clear();
 	poblacion = nullptr;
 }
 
-GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
+GA_P :: GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
@@ -54,7 +54,7 @@ GA_P::GA_P(const std::string fichero_datos, const char char_comentario,
 }
 
 
-void GA_P::generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
+void GA_P :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
 									 const double prob_var, const bool sustituir_actual) {
 	if ( poblacion == nullptr || sustituir_actual ) {
 		if ( poblacion != nullptr ) {
@@ -68,16 +68,16 @@ void GA_P::generarPoblacion(const unsigned tam_poblacion, const unsigned profund
 
 }
 
-GA_P::~GA_P(){
+GA_P :: ~GA_P(){
 	liberarMemoria();
 }
 
-void GA_P::liberarMemoria() {
+void GA_P :: liberarMemoria() {
 	liberarPoblacion();
 	inicializarVacio();
 }
 
-void GA_P::liberarPoblacion(){
+void GA_P :: liberarPoblacion(){
 	// si la poblacion tiene una zona de memoria asignada, la liberamos
 	if (poblacion != nullptr){
 		delete poblacion;
@@ -86,12 +86,12 @@ void GA_P::liberarPoblacion(){
 	poblacion = nullptr;
 }
 
-void GA_P::cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
+void GA_P :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
 	datos = caracteristicas;
 	output_datos = etiquetas;
 }
 
-bool GA_P::leerDatos(const std::string fichero_datos,
+bool GA_P :: leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
@@ -157,33 +157,34 @@ bool GA_P::leerDatos(const std::string fichero_datos,
 
 
 
-int GA_P::getNumDatos() const {
+
+int GA_P :: getNumDatos() const {
 	return datos.size();
 }
 
-int GA_P::getNumVariables() const {
+int GA_P :: getNumVariables() const {
 	return datos[0].size();
 }
 
-std::vector<std::vector<double> > GA_P::getDatos() const {
+std::vector<std::vector<double> > GA_P :: getDatos() const {
 	return datos;
 }
 
-std::vector<double> GA_P::getDato(const unsigned i) const {
+std::vector<double> GA_P :: getDato(const unsigned i) const {
 	return datos[i];
 }
 
-std::vector<double> GA_P::getOutputDatos() const {
+std::vector<double> GA_P :: getOutputDatos() const {
 	return output_datos;
 }
 
 
 
-double GA_P::getOutputDato(const unsigned indice) const {
+double GA_P :: getOutputDato(const unsigned indice) const {
 	return output_datos[indice];
 }
 
-unsigned GA_P::getMaxProfExpresiones() const {
+unsigned GA_P :: getMaxProfExpresiones() const {
 	return prof_expresiones;
 }
 
