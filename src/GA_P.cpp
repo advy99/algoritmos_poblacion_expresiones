@@ -186,7 +186,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 		// TODO: seleccion por torneo
 
 		// aplicamos los operadores geneticos
-		for ( int i = 0; i < poblacion->getTamPoblacion(); i += 2){
+		for ( unsigned i = 0; i < poblacion->getTamPoblacion(); i += 2){
 			madre = i;
 			padre = i + 1;
 
