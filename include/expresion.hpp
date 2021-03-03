@@ -410,15 +410,18 @@ class Expresion{
 
 		/**
 		 * @brief Operador de cruce para los cromosomas de las expresiones.
+		 * Al cruzar dos cromosomas obtendremos otros dos nuevos cromosomas.
 		 *
 		 * @param otra Expresion con la que cruzar el cromosoma.
+		 * @param hijo1 Expresión donde se almacenará el resultado del cruce.
+		 * @param hijo2 Expresión donde se almacenará el resultado del cruce.
 		 * @param alfa Valor alfa del metodo BLX-alfa, posible extension del
 		 * rango entre dos valores
 		 *
 		 */
 
 
-		void cruceBLXalfa(Expresion & otra, const double alfa = 0.3);
+		void cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expresion & hijo2, const double alfa = 0.3) const;
 
 		/**
 		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho

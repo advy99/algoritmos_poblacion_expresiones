@@ -589,7 +589,7 @@ unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 
 
 
-void Expresion :: cruceBLXalfa(Expresion & otra, const double alfa){
+void Expresion :: cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expresion & hijo2, const double alfa) const{
 
 	if ( otra.longitud_cromosoma != this->longitud_cromosoma ) {
 		std::cerr << "Cruzando dos cromosomas de distinta longitud" << std::endl;
@@ -624,11 +624,12 @@ void Expresion :: cruceBLXalfa(Expresion & otra, const double alfa){
 	}
 
 
-	this->copiarCromosoma(cromosoma_actual);
-	otra.copiarCromosoma(cromosoma_otro);
+	hijo1.asignarCromosoma(cromosoma_actual, this->longitud_cromosoma);
+	hijo2.asignarCromosoma(cromosoma_otro, otra.longitud_cromosoma);
 
 	delete [] cromosoma_actual;
 	delete [] cromosoma_otro;
+
 }
 
 
