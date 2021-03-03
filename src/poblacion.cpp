@@ -137,4 +137,12 @@ unsigned Poblacion :: getTamPoblacion() const {
 	return tam_poblacion;
 }
 
+Expresion & Poblacion :: operator[] (const unsigned indice) {
+	return expresiones[indice];
+}
+
+const Expresion & Poblacion :: operator[] (const unsigned indice) const {
+	return expresiones[indice];
+}
+
 } // namespace GA_P
