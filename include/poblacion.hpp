@@ -169,10 +169,20 @@ class Poblacion{
 		  *
 		  * @param indice Posición del individuo en la población.
 		  *
-		  * @return Mejor individuo de la población.
+		  * @return Individuo en la posicion indice de la población.
 		  */
 
-		Expresion getIndividuo(const unsigned indice) const;
+		Expresion & operator [] (const unsigned indice);
+
+		/**
+		  * @brief Obtener el individuo indice de la poblacion.
+		  *
+		  * @param indice Posición del individuo en la población.
+		  *
+		  * @return Individuo en la posicion indice de la población.
+		  */
+
+		const Expresion & operator [] (const unsigned indice) const;
 
 
 		/**

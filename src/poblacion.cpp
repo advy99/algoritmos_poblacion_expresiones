@@ -4,7 +4,7 @@
 
 namespace GA_P {
 
-Poblacion::Poblacion(){
+Poblacion :: Poblacion(){
 	// una poblacion vacia no tiene nada
 	expresiones     = nullptr;
 	tam_poblacion   = 0;
@@ -13,7 +13,7 @@ Poblacion::Poblacion(){
 }
 
 
-Poblacion::Poblacion(const unsigned tam, const unsigned lon_expre,
+Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
 							const double prob_var, const unsigned num_vars,
 							const unsigned prof_expre){
 	// liberamos memoria para inicializar a vacio
@@ -30,11 +30,11 @@ Poblacion::Poblacion(const unsigned tam, const unsigned lon_expre,
 	}
 }
 
-Poblacion::~Poblacion(){
+Poblacion :: ~Poblacion(){
 	liberarMemoria();
 }
 
-void Poblacion::liberarMemoria(){
+void Poblacion :: liberarMemoria(){
 	// si tiene asignada una direccion de memoria, liberamos la poblacion
 	if (expresiones != nullptr){
 		delete [] expresiones;
@@ -48,12 +48,12 @@ void Poblacion::liberarMemoria(){
 
 }
 
-void Poblacion::reservarMemoria(const unsigned tam){
+void Poblacion :: reservarMemoria(const unsigned tam){
 	expresiones   = new Expresion[tam];
 	tam_reservado = tam;
 }
 
-void Poblacion::copiarDatos(const Poblacion & otra){
+void Poblacion :: copiarDatos(const Poblacion & otra){
 	// copiamos los atributos
 	tam_poblacion = otra.tam_poblacion;
 	mejor_individuo = otra.mejor_individuo;
@@ -67,7 +67,7 @@ void Poblacion::copiarDatos(const Poblacion & otra){
 	}
 }
 
-void Poblacion::evaluarPoblacion(const std::vector<std::vector<double> > & datos,
+void Poblacion :: evaluarPoblacion(const std::vector<std::vector<double> > & datos,
 											const std::vector<double> & etiquetas){
 	// establecemos el mejor individuo al primero
 	mejor_individuo = 0;
@@ -91,7 +91,7 @@ void Poblacion::evaluarPoblacion(const std::vector<std::vector<double> > & datos
 }
 
 
-double Poblacion::sumaFitness() const {
+double Poblacion :: sumaFitness() const {
 	double suma = 0.0;
 
 	for (unsigned i = 0; i < tam_poblacion; i++){
@@ -101,7 +101,7 @@ double Poblacion::sumaFitness() const {
 	return suma;
 }
 
-unsigned Poblacion::seleccionIndividuo() const {
+unsigned Poblacion :: seleccionIndividuo() const {
 
 	double * probabilidad = new double [tam_poblacion];
 
@@ -130,6 +130,19 @@ unsigned Poblacion::seleccionIndividuo() const {
 	return indice;
 
 
+}
+
+
+unsigned Poblacion :: getTamPoblacion() const {
+	return tam_poblacion;
+}
+
+Expresion & Poblacion :: operator[] (const unsigned indice) {
+	return expresiones[indice];
+}
+
+const Expresion & Poblacion :: operator[] (const unsigned indice) const {
+	return expresiones[indice];
 }
 
 } // namespace GA_P

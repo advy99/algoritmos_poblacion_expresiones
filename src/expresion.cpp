@@ -2,12 +2,13 @@
 #include "expresion.hpp"
 #include <cstring>
 #include <stack>
+#include <limits>
 #include "aux_gap.hpp"
 #include "random.hpp"
 
 namespace GA_P {
 
-Expresion::Expresion(const unsigned prof_max){
+Expresion :: Expresion(const unsigned prof_max){
 
 	// establecemos la profundidad a la maxima dada
 	profundidad_maxima = prof_max;
@@ -22,7 +23,7 @@ Expresion::Expresion(const unsigned prof_max){
 	inicializarCromosoma();
 }
 
-Expresion::Expresion(const Arbol subarbol, const unsigned prof_max){
+Expresion :: Expresion(const Arbol subarbol, const unsigned prof_max){
 
 	// establecemos la profundidad maxima a la dada
 	profundidad_maxima = prof_max;
@@ -35,7 +36,7 @@ Expresion::Expresion(const Arbol subarbol, const unsigned prof_max){
 
 }
 
-Expresion::Expresion(const unsigned longitud_max, const double prob_variable,
+Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 							const unsigned num_vars, const unsigned prof_max){
 
 	profundidad_maxima = prof_max;
@@ -52,7 +53,7 @@ Expresion::Expresion(const unsigned longitud_max, const double prob_variable,
 	generarExpresionAleatoria(longitud_max, prob_variable, num_vars);
 }
 
-void Expresion::inicializarCromosoma(){
+void Expresion :: inicializarCromosoma(){
 	// para cada elemento escogemos un numero aleatorio en [-10, 10]
 	for (unsigned i = 0; i < longitud_cromosoma; i++){
 		cromosoma[i] = Random::getFloat(-10.0f, 10.0f);
@@ -60,7 +61,7 @@ void Expresion::inicializarCromosoma(){
 
 }
 
-Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
+Expresion Expresion :: obtenerSubarbol(const Arbol subarbol){
 	Expresion sol;
 
 	unsigned tam = 0;
@@ -98,7 +99,7 @@ Expresion Expresion::obtenerSubarbol(const Arbol subarbol){
 
 
 
-void Expresion::inicializarVacia(){
+void Expresion :: inicializarVacia(){
 	// una expresion vacia no tiene arbol
 	arbol              = nullptr;
 	cromosoma          = nullptr;
@@ -110,11 +111,11 @@ void Expresion::inicializarVacia(){
 
 
 
-Expresion::~Expresion(){
+Expresion :: ~Expresion(){
 	liberarMemoria();
 }
 
-void Expresion::liberarMemoriaArbol() {
+void Expresion :: liberarMemoriaArbol() {
 	// si el arbol tiene asociado alguna direccion de memoria
 	if (arbol != nullptr){
 		// la liberamos
@@ -122,14 +123,14 @@ void Expresion::liberarMemoriaArbol() {
 	}
 }
 
-void Expresion::liberarMemoriaCromosoma() {
+void Expresion :: liberarMemoriaCromosoma() {
 	// y lo mismo con el cromosoma
 	if (cromosoma != nullptr){
 		delete [] cromosoma;
 	}
 }
 
-void Expresion::liberarMemoria(){
+void Expresion :: liberarMemoria(){
 
 	liberarMemoriaArbol();
 	liberarMemoriaCromosoma();
@@ -140,7 +141,7 @@ void Expresion::liberarMemoria(){
 
 }
 
-void Expresion::reservarMemoriaArbol(const int tam){
+void Expresion :: reservarMemoriaArbol(const int tam){
 	// en todo caso la longitud reservada es cero
 	longitud_reservada = 0;
 
@@ -151,14 +152,14 @@ void Expresion::reservarMemoriaArbol(const int tam){
 	}
 }
 
-void Expresion::reservarMemoriaCromosoma(const int tam){
+void Expresion :: reservarMemoriaCromosoma(const int tam){
 	if (tam > 0){
 		cromosoma = new double[tam];
 		longitud_cromosoma = tam;
 	}
 }
 
-void Expresion::copiarDatos(const Expresion & otra){
+void Expresion :: copiarDatos(const Expresion & otra){
 	// copiamos todos los valores
 	fitness            = otra.fitness;
 	evaluada           = otra.evaluada;
@@ -173,12 +174,12 @@ void Expresion::copiarDatos(const Expresion & otra){
 	copiarCromosoma(otra.cromosoma);
 }
 
-void Expresion::copiarCromosoma(const double * otro_cromosoma){
+void Expresion :: copiarCromosoma(const double * otro_cromosoma){
 	// el cromosoma, al ser reales, podemos copiarlo con memcpy
 	memcpy(cromosoma, otro_cromosoma, longitud_cromosoma*sizeof(double));
 }
 
-Expresion::Expresion(const Expresion & otra){
+Expresion :: Expresion(const Expresion & otra){
 	// al inicializar vacia mantenemos la prfuncidad que queramos
 	profundidad_maxima = otra.profundidad_maxima;
 
@@ -189,7 +190,7 @@ Expresion::Expresion(const Expresion & otra){
 	(*this) = otra;
 }
 
-Expresion & Expresion::operator= (const Expresion & otra){
+Expresion & Expresion :: operator= (const Expresion & otra){
 	// si no es ella misma
 	if (this != &otra){
 		// liberamos la memoria de la actual
@@ -208,7 +209,7 @@ Expresion & Expresion::operator= (const Expresion & otra){
 
 }
 
-void Expresion::redimensionar(const int tam){
+void Expresion :: redimensionar(const int tam){
 
 	// guardamos la expresion actual
 	Expresion otra = (*this);
@@ -228,7 +229,7 @@ void Expresion::redimensionar(const int tam){
 
 }
 
-bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
+bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 														const double prob_variable,
 														const unsigned num_variables){
 
@@ -294,7 +295,7 @@ bool Expresion::generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-double Expresion::evaluarDato(std::stack<Nodo> & pila,
+double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 										const std::vector<double> & dato){
 
 	double resultado = 0.0;
@@ -352,7 +353,7 @@ double Expresion::evaluarDato(std::stack<Nodo> & pila,
 
 }
 
-double Expresion::evaluarDato(const std::vector<double> & dato){
+double Expresion :: evaluarDato(const std::vector<double> & dato){
 	double resultado;
 
 	// pila donde almacenaremos la expresion
@@ -371,7 +372,7 @@ double Expresion::evaluarDato(const std::vector<double> & dato){
 }
 
 
-double Expresion::evaluarExpresion(const std::vector<std::vector<double>> &datos,
+double Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
 											  const std::vector<double> & etiquetas){
 
 	// almacenamos como resultado el valor de fitness
@@ -404,22 +405,26 @@ double Expresion::evaluarExpresion(const std::vector<std::vector<double>> &datos
 	return resultado;
 }
 
-bool Expresion::estaEvaluada() const{
+bool Expresion :: estaEvaluada() const{
 	return evaluada;
 }
 
-double Expresion::getFitness() const{
+double Expresion :: getFitness() const{
 	return fitness;
 }
 
-unsigned Expresion::getLongitudArbol() const{
+unsigned Expresion :: getLongitudArbol() const{
 	return longitud_arbol;
 }
 
+unsigned Expresion :: getLongitudCromosoma() const{
+	return longitud_cromosoma;
+}
 
 
-void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra,
-												 const unsigned pos_otra){
+void Expresion :: intercambiarSubarbol(const unsigned pos, const Expresion & otra,
+													const unsigned pos_otra,
+												   Expresion & hijo1, Expresion & hijo2) const {
 
 	// obtenemos el subarbol de la expresion actual
 	Expresion subarbol(&arbol[pos], profundidad_maxima);
@@ -494,21 +499,20 @@ void Expresion::intercambiarSubarbol(const unsigned pos, Expresion & otra,
 	// actualizamos la longitud
 	nueva.longitud_arbol = pos_nuevo;
 
-	// nuestro arbol pasa a ser el antiguo
-	(*this) = nueva;
+	// asignamos el nuevo arbol al primer hijo
+	hijo1 = nueva;
 
 	nueva_otra.longitud_arbol = pos_otra_nuevo;
 
-	otra = nueva_otra;
+	hijo2 = nueva_otra;
 
 	// ambas dejan de estar evaluadas
-	dejaEstarEvaluada();
-	otra.dejaEstarEvaluada();
-
+	hijo1.dejaEstarEvaluada();
+	hijo2.dejaEstarEvaluada();
 
 }
 
-void Expresion::asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n_arbol) {
+void Expresion :: asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n_arbol) {
 
 	liberarMemoriaArbol();
 
@@ -520,7 +524,7 @@ void Expresion::asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n
 
 }
 
-void Expresion::asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud){
+void Expresion :: asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud){
 
 	liberarMemoriaCromosoma();
 
@@ -532,14 +536,14 @@ void Expresion::asignarCromosoma(const double * nuevo_cromosoma, const unsigned 
 
 }
 
-void Expresion::dejaEstarEvaluada(){
+void Expresion :: dejaEstarEvaluada(){
 	// ponemos la flag a false y establecemos el fitness a NaN
 	evaluada = false;
 	fitness = std::numeric_limits<double>::quiet_NaN();
 }
 
 
-unsigned Expresion::contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const{
+unsigned Expresion :: contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const{
 	// si la pila esta vacia, devolvemos el nivel actual
 	if (pila.empty()){
 		return nivel;
@@ -569,7 +573,7 @@ unsigned Expresion::contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const
 	}
 }
 
-unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
+unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 
 	unsigned profundidad = 0;
 	std::stack<Nodo> pila;
@@ -589,7 +593,7 @@ unsigned Expresion::calcularProfundidad(const unsigned comienzo) const {
 
 
 
-void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
+void Expresion :: cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expresion & hijo2, const double alfa) const{
 
 	if ( otra.longitud_cromosoma != this->longitud_cromosoma ) {
 		std::cerr << "Cruzando dos cromosomas de distinta longitud" << std::endl;
@@ -624,19 +628,20 @@ void Expresion::cruceBLXalfa(Expresion & otra, const double alfa){
 	}
 
 
-	this->copiarCromosoma(cromosoma_actual);
-	otra.copiarCromosoma(cromosoma_otro);
+	hijo1.asignarCromosoma(cromosoma_actual, this->longitud_cromosoma);
+	hijo2.asignarCromosoma(cromosoma_otro, otra.longitud_cromosoma);
 
 	delete [] cromosoma_actual;
 	delete [] cromosoma_otro;
+
 }
 
 
-bool Expresion::mismoNicho(const Expresion & otra) const {
+bool Expresion :: mismoNicho(const Expresion & otra) const {
 	return (*this == otra);
 }
 
-std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila,
+std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 															 std::string resultado,
 															 const bool izda) const{
 	// si la pila esta vacia, devolvemos el resultado
@@ -717,7 +722,18 @@ std::string Expresion::obtenerStringExpresion(std::stack<Nodo> & pila,
 
 }
 
-std::string Expresion::stringExpresion() const {
+
+
+Arbol Expresion:: getArbol () const {
+	return arbol;
+}
+
+
+double * Expresion:: getCromosoma () const {
+	return cromosoma;
+}
+
+std::string Expresion :: stringExpresion() const {
 	std::string resultado = "";
 
 	std::stack<Nodo> pila;
@@ -742,7 +758,7 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	return os;
 }
 
-bool Expresion::operator == ( const Expresion & otra) const {
+bool Expresion :: operator == ( const Expresion & otra) const {
 
 	bool resultado = longitud_arbol == otra.longitud_arbol;
 
@@ -753,7 +769,7 @@ bool Expresion::operator == ( const Expresion & otra) const {
 	return resultado;
 }
 
-bool Expresion::operator != ( const Expresion & otra) const {
+bool Expresion :: operator != ( const Expresion & otra) const {
 	return !(*this == otra);
 }
 

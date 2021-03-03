@@ -258,6 +258,18 @@ class GA_P{
 
 		unsigned getMaxProfExpresiones() const;
 
+		/**
+		 *  @brief Ajustar la poblacion utilizando los datos actuales
+		 * 
+		 *  
+		 **/
+
+		void ajustar(const int num_eval, const double prob_cruce_gp,
+						 const double prob_cruce_ga, 
+						 const double prob_mutacion_gp, 
+						 const double prob_mutacion_ga,
+						 const bool mostrar_evolucion = true) ;
+
 };
 
 }

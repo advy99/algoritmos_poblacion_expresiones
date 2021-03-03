@@ -178,14 +178,6 @@ class Expresion{
 		void redimensionar(const int tam);
 
 		/**
-		  * @brief Metodo para marcar que la evaluación del fitness de una
-		  * expresión ya no es valida.
-		  *
-		  */
-
-		void dejaEstarEvaluada();
-
-		/**
 		  * @brief Contar los niveles de un árbol de Expresion dado en una pila.
 		  *
 		  * @param pila Pila donde esta almacenada la Expresion
@@ -320,6 +312,14 @@ class Expresion{
 
 		unsigned getLongitudArbol() const;
 
+		/**
+		  * @brief Consultar la longitud del cromosoma.
+		  *
+		  * @return Longitud del cromosoma.
+		  */
+
+		unsigned getLongitudCromosoma() const;
+
 		/*
 		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
 		 *
@@ -368,13 +368,23 @@ class Expresion{
 		  * @param pos Posición del árbol a intercambiar.
 		  * @param otra Expresion con la que intercambiar.
 		  * @param pos_otra Posición de la expresión dada a intercambiar.
+		  * @param hijo1 Expresión donde se almacenará el resultado del cruce.
+		  * @param hijo2 Expresión donde se almacenará el resultado del cruce.
 		  *
 		  * @pre otra No es una expresion vacia.
 		  */
 
-		void intercambiarSubarbol(const unsigned pos, Expresion & otra,
-										  const unsigned pos_otra);
+		void intercambiarSubarbol(const unsigned pos, const Expresion & otra,
+										  const unsigned pos_otra,
+										  Expresion & hijo1, Expresion & hijo2) const;
 
+		/**
+		  * @brief Metodo para marcar que la evaluación del fitness de una
+		  * expresión ya no es valida.
+		  *
+		  */
+
+		void dejaEstarEvaluada();
 
 		/**
 		  * @brief Operador de asignación de una expresión. Asignamos una
@@ -410,15 +420,18 @@ class Expresion{
 
 		/**
 		 * @brief Operador de cruce para los cromosomas de las expresiones.
+		 * Al cruzar dos cromosomas obtendremos otros dos nuevos cromosomas.
 		 *
 		 * @param otra Expresion con la que cruzar el cromosoma.
+		 * @param hijo1 Expresión donde se almacenará el resultado del cruce.
+		 * @param hijo2 Expresión donde se almacenará el resultado del cruce.
 		 * @param alfa Valor alfa del metodo BLX-alfa, posible extension del
 		 * rango entre dos valores
 		 *
 		 */
 
 
-		void cruceBLXalfa(Expresion & otra, const double alfa = 0.3);
+		void cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expresion & hijo2, const double alfa = 0.3) const;
 
 		/**
 		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho
@@ -430,6 +443,23 @@ class Expresion{
 		 */
 
 		bool mismoNicho(const Expresion & otra) const;
+
+
+
+		/**
+		 * @brief Obtener donde está almacenado el arbol
+		 * 
+		 */
+
+		Arbol getArbol() const;
+
+
+		/**
+		 * @brief Obtener donde está almacenado el cromosoma
+		 * 
+		 */
+
+		double * getCromosoma() const;
 
 		/**
 		  * @brief Funcion para obtener una expresión almacenada en una pila en
