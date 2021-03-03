@@ -155,6 +155,128 @@ bool GA_P :: leerDatos(const std::string fichero_datos,
 }
 
 
+void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
+							const double prob_cruce_ga, const double prob_mutacion_gp, 
+							const double prob_mutacion_ga, const bool mostrar_evolucion) {
+
+	const int NUM_GENERACIONES = num_eval / (double) poblacion->getTamPoblacion();
+
+	int eval_actual = 0;
+	int padre, madre;
+	bool modificado_hijo1;
+	bool modificado_hijo2;
+
+	Poblacion * poblacion_antigua = new Poblacion(*poblacion);
+	Poblacion poblacion_tmp;
+
+	Expresion hijo1, hijo2;
+
+	bool cruce_ga;
+	bool cruce_gp;
+
+	while ( eval_actual < NUM_GENERACIONES) {
+
+		// intercambio la poblacion antigua y la actual
+		poblacion_tmp = *poblacion_antigua;
+		*poblacion_antigua = *poblacion;
+		*poblacion = poblacion_tmp;
+
+
+		// seleccionamos la poblacion a cruzar
+		// TODO: seleccion por torneo
+
+		// aplicamos los operadores geneticos
+		for ( int i = 0; i < poblacion->getTamPoblacion(); i += 2){
+			madre = i;
+			padre = i + 1;
+
+			modificado_hijo1 = modificado_hijo2 = false;
+			cruce_ga = cruce_gp = false;
+
+			// cruce de la parte GA
+			if ( Random::getFloat() < prob_cruce_ga ) {
+				// cruce del cromosoma utilizando BLX_alfa
+				(*poblacion)[madre].cruceBLXalfa((*poblacion)[padre], hijo1, hijo2);
+				modificado_hijo1 = modificado_hijo2 = true;
+				cruce_ga = true;
+			}
+
+			// cruce de la parte GP
+			if ( Random::getFloat() < prob_cruce_gp ) {
+				// cruce de programacion genetica, se intercambian arboles
+
+				int pos_cruce_madre = Random::getInt((*poblacion)[madre].getLongitudArbol());
+				int pos_cruce_padre = Random::getInt((*poblacion)[padre].getLongitudArbol());
+
+
+				(*poblacion)[madre].intercambiarSubarbol(pos_cruce_madre, (*poblacion)[padre], pos_cruce_padre, hijo1, hijo2);
+				modificado_hijo1 = modificado_hijo2 = true;
+				cruce_gp = true;
+			}
+
+			if ( !cruce_gp && !cruce_ga ) {
+				// si no hay ningun tipo de cruce, asignamos los hijos tal cual
+				hijo1 = (*poblacion)[madre];
+				hijo2 = (*poblacion)[padre];
+
+			} else {
+				if ( !cruce_gp ) {
+					// no se ha cruzado el arbol
+					hijo1.asignarArbol((*poblacion)[madre].getArbol(), (*poblacion)[madre].getLongitudArbol());
+					hijo2.asignarArbol((*poblacion)[padre].getArbol(), (*poblacion)[padre].getLongitudArbol());
+				} else {
+					// no se ha cruzado el cromosoma
+					hijo1.asignarCromosoma((*poblacion)[madre].getCromosoma(), (*poblacion)[madre].getLongitudCromosoma());
+					hijo2.asignarCromosoma((*poblacion)[padre].getCromosoma(), (*poblacion)[padre].getLongitudCromosoma());
+
+				}
+			}
+
+			if ( Random::getFloat() < prob_mutacion_ga ) {
+				// mutacion GA en el primer hijo
+			}
+
+			if ( Random::getFloat() < prob_mutacion_ga ) {
+				// mutacion GA en el segundo hijo
+			}
+
+			if ( Random::getFloat() < prob_mutacion_gp ) {
+				// mutacion GP en el primer hijo
+			}
+
+			if ( Random::getFloat() < prob_mutacion_gp ) {
+				// mutacion GP en el segundo hijo
+			}
+
+			if ( modificado_hijo1 ) {
+				(*poblacion)[madre] = hijo1;
+				(*poblacion)[madre].dejaEstarEvaluada();
+			}
+
+			if ( modificado_hijo2) {
+				(*poblacion)[padre] = hijo2;
+				(*poblacion)[padre].dejaEstarEvaluada();
+			}
+
+		}
+
+		// elitismo
+
+
+		// evaluamos
+
+
+
+
+		eval_actual++;
+
+		if ( mostrar_evolucion ) {
+			// mostramos el mejor individuo
+		}
+
+	}
+
+}
 
 
 
