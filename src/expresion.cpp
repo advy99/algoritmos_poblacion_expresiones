@@ -416,6 +416,9 @@ unsigned Expresion :: getLongitudArbol() const{
 	return longitud_arbol;
 }
 
+unsigned Expresion :: getLongitudCromosoma() const{
+	return longitud_cromosoma;
+}
 
 
 void Expresion :: intercambiarSubarbol(const unsigned pos, const Expresion & otra,
@@ -716,6 +719,17 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 
 
 
+}
+
+
+
+Arbol Expresion:: getArbol () const {
+	return arbol;
+}
+
+
+double * Expresion:: getCromosoma () const {
+	return cromosoma;
 }
 
 std::string Expresion :: stringExpresion() const {

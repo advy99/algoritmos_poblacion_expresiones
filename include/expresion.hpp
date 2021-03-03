@@ -320,6 +320,14 @@ class Expresion{
 
 		unsigned getLongitudArbol() const;
 
+		/**
+		  * @brief Consultar la longitud del cromosoma.
+		  *
+		  * @return Longitud del cromosoma.
+		  */
+
+		unsigned getLongitudCromosoma() const;
+
 		/*
 		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
 		 *
@@ -436,6 +444,23 @@ class Expresion{
 		 */
 
 		bool mismoNicho(const Expresion & otra) const;
+
+
+
+		/**
+		 * @brief Obtener donde está almacenado el arbol
+		 * 
+		 */
+
+		Arbol getArbol() const;
+
+
+		/**
+		 * @brief Obtener donde está almacenado el cromosoma
+		 * 
+		 */
+
+		double * getCromosoma() const;
 
 		/**
 		  * @brief Funcion para obtener una expresión almacenada en una pila en
