@@ -2,6 +2,7 @@
 #include "expresion.hpp"
 #include <cstring>
 #include <stack>
+#include <limits>
 #include "aux_gap.hpp"
 #include "random.hpp"
 
