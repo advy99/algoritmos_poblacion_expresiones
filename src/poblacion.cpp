@@ -132,4 +132,9 @@ unsigned Poblacion :: seleccionIndividuo() const {
 
 }
 
+
+unsigned Poblacion :: getTamPoblacion() const {
+	return tam_poblacion;
+}
+
 } // namespace GA_P
