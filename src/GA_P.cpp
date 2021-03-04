@@ -245,19 +245,30 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 		}
 
 		// elitismo
+		bool mejor_encontrado = false;
+		unsigned i = 0;
+		
+		while (i < poblacion_antigua.getTamPoblacion() && !mejor_encontrado) {
+			mejor_encontrado = poblacion[i].totalmenteIguales(poblacion_antigua.getMejorIndividuo());
+			i++;
+		}
 
+		// si no esta el mejor, aplico elitismo
+		if ( !mejor_encontrado ){
+			poblacion[poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
+		}
 
 		// evaluamos
+		poblacion.evaluarPoblacion(datos, output_datos);
 
 
 
-
-		eval_actual++;
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
 		}
 
+		eval_actual++;
 	}
 
 }
