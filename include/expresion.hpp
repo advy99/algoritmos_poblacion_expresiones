@@ -348,11 +348,11 @@ class Expresion{
 		  * @param datos Datos con los que evaluar la expresion
 		  * @param etiquetas Etiquetas correspondientes a los datos para evaluar.
 		  *
-		  * @return Valor de ajuste de la expresión.
+		  * @post fitness = Valor de ajuste de la expresión.
 		  */
 
-		double evaluarExpresion(const std::vector<std::vector<double>> & datos,
-										const std::vector<double> & etiquetas);
+		void evaluarExpresion(const std::vector<std::vector<double>> & datos,
+									 const std::vector<double> & etiquetas);
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.

@@ -372,7 +372,7 @@ double Expresion :: evaluarDato(const std::vector<double> & dato){
 }
 
 
-double Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
+void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
 											  const std::vector<double> & etiquetas){
 
 	// almacenamos como resultado el valor de fitness
@@ -402,7 +402,6 @@ double Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &dat
 	fitness = resultado;
 	evaluada = true;
 
-	return resultado;
 }
 
 bool Expresion :: estaEvaluada() const{
