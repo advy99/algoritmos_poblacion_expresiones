@@ -489,6 +489,17 @@ class Expresion{
 		std::string stringExpresion() const;
 
 		/*
+		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma
+		 *
+		 * @param otra Expresión a comparar con la actual
+		 * 
+		 * @pre Los cromosomas son de la misma longitud
+		 *
+		 */
+
+		bool totalmenteIguales(const Expresion & otra) const;
+
+		/*
 		 * @brief Operador para comparar si dos expresiones son iguales
 		 *
 		 * @param otra Expresión a comparar con la actual

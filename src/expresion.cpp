@@ -757,6 +757,23 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	return os;
 }
 
+bool Expresion :: totalmenteIguales ( const Expresion & otra) const {
+
+	// comprobamos si el arbol es igual
+	bool resultado = (*this) == otra;
+
+	// si el arbol coincide, comparamos el cromosoma
+	if ( resultado ) {
+		for ( unsigned i = 0; i < getLongitudCromosoma(); i++) {
+			resultado = resultado && comparar_reales(cromosoma[i], otra.cromosoma[i]);
+		}
+	}
+
+	return resultado;
+
+}
+
+
 bool Expresion :: operator == ( const Expresion & otra) const {
 
 	bool resultado = longitud_arbol == otra.longitud_arbol;
