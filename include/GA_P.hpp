@@ -93,6 +93,16 @@ class GA_P{
 
 		 void inicializarVacio();
 
+		/**
+		 *  @brief Selección de una nueva población por torneo a partir de
+		 * la poblacion actual
+		 * 
+		 * @param tam_torneo Tamaño del torneo
+		 * 
+		 */
+
+		 Poblacion seleccionTorneo(const unsigned tam_torneo);
+
 	public:
 
 		/**
@@ -262,6 +272,7 @@ class GA_P{
 						 const double prob_cruce_ga, 
 						 const double prob_mutacion_gp, 
 						 const double prob_mutacion_ga,
+						 const int tam_torneo,
 						 const bool mostrar_evolucion = true) ;
 
 };

@@ -5,6 +5,7 @@
 #include <cctype>
 #include <sstream>
 #include <cstdlib>
+#include <set>
 
 namespace GA_P{
 
@@ -138,7 +139,8 @@ bool GA_P :: leerDatos(const std::string fichero_datos,
 
 void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 							const double prob_cruce_ga, const double prob_mutacion_gp, 
-							const double prob_mutacion_ga, const bool mostrar_evolucion) {
+							const double prob_mutacion_ga, const int tam_torneo,
+							const bool mostrar_evolucion) {
 
 	const int NUM_GENERACIONES = num_eval / (double) poblacion.getTamPoblacion();
 
@@ -165,6 +167,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		// seleccionamos la poblacion a cruzar
 		// TODO: seleccion por torneo
+		poblacion = seleccionTorneo(tam_torneo);
 
 		// aplicamos los operadores geneticos
 		for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i += 2){
@@ -257,6 +260,52 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 	}
 
+}
+
+
+Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
+	// partimos de una poblacion con el mismo tamaño que la actual
+	Poblacion resultado = poblacion;
+
+	std::set<int> participantes_torneo;
+	std::vector<int> ganadores_torneo(tam_torneo);
+
+	int nuevo_participante;
+	int mejor_torneo;
+
+	// escojo una nueva poblacion del mismo tamaño
+	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
+
+		// generamos el inicial y lo insertamos en los generados
+		mejor_torneo = Random::getInt(poblacion.getTamPoblacion());
+
+		participantes_torneo.insert(mejor_torneo);
+
+		// insertamos participantes hasta llegar al tamaño indicado
+		while ( tam_torneo > participantes_torneo.size()) {
+			nuevo_participante = Random::getInt(poblacion.getTamPoblacion());
+
+			auto resultado_insertar = participantes_torneo.insert(nuevo_participante);
+
+			// si se ha insertado correctamente (no hemos repetido participante)
+			if ( resultado_insertar.second ) {
+				// si este nuevo participante tiene mejor fitness, lo cojemos como mejor
+				if ( poblacion[nuevo_participante].getFitness() < poblacion[mejor_torneo].getFitness() ) {
+					mejor_torneo = nuevo_participante;
+				}
+			}
+		}
+		
+		// el ganador del torneo i es el mejor del torneo
+		ganadores_torneo[i] = mejor_torneo;
+	}
+
+	// actualizamos el resultado con los ganadores del torneo
+	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
+		resultado[i] = poblacion[ganadores_torneo[i]];
+	}
+
+	return resultado;
 }
 
 
