@@ -60,7 +60,7 @@ class GA_P{
 		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
 		  * GA_P
 		  */
-		Poblacion * poblacion;
+		Poblacion poblacion;
 
 		/**
 		  * @brief Datos con los que ajustar el algoritmo
@@ -85,12 +85,6 @@ class GA_P{
 		  */
 
 		void liberarMemoria();
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por la población
-		  */
-
-		void liberarPoblacion();
 
 		/**
 		  * @brief Inicializar GA_P vacio
