@@ -45,7 +45,8 @@ int main(int argc, char ** argv){
 	std::cout << std::endl << "Evaluacion del dato: x0 = 3.23 \t x1 = 286.7835 \t x2 = 32.019: "
 				 << std::endl << miExpresion.evaluarDato(dato_prueba) << std::endl;
 
-	std::cout << std::endl << miExpresion.evaluarExpresion(myGAP.getDatos(), myGAP.getOutputDatos());
+	miExpresion.evaluarExpresion(myGAP.getDatos(), myGAP.getOutputDatos());
+	std::cout << std::endl << miExpresion.getFitness();
 
 
 	GA_P::Expresion miExpresion2;
