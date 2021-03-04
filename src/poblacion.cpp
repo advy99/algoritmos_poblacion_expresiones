@@ -130,6 +130,13 @@ unsigned Poblacion :: seleccionIndividuo() const {
 
 }
 
+Expresion Poblacion :: getMejorIndividuo() const {
+	return expresiones[mejor_individuo];
+}
+
+unsigned Poblacion :: getIndiceMejorIndividuo() const {
+	return mejor_individuo;
+}
 
 unsigned Poblacion :: getTamPoblacion() const {
 	return tam_poblacion;
