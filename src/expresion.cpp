@@ -372,7 +372,7 @@ double Expresion :: evaluarDato(const std::vector<double> & dato){
 }
 
 
-double Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
+void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
 											  const std::vector<double> & etiquetas){
 
 	// almacenamos como resultado el valor de fitness
@@ -402,7 +402,6 @@ double Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &dat
 	fitness = resultado;
 	evaluada = true;
 
-	return resultado;
 }
 
 bool Expresion :: estaEvaluada() const{
@@ -757,6 +756,23 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 
 	return os;
 }
+
+bool Expresion :: totalmenteIguales ( const Expresion & otra) const {
+
+	// comprobamos si el arbol es igual
+	bool resultado = (*this) == otra;
+
+	// si el arbol coincide, comparamos el cromosoma
+	if ( resultado ) {
+		for ( unsigned i = 0; i < getLongitudCromosoma(); i++) {
+			resultado = resultado && comparar_reales(cromosoma[i], otra.cromosoma[i]);
+		}
+	}
+
+	return resultado;
+
+}
+
 
 bool Expresion :: operator == ( const Expresion & otra) const {
 

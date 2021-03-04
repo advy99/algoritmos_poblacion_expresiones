@@ -155,6 +155,14 @@ class Poblacion{
 		  */
 
 		Expresion getMejorIndividuo() const;
+		
+		/**
+		  * @brief Obtener el indice del mejor individuo de la poblacion.
+		  *
+		  * @return Indice del mejor individuo de la población
+		  */
+
+		unsigned getIndiceMejorIndividuo() const;
 
 		/**
 		  * @brief Obtener el tamaño de la poblacion.
