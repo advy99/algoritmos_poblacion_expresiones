@@ -71,21 +71,19 @@ void Poblacion :: evaluarPoblacion(const std::vector<std::vector<double> > & dat
 											const std::vector<double> & etiquetas){
 	// establecemos el mejor individuo al primero
 	mejor_individuo = 0;
-	double valor_mejor;
-	double valor_evaluada;
 
-	// evaluamos el mejor hasta ahora
-	valor_mejor = expresiones[0].evaluarExpresion(datos, etiquetas);
+	if (!expresiones[0].estaEvaluada()) {
+		expresiones[0].evaluarExpresion(datos, etiquetas);
+	}
 
 	// evaluamos el resto de individuos
 	for ( unsigned i = 1; i < tam_poblacion; i++){
 		if (!expresiones[i].estaEvaluada()){
-			valor_evaluada = expresiones[i].evaluarExpresion(datos, etiquetas);
+			expresiones[i].evaluarExpresion(datos, etiquetas);
+		}
 
-			if (valor_evaluada < valor_mejor){
-				mejor_individuo = i;
-				valor_mejor = valor_evaluada;
-			}
+		if (expresiones[i].getFitness() < expresiones[mejor_individuo].getFitness()){
+			mejor_individuo = i;
 		}
 	}
 }
