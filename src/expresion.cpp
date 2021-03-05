@@ -120,6 +120,7 @@ void Expresion :: liberarMemoriaArbol() {
 	if (arbol != nullptr){
 		// la liberamos
 		delete [] arbol;
+		arbol = nullptr;
 	}
 }
 
@@ -127,6 +128,7 @@ void Expresion :: liberarMemoriaCromosoma() {
 	// y lo mismo con el cromosoma
 	if (cromosoma != nullptr){
 		delete [] cromosoma;
+		cromosoma = nullptr;
 	}
 }
 

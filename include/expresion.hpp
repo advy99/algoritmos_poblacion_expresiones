@@ -85,7 +85,7 @@ class Expresion{
 		/**
 		  * @brief Conjunto de nodos que conformarán la expresión.
 		  */
-		Arbol arbol;
+		Arbol arbol = nullptr;
 
 		/**
 		  * @brief Array donde almacenaremos los valores de las constantes
@@ -93,7 +93,7 @@ class Expresion{
 		  *
 		  */
 
-		double * cromosoma;
+		double * cromosoma = nullptr;
 
 		/**
 		  * @brief Longitud del array cromosoma
