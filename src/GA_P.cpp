@@ -266,6 +266,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
+			std::cout << eval_actual << "\t" << poblacion[mejor_encontrado].getFitness() << std::endl;
 		}
 
 		eval_actual++;
