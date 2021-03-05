@@ -218,22 +218,26 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
 				// mutacion GA en el primer hijo
-				poblacion[madre].mutarGA(generacion);
+				hijo1.mutarGA(generacion);
 				modificado_hijo1 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
 				// mutacion GA en el segundo hijo
-				poblacion[padre].mutarGA(generacion);
+				hijo2.mutarGA(generacion);
 				modificado_hijo2 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_gp ) {
 				// mutacion GP en el primer hijo
+				hijo1.mutarGP(getNumVariables());
+				modificado_hijo1 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_gp ) {
 				// mutacion GP en el segundo hijo
+				hijo2.mutarGP(getNumVariables());
+				modificado_hijo2 = true;
 			}
 
 			if ( modificado_hijo1 ) {
