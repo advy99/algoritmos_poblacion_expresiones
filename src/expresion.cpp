@@ -444,7 +444,7 @@ void Expresion :: intercambiarSubarbol(const unsigned pos, const Expresion & otr
 
 	// creamos la nueva expresion
 	Expresion nueva;
-	nueva.copiarCromosoma(cromosoma);
+	nueva.asignarCromosoma(cromosoma, longitud_cromosoma);
 
 
 	// la nueva tendra dimension la actual, menos el subarbol que
@@ -473,7 +473,7 @@ void Expresion :: intercambiarSubarbol(const unsigned pos, const Expresion & otr
 
 	// aplicamos lo mismo a la que nos pasan por referencia
 	Expresion nueva_otra;
-	nueva_otra.copiarCromosoma(otra.cromosoma);
+	nueva_otra.asignarCromosoma(otra.cromosoma, otra.longitud_cromosoma);
 
 
 	nueva_otra.redimensionar(pos_otra + subarbol.getLongitudArbol() +
@@ -767,7 +767,7 @@ bool Expresion :: totalmenteIguales ( const Expresion & otra) const {
 	// si el arbol coincide, comparamos el cromosoma
 	if ( resultado ) {
 		for ( unsigned i = 0; i < getLongitudCromosoma(); i++) {
-			resultado = resultado && comparar_reales(cromosoma[i], otra.cromosoma[i]);
+			resultado = resultado && comparar_reales(cromosoma[i], otra.cromosoma[i], 0.00005);
 		}
 	}
 
@@ -775,10 +775,10 @@ bool Expresion :: totalmenteIguales ( const Expresion & otra) const {
 
 }
 
-double Expresion :: delta(const int generacion, const double valor) {
+double Expresion :: delta(const int generacion, const int max_generaciones, const double valor) {
 	double aleatorio = Random::getFloat();
 
-	double sub = 1.0 - (valor / static_cast<double>(generacion));
+	double sub = 1.0 - ((double)generacion / (double)(max_generaciones));
 	// TODO: parametrizar B
 	double potencia = std::pow(sub, 5);
 	double subtotal = std::pow(aleatorio, potencia);
@@ -787,14 +787,14 @@ double Expresion :: delta(const int generacion, const double valor) {
 }
 
 
-void Expresion :: mutarGA(const int generacion) {
+void Expresion :: mutarGA(const int generacion, const int max_generaciones) {
 
 	int pos_mutacion = Random::getInt(longitud_cromosoma);
 
 	if ( Random::getFloat() < 0.5) {
-		cromosoma[pos_mutacion] += delta(generacion, 1.0 - cromosoma[pos_mutacion]);
+		cromosoma[pos_mutacion] += delta(generacion, max_generaciones, 1.0 - cromosoma[pos_mutacion]);
 	} else {
-		cromosoma[pos_mutacion] -= delta(generacion, cromosoma[pos_mutacion]);
+		cromosoma[pos_mutacion] -= delta(generacion, max_generaciones, cromosoma[pos_mutacion]);
 	}
 }
 
