@@ -5,7 +5,8 @@
 #include <cctype>
 #include <sstream>
 #include <cstdlib>
-#include <set>
+#include <vector>
+#include <algorithm>
 
 namespace GA_P{
 
@@ -44,7 +45,7 @@ GA_P :: GA_P(const std::string fichero_datos, const char char_comentario,
 	// si se han leido bien, inicilizamos la poblacion
 	if (lectura_correcta){
 		// inicilizamos poblacion
-		generarPoblacion(tam_poblacion, prof, prob_var);
+		generarPoblacion(tam_poblacion, prof, prob_var, true);
 
 	} else {
 		// si no, mostramos un error
@@ -59,7 +60,6 @@ void GA_P :: generarPoblacion(const unsigned tam_poblacion, const unsigned profu
 	if ( sustituir_actual ) {
 		poblacion = Poblacion(tam_poblacion, profundidad_exp, prob_var,
 									 getNumVariables(), getMaxProfExpresiones());
-
 	}
 
 }
@@ -149,7 +149,10 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 	bool modificado_hijo1;
 	bool modificado_hijo2;
 
-	Poblacion  poblacion_antigua = poblacion;
+	// evaluo la poblacion al inicio
+	poblacion.evaluarPoblacion(datos, output_datos);
+
+	Poblacion poblacion_antigua = poblacion;
 	Poblacion poblacion_tmp;
 
 	Expresion hijo1, hijo2;
@@ -166,7 +169,6 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 
 		// seleccionamos la poblacion a cruzar
-		// TODO: seleccion por torneo
 		poblacion = seleccionTorneo(tam_torneo);
 
 		// aplicamos los operadores geneticos
@@ -287,8 +289,8 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion resultado = poblacion;
 
-	std::set<int> participantes_torneo;
-	std::vector<int> ganadores_torneo(tam_torneo);
+	std::vector<int> participantes_torneo;
+	std::vector<int> ganadores_torneo;
 
 	int nuevo_participante;
 	int mejor_torneo;
@@ -296,28 +298,32 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 	// escojo una nueva poblacion del mismo tamaño
 	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
 
+		participantes_torneo.clear();
+
 		// generamos el inicial y lo insertamos en los generados
 		mejor_torneo = Random::getInt(poblacion.getTamPoblacion());
 
-		participantes_torneo.insert(mejor_torneo);
+		participantes_torneo.push_back(mejor_torneo);
 
 		// insertamos participantes hasta llegar al tamaño indicado
 		while ( tam_torneo > participantes_torneo.size()) {
 			nuevo_participante = Random::getInt(poblacion.getTamPoblacion());
 
-			auto resultado_insertar = participantes_torneo.insert(nuevo_participante);
+			auto encontrado = std::find(participantes_torneo.begin(), participantes_torneo.end(), nuevo_participante);
 
-			// si se ha insertado correctamente (no hemos repetido participante)
-			if ( resultado_insertar.second ) {
+			// si no aparece como participante
+			if ( encontrado != participantes_torneo.end() ) {
+				participantes_torneo.push_back(nuevo_participante);
 				// si este nuevo participante tiene mejor fitness, lo cojemos como mejor
 				if ( poblacion[nuevo_participante].getFitness() < poblacion[mejor_torneo].getFitness() ) {
 					mejor_torneo = nuevo_participante;
 				}
+
 			}
 		}
 		
 		// el ganador del torneo i es el mejor del torneo
-		ganadores_torneo[i] = mejor_torneo;
+		ganadores_torneo.push_back(mejor_torneo);
 	}
 
 	// actualizamos el resultado con los ganadores del torneo
