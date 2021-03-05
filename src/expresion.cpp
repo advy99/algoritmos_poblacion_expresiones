@@ -796,6 +796,32 @@ void Expresion :: mutarGA(const int generacion) {
 	}
 }
 
+
+void Expresion :: mutarGP (const int num_vars) {
+
+
+	int posicion = Random::getInt(longitud_arbol);
+
+	// primera opcion, cambiar un termino por otro
+
+	TipoNodo tipo = arbol[posicion].getTipoNodo();
+
+	if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
+		if ( Random::getFloat() < 0.5) {
+			arbol[posicion].setTipoNodo(TipoNodo::VARIABLE);
+		} else {
+			arbol[posicion].setTipoNodo(TipoNodo::NUMERO);
+		}
+
+		arbol[posicion].setTerminoAleatorio(getLongitudCromosoma(), num_vars);
+	} else {
+		arbol[posicion].setTipoNodoOperadorAleatorio();
+	}
+
+}
+
+
+
 bool Expresion :: operator == ( const Expresion & otra) const {
 
 	bool resultado = longitud_arbol == otra.longitud_arbol;
