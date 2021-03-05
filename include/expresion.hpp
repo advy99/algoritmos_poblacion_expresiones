@@ -85,7 +85,7 @@ class Expresion{
 		/**
 		  * @brief Conjunto de nodos que conformarán la expresión.
 		  */
-		Arbol arbol;
+		Arbol arbol = nullptr;
 
 		/**
 		  * @brief Array donde almacenaremos los valores de las constantes
@@ -93,7 +93,7 @@ class Expresion{
 		  *
 		  */
 
-		double * cromosoma;
+		double * cromosoma = nullptr;
 
 		/**
 		  * @brief Longitud del array cromosoma
@@ -214,6 +214,18 @@ class Expresion{
 
 		double evaluarDato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato);
+
+		/**
+		  * @brief Función delta para la mutación no uniforme de GA
+		  *
+		  * @param generacion Generación en la que se aplica la mutación
+		  * @param valor Valor del cromosoma al aplicar la mutación 
+		  * 
+		  * @return Valor a modificar el cromosoma con el valor dado
+		  */
+
+
+		double delta(const int generacion, const double valor);
 
 	public:
 
@@ -487,6 +499,28 @@ class Expresion{
 		  */
 
 		std::string stringExpresion() const;
+
+
+		/**
+		 * 
+		 *  @brief Mutación no uniforme de la parte de algoritmo genético (cromosoma)
+		 * 
+		 *  @param generacion Generación en la que se aplica la mutación
+		 * 
+		 */
+
+		void mutarGA(const int generacion);
+
+
+		/**
+		 * 
+		 *  @brief Mutación de la parte de programación genética (arbol)
+		 * 
+		 *  @param num_vars Numero de variables que puede tomar el arbol
+		 * 
+		 */
+
+		void mutarGP(const int num_vars);
 
 		/*
 		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma

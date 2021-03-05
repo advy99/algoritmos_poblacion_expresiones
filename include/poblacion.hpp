@@ -54,7 +54,7 @@ class Poblacion{
 		  *
 		  */
 
-		Expresion * expresiones;
+		Expresion * expresiones = nullptr;
 
 
 		/**
@@ -64,12 +64,6 @@ class Poblacion{
 		  */
 
 		unsigned tam_poblacion;
-
-		/**
-		  * @brief Tamaño reservado en memoria para almacenar elementos
-		  */
-
-		unsigned tam_reservado;
 
 		/**
 		  * @brief Mejor individuo de la población
@@ -112,11 +106,19 @@ class Poblacion{
 	public:
 
 		/**
-		  * @brief Constructor con un parametro, generamos una poblacion vacia.
+		  * @brief Constructor con sin parametros, generamos una poblacion vacia.
 		  *
 		  */
 
 		Poblacion();
+
+		/**
+		  * @brief Constructor de copia.
+		  *
+		  */
+
+		Poblacion(const Poblacion & otra);
+
 
 
 
@@ -224,6 +226,16 @@ class Poblacion{
 		unsigned seleccionIndividuo() const;
 
 
+		/**
+		  * @brief Operador de asignación de una poblacion. Asignamos una
+		  * poblacion a otra.
+		  *
+		  * @param otra Poblacion a copiar.
+		  *
+		  * @return Referencia a la poblacion.
+		  */
+
+		Poblacion & operator= (const Poblacion & otra);
 
 };
 

@@ -120,6 +120,7 @@ void Expresion :: liberarMemoriaArbol() {
 	if (arbol != nullptr){
 		// la liberamos
 		delete [] arbol;
+		arbol = nullptr;
 	}
 }
 
@@ -127,6 +128,7 @@ void Expresion :: liberarMemoriaCromosoma() {
 	// y lo mismo con el cromosoma
 	if (cromosoma != nullptr){
 		delete [] cromosoma;
+		cromosoma = nullptr;
 	}
 }
 
@@ -772,6 +774,54 @@ bool Expresion :: totalmenteIguales ( const Expresion & otra) const {
 	return resultado;
 
 }
+
+double Expresion :: delta(const int generacion, const double valor) {
+	double aleatorio = Random::getFloat();
+
+	double sub = 1.0 - (valor / static_cast<double>(generacion));
+	// TODO: parametrizar B
+	double potencia = std::pow(sub, 5);
+	double subtotal = std::pow(aleatorio, potencia);
+
+	return (valor * (1.0 - subtotal));
+}
+
+
+void Expresion :: mutarGA(const int generacion) {
+
+	int pos_mutacion = Random::getInt(longitud_cromosoma);
+
+	if ( Random::getFloat() < 0.5) {
+		cromosoma[pos_mutacion] += delta(generacion, 1.0 - cromosoma[pos_mutacion]);
+	} else {
+		cromosoma[pos_mutacion] -= delta(generacion, cromosoma[pos_mutacion]);
+	}
+}
+
+
+void Expresion :: mutarGP (const int num_vars) {
+
+
+	int posicion = Random::getInt(longitud_arbol);
+
+	// primera opcion, cambiar un termino por otro
+
+	TipoNodo tipo = arbol[posicion].getTipoNodo();
+
+	if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
+		if ( Random::getFloat() < 0.5) {
+			arbol[posicion].setTipoNodo(TipoNodo::VARIABLE);
+		} else {
+			arbol[posicion].setTipoNodo(TipoNodo::NUMERO);
+		}
+
+		arbol[posicion].setTerminoAleatorio(getLongitudCromosoma(), num_vars);
+	} else {
+		arbol[posicion].setTipoNodoOperadorAleatorio();
+	}
+
+}
+
 
 
 bool Expresion :: operator == ( const Expresion & otra) const {

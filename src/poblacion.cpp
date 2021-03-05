@@ -8,7 +8,6 @@ Poblacion :: Poblacion(){
 	// una poblacion vacia no tiene nada
 	expresiones     = nullptr;
 	tam_poblacion   = 0;
-	tam_reservado   = 0;
 	mejor_individuo = -1;
 }
 
@@ -30,6 +29,16 @@ Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
 	}
 }
 
+Poblacion :: Poblacion ( const Poblacion & otra) {
+	expresiones = nullptr;
+
+	tam_poblacion = 0;
+
+
+	(*this) = otra;
+}
+
+
 Poblacion :: ~Poblacion(){
 	liberarMemoria();
 }
@@ -41,7 +50,7 @@ void Poblacion :: liberarMemoria(){
 	}
 
 	// establecemos los valores a nulos
-	tam_reservado   = 0;
+
 	tam_poblacion   = 0;
 	mejor_individuo = -1;
 	expresiones     = nullptr;
@@ -50,7 +59,7 @@ void Poblacion :: liberarMemoria(){
 
 void Poblacion :: reservarMemoria(const unsigned tam){
 	expresiones   = new Expresion[tam];
-	tam_reservado = tam;
+	tam_poblacion = tam;
 }
 
 void Poblacion :: copiarDatos(const Poblacion & otra){
@@ -149,5 +158,25 @@ Expresion & Poblacion :: operator[] (const unsigned indice) {
 const Expresion & Poblacion :: operator[] (const unsigned indice) const {
 	return expresiones[indice];
 }
+
+Poblacion & Poblacion :: operator= (const Poblacion & otra) {
+
+	liberarMemoria();
+
+	tam_poblacion = otra.tam_poblacion;
+
+	reservarMemoria(tam_poblacion);
+
+	for ( unsigned i = 0; i < tam_poblacion; i++ ) {
+		expresiones[i] = otra[i];
+	}
+
+	mejor_individuo = otra.mejor_individuo;
+
+	return (*this);
+
+}
+
+
 
 } // namespace GA_P
