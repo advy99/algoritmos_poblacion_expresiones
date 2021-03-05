@@ -142,7 +142,7 @@ class GA_P{
 		GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed = time(nullptr),
-			  const char delimitador = ',', const unsigned prof = 10);
+			  const char delimitador = ',', const unsigned prof = 20);
 
 		/**
 		  * @brief Destructor

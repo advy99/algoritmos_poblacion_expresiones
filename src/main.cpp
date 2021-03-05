@@ -24,7 +24,7 @@ int main(int argc, char ** argv){
 
 	GA_P::GA_P myGAP (argv[1], '@', 50, 0.3, semilla);
 
-	myGAP.ajustar(10000, 0.8, 0.8, 0.2, 0.2, 16);
+	myGAP.ajustar(100000, 0.8, 0.8, 0.2, 0.2, 16);
 
 	return 0;
 

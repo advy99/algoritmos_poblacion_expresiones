@@ -168,7 +168,7 @@ Poblacion & Poblacion :: operator= (const Poblacion & otra) {
 	reservarMemoria(tam_poblacion);
 
 	for ( unsigned i = 0; i < tam_poblacion; i++ ) {
-		expresiones[i] = otra[i];
+		expresiones[i] = otra.expresiones[i];
 	}
 
 	mejor_individuo = otra.mejor_individuo;

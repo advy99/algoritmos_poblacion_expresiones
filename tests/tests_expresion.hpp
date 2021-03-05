@@ -48,6 +48,42 @@ TEST ( Expresion, OperadorAsignacion) {
 	EXPECT_EQ(exp1, exp2);
 }
 
+TEST ( Expresion, TotalmenteIguales) {
+	GA_P::Expresion exp1;
+
+	exp1.generarExpresionAleatoria(10, 0.3, 3);
+
+	GA_P::Expresion exp2;
+	exp2 = exp1;
+
+	EXPECT_TRUE(exp1.totalmenteIguales(exp2));
+}
+
+
+TEST ( Expresion, AsignarArbol) {
+	GA_P::Expresion exp1;
+
+	exp1.generarExpresionAleatoria(10, 0.3, 3);
+
+	GA_P::Expresion exp2;
+
+	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
+
+	EXPECT_EQ(exp1, exp2);
+}
+
+TEST ( Expresion, AsignarCromosoma) {
+	GA_P::Expresion exp1;
+
+	exp1.generarExpresionAleatoria(10, 0.3, 3);
+
+	GA_P::Expresion exp2;
+
+	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
+
+	EXPECT_EQ(exp1, exp2);
+}
+
 TEST (Expresion, MismaCadena) {
 	GA_P::Expresion exp1;
 

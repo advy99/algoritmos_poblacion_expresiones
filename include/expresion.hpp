@@ -219,13 +219,14 @@ class Expresion{
 		  * @brief Función delta para la mutación no uniforme de GA
 		  *
 		  * @param generacion Generación en la que se aplica la mutación
+		  * @param max_gen Número máximo de generaciones al entrenar.
 		  * @param valor Valor del cromosoma al aplicar la mutación 
 		  * 
 		  * @return Valor a modificar el cromosoma con el valor dado
 		  */
 
 
-		double delta(const int generacion, const double valor);
+		double delta(const int generacion, const int max_gen, const double valor);
 
 	public:
 
@@ -506,10 +507,11 @@ class Expresion{
 		 *  @brief Mutación no uniforme de la parte de algoritmo genético (cromosoma)
 		 * 
 		 *  @param generacion Generación en la que se aplica la mutación
+		 *  @param max_gen Número máximo de generaciones al entrenar.
 		 * 
 		 */
 
-		void mutarGA(const int generacion);
+		void mutarGA(const int generacion, const int max_gen);
 
 
 		/**

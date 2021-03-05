@@ -220,13 +220,13 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
 				// mutacion GA en el primer hijo
-				hijo1.mutarGA(generacion);
+				hijo1.mutarGA(generacion, NUM_GENERACIONES);
 				modificado_hijo1 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
 				// mutacion GA en el segundo hijo
-				hijo2.mutarGA(generacion);
+				hijo2.mutarGA(generacion, NUM_GENERACIONES);
 				modificado_hijo2 = true;
 			}
 
@@ -258,10 +258,12 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 		bool mejor_encontrado = false;
 		unsigned i = 0;
 		
-		while (i < poblacion_antigua.getTamPoblacion() && !mejor_encontrado) {
+		while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
 			mejor_encontrado = poblacion[i].totalmenteIguales(poblacion_antigua.getMejorIndividuo());
 			i++;
 		}
+
+		
 
 		// si no esta el mejor, aplico elitismo
 		if ( !mejor_encontrado ){
@@ -276,7 +278,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
-			std::cout << generacion << "\t" << poblacion[mejor_encontrado].getFitness() << std::endl;
+			std::cout << generacion << "\t" << poblacion.getMejorIndividuo().getFitness() << std::endl;
 		}
 
 		generacion++;
