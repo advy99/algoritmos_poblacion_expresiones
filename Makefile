@@ -22,7 +22,7 @@ endif
 
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
-OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main_pruebas.o
+OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
 OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
@@ -86,7 +86,7 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main_pruebas.o -o $@ -L$(LIB) -lGA_P
+	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
@@ -123,6 +123,8 @@ $(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
 $(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
+$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
+	$(call compilar_objeto,$<,$@)
 
 
 # mensaje de fin
