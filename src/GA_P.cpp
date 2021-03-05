@@ -144,7 +144,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 	const int NUM_GENERACIONES = num_eval / (double) poblacion.getTamPoblacion();
 
-	int eval_actual = 0;
+	int generacion = 0;
 	int padre, madre;
 	bool modificado_hijo1;
 	bool modificado_hijo2;
@@ -157,7 +157,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 	bool cruce_ga;
 	bool cruce_gp;
 
-	while ( eval_actual < NUM_GENERACIONES) {
+	while ( generacion < NUM_GENERACIONES) {
 
 		// intercambio la poblacion antigua y la actual
 		poblacion_tmp = poblacion_antigua;
@@ -218,10 +218,14 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
 				// mutacion GA en el primer hijo
+				poblacion[madre].mutarGA(generacion);
+				modificado_hijo1 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
 				// mutacion GA en el segundo hijo
+				poblacion[padre].mutarGA(generacion);
+				modificado_hijo2 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_gp ) {
@@ -266,10 +270,10 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
-			std::cout << eval_actual << "\t" << poblacion[mejor_encontrado].getFitness() << std::endl;
+			std::cout << generacion << "\t" << poblacion[mejor_encontrado].getFitness() << std::endl;
 		}
 
-		eval_actual++;
+		generacion++;
 	}
 
 }
