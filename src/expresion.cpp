@@ -221,7 +221,7 @@ void Expresion :: redimensionar(const int tam){
 
 	// reservamos con el nuevo tamaño
 	reservarMemoriaArbol(tam);
-	reservarMemoriaCromosoma(otra.profundidad_maxima);
+	reservarMemoriaCromosoma(otra.longitud_cromosoma);
 
 	// copiamos como estaba
 	copiarDatos(otra);
