@@ -22,9 +22,12 @@ int main(int argc, char ** argv){
 		semilla = std::time(nullptr);
 	}
 
-	GA_P::GA_P myGAP (argv[1], '@', 50, 0.3, semilla);
+	GA_P::GA_P myGAP (std::string(argv[1]), '@', 50, 0.3, semilla, ',', 10);
 
-	myGAP.ajustar(100000, 0.8, 0.8, 0.2, 0.2, 16);
+	myGAP.ajustar(500000, 0.8, 0.8, 0.2, 0.2, 16);
+
+
+	std::cout << myGAP.getMejorIndividuo() << std::endl;
 
 	return 0;
 
