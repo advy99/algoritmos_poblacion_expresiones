@@ -5,6 +5,7 @@
 #include <limits>
 #include "aux_gap.hpp"
 #include "random.hpp"
+#include <algorithm>
 
 namespace GA_P {
 
@@ -33,6 +34,10 @@ Expresion :: Expresion(const Arbol subarbol, const unsigned prof_max){
 
 	// obtenemos el subarbol
 	(*this) = obtenerSubarbol(subarbol);
+
+	reservarMemoriaCromosoma(profundidad_maxima);
+
+	inicializarCromosoma();
 
 }
 
@@ -66,28 +71,30 @@ Expresion Expresion :: obtenerSubarbol(const Arbol subarbol){
 
 	unsigned tam = 0;
 
-	// al principio comenzamos con un nodo
-	unsigned ramas_libres = 1;
+	if ( subarbol == nullptr) {
+		sol.arbol = nullptr;
+	} else {
+		// al principio comenzamos con un nodo
+		unsigned ramas_libres = 1;
 
-	// mientras tenga ramas que visitar
-	while(ramas_libres > 0){
-		// si no es ni un numero ni una variable
-		if (subarbol[tam].getTipoNodo() != TipoNodo::NUMERO &&
-			 subarbol[tam].getTipoNodo() != TipoNodo::VARIABLE){
-			// es un operador, tiene dos ramas
-			ramas_libres += 2;
+		// mientras tenga ramas que visitar
+		while(ramas_libres > 0){
+			// si no es ni un numero ni una variable
+			if (subarbol[tam].getTipoNodo() != TipoNodo::NUMERO &&
+				subarbol[tam].getTipoNodo() != TipoNodo::VARIABLE){
+				// es un operador, tiene dos ramas
+				ramas_libres += 2;
+			}
+			// en todo caso, he visitado ese nodo, y el tamaño se incrementa en uno
+			ramas_libres--;
+			tam++;
 		}
-		// en todo caso, he visitado ese nodo, y el tamaño se incrementa en uno
-		ramas_libres--;
-		tam++;
-	}
 
-	// una vez sabemos el tamaño, redimensionamos la solucion
-	sol.redimensionar(tam);
+		// una vez sabemos el tamaño, redimensionamos la solucion
+		sol.liberarMemoriaArbol();
 
-	// copiamos el subarbol
-	for (unsigned i = 0; i < tam; i++){
-		sol.arbol[i] = subarbol[i];
+		sol.asignarArbol(subarbol, tam);
+
 	}
 
 	// actualizamos la longitud de la solucion
@@ -105,7 +112,6 @@ void Expresion :: inicializarVacia(){
 	cromosoma          = nullptr;
 	longitud_cromosoma = profundidad_maxima;
 	longitud_arbol     = 0;
-	longitud_reservada = 0;
 	dejaEstarEvaluada();
 }
 
@@ -145,12 +151,12 @@ void Expresion :: liberarMemoria(){
 
 void Expresion :: reservarMemoriaArbol(const int tam){
 	// en todo caso la longitud reservada es cero
-	longitud_reservada = 0;
+	longitud_arbol = 0;
 
 	// si el tamaño es mayor que 0, reservamos, si no se queda a cero
 	if (tam > 0){
 		arbol = new Nodo[tam];
-		longitud_reservada = tam;
+		longitud_arbol = tam;
 	}
 }
 
@@ -169,17 +175,20 @@ void Expresion :: copiarDatos(const Expresion & otra){
 	profundidad_maxima = otra.profundidad_maxima;
 	longitud_cromosoma = otra.longitud_cromosoma;
 
-	// son elementos básicos sin memoria dinamica, podemos usar memcpy
-	memcpy(arbol, otra.arbol, longitud_arbol*sizeof(Nodo));
+	if ( otra.arbol == nullptr) {
+		arbol = nullptr;
+	} else {
+		asignarArbol(otra.arbol, otra.longitud_arbol);
+	}
 
 	// copiamos el cromosoma de la otra expresion
-	copiarCromosoma(otra.cromosoma);
+	if ( otra.cromosoma == nullptr) {
+		cromosoma = nullptr;
+	} else {
+		asignarCromosoma(otra.cromosoma, otra.longitud_cromosoma);
+	}
 }
 
-void Expresion :: copiarCromosoma(const double * otro_cromosoma){
-	// el cromosoma, al ser reales, podemos copiarlo con memcpy
-	memcpy(cromosoma, otro_cromosoma, longitud_cromosoma*sizeof(double));
-}
 
 Expresion :: Expresion(const Expresion & otra){
 	// al inicializar vacia mantenemos la prfuncidad que queramos
@@ -198,10 +207,6 @@ Expresion & Expresion :: operator= (const Expresion & otra){
 		// liberamos la memoria de la actual
 		liberarMemoria();
 
-		// reservamos memoria para el arbol y el cromosoma
-		reservarMemoriaArbol(otra.longitud_arbol);
-		reservarMemoriaCromosoma(otra.longitud_cromosoma);
-
 		// copiamos los datos de la otra
 		copiarDatos(otra);
 	}
@@ -211,33 +216,14 @@ Expresion & Expresion :: operator= (const Expresion & otra){
 
 }
 
-void Expresion :: redimensionar(const int tam){
-
-	// guardamos la expresion actual
-	Expresion otra = (*this);
-
-	// liberamos la memoria
-	liberarMemoria();
-
-	// reservamos con el nuevo tamaño
-	reservarMemoriaArbol(tam);
-	reservarMemoriaCromosoma(otra.longitud_cromosoma);
-
-	// copiamos como estaba
-	copiarDatos(otra);
-
-	// y cambiamos la longitud reservada
-	longitud_reservada = tam;
-
-}
-
 bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 														const double prob_variable,
 														const unsigned num_variables){
 
 	// si no tenemos espacio, redimensionamos
-	if (longitud_maxima > longitud_reservada){
-		redimensionar(longitud_maxima);
+	if (longitud_maxima > longitud_arbol){
+		liberarMemoriaArbol();
+		reservarMemoriaArbol(longitud_maxima);
 	}
 
 
@@ -423,95 +409,74 @@ unsigned Expresion :: getLongitudCromosoma() const{
 }
 
 
-void Expresion :: intercambiarSubarbol(const unsigned pos, const Expresion & otra,
-													const unsigned pos_otra,
-												   Expresion & hijo1, Expresion & hijo2) const {
+bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned pos,
+													const unsigned cruce_padre,
+												   Expresion & hijo) const {
+	
+	Expresion madre_cortada((arbol + pos), profundidad_maxima);
+	Expresion padre_cortado((otra.arbol + cruce_padre), otra.profundidad_maxima);
 
-	// obtenemos el subarbol de la expresion actual
-	Expresion subarbol(&arbol[pos], profundidad_maxima);
+	// sumamos, la parte de la madre, la longitud de la parte del padre, y lo que nos queda de madre tras el cruce
+	unsigned nueva_longitud = pos + padre_cortado.getLongitudArbol() + getLongitudArbol() - madre_cortada.getLongitudArbol();
 
-	// obtenemos el subarbol de la otra expresion
-	Expresion subarbol_otra(&otra.arbol[pos_otra], otra.profundidad_maxima);
+	bool podido_cruzar = nueva_longitud <= profundidad_maxima;
+	
+	if ( podido_cruzar) {
+		// cruce
+		hijo.liberarMemoria();
+		hijo.reservarMemoriaArbol(nueva_longitud);
 
-	// copiamos los cromosomas para mantenerlos
-	subarbol.copiarCromosoma(cromosoma);
-	subarbol_otra.copiarCromosoma(cromosoma);
+		for ( unsigned i = 0; i < pos; i++) {
+			hijo.arbol[i] = arbol[i];
+		}
 
+		for ( unsigned i = 0; i < padre_cortado.getLongitudArbol(); i++) {
+			hijo.arbol[i + pos] = padre_cortado.arbol[i];
+		}
 
-	// calculamos donde acaba cada subarbol en el arbol general
-	int fin_subarbol = pos + subarbol.getLongitudArbol();
-	int fin_otro_surbarbol = pos_otra + subarbol_otra.getLongitudArbol();
+		unsigned indice_hijo = 0;
 
-	// creamos la nueva expresion
-	Expresion nueva;
-	nueva.asignarCromosoma(cromosoma, longitud_cromosoma);
+		// i en este caso comienza en el punto donde acaba el arbol que hemos intercambiado
+		for ( unsigned i = pos + madre_cortada.getLongitudArbol(); i < getLongitudArbol(); i++) {
+			// nos ponemos donde habiamos dejado de copiar el padre
+			indice_hijo = pos + padre_cortado.getLongitudArbol() + (i - (pos + madre_cortada.getLongitudArbol()) ) ;
+			hijo.arbol[indice_hijo] = arbol[i];
+		}
 
+		hijo.asignarCromosoma(cromosoma, longitud_cromosoma);
 
-	// la nueva tendra dimension la actual, menos el subarbol que
-	// eliminamos más el subarbol que añadimos
-	nueva.redimensionar(pos + subarbol_otra.getLongitudArbol() +
-							  (*this).getLongitudArbol() - fin_subarbol);
-
-
-	// copiamos la parte que dejamos igual
-	for (unsigned i = 0; i < pos; i++){
-		nueva.arbol[i] = arbol[i];
 	}
 
-	// insertamos la parte del otro subarbol
-	for (unsigned i = 0; i < subarbol_otra.getLongitudArbol(); i++){
-		nueva.arbol[i + pos] = subarbol_otra.arbol[i];
-	}
-
-	// copiamos la parte final del arbol original
-	unsigned pos_nuevo = pos + subarbol_otra.getLongitudArbol();
-	for (unsigned i = fin_subarbol; i < (*this).getLongitudArbol(); i++){
-		nueva.arbol[pos_nuevo] = arbol[i];
-		pos_nuevo++;
-	}
-
-
-	// aplicamos lo mismo a la que nos pasan por referencia
-	Expresion nueva_otra;
-	nueva_otra.asignarCromosoma(otra.cromosoma, otra.longitud_cromosoma);
-
-
-	nueva_otra.redimensionar(pos_otra + subarbol.getLongitudArbol() +
-									 otra.getLongitudArbol() - fin_otro_surbarbol);
-
-	// copiamos la parte que dejamos igual
-	for (unsigned i = 0; i < pos_otra; i++){
-		nueva_otra.arbol[i] = otra.arbol[i];
-	}
-
-	// insertamos la parte del otro subarbol
-	for (unsigned i = 0; i < subarbol.getLongitudArbol(); i++){
-		nueva_otra.arbol[i + pos_otra] = subarbol.arbol[i];
-	}
-
-	unsigned pos_otra_nuevo = pos_otra + subarbol.getLongitudArbol();
-	for (unsigned i = fin_otro_surbarbol; i < otra.getLongitudArbol(); i++){
-		nueva_otra.arbol[pos_otra_nuevo] = otra.arbol[i];
-		pos_otra_nuevo++;
-	}
-
-	// los intercambiamos al final
-
-	// actualizamos la longitud
-	nueva.longitud_arbol = pos_nuevo;
-
-	// asignamos el nuevo arbol al primer hijo
-	hijo1 = nueva;
-
-	nueva_otra.longitud_arbol = pos_otra_nuevo;
-
-	hijo2 = nueva_otra;
-
-	// ambas dejan de estar evaluadas
-	hijo1.dejaEstarEvaluada();
-	hijo2.dejaEstarEvaluada();
+	return podido_cruzar;
 
 }
+
+
+
+void Expresion :: cruceArbol(const Expresion & otra, Expresion & hijo1, Expresion & hijo2) const {
+
+	int punto_cruce_madre;
+	int punto_cruce_padre;
+
+	bool cruce_mal;
+
+	// cruzamos mientras se cruce mal
+	do {
+
+		punto_cruce_madre = Random::getInt(getLongitudArbol());
+		punto_cruce_padre = Random::getInt(otra.getLongitudArbol());
+
+		cruce_mal = !(intercambiarSubarbol(otra, punto_cruce_madre, punto_cruce_padre, hijo1));
+
+		if ( !cruce_mal ) {
+			cruce_mal = !(otra.intercambiarSubarbol((*this), punto_cruce_padre, punto_cruce_madre, hijo2));
+		}
+
+	} while (cruce_mal);
+
+
+}
+
 
 void Expresion :: asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n_arbol) {
 
@@ -530,7 +495,7 @@ void Expresion :: asignarCromosoma(const double * nuevo_cromosoma, const unsigne
 	liberarMemoriaCromosoma();
 
 	reservarMemoriaCromosoma(longitud);
-
+	
 	memcpy(cromosoma, nuevo_cromosoma, longitud*sizeof(double));
 
 	longitud_cromosoma = longitud;
