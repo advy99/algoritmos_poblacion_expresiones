@@ -162,6 +162,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 	while ( generacion < NUM_GENERACIONES) {
 
+
 		// intercambio la poblacion antigua y la actual
 		poblacion_tmp = poblacion_antigua;
 		poblacion_antigua = poblacion;
@@ -173,8 +174,12 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		// aplicamos los operadores geneticos
 		for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i += 2){
+
 			madre = i;
 			padre = i + 1;
+
+			hijo1 = poblacion[madre];
+			hijo2 = poblacion[padre];
 
 			modificado_hijo1 = modificado_hijo2 = false;
 			cruce_ga = cruce_gp = false;
@@ -191,11 +196,7 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 			if ( Random::getFloat() < prob_cruce_gp ) {
 				// cruce de programacion genetica, se intercambian arboles
 
-				int pos_cruce_madre = Random::getInt(poblacion[madre].getLongitudArbol());
-				int pos_cruce_padre = Random::getInt(poblacion[padre].getLongitudArbol());
-
-
-				poblacion[madre].intercambiarSubarbol(pos_cruce_madre, poblacion[padre], pos_cruce_padre, hijo1, hijo2);
+				poblacion[madre].cruceArbol(poblacion[padre], hijo1, hijo2);
 				modificado_hijo1 = modificado_hijo2 = true;
 				cruce_gp = true;
 			}
