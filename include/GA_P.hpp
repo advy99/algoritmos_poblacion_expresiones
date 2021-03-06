@@ -275,6 +275,14 @@ class GA_P{
 						 const int tam_torneo,
 						 const bool mostrar_evolucion = true) ;
 
+		/**
+		  * @brief Obtener el mejor individuo de la poblacion.
+		  *
+		  * @return Mejor individuo de la población
+		  */
+		 
+		Expresion getMejorIndividuo() const;
+
 };
 
 }

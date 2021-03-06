@@ -287,6 +287,9 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 }
 
+Expresion GA_P :: getMejorIndividuo() const {
+	return poblacion.getMejorIndividuo();
+}
 
 Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
