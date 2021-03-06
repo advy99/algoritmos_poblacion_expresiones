@@ -417,7 +417,8 @@ bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned po
 	Expresion padre_cortado((otra.arbol + cruce_padre), otra.profundidad_maxima);
 
 	// sumamos, la parte de la madre, la longitud de la parte del padre, y lo que nos queda de madre tras el cruce
-	unsigned nueva_longitud = pos + padre_cortado.getLongitudArbol() + getLongitudArbol() - madre_cortada.getLongitudArbol();
+	unsigned nueva_longitud = pos + padre_cortado.getLongitudArbol() + (getLongitudArbol() - madre_cortada.getLongitudArbol() - pos);
+
 
 	bool podido_cruzar = nueva_longitud <= profundidad_maxima;
 	
