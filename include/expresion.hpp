@@ -378,7 +378,7 @@ class Expresion{
 
 		bool intercambiarSubarbol(const Expresion & otra, const unsigned pos, 
 										  const unsigned longitud_cruce,
-										  Expresion & hijo1) const;
+										  Expresion & hijo) const;
 
 		/**
 		  * @brief Cruce del arbol entre dos expresiones.

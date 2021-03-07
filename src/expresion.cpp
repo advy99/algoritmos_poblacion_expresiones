@@ -573,8 +573,8 @@ void Expresion :: cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expres
 	double punto_padre, punto_madre, seccion;
 
 	for ( unsigned i = 0; i < longitud_cromosoma; i++){
-		punto_padre = this->cromosoma[i];
-		punto_madre = otra.cromosoma[i];
+		punto_madre = this->cromosoma[i];
+		punto_padre = otra.cromosoma[i];
 
 		if ( punto_madre > punto_padre ) {
 			double intercamio = punto_madre;
@@ -587,7 +587,15 @@ void Expresion :: cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expres
 		punto_madre = punto_madre - seccion * alfa;
 		punto_padre = punto_padre + seccion * alfa;
 
-		cromosoma_actual[i] = punto_padre + Random::getFloat() *
+		if ( punto_madre < 0.0) {
+			punto_madre = 0.0;
+		}
+
+		if ( punto_padre > 1.0) {
+			punto_padre = 1.0;
+		}
+
+		cromosoma_actual[i] = punto_madre + Random::getFloat() *
 														(punto_padre - punto_madre);
 
 		cromosoma_otro[i] = punto_madre + Random::getFloat() *
