@@ -7,6 +7,7 @@
 #ifndef POBLACION_H_INCLUDED
 #define POBLACION_H_INCLUDED
 
+#include "aux_gap.hpp"
 #include "expresion.hpp"
 
 namespace GA_P {

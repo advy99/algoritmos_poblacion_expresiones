@@ -11,14 +11,21 @@ DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
 # flags de compilacion por defecto
-CXXFLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
+OPTIMIZACION = -O3
+GPROF ?= 
+OPENMP = -fopenmp
 
 ifeq ($(debug), 1)
 # target para debug (cambiamos flags y el mensaje)
-CXXFLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
+OPTIMIZACION = -g
+GPROF = -pg
+OPENMP = 
 MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
+
+CXXFLAGS = -std=c++17 $(OPTIMIZACION) $(OPENMP) $(GPROF) -Wall -Wextra -Wfloat-equal -Wpedantic
+
 
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
@@ -63,7 +70,7 @@ ejecutar-tests: $(OBJETIVO_TEST)
 $(OBJETIVO_TEST): $(LIB)/libGA_P.a $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
-	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(gtestflags) -L$(LIB) -lGA_P
+	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(OPENMP) $(gtestflags) -L$(LIB) -lGA_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\n\n"
 
 
@@ -86,7 +93,7 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P
+	@$(CXX) $(OBJ)/main.o -o $@ $(OPENMP) -L$(LIB) -lGA_P $(GPROF) 
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 

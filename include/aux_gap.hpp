@@ -7,6 +7,26 @@
 #ifndef AUX_GAP
 #define AUX_GAP
 
+#ifdef _OPENMP
+	#include <omp.h>
+#endif
+
+#include <algorithm>
+#include "random.hpp"
+#include <cstring>
+#include <stack>
+#include <limits>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <cctype>
+#include <sstream>
+#include <cstdlib>
+#include <string>
+#include <cmath>
+
+
+
 namespace GA_P {
 
 /**

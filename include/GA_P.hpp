@@ -7,8 +7,7 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include <vector>
-#include <string>
+#include "aux_gap.hpp"
 #include "random.hpp"
 #include "expresion.hpp"
 #include "poblacion.hpp"
