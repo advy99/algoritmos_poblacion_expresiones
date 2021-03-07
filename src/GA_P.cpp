@@ -1,5 +1,5 @@
 #include "GA_P.hpp"
-
+#include "aux_gap.hpp"
 #include <iostream>
 #include <fstream>
 #include <cctype>
@@ -295,17 +295,18 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion resultado = poblacion;
 
-	std::vector<int> participantes_torneo;
 	std::vector<int> ganadores_torneo;
 
-	int nuevo_participante;
-	int mejor_torneo;
+	
 
 	// escojo una nueva poblacion del mismo tamaño
+	#pragma omp parallel for
 	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
 
-		participantes_torneo.clear();
-
+		std::vector<int> participantes_torneo;
+		int nuevo_participante;
+		int mejor_torneo;
+		
 		// generamos el inicial y lo insertamos en los generados
 		mejor_torneo = Random::getInt(poblacion.getTamPoblacion());
 
@@ -329,6 +330,7 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 		}
 		
 		// el ganador del torneo i es el mejor del torneo
+		#pragma omp critical
 		ganadores_torneo.push_back(mejor_torneo);
 	}
 
