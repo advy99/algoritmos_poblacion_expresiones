@@ -1,12 +1,5 @@
 #include "GA_P.hpp"
-#include "aux_gap.hpp"
-#include <iostream>
-#include <fstream>
-#include <cctype>
-#include <sstream>
-#include <cstdlib>
-#include <vector>
-#include <algorithm>
+
 
 namespace GA_P{
 

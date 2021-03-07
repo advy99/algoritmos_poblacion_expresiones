@@ -7,11 +7,9 @@
 #ifndef EXPRESION_H_INCLUDED
 #define EXPRESION_H_INCLUDED
 
-#include <cmath>
 #include "nodo.hpp"
-#include <vector>
-#include <stack>
-#include <string>
+#include "aux_gap.hpp"
+
 
 namespace GA_P {
 

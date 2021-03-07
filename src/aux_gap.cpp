@@ -1,5 +1,4 @@
 #include "aux_gap.hpp"
-#include <cmath>
 
 namespace GA_P {
 
