@@ -70,7 +70,7 @@ ejecutar-tests: $(OBJETIVO_TEST)
 $(OBJETIVO_TEST): $(LIB)/libGA_P.a $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
-	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(gtestflags) -L$(LIB) -lGA_P
+	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(OPENMP) $(gtestflags) -L$(LIB) -lGA_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\n\n"
 
 
@@ -93,7 +93,7 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P $(GPROF) $(OPENMP)
+	@$(CXX) $(OBJ)/main.o -o $@ $(OPENMP) -L$(LIB) -lGA_P $(GPROF) 
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
