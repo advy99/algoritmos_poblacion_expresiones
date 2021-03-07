@@ -11,14 +11,17 @@ DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
 # flags de compilacion por defecto
-CXXFLAGS = -std=c++17 -O3 -Wall -Wextra -Wfloat-equal -Wpedantic
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
+OPTIMIZACION = -O3
 
 ifeq ($(debug), 1)
 # target para debug (cambiamos flags y el mensaje)
-CXXFLAGS = -std=c++17 -g -Wall -Wextra -Wfloat-equal -Wpedantic
+OPTIMIZACION = -g
 MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
+
+CXXFLAGS = -std=c++17 $(OPTIMIZACION) -Wall -Wextra -Wfloat-equal -Wpedantic
+
 
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
