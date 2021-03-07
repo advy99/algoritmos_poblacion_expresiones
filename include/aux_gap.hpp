@@ -7,6 +7,10 @@
 #ifndef AUX_GAP
 #define AUX_GAP
 
+#ifdef _OPENMP
+	#include <omp.h>
+#endif
+
 namespace GA_P {
 
 /**
