@@ -1,5 +1,7 @@
 #include "poblacion.hpp"
 #include "random.hpp"
+#include "aux_gap.hpp"
+
 #include <cstring>
 
 namespace GA_P {
@@ -86,14 +88,19 @@ void Poblacion :: evaluarPoblacion(const std::vector<std::vector<double> > & dat
 	}
 
 	// evaluamos el resto de individuos
+	#pragma omp parallel for
 	for ( unsigned i = 1; i < tam_poblacion; i++){
 		if (!expresiones[i].estaEvaluada()){
 			expresiones[i].evaluarExpresion(datos, etiquetas);
 		}
 
-		if (expresiones[i].getFitness() < expresiones[mejor_individuo].getFitness()){
-			mejor_individuo = i;
+		#pragma omp critical 
+		{
+			if (expresiones[i].getFitness() < expresiones[mejor_individuo].getFitness()){
+				mejor_individuo = i;
+			}
 		}
+		
 	}
 }
 
