@@ -13,14 +13,16 @@ GRAFICAS = $(HOME)/graficas/datos
 # flags de compilacion por defecto
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 OPTIMIZACION = -O3
+GPROF ?= 
 
 ifeq ($(debug), 1)
 # target para debug (cambiamos flags y el mensaje)
 OPTIMIZACION = -g
+GPROF = -pg
 MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
 
-CXXFLAGS = -std=c++17 $(OPTIMIZACION) -Wall -Wextra -Wfloat-equal -Wpedantic
+CXXFLAGS = -std=c++17 $(OPTIMIZACION) $(GPROF) -Wall -Wextra -Wfloat-equal -Wpedantic
 
 
 # objetivo principal
@@ -89,7 +91,7 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P
+	@$(CXX) $(OBJ)/main.o -o $@ -L$(LIB) -lGA_P $(GPROF)
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
