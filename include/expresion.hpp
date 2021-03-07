@@ -72,10 +72,6 @@ class Expresion{
 		  */
 		unsigned longitud_arbol;
 
-		/**
-		  * @brief Longitud reservada en memoria dinámica para el árbol.
-		  */
-		unsigned longitud_reservada;
 
 		/**
 		  * @brief Profundidad máxima permitida para el árbol.
@@ -168,14 +164,6 @@ class Expresion{
 
 		void liberarMemoriaCromosoma();
 
-
-		/**
-		  * @brief Redimensionar el tamaño de la expresión
-		  *
-		  * @param tam Nuevo tamaño reservado para la expresion
-		  *
-		  */
-		void redimensionar(const int tam);
 
 		/**
 		  * @brief Contar los niveles de un árbol de Expresion dado en una pila.
@@ -378,18 +366,32 @@ class Expresion{
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.
 		  *
-		  * @param pos Posición del árbol a intercambiar.
 		  * @param otra Expresion con la que intercambiar.
-		  * @param pos_otra Posición de la expresión dada a intercambiar.
+		  * @param pos Posición del árbol a intercambiar.
+		  * @param longitud_cruce Posición de la expresión dada a intercambiar.
+		  * @param hijo Expresión donde se almacenará el resultado del cruce.
+		  *
+		  * @pre otra No es una expresion vacia.
+		  * 
+		  * @return Verdadero si se ha podido realizar el intercambio, falso si no.
+		  */
+
+		bool intercambiarSubarbol(const Expresion & otra, const unsigned pos, 
+										  const unsigned longitud_cruce,
+										  Expresion & hijo) const;
+
+		/**
+		  * @brief Cruce del arbol entre dos expresiones.
+		  *
+		  * @param otra Expresion con la que intercambiar.
 		  * @param hijo1 Expresión donde se almacenará el resultado del cruce.
 		  * @param hijo2 Expresión donde se almacenará el resultado del cruce.
 		  *
 		  * @pre otra No es una expresion vacia.
 		  */
 
-		void intercambiarSubarbol(const unsigned pos, const Expresion & otra,
-										  const unsigned pos_otra,
-										  Expresion & hijo1, Expresion & hijo2) const;
+
+		void cruceArbol(const Expresion & otra, Expresion & hijo1, Expresion & hijo2) const;
 
 		/**
 		  * @brief Metodo para marcar que la evaluación del fitness de una

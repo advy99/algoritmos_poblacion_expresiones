@@ -7,24 +7,41 @@
 
 int main(int argc, char ** argv){
 
-	if ( argc < 2 || argc > 3 ) {
+	if ( argc < 11 || argc > 12 ) {
 		std::cerr << "Error en el número de parámetros\n"
-					 << "\t Uso: " << argv[0] << " <fichero_datos> [semilla]"
+					 << "\t Uso: " << argv[0] << " <fichero_datos> <tam_poblacion> <prob_variable> <profundidad_max> \n" 
+					 << "\t\t\t" << " <num_evaluaciones> <prob_cruce_gp> <prob_cruce_ga> <prob_mutacion_gp> <prob_mutacion_ga> <tam_torneo> [semilla]"
 					 << std::endl;
 		exit(-1);
 	}
 
 	int semilla;
 
-	if ( argc == 3 ){
+	if ( argc == 12 ){
 		semilla = atoi(argv[2]);
 	} else {
 		semilla = std::time(nullptr);
 	}
 
-	GA_P::GA_P myGAP (argv[1], '@', 50, 0.3, semilla);
+	int tam_pob = atoi(argv[2]);
+	double prob_variable = atof(argv[3]);
+	int prof_max_expr = atoi(argv[4]);
+	int evaluaciones = atoi(argv[5]);
+	double prob_cruce_gp = atof(argv[6]);
+	double prob_cruce_ga = atof(argv[7]);
+	double prob_muta_gp = atof(argv[8]);
+	double prob_muta_ga = atof(argv[9]);
+	int tam_torneo = atoi(argv[10]);
 
-	myGAP.ajustar(100000, 0.8, 0.8, 0.2, 0.2, 16);
+
+	GA_P::GA_P myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+
+	
+
+	myGAP.ajustar(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo);
+
+
+	std::cout << myGAP.getMejorIndividuo() << std::endl;
 
 	return 0;
 
