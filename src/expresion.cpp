@@ -327,6 +327,8 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 			} else {
 				resultado = 1.0f;
 			}
+		} else if (operacion == TipoNodo::ELEVADO) {
+			resultado = std::pow(valor_izda, valor_dcha);
 		}
 
 	}
@@ -660,6 +662,8 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 			valor = "*";
 		} else if (pila.top().getTipoNodo() == TipoNodo::ENTRE){
 			valor = "/";
+		} else if (pila.top().getTipoNodo() == TipoNodo::ELEVADO){
+			valor = "^";
 		}
 
 

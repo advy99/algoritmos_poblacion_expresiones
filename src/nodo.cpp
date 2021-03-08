@@ -22,14 +22,16 @@ void Nodo :: setTipoNodoOperadorAleatorio(){
 	float aleatorio = Random::getFloat();
 
 	// le damos la misma probabilidad a cada operador
-	if (aleatorio < 0.25){
+	if (aleatorio < 1.0/5.0){
 		tipo_nodo = TipoNodo::MAS;
-	} else if (aleatorio < 0.5) {
+	} else if (aleatorio < 2.0/5.0) {
 		tipo_nodo = TipoNodo::MENOS;
-	} else if (aleatorio < 0.75) {
+	} else if (aleatorio < 3.0/5.0) {
 		tipo_nodo = TipoNodo::POR;
-	} else {
+	} else if (aleatorio < 4.0/5.0) {
 		tipo_nodo = TipoNodo::ENTRE;
+	} else { 
+		tipo_nodo = TipoNodo::ELEVADO;
 	}
 }
 
