@@ -10,7 +10,7 @@
 #include "aux_gap.hpp"
 #include "expresion.hpp"
 
-namespace GA_P {
+namespace PG_ALGS {
 
 
 /**
@@ -158,7 +158,7 @@ class Poblacion{
 		  */
 
 		Expresion getMejorIndividuo() const;
-		
+
 		/**
 		  * @brief Obtener el indice del mejor individuo de la poblacion.
 		  *
@@ -241,6 +241,6 @@ class Poblacion{
 };
 
 
-}
+} // namespace PG_ALGS
 
 #endif

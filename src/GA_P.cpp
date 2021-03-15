@@ -1,7 +1,7 @@
 #include "GA_P.hpp"
 
 
-namespace GA_P{
+namespace PG_ALGS {
 
 GA_P :: GA_P(const unsigned long seed) {
 
@@ -131,7 +131,7 @@ bool GA_P :: leerDatos(const std::string fichero_datos,
 
 
 void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
-							const double prob_cruce_ga, const double prob_mutacion_gp, 
+							const double prob_cruce_ga, const double prob_mutacion_gp,
 							const double prob_mutacion_ga, const int tam_torneo,
 							const bool mostrar_evolucion) {
 
@@ -251,13 +251,13 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 		// elitismo
 		bool mejor_encontrado = false;
 		unsigned i = 0;
-		
+
 		while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
 			mejor_encontrado = poblacion[i].totalmenteIguales(poblacion_antigua.getMejorIndividuo());
 			i++;
 		}
 
-		
+
 
 		// si no esta el mejor, aplico elitismo
 		if ( !mejor_encontrado ){
@@ -290,7 +290,7 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 
 	std::vector<int> ganadores_torneo;
 
-	
+
 
 	// escojo una nueva poblacion del mismo tamaño
 	#pragma omp parallel for
@@ -299,7 +299,7 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 		std::vector<int> participantes_torneo;
 		int nuevo_participante;
 		int mejor_torneo;
-		
+
 		// generamos el inicial y lo insertamos en los generados
 		mejor_torneo = Random::getInt(poblacion.getTamPoblacion());
 
@@ -321,7 +321,7 @@ Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
 
 			}
 		}
-		
+
 		// el ganador del torneo i es el mejor del torneo
 		#pragma omp critical
 		ganadores_torneo.push_back(mejor_torneo);
@@ -368,4 +368,4 @@ unsigned GA_P :: getMaxProfExpresiones() const {
 }
 
 
-} // namespace GA_P
+} // namespace PG_ALGS

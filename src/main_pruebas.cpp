@@ -31,7 +31,7 @@ int main(int argc, char ** argv){
 	// 	std::cout << std::endl;
 	// }
 
-	GA_P::Expresion miExpresion;
+	PG_ALGS::Expresion miExpresion;
 
 	miExpresion.generarExpresionAleatoria(13, 0.3, 3);
 
@@ -49,7 +49,7 @@ int main(int argc, char ** argv){
 	std::cout << std::endl << miExpresion.getFitness();
 
 
-	GA_P::Expresion miExpresion2;
+	PG_ALGS::Expresion miExpresion2;
 
 	miExpresion2.generarExpresionAleatoria(10, 0.4, 2);
 
@@ -60,8 +60,8 @@ int main(int argc, char ** argv){
 	int punto1 = Random::getInt(miExpresion.getLongitudArbol());
 	int punto2 = Random::getInt(miExpresion2.getLongitudArbol());
 
-	GA_P::Expresion hijo1 = miExpresion;
-	GA_P::Expresion hijo2 = miExpresion2;
+	PG_ALGS::Expresion hijo1 = miExpresion;
+	PG_ALGS::Expresion hijo2 = miExpresion2;
 
 	miExpresion.intercambiarSubarbol(punto1, miExpresion2, punto2, hijo1, hijo2);
 

@@ -18,7 +18,7 @@
  */
 
 
-namespace GA_P {
+namespace PG_ALGS {
 
 /**
   *  @brief Clase GA_P
@@ -95,9 +95,9 @@ class GA_P{
 		/**
 		 *  @brief Selección de una nueva población por torneo a partir de
 		 * la poblacion actual
-		 * 
+		 *
 		 * @param tam_torneo Tamaño del torneo
-		 * 
+		 *
 		 */
 
 		 Poblacion seleccionTorneo(const unsigned tam_torneo);
@@ -263,13 +263,13 @@ class GA_P{
 
 		/**
 		 *  @brief Ajustar la poblacion utilizando los datos actuales
-		 * 
-		 *  
+		 *
+		 *
 		 **/
 
 		void ajustar(const int num_eval, const double prob_cruce_gp,
-						 const double prob_cruce_ga, 
-						 const double prob_mutacion_gp, 
+						 const double prob_cruce_ga,
+						 const double prob_mutacion_gp,
 						 const double prob_mutacion_ga,
 						 const int tam_torneo,
 						 const bool mostrar_evolucion = true) ;
@@ -279,11 +279,11 @@ class GA_P{
 		  *
 		  * @return Mejor individuo de la población
 		  */
-		 
+
 		Expresion getMejorIndividuo() const;
 
 };
 
-}
+} // namespace PG_ALGS
 
 #endif

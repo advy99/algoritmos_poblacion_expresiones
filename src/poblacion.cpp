@@ -1,6 +1,6 @@
 #include "poblacion.hpp"
 
-namespace GA_P {
+namespace PG_ALGS {
 
 Poblacion :: Poblacion(){
 	// una poblacion vacia no tiene nada
@@ -90,13 +90,13 @@ void Poblacion :: evaluarPoblacion(const std::vector<std::vector<double> > & dat
 			expresiones[i].evaluarExpresion(datos, etiquetas);
 		}
 
-		#pragma omp critical 
+		#pragma omp critical
 		{
 			if (expresiones[i].getFitness() < expresiones[mejor_individuo].getFitness()){
 				mejor_individuo = i;
 			}
 		}
-		
+
 	}
 }
 
@@ -182,4 +182,4 @@ Poblacion & Poblacion :: operator= (const Poblacion & otra) {
 
 
 
-} // namespace GA_P
+} // namespace PG_ALGS

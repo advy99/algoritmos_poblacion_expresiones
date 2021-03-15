@@ -11,7 +11,7 @@
 #include "aux_gap.hpp"
 
 
-namespace GA_P {
+namespace PG_ALGS {
 
 /**
   *  @brief Clase Expresion
@@ -206,8 +206,8 @@ class Expresion{
 		  *
 		  * @param generacion Generación en la que se aplica la mutación
 		  * @param max_gen Número máximo de generaciones al entrenar.
-		  * @param valor Valor del cromosoma al aplicar la mutación 
-		  * 
+		  * @param valor Valor del cromosoma al aplicar la mutación
+		  *
 		  * @return Valor a modificar el cromosoma con el valor dado
 		  */
 
@@ -370,11 +370,11 @@ class Expresion{
 		  * @param hijo Expresión donde se almacenará el resultado del cruce.
 		  *
 		  * @pre otra No es una expresion vacia.
-		  * 
+		  *
 		  * @return Verdadero si se ha podido realizar el intercambio, falso si no.
 		  */
 
-		bool intercambiarSubarbol(const Expresion & otra, const unsigned pos, 
+		bool intercambiarSubarbol(const Expresion & otra, const unsigned pos,
 										  const unsigned longitud_cruce,
 										  Expresion & hijo) const;
 
@@ -461,7 +461,7 @@ class Expresion{
 
 		/**
 		 * @brief Obtener donde está almacenado el arbol
-		 * 
+		 *
 		 */
 
 		Arbol getArbol() const;
@@ -469,7 +469,7 @@ class Expresion{
 
 		/**
 		 * @brief Obtener donde está almacenado el cromosoma
-		 * 
+		 *
 		 */
 
 		double * getCromosoma() const;
@@ -503,23 +503,23 @@ class Expresion{
 
 
 		/**
-		 * 
+		 *
 		 *  @brief Mutación no uniforme de la parte de algoritmo genético (cromosoma)
-		 * 
+		 *
 		 *  @param generacion Generación en la que se aplica la mutación
 		 *  @param max_gen Número máximo de generaciones al entrenar.
-		 * 
+		 *
 		 */
 
 		void mutarGA(const int generacion, const int max_gen);
 
 
 		/**
-		 * 
+		 *
 		 *  @brief Mutación de la parte de programación genética (arbol)
-		 * 
+		 *
 		 *  @param num_vars Numero de variables que puede tomar el arbol
-		 * 
+		 *
 		 */
 
 		void mutarGP(const int num_vars);
@@ -528,7 +528,7 @@ class Expresion{
 		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma
 		 *
 		 * @param otra Expresión a comparar con la actual
-		 * 
+		 *
 		 * @pre Los cromosomas son de la misma longitud
 		 *
 		 */
@@ -568,6 +568,6 @@ class Expresion{
 
 };
 
-}
+} // namespace PG_ALGS
 
 #endif
