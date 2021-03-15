@@ -1,6 +1,6 @@
-# GA_P
+# PG_ALGS
 
-Este repositorio contiene mi implementación del algoritmo GA_P en C++, utilizado en mi Trabajo de Fin de Grado en Ingeniería Informática en la UGR.
+Este repositorio contiene mi implementación del varios algoritmo de Programación Genética (PG, GA_P, PG basados en reglas, etc) en C++, utilizados en mi Trabajo de Fin de Grado en Ingeniería Informática en la UGR.
 
 
 # Documentación
@@ -15,10 +15,20 @@ Puedes consultarla abriendo `doc/html/index.html` en tu navegador.
 
 # Compilar
 
-Existen dos opciones de compilación.
+Existen diversas formas de compilar.
 
-- Compilación con símbolos de depuración (pensado para depurar).
-- Compilación con optimización (pensado para ejecutar).
+- Ejecutando simplemente `make` : Compilar con optimización y utilizando OpenMP para añadir paralelismo.
+- Utilizando la variable `debug` : Si definimos `debug` a 1 al compilar(ejecutando `make debug=1`) compilará con símbolos de depuración y sin OpenMP.
+
+Además también podrémos utilizar la variable `GPROF` si queremos compilar para ejecutar `gprof`:
+
+```sh
+# podemos usar
+make GPROF=1
+
+# o bien
+make debug=1 GPROF=1
+```
 
 Siempre que compiles se limpiarán los objetos y binarios anteriores.
 

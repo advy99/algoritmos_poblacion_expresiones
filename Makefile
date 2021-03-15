@@ -13,15 +13,18 @@ GRAFICAS = $(HOME)/graficas/datos
 # flags de compilacion por defecto
 MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 OPTIMIZACION = -O3
-GPROF ?=
+GPROF ?= 0
 OPENMP = -fopenmp
 
 ifeq ($(debug), 1)
 # target para debug (cambiamos flags y el mensaje)
 OPTIMIZACION = -g
-GPROF = -pg
 OPENMP =
 MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
+endif
+
+ifeq ($(GPROF), 1)
+GPROF = -pg
 endif
 
 CXXFLAGS = -std=c++17 $(OPTIMIZACION) $(OPENMP) $(GPROF) -Wall -Wextra -Wfloat-equal -Wpedantic
