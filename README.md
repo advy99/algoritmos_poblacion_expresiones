@@ -1,6 +1,6 @@
 # PG_ALGS
 
-Este repositorio contiene mi implementación del varios algoritmo de Programación Genética (PG, GA_P, PG basados en reglas, etc) en C++, utilizados en mi Trabajo de Fin de Grado en Ingeniería Informática en la UGR.
+Este repositorio contiene mi implementación del varios algoritmos de Programación Genética (PG, GA_P, PG basados en reglas, etc) en C++, utilizados en mi Trabajo de Fin de Grado en Ingeniería Informática en la UGR.
 
 
 # Documentación
