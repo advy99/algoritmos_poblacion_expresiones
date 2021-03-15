@@ -29,19 +29,19 @@ CXXFLAGS = -std=c++17 $(OPTIMIZACION) $(OPENMP) $(GPROF) -Wall -Wextra -Wfloat-e
 
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
-OBJETOS = $(LIB)/libGA_P.a $(OBJ)/main.o
+OBJETOS = $(LIB)/libPG_ALGS.a $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_LIB_GAP = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
+OBJETOS_LIB_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
 
-GAP_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_gap.hpp
+PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_gap.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
 OBJETOS_TEST = $(OBJ)/main_test.o
 
 # variables para el contador de reglas
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_GAP) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_PG_ALGS) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -67,10 +67,10 @@ ejecutar-tests: $(OBJETIVO_TEST)
 
 
 
-$(OBJETIVO_TEST): $(LIB)/libGA_P.a $(OBJETOS_TEST)
+$(OBJETIVO_TEST): $(LIB)/libPG_ALGS.a $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
-	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(OPENMP) $(gtestflags) -L$(LIB) -lGA_P
+	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(OPENMP) $(gtestflags) -L$(LIB) -lPG_ALGS
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\n\n"
 
 
@@ -93,7 +93,7 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o -o $@ $(OPENMP) -L$(LIB) -lGA_P $(GPROF)
+	@$(CXX) $(OBJ)/main.o -o $@ $(OPENMP) -L$(LIB) -lPG_ALGS $(GPROF)
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
@@ -115,7 +115,7 @@ $(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp $(INC)/aux_gap.hpp
 
 
 
-$(LIB)/libGA_P.a: $(OBJETOS_LIB_GAP)
+$(LIB)/libPG_ALGS.a: $(OBJETOS_LIB_PG_ALGS)
 	$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
 	@ar rs $@ $^
