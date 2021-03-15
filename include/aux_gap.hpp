@@ -27,7 +27,7 @@
 
 
 
-namespace GA_P {
+namespace PG_ALGS {
 
 /**
   * @brief Comparar si dos números reales son iguales teniendo en cuenta la falta

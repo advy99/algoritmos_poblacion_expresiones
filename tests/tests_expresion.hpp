@@ -6,13 +6,13 @@
 #include "aux_gap.hpp"
 
 TEST (Expresion, IgualElMismo) {
-	GA_P::Expresion exp;
+	PG_ALGS::Expresion exp;
 
 	EXPECT_EQ(exp, exp);
 }
 
 TEST (Expresion, IgualElMismoConDatos) {
-	GA_P::Expresion exp;
+	PG_ALGS::Expresion exp;
 
 	exp.generarExpresionAleatoria(10, 0.3, 4);
 
@@ -21,39 +21,39 @@ TEST (Expresion, IgualElMismoConDatos) {
 
 
 TEST ( Expresion, ConstructorPorDefecto) {
-	GA_P::Expresion exp1;
-	GA_P::Expresion exp2;
+	PG_ALGS::Expresion exp1;
+	PG_ALGS::Expresion exp2;
 
 	EXPECT_EQ(exp1, exp2);
 }
 
 TEST ( Expresion, ConstructorCopia) {
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	GA_P::Expresion exp2(exp1);
+	PG_ALGS::Expresion exp2(exp1);
 
 	EXPECT_EQ(exp1, exp2);
 }
 
 TEST ( Expresion, OperadorAsignacion) {
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	GA_P::Expresion exp2;
+	PG_ALGS::Expresion exp2;
 	exp2 = exp1;
 
 	EXPECT_EQ(exp1, exp2);
 }
 
 TEST ( Expresion, TotalmenteIguales) {
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	GA_P::Expresion exp2;
+	PG_ALGS::Expresion exp2;
 	exp2 = exp1;
 
 	EXPECT_TRUE(exp1.totalmenteIguales(exp2));
@@ -61,11 +61,11 @@ TEST ( Expresion, TotalmenteIguales) {
 
 
 TEST ( Expresion, AsignarArbol) {
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	GA_P::Expresion exp2;
+	PG_ALGS::Expresion exp2;
 
 	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
 
@@ -73,11 +73,11 @@ TEST ( Expresion, AsignarArbol) {
 }
 
 TEST ( Expresion, AsignarCromosoma) {
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	GA_P::Expresion exp2;
+	PG_ALGS::Expresion exp2;
 
 	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
 
@@ -85,11 +85,11 @@ TEST ( Expresion, AsignarCromosoma) {
 }
 
 TEST (Expresion, MismaCadena) {
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	GA_P::Expresion exp2(exp1);
+	PG_ALGS::Expresion exp2(exp1);
 
 	EXPECT_EQ(exp1.stringExpresion(), exp2.stringExpresion());
 
@@ -97,20 +97,20 @@ TEST (Expresion, MismaCadena) {
 
 TEST (Expresion, EvaluarDato) {
 
-	GA_P::Expresion exp1;
+	PG_ALGS::Expresion exp1;
 
-	GA_P::Arbol arbol_tmp = new GA_P::Nodo[5];
+	PG_ALGS::Arbol arbol_tmp = new PG_ALGS::Nodo[5];
 
-	arbol_tmp[0].setTipoNodo(GA_P::TipoNodo::MAS);
+	arbol_tmp[0].setTipoNodo(PG_ALGS::TipoNodo::MAS);
 
-	arbol_tmp[1].setTipoNodo(GA_P::TipoNodo::VARIABLE);
+	arbol_tmp[1].setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
 	arbol_tmp[1].setValor(0);
 
-	arbol_tmp[2].setTipoNodo(GA_P::TipoNodo::POR);
+	arbol_tmp[2].setTipoNodo(PG_ALGS::TipoNodo::POR);
 
-	arbol_tmp[3].setTipoNodo(GA_P::TipoNodo::VARIABLE);
+	arbol_tmp[3].setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
 	arbol_tmp[3].setValor(1);
-	arbol_tmp[4].setTipoNodo(GA_P::TipoNodo::NUMERO);
+	arbol_tmp[4].setTipoNodo(PG_ALGS::TipoNodo::NUMERO);
 	arbol_tmp[4].setValor(1);
 
 	double * n_cromosoma = new double[5];
@@ -129,7 +129,7 @@ TEST (Expresion, EvaluarDato) {
 
 	double resultado = exp1.evaluarDato(dato);
 
-	EXPECT_TRUE( GA_P::comparar_reales(resultado, 9.54 ));
+	EXPECT_TRUE( PG_ALGS::comparar_reales(resultado, 9.54 ));
 
 }
 

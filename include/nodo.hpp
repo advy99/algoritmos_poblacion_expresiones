@@ -9,7 +9,7 @@
 
 #include "aux_gap.hpp"
 
-namespace GA_P {
+namespace PG_ALGS {
 
 /**
   * @brief Posibles tipos de nodo que utilizaremos en el GA_P
@@ -159,6 +159,6 @@ class Nodo {
 
 typedef Nodo * Arbol;
 
-}
+} // namespace PG_ALGS
 
 #endif

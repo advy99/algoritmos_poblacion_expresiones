@@ -1,7 +1,7 @@
 #include "expresion.hpp"
 
 
-namespace GA_P {
+namespace PG_ALGS {
 
 Expresion :: Expresion(const unsigned prof_max){
 
@@ -810,4 +810,4 @@ bool Expresion :: operator != ( const Expresion & otra) const {
 	return !(*this == otra);
 }
 
-} // namespace GA_P
+} // namespace PG_ALGS

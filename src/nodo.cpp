@@ -1,6 +1,6 @@
 #include "nodo.hpp"
 
-namespace GA_P {
+namespace PG_ALGS {
 
 Nodo :: Nodo(){
 	tipo_nodo = TipoNodo::NUMERO;
@@ -30,7 +30,7 @@ void Nodo :: setTipoNodoOperadorAleatorio(){
 		tipo_nodo = TipoNodo::POR;
 	} else if (aleatorio < 4.0/5.0) {
 		tipo_nodo = TipoNodo::ENTRE;
-	} else { 
+	} else {
 		tipo_nodo = TipoNodo::ELEVADO;
 	}
 }
@@ -77,4 +77,4 @@ bool Nodo :: operator!=(const Nodo & otro) const {
 }
 
 
-} // namespace GA_P
+} // namespace PG_ALGS
