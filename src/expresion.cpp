@@ -327,6 +327,8 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 			} else {
 				resultado = 1.0f;
 			}
+		} else if (operacion == TipoNodo::ELEVADO) {
+			resultado = std::pow(valor_izda, valor_dcha);
 		}
 
 	}
@@ -406,7 +408,7 @@ unsigned Expresion :: getLongitudCromosoma() const{
 bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned pos,
 													const unsigned cruce_padre,
 												   Expresion & hijo) const {
-	
+
 	Expresion madre_cortada((arbol + pos), profundidad_maxima);
 	Expresion padre_cortado((otra.arbol + cruce_padre), otra.profundidad_maxima);
 
@@ -415,7 +417,7 @@ bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned po
 
 
 	bool podido_cruzar = nueva_longitud <= profundidad_maxima;
-	
+
 	if ( podido_cruzar) {
 		// cruce
 		hijo.liberarMemoria();
@@ -490,7 +492,7 @@ void Expresion :: asignarCromosoma(const double * nuevo_cromosoma, const unsigne
 	liberarMemoriaCromosoma();
 
 	reservarMemoriaCromosoma(longitud);
-	
+
 	memcpy(cromosoma, nuevo_cromosoma, longitud*sizeof(double));
 
 	longitud_cromosoma = longitud;
@@ -563,7 +565,6 @@ void Expresion :: cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expres
 	double * cromosoma_actual = new double[this->longitud_cromosoma];
 	double * cromosoma_otro = new double[otra.longitud_cromosoma];
 
-	// TODO: Comprobar que el cruce BLX-alfa es correcto
 	double punto_padre, punto_madre, seccion;
 
 	for ( unsigned i = 0; i < longitud_cromosoma; i++){
@@ -660,6 +661,8 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 			valor = "*";
 		} else if (pila.top().getTipoNodo() == TipoNodo::ENTRE){
 			valor = "/";
+		} else if (pila.top().getTipoNodo() == TipoNodo::ELEVADO){
+			valor = "^";
 		}
 
 
