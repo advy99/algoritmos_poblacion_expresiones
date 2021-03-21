@@ -49,6 +49,63 @@ class PG_ALG {
 
 		void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
 
+		/**
+		  * @brief Obtener el numero de variables de los datos
+		  *
+		  * @return Numero de variables del problema
+		  */
+
+		int getNumVariables() const ;
+
+		/**
+		  * @brief Obtener el numero de datos
+		  *
+		  * @return Numero de datos
+		  */
+
+		int getNumDatos() const;
+
+		/**
+		  * @brief Obtener los datos
+		  *
+		  * @return Datos.
+		  */
+		std::vector<std::vector<double> > getDatos() const;
+
+
+		/**
+		  * @brief Obtener el dato de la fila indice
+		  *
+		  * @param indice Indice del dato a obtener
+		  *
+		  * @pre indice >= 0 && indice < datos.size
+		  *
+		  * @return Dato de la columna indice.
+		  */
+		std::vector<double > getDato(const unsigned indice) const;
+
+
+		/**
+		  * @brief Obtener las etiquetas asociadas a los datos
+		  *
+		  * @return Etiquetas asociadas a los datos.
+		  */
+
+		std::vector<double> getOutputDatos() const;
+
+
+		/**
+		  * @brief Obtener la etiqueta asociada al dato indice
+		  *
+		  * @param indice Indice de la etiqueta a obtener
+		  *
+		  * @pre indice >= 0 && indice < output_datos.size
+		  *
+		  * @return Etiqueta asociada al dato indice.
+		  */
+
+		double getOutputDato(const unsigned indice) const ;
+
 };
 
 

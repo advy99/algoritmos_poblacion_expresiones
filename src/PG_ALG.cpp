@@ -73,4 +73,33 @@ bool PG_ALG :: leerDatos(const std::string fichero_datos,
 
 
 
+int PG_ALG :: getNumDatos() const {
+	return datos.size();
+}
+
+int PG_ALG :: getNumVariables() const {
+	return datos[0].size();
+}
+
+std::vector<std::vector<double> > PG_ALG :: getDatos() const {
+	return datos;
+}
+
+std::vector<double> PG_ALG :: getDato(const unsigned i) const {
+	return datos[i];
+}
+
+std::vector<double> PG_ALG :: getOutputDatos() const {
+	return output_datos;
+}
+
+
+
+double PG_ALG :: getOutputDato(const unsigned indice) const {
+	return output_datos[indice];
+}
+
+
+
+
 } // namespace PG_ALGS
