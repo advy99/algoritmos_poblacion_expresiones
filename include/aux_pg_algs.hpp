@@ -4,8 +4,8 @@
   *
   */
 
-#ifndef AUX_GAP
-#define AUX_GAP
+#ifndef AUX_PG_ALGS
+#define AUX_PG_ALGS
 
 #ifdef _OPENMP
 	#include <omp.h>

@@ -1,4 +1,4 @@
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 
 namespace PG_ALGS {
 

@@ -45,9 +45,9 @@ OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libPG_ALGS.a $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_LIB_PG_ALGS = $(OBJ)/PG_ALG.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
+OBJETOS_LIB_PG_ALGS = $(OBJ)/PG_ALG.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
 
-PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_gap.hpp
+PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
@@ -123,10 +123,10 @@ $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp $(INC)/poblacion.hpp $(INC)/expresion.h
 $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp $(INC)/GA_P.hpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/PG_ALG.o: $(SRC)/PG_ALG.cpp $(INC)/aux_gap.hpp
+$(OBJ)/PG_ALG.o: $(SRC)/PG_ALG.cpp $(INC)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp $(INC)/aux_gap.hpp
+$(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
 
