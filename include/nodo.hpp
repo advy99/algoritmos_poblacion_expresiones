@@ -7,7 +7,7 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 
 namespace PG_ALGS {
 

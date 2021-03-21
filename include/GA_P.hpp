@@ -7,7 +7,7 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 #include "random.hpp"
 #include "expresion.hpp"
 #include "poblacion.hpp"
@@ -160,7 +160,7 @@ class GA_P : public PG_ALG {
 
 		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
 
-	
+
 
 		/**
 		 * @brief Obtener la profundidad máxima de las expresiones

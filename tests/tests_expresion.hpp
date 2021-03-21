@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 #include "expresion.hpp"
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 
 TEST (Expresion, IgualElMismo) {
 	PG_ALGS::Expresion exp;
