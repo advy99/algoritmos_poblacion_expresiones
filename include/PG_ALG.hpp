@@ -2,6 +2,7 @@
 #define PG_ALG_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
+#include "poblacion.hpp"
 
 namespace PG_ALGS {
 
@@ -17,6 +18,39 @@ class PG_ALG {
 		  * @brief Etiquetas para comprobar el error de la estimación.
 		  */
 		std::vector<double> output_datos;
+
+
+		/**
+		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
+		  * GA_P
+		  */
+		Poblacion poblacion;
+
+
+		/**
+		  * @brief Profundidad maxima de las expresiones utilizadas
+		  *
+		  */
+
+		unsigned prof_expresiones;
+
+
+		/**
+		  * @brief Inicializar GA_P vacio
+		  *
+		 */
+
+		 void inicializarVacio();
+
+		/**
+		 *  @brief Selección de una nueva población por torneo a partir de
+		 * la poblacion actual
+		 *
+		 * @param tam_torneo Tamaño del torneo
+		 *
+		 */
+
+		 Poblacion seleccionTorneo(const unsigned tam_torneo);
 
 	public:
 
@@ -105,6 +139,14 @@ class PG_ALG {
 		  */
 
 		double getOutputDato(const unsigned indice) const ;
+
+		/**
+		  * @brief Obtener el mejor individuo de la poblacion.
+		  *
+		  * @return Mejor individuo de la población
+		  */
+
+		Expresion getMejorIndividuo() const;
 
 };
 

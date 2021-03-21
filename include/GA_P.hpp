@@ -57,43 +57,6 @@ class GA_P : public PG_ALG {
 		  *
 		  */
 
-		/**
-		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
-		  * GA_P
-		  */
-		Poblacion poblacion;
-
-
-		/**
-		  * @brief Profundidad maxima de las expresiones utilizadas
-		  *
-		  */
-
-		unsigned prof_expresiones;
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por GA_P
-		  */
-
-		void liberarMemoria();
-
-		/**
-		  * @brief Inicializar GA_P vacio
-		  *
-		 */
-
-		 void inicializarVacio();
-
-		/**
-		 *  @brief Selección de una nueva población por torneo a partir de
-		 * la poblacion actual
-		 *
-		 * @param tam_torneo Tamaño del torneo
-		 *
-		 */
-
-		 Poblacion seleccionTorneo(const unsigned tam_torneo);
-
 	public:
 
 		/**
@@ -182,14 +145,6 @@ class GA_P : public PG_ALG {
 						 const double prob_mutacion_ga,
 						 const int tam_torneo,
 						 const bool mostrar_evolucion = true) ;
-
-		/**
-		  * @brief Obtener el mejor individuo de la poblacion.
-		  *
-		  * @return Mejor individuo de la población
-		  */
-
-		Expresion getMejorIndividuo() const;
 
 };
 

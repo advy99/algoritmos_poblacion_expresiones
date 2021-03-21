@@ -12,11 +12,6 @@ GA_P :: GA_P(const unsigned long seed) {
 
 }
 
-void GA_P :: inicializarVacio() {
-	prof_expresiones = 0;
-	datos.clear();
-	output_datos.clear();
-}
 
 GA_P :: GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
@@ -210,61 +205,6 @@ void GA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 		generacion++;
 	}
 
-}
-
-Expresion GA_P :: getMejorIndividuo() const {
-	return poblacion.getMejorIndividuo();
-}
-
-Poblacion GA_P :: seleccionTorneo(const unsigned tam_torneo) {
-	// partimos de una poblacion con el mismo tamaño que la actual
-	Poblacion resultado = poblacion;
-
-	std::vector<int> ganadores_torneo;
-
-
-
-	// escojo una nueva poblacion del mismo tamaño
-	#pragma omp parallel for
-	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
-
-		std::vector<int> participantes_torneo;
-		int nuevo_participante;
-		int mejor_torneo;
-
-		// generamos el inicial y lo insertamos en los generados
-		mejor_torneo = Random::getInt(poblacion.getTamPoblacion());
-
-		participantes_torneo.push_back(mejor_torneo);
-
-		// insertamos participantes hasta llegar al tamaño indicado
-		while ( tam_torneo > participantes_torneo.size()) {
-			nuevo_participante = Random::getInt(poblacion.getTamPoblacion());
-
-			auto encontrado = std::find(participantes_torneo.begin(), participantes_torneo.end(), nuevo_participante);
-
-			// si no aparece como participante
-			if ( encontrado != participantes_torneo.end() ) {
-				participantes_torneo.push_back(nuevo_participante);
-				// si este nuevo participante tiene mejor fitness, lo cojemos como mejor
-				if ( poblacion[nuevo_participante].getFitness() < poblacion[mejor_torneo].getFitness() ) {
-					mejor_torneo = nuevo_participante;
-				}
-
-			}
-		}
-
-		// el ganador del torneo i es el mejor del torneo
-		#pragma omp critical
-		ganadores_torneo.push_back(mejor_torneo);
-	}
-
-	// actualizamos el resultado con los ganadores del torneo
-	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
-		resultado[i] = poblacion[ganadores_torneo[i]];
-	}
-
-	return resultado;
 }
 
 
