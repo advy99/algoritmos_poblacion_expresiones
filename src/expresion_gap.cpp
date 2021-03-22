@@ -27,7 +27,7 @@ Expresion_GAP :: Expresion_GAP(const Arbol subarbol, const unsigned prof_max){
 	inicializarVacia();
 
 	// obtenemos el subarbol
-	(*this) = obtenerSubarbol(subarbol);
+	(*this) = dynamic_cast<Expresion_GAP &>(obtenerSubarbol(subarbol));
 
 	reservarMemoriaCromosoma(profundidad_maxima);
 
@@ -35,6 +35,9 @@ Expresion_GAP :: Expresion_GAP(const Arbol subarbol, const unsigned prof_max){
 
 }
 
+Expresion_GAP :: ~Expresion_GAP(){
+	liberarMemoria();
+}
 
 
 Expresion_GAP :: Expresion_GAP(const unsigned longitud_max, const double prob_variable,
@@ -104,7 +107,7 @@ void Expresion_GAP :: copiarDatos(const Expresion_GAP & otra){
 }
 
 
-Expresion_GAP :: Expresion_GAP(const Expresion_GAP & otra){
+Expresion_GAP :: Expresion_GAP(const Expresion_GAP & otra) : Expresion(otra){
 	// al inicializar vacia mantenemos la prfuncidad que queramos
 	profundidad_maxima = otra.profundidad_maxima;
 
