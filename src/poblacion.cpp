@@ -12,7 +12,7 @@ Poblacion :: Poblacion(){
 
 Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
 							const double prob_var, const unsigned num_vars,
-							const unsigned prof_expre){
+							const unsigned prof_expre, const bool expresion_gap){
 	// liberamos memoria para inicializar a vacio
 	expresiones = nullptr;
 
@@ -23,7 +23,11 @@ Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
 	tam_poblacion = tam;
 	// inicializamos todas las expresiones de la poblacion
 	for (unsigned i = 0; i < tam; i++){
-		expresiones[i] = Expresion(lon_expre, prob_var, num_vars, prof_expre);
+		if ( expresion_gap ){
+			expresiones[i] = Expresion_GAP(lon_expre, prob_var, num_vars, prof_expre);
+		} else {
+			expresiones[i] = Expresion(lon_expre, prob_var, num_vars, prof_expre);
+		}
 	}
 }
 

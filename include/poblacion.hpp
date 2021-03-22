@@ -9,6 +9,7 @@
 
 #include "aux_pg_algs.hpp"
 #include "expresion.hpp"
+#include "expresion_gap.hpp"
 
 namespace PG_ALGS {
 
@@ -141,7 +142,7 @@ class Poblacion{
 
 		Poblacion(const unsigned tam, const unsigned lon_expre,
 					 const double prob_var, const unsigned num_vars,
-					 const unsigned prof_expre);
+					 const unsigned prof_expre, const bool expresion_gap = false);
 
 		/**
 		  * @brief Destructor de la Población
