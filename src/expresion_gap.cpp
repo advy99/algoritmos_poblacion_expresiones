@@ -144,6 +144,28 @@ void Expresion_GAP :: reservarMemoriaCromosoma(const int tam){
 }
 
 
+
+bool Expresion_GAP :: generarExpresionAleatoria(const unsigned longitud_maxima,
+														const double prob_variable,
+														const unsigned num_variables){
+
+	bool exito = Expresion::generarExpresionAleatoria(longitud_maxima, prob_variable, num_variables);
+
+	for (unsigned i = 0; i < longitud_arbol; i++) {
+		if (arbol[i].getTipoNodo() == TipoNodo::NUMERO) {
+			arbol[i].setTerminoAleatorio(longitud_cromosoma, num_variables);
+		}
+	}
+
+	return exito;
+
+}
+
+
+
+
+
+
 double Expresion_GAP :: delta(const int generacion, const int max_generaciones, const double valor) {
 	double aleatorio = Random::getFloat();
 
