@@ -45,7 +45,7 @@ OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libPG_ALGS.a $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_LIB_PG_ALGS = $(OBJ)/PG_ALG.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_LIB_PG_ALGS = $(OBJ)/PG_ALG.o $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
 
 PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
 
@@ -115,6 +115,9 @@ $(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/expresion_gap.o: $(SRC)/expresion_gap.cpp $(INC)/expresion_gap.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
