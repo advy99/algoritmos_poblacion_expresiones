@@ -162,5 +162,8 @@ Expresion PG_ALG :: getMejorIndividuo() const {
 	return poblacion.getMejorIndividuo();
 }
 
+unsigned PG_ALG :: getMaxProfExpresiones() const {
+	return prof_expresiones;
+}
 
 } // namespace PG_ALGS

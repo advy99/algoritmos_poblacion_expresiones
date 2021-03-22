@@ -148,6 +148,14 @@ class PG_ALG {
 
 		Expresion getMejorIndividuo() const;
 
+		/**
+		 * @brief Obtener la profundidad máxima de las expresiones
+		 *
+		 * @return Profundidad máxima de las expresiones
+		 */
+
+		unsigned getMaxProfExpresiones() const;
+
 };
 
 
