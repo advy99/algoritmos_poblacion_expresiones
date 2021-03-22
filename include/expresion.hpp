@@ -25,7 +25,7 @@ namespace PG_ALGS {
   */
 
 class Expresion{
-	private:
+	protected:
 
 		/**
 		  * @page repExpresion Representación de la clase Expresion
@@ -82,21 +82,6 @@ class Expresion{
 		Arbol arbol = nullptr;
 
 		/**
-		  * @brief Array donde almacenaremos los valores de las constantes
-		  * numéricas para aprenderlos
-		  *
-		  */
-
-		double * cromosoma = nullptr;
-
-		/**
-		  * @brief Longitud del array cromosoma
-		  *
-		  */
-
-		unsigned longitud_cromosoma;
-
-		/**
 		  * @brief Inicializar una expresión vacia.
 		  *
 		  * @pre La expresión no tiene memoria dinámica reservada.
@@ -104,7 +89,7 @@ class Expresion{
 		  * @post La expresión queda como una expresión vacia.
 		  */
 
-		void inicializarVacia();
+		virtual void inicializarVacia();
 
 		/**
 		  * @brief Copiar datos de una expresión dada a la expresión.
@@ -129,24 +114,12 @@ class Expresion{
 
 		void reservarMemoriaArbol(const int tam);
 
-
-		/**
-		  * @brief Reservar memoria para un cromosoma de tamaño tam
-		  *
-		  * @param tam Tamaño a reservar para el cromosoma.
-		  *
-		  * @pre cromosoma == nullptr
-		  *
-		  */
-
-		void reservarMemoriaCromosoma(const int tam);
-
 		/**
 		  * @brief Liberar la memoria dinámica utilizada y limpiar la expresión.
 		  *
 		  */
 
-		void liberarMemoria();
+		virtual void liberarMemoria();
 
 		/**
 		  * @brief Liberar la memoria dinámica utilizada por el arbol.
@@ -154,13 +127,6 @@ class Expresion{
 		  */
 
 		void liberarMemoriaArbol();
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por el cromosoma.
-		  *
-		  */
-
-		void liberarMemoriaCromosoma();
 
 
 		/**
@@ -175,46 +141,16 @@ class Expresion{
 		unsigned contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const;
 
 		/**
-		 * @brief Inicializar el cromosoma de constantes asociadas a la Expresion.
-		 *
-		 *
-		 */
-
-		void inicializarCromosoma();
-
-		/**
-		 * @brief Copiar cromosoma dado al cromosoma de la Expresion actual
-		 *
-		 * @param otro_cromosoma Cromosoma a copiar
-		 *
-		 */
-
-		void copiarCromosoma(const double * otro_cromosoma);
-
-		/**
 		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
 		  * la expresión.
 		  *
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(std::stack<Nodo> & pila,
-								 const std::vector<double> & dato);
+		virtual double evaluarDato(std::stack<Nodo> & pila,
+								 			const std::vector<double> & dato);
 
-		/**
-		  * @brief Función delta para la mutación no uniforme de GA
-		  *
-		  * @param generacion Generación en la que se aplica la mutación
-		  * @param max_gen Número máximo de generaciones al entrenar.
-		  * @param valor Valor del cromosoma al aplicar la mutación
-		  *
-		  * @return Valor a modificar el cromosoma con el valor dado
-		  */
-
-
-		double delta(const int generacion, const int max_gen, const double valor);
-
-	public:
+		public:
 
 		/**
 		  * @brief Constructor con un parámetro, genera una expresión vacia.
@@ -282,9 +218,9 @@ class Expresion{
 		  * correctamente, false en caso contrario
 		  */
 
-		bool generarExpresionAleatoria(const unsigned longitud_max,
-			 									 const double prob_variable,
-												 const unsigned num_variables);
+		virtual bool generarExpresionAleatoria(const unsigned longitud_max,
+					 									 	const double prob_variable,
+														 	const unsigned num_variables);
 
 		/**
 		  * @brief Consultar si la expresión ha sido evaluada tras ser modificada.
@@ -311,14 +247,6 @@ class Expresion{
 
 		unsigned getLongitudArbol() const;
 
-		/**
-		  * @brief Consultar la longitud del cromosoma.
-		  *
-		  * @return Longitud del cromosoma.
-		  */
-
-		unsigned getLongitudCromosoma() const;
-
 		/*
 		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
 		 *
@@ -330,16 +258,6 @@ class Expresion{
 
 		void asignarArbol ( const Arbol nuevo_arbol, const unsigned longitud_n_arbol);
 
-		/*
-		 * @brief Dado un cromosoma, asignar dicho cromosoma a la expresion actual
-		 *
-		 * @param nuevo_cromosoma Cromosoma que formará la expresion
-		 *
-		 * @param longitud Longitud del nuevo cromosoma dado
-		 *
-		 */
-
-		void asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud);
 
 		/**
 		  * @brief Evaluar la expresión con los datos dados.
@@ -431,20 +349,6 @@ class Expresion{
 
 		unsigned calcularProfundidad(const unsigned comienzo = 0) const;
 
-		/**
-		 * @brief Operador de cruce para los cromosomas de las expresiones.
-		 * Al cruzar dos cromosomas obtendremos otros dos nuevos cromosomas.
-		 *
-		 * @param otra Expresion con la que cruzar el cromosoma.
-		 * @param hijo1 Expresión donde se almacenará el resultado del cruce.
-		 * @param hijo2 Expresión donde se almacenará el resultado del cruce.
-		 * @param alfa Valor alfa del metodo BLX-alfa, posible extension del
-		 * rango entre dos valores
-		 *
-		 */
-
-
-		void cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expresion & hijo2, const double alfa = 0.3) const;
 
 		/**
 		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho
@@ -467,12 +371,7 @@ class Expresion{
 		Arbol getArbol() const;
 
 
-		/**
-		 * @brief Obtener donde está almacenado el cromosoma
-		 *
-		 */
 
-		double * getCromosoma() const;
 
 		/**
 		  * @brief Funcion para obtener una expresión almacenada en una pila en
@@ -504,18 +403,6 @@ class Expresion{
 
 		/**
 		 *
-		 *  @brief Mutación no uniforme de la parte de algoritmo genético (cromosoma)
-		 *
-		 *  @param generacion Generación en la que se aplica la mutación
-		 *  @param max_gen Número máximo de generaciones al entrenar.
-		 *
-		 */
-
-		void mutarGA(const int generacion, const int max_gen);
-
-
-		/**
-		 *
 		 *  @brief Mutación de la parte de programación genética (arbol)
 		 *
 		 *  @param num_vars Numero de variables que puede tomar el arbol
@@ -524,16 +411,6 @@ class Expresion{
 
 		void mutarGP(const int num_vars);
 
-		/*
-		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma
-		 *
-		 * @param otra Expresión a comparar con la actual
-		 *
-		 * @pre Los cromosomas son de la misma longitud
-		 *
-		 */
-
-		bool totalmenteIguales(const Expresion & otra) const;
 
 		/*
 		 * @brief Operador para comparar si dos expresiones son iguales

@@ -11,11 +11,6 @@ Expresion :: Expresion(const unsigned prof_max){
 	// inicilizamos la expresion vacia
 	inicializarVacia();
 
-	// reservamos memoria para el cromosoma
-	reservarMemoriaCromosoma(profundidad_maxima);
-
-	// inicializamos el cromosoma de forma aleatoria
-	inicializarCromosoma();
 }
 
 Expresion :: Expresion(const Arbol subarbol, const unsigned prof_max){
@@ -29,10 +24,6 @@ Expresion :: Expresion(const Arbol subarbol, const unsigned prof_max){
 	// obtenemos el subarbol
 	(*this) = obtenerSubarbol(subarbol);
 
-	reservarMemoriaCromosoma(profundidad_maxima);
-
-	inicializarCromosoma();
-
 }
 
 Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
@@ -42,23 +33,11 @@ Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 
 	inicializarVacia();
 
-	// reservamos la profundidad maxima
-	reservarMemoriaCromosoma(profundidad_maxima);
-
-	// inicializamos el cromosoma el cromosoma
-	inicializarCromosoma();
-
 	// generamos una expresion aleatoria
 	generarExpresionAleatoria(longitud_max, prob_variable, num_vars);
 }
 
-void Expresion :: inicializarCromosoma(){
-	// para cada elemento escogemos un numero aleatorio en [-10, 10]
-	for (unsigned i = 0; i < longitud_cromosoma; i++){
-		cromosoma[i] = Random::getFloat(-10.0f, 10.0f);
-	}
 
-}
 
 Expresion Expresion :: obtenerSubarbol(const Arbol subarbol){
 	Expresion sol;
@@ -103,8 +82,6 @@ Expresion Expresion :: obtenerSubarbol(const Arbol subarbol){
 void Expresion :: inicializarVacia(){
 	// una expresion vacia no tiene arbol
 	arbol              = nullptr;
-	cromosoma          = nullptr;
-	longitud_cromosoma = profundidad_maxima;
 	longitud_arbol     = 0;
 	dejaEstarEvaluada();
 }
@@ -124,18 +101,10 @@ void Expresion :: liberarMemoriaArbol() {
 	}
 }
 
-void Expresion :: liberarMemoriaCromosoma() {
-	// y lo mismo con el cromosoma
-	if (cromosoma != nullptr){
-		delete [] cromosoma;
-		cromosoma = nullptr;
-	}
-}
 
 void Expresion :: liberarMemoria(){
 
 	liberarMemoriaArbol();
-	liberarMemoriaCromosoma();
 
 	// una vez esta liberada la memoria, la expresion esta vacia, luego
 	// la ponemos a vacio
@@ -154,12 +123,6 @@ void Expresion :: reservarMemoriaArbol(const int tam){
 	}
 }
 
-void Expresion :: reservarMemoriaCromosoma(const int tam){
-	if (tam > 0){
-		cromosoma = new double[tam];
-		longitud_cromosoma = tam;
-	}
-}
 
 void Expresion :: copiarDatos(const Expresion & otra){
 	// copiamos todos los valores
@@ -167,7 +130,6 @@ void Expresion :: copiarDatos(const Expresion & otra){
 	evaluada           = otra.evaluada;
 	longitud_arbol     = otra.longitud_arbol;
 	profundidad_maxima = otra.profundidad_maxima;
-	longitud_cromosoma = otra.longitud_cromosoma;
 
 	if ( otra.arbol == nullptr) {
 		arbol = nullptr;
@@ -175,12 +137,6 @@ void Expresion :: copiarDatos(const Expresion & otra){
 		asignarArbol(otra.arbol, otra.longitud_arbol);
 	}
 
-	// copiamos el cromosoma de la otra expresion
-	if ( otra.cromosoma == nullptr) {
-		cromosoma = nullptr;
-	} else {
-		asignarCromosoma(otra.cromosoma, otra.longitud_cromosoma);
-	}
 }
 
 
@@ -247,9 +203,11 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 				arbol[i].setTipoNodo(TipoNodo::NUMERO);
 			}
 
+			// TODO: Para adaptar a Expresion/Expersion_GAP, si es una variable hacer la llamada,
+			// pero si es un numero ya poner un valor asignado, y en GAP que se rellene el cromosoma
 			// generamos el termino aleatorio entre los posibles valores, ya sean
 			// una variable o un numero
-			arbol[i].setTerminoAleatorio(longitud_cromosoma, num_variables);
+			arbol[i].setTerminoAleatorio(num_variables);
 
 			// al ser un terminal, esta rama ya no esta libre y quitamos una
 			ramas_libres--;
@@ -289,7 +247,7 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
 		// posicion del cromosoma correspondiente
-		resultado = cromosoma[pila.top().getValor()];
+		resultado = pila.top().getValorNumerico();
 
 		// eliminamos de la pila, y lo devolvemos
 		pila.pop();
@@ -400,9 +358,6 @@ unsigned Expresion :: getLongitudArbol() const{
 	return longitud_arbol;
 }
 
-unsigned Expresion :: getLongitudCromosoma() const{
-	return longitud_cromosoma;
-}
 
 
 bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned pos,
@@ -440,7 +395,7 @@ bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned po
 			hijo.arbol[indice_hijo] = arbol[i];
 		}
 
-		hijo.asignarCromosoma(cromosoma, longitud_cromosoma);
+		//hijo.asignarCromosoma(cromosoma, longitud_cromosoma);
 
 	}
 
@@ -487,17 +442,6 @@ void Expresion :: asignarArbol (const Arbol nuevo_arbol, const unsigned longitud
 
 }
 
-void Expresion :: asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud){
-
-	liberarMemoriaCromosoma();
-
-	reservarMemoriaCromosoma(longitud);
-
-	memcpy(cromosoma, nuevo_cromosoma, longitud*sizeof(double));
-
-	longitud_cromosoma = longitud;
-
-}
 
 void Expresion :: dejaEstarEvaluada(){
 	// ponemos la flag a false y establecemos el fitness a NaN
@@ -556,55 +500,6 @@ unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 
 
 
-void Expresion :: cruceBLXalfa(const Expresion & otra, Expresion & hijo1, Expresion & hijo2, const double alfa) const{
-
-	if ( otra.longitud_cromosoma != this->longitud_cromosoma ) {
-		std::cerr << "Cruzando dos cromosomas de distinta longitud" << std::endl;
-	}
-
-	double * cromosoma_actual = new double[this->longitud_cromosoma];
-	double * cromosoma_otro = new double[otra.longitud_cromosoma];
-
-	double punto_padre, punto_madre, seccion;
-
-	for ( unsigned i = 0; i < longitud_cromosoma; i++){
-		punto_madre = this->cromosoma[i];
-		punto_padre = otra.cromosoma[i];
-
-		if ( punto_madre > punto_padre ) {
-			double intercamio = punto_madre;
-			punto_madre = punto_padre;
-			punto_padre = intercamio;
-		}
-
-		seccion = punto_padre - punto_madre;
-
-		punto_madre = punto_madre - seccion * alfa;
-		punto_padre = punto_padre + seccion * alfa;
-
-		if ( punto_madre < 0.0) {
-			punto_madre = 0.0;
-		}
-
-		if ( punto_padre > 1.0) {
-			punto_padre = 1.0;
-		}
-
-		cromosoma_actual[i] = punto_madre + Random::getFloat() *
-														(punto_padre - punto_madre);
-
-		cromosoma_otro[i] = punto_madre + Random::getFloat() *
-														(punto_padre - punto_madre);
-	}
-
-
-	hijo1.asignarCromosoma(cromosoma_actual, this->longitud_cromosoma);
-	hijo2.asignarCromosoma(cromosoma_otro, otra.longitud_cromosoma);
-
-	delete [] cromosoma_actual;
-	delete [] cromosoma_otro;
-
-}
 
 
 bool Expresion :: mismoNicho(const Expresion & otra) const {
@@ -623,11 +518,12 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 		// la derecha ponemos primero el numero y lo que llevamos
 		// o lo que llevamos y el numero
 		if (izda){
-			resultado = std::to_string(cromosoma[pila.top().getValor()]) +
+			// resultado = std::to_string(cromosoma[pila.top().getValor()]) +
+			resultado = std::to_string(pila.top().getValorNumerico()) +
 							" " + resultado;
 		} else {
 			resultado = resultado + " " +
-							std::to_string(cromosoma[pila.top().getValor()]);
+							std::to_string(pila.top().getValorNumerico());
 		}
 
 		// eliminamos el nodo de la pila y devolvemos el resultado
@@ -701,10 +597,6 @@ Arbol Expresion:: getArbol () const {
 }
 
 
-double * Expresion:: getCromosoma () const {
-	return cromosoma;
-}
-
 std::string Expresion :: stringExpresion() const {
 	std::string resultado = "";
 
@@ -730,44 +622,6 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	return os;
 }
 
-bool Expresion :: totalmenteIguales ( const Expresion & otra) const {
-
-	// comprobamos si el arbol es igual
-	bool resultado = (*this) == otra;
-
-	// si el arbol coincide, comparamos el cromosoma
-	if ( resultado ) {
-		for ( unsigned i = 0; i < getLongitudCromosoma(); i++) {
-			resultado = resultado && comparar_reales(cromosoma[i], otra.cromosoma[i], 0.00005);
-		}
-	}
-
-	return resultado;
-
-}
-
-double Expresion :: delta(const int generacion, const int max_generaciones, const double valor) {
-	double aleatorio = Random::getFloat();
-
-	double sub = 1.0 - ((double)generacion / (double)(max_generaciones));
-	// TODO: parametrizar B
-	double potencia = std::pow(sub, 5);
-	double subtotal = std::pow(aleatorio, potencia);
-
-	return (valor * (1.0 - subtotal));
-}
-
-
-void Expresion :: mutarGA(const int generacion, const int max_generaciones) {
-
-	int pos_mutacion = Random::getInt(longitud_cromosoma);
-
-	if ( Random::getFloat() < 0.5) {
-		cromosoma[pos_mutacion] += delta(generacion, max_generaciones, 1.0 - cromosoma[pos_mutacion]);
-	} else {
-		cromosoma[pos_mutacion] -= delta(generacion, max_generaciones, cromosoma[pos_mutacion]);
-	}
-}
 
 
 void Expresion :: mutarGP (const int num_vars) {
@@ -782,11 +636,12 @@ void Expresion :: mutarGP (const int num_vars) {
 	if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
 		if ( Random::getFloat() < 0.5) {
 			arbol[posicion].setTipoNodo(TipoNodo::VARIABLE);
+			arbol[posicion].setTerminoAleatorio(num_vars);
 		} else {
 			arbol[posicion].setTipoNodo(TipoNodo::NUMERO);
+			// TODO: ser valor aleatorio al valor numerico
 		}
 
-		arbol[posicion].setTerminoAleatorio(getLongitudCromosoma(), num_vars);
 	} else {
 		arbol[posicion].setTipoNodoOperadorAleatorio();
 	}

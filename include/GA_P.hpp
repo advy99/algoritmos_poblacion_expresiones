@@ -125,13 +125,6 @@ class GA_P : public PG_ALG {
 
 
 
-		/**
-		 * @brief Obtener la profundidad máxima de las expresiones
-		 *
-		 * @return Profundidad máxima de las expresiones
-		 */
-
-		unsigned getMaxProfExpresiones() const;
 
 		/**
 		 *  @brief Ajustar la poblacion utilizando los datos actuales
