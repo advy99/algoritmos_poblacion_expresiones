@@ -42,16 +42,6 @@ GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
 
 
 template <class T>
-void GA_P<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
-									 const double prob_var, const bool sustituir_actual) {
-	if ( sustituir_actual ) {
-		poblacion = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
-									 	 getNumVariables(), getMaxProfExpresiones());
-	}
-
-}
-
-template <class T>
 GA_P<T> :: ~GA_P(){
 }
 
@@ -61,7 +51,7 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 							const double prob_mutacion_ga, const int tam_torneo,
 							const bool mostrar_evolucion) {
 
-	const int NUM_GENERACIONES = num_eval / (double) poblacion.getTamPoblacion();
+	const int NUM_GENERACIONES = num_eval / static_cast<double>(poblacion.getTamPoblacion());
 
 	int generacion = 0;
 	int padre, madre;
@@ -134,30 +124,23 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 				}
 			}
 			// si no hay cruce, los hijos ya estaban con el valor de los padres
-
 			if ( Random::getFloat() < prob_mutacion_ga ) {
-				// mutacion GA en el primer hijo
+				// mutacion GP en el primer hijo
 				hijo1.mutarGA(generacion, NUM_GENERACIONES);
 				modificado_hijo1 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_ga ) {
-				// mutacion GA en el segundo hijo
+				// mutacion GP en el segundo hijo
 				hijo2.mutarGA(generacion, NUM_GENERACIONES);
 				modificado_hijo2 = true;
 			}
 
-			if ( Random::getFloat() < prob_mutacion_gp ) {
-				// mutacion GP en el primer hijo
-				hijo1.mutarGP(getNumVariables());
-				modificado_hijo1 = true;
-			}
 
-			if ( Random::getFloat() < prob_mutacion_gp ) {
-				// mutacion GP en el segundo hijo
-				hijo2.mutarGP(getNumVariables());
-				modificado_hijo2 = true;
-			}
+			auto resultado_mut_gp = aplicarMutacionesGP(hijo1, hijo2, prob_mutacion_gp);
+
+			modificado_hijo1 = modificado_hijo1 || resultado_mut_gp.first;
+			modificado_hijo2 = modificado_hijo2 || resultado_mut_gp.second;
 
 			if ( modificado_hijo1 ) {
 				poblacion[madre] = hijo1;
@@ -171,27 +154,7 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		}
 
-		// elitismo
-		bool mejor_encontrado = false;
-		unsigned i = 0;
-
-		while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
-			mejor_encontrado = poblacion[i].totalmenteIguales(poblacion_antigua.getMejorIndividuo());
-			i++;
-		}
-
-
-
-		// si no esta el mejor, aplico elitismo
-		if ( !mejor_encontrado ){
-			poblacion[poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
-		}
-
-		// evaluamos
-		poblacion.evaluarPoblacion(datos, output_datos);
-
-
-
+		aplicarElitismo(poblacion_antigua);
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo

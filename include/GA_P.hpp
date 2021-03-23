@@ -37,16 +37,18 @@ template <class T>
 class GA_P : public PG_ALG<T> {
 	private:
 		using PG_ALG<T>::poblacion;
-		using PG_ALG<T>::inicializarVacio;
 		using PG_ALG<T>::datos;
 		using PG_ALG<T>::output_datos;
 
 		using PG_ALG<T>::leerDatos;
+		using PG_ALG<T>::inicializarVacio;
 		using PG_ALG<T>::prof_expresiones;
 		using PG_ALG<T>::getNumVariables;
 		using PG_ALG<T>::getMaxProfExpresiones;
 		using PG_ALG<T>::seleccionTorneo;
-
+		using PG_ALG<T>::generarPoblacion;
+		using PG_ALG<T>::aplicarElitismo;
+		using PG_ALG<T>::aplicarMutacionesGP;
 
 		/**
 		  * @page repGA_P Representación de la clase GA_P
@@ -116,26 +118,6 @@ class GA_P : public PG_ALG<T> {
 		  */
 
 		~GA_P();
-
-
-		/**
-		  * @brief Generar la población en base a los datos cargados
-		  *
-		  * @param tam_poblacion Tamaño de la poblacion a generar
-		  *
-		  * @param profundidad_exp Profundidad máxima de las expresiones de la población
-		  *
-		  * @param prob_var Probabilidad de que un nodo terminal sea una variable
-		  *
-		  * @param sustituir_actual Booleano para sustituir la población por una nueva, en caso de que ya exista una población
-		  *
-		  * @pre datos.size != 0
-		  *
-		  */
-
-		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
-
-
 
 
 		/**
