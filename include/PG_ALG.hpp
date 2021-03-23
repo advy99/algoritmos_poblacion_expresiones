@@ -6,6 +6,7 @@
 
 namespace PG_ALGS {
 
+template <class T>
 class PG_ALG {
 	protected:
 		/**
@@ -24,7 +25,7 @@ class PG_ALG {
 		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
 		  * GA_P
 		  */
-		Poblacion poblacion;
+		Poblacion<T> poblacion;
 
 
 		/**
@@ -50,7 +51,7 @@ class PG_ALG {
 		 *
 		 */
 
-		 Poblacion seleccionTorneo(const unsigned tam_torneo);
+		 Poblacion<T> seleccionTorneo(const unsigned tam_torneo);
 
 	public:
 
@@ -146,7 +147,7 @@ class PG_ALG {
 		  * @return Mejor individuo de la población
 		  */
 
-		Expresion getMejorIndividuo() const;
+		T getMejorIndividuo() const;
 
 		/**
 		 * @brief Obtener la profundidad máxima de las expresiones
@@ -161,5 +162,9 @@ class PG_ALG {
 
 
 } // namespace PG_ALGS
+
+
+#include "PG_ALG.tpp"
+
 
 #endif

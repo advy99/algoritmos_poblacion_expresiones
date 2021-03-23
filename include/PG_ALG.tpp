@@ -1,14 +1,14 @@
-#include "PG_ALG.hpp"
 
 namespace PG_ALGS {
 
-
-void PG_ALG :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
+template <class T>
+void PG_ALG<T> :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
 	datos = caracteristicas;
 	output_datos = etiquetas;
 }
 
-bool PG_ALG :: leerDatos(const std::string fichero_datos,
+template <class T>
+bool PG_ALG<T> :: leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
@@ -72,44 +72,49 @@ bool PG_ALG :: leerDatos(const std::string fichero_datos,
 }
 
 
-
-int PG_ALG :: getNumDatos() const {
+template <class T>
+int PG_ALG<T> :: getNumDatos() const {
 	return datos.size();
 }
 
-int PG_ALG :: getNumVariables() const {
+template <class T>
+int PG_ALG<T> :: getNumVariables() const {
 	return datos[0].size();
 }
 
-std::vector<std::vector<double> > PG_ALG :: getDatos() const {
+template <class T>
+std::vector<std::vector<double> > PG_ALG<T> :: getDatos() const {
 	return datos;
 }
 
-std::vector<double> PG_ALG :: getDato(const unsigned i) const {
+template <class T>
+std::vector<double> PG_ALG<T> :: getDato(const unsigned i) const {
 	return datos[i];
 }
 
-std::vector<double> PG_ALG :: getOutputDatos() const {
+template <class T>
+std::vector<double> PG_ALG<T> :: getOutputDatos() const {
 	return output_datos;
 }
 
 
-
-double PG_ALG :: getOutputDato(const unsigned indice) const {
+template <class T>
+double PG_ALG<T> :: getOutputDato(const unsigned indice) const {
 	return output_datos[indice];
 }
 
-void PG_ALG :: inicializarVacio() {
+template <class T>
+void PG_ALG<T> :: inicializarVacio() {
 	prof_expresiones = 0;
 	datos.clear();
 	output_datos.clear();
 }
 
 
-
-Poblacion PG_ALG :: seleccionTorneo(const unsigned tam_torneo) {
+template <class T>
+Poblacion<T> PG_ALG<T> :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
-	Poblacion resultado = poblacion;
+	Poblacion<T> resultado = poblacion;
 
 	std::vector<int> ganadores_torneo;
 
@@ -158,11 +163,13 @@ Poblacion PG_ALG :: seleccionTorneo(const unsigned tam_torneo) {
 	return resultado;
 }
 
-Expresion PG_ALG :: getMejorIndividuo() const {
+template <class T>
+T PG_ALG<T> :: getMejorIndividuo() const {
 	return poblacion.getMejorIndividuo();
 }
 
-unsigned PG_ALG :: getMaxProfExpresiones() const {
+template <class T>
+unsigned PG_ALG<T> :: getMaxProfExpresiones() const {
 	return prof_expresiones;
 }
 
