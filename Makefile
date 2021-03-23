@@ -42,10 +42,11 @@ CXXFLAGS = -std=c++17 $(O_LEVEL) $(F_OPENMP) $(F_GPROF) -Wall -Wextra -Wfloat-eq
 
 # objetivo principal
 OBJETIVO = $(BIN)/GA_P
-OBJETOS = $(LIB)/libPG_ALGS.a $(OBJ)/main.o
+OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_LIB_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
+CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
 
 PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
 
@@ -54,7 +55,7 @@ OBJETIVO_TEST = $(BIN)/main_test
 OBJETOS_TEST = $(OBJ)/main_test.o
 
 # variables para el contador de reglas
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_LIB_PG_ALGS) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_PG_ALGS) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -103,10 +104,10 @@ INICIO:
 	@printf "\e[94mFlags del compilador: $(CXXFLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
 
-$(OBJETIVO): $(OBJETOS)
+$(OBJETIVO): $(OBJETOS) $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o -o $@ $(F_OPENMP) -L$(LIB) -lPG_ALGS $(F_GPROF)
+	@$(CXX) $(OBJETOS) $(OBJETOS_PG_ALGS) $(CXXFLAGS) -o $@ -I$(INC) $(F_OPENMP) $(F_GPROF)
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
@@ -120,25 +121,10 @@ $(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(
 $(OBJ)/expresion_gap.o: $(SRC)/expresion_gap.cpp $(INC)/expresion_gap.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-# $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
-# 	$(call compilar_objeto,$<,$@)
-#
-# $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp $(INC)/GA_P.hpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
-# 	$(call compilar_objeto,$<,$@)
-#
-# $(OBJ)/PG_ALG.o: $(SRC)/PG_ALG.cpp $(INC)/aux_pg_algs.hpp
-# 	$(call compilar_objeto,$<,$@)
-
 $(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
 
-
-
-$(LIB)/libPG_ALGS.a: $(OBJETOS_LIB_PG_ALGS)
-	$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando la biblioteca $@ \n"
-	@ar rs $@ $^
 
 $(OBJ)/random.o: $(SRC)/random.cpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
