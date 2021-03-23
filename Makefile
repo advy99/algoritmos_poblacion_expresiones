@@ -81,10 +81,10 @@ ejecutar-tests: $(OBJETIVO_TEST)
 
 
 
-$(OBJETIVO_TEST): $(LIB)/libPG_ALGS.a $(OBJETOS_TEST)
+$(OBJETIVO_TEST): $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)  $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
-	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -L$(LIB) -lPG_ALGS
+	@$(CXX) $(OBJETOS_PG_ALGS) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\n\n"
 
 
@@ -123,8 +123,6 @@ $(OBJ)/expresion_gap.o: $(SRC)/expresion_gap.cpp $(INC)/expresion_gap.hpp $(INC)
 
 $(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
-
-
 
 $(OBJ)/random.o: $(SRC)/random.cpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
