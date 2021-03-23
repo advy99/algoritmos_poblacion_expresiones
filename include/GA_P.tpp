@@ -6,7 +6,7 @@ GA_P<T> :: GA_P(const unsigned long seed) {
 	// inicializamos la semilla
 	Random::setSeed(seed);
 
-	this->inicializarVacio();
+	inicializarVacio();
 
 }
 
@@ -18,11 +18,11 @@ GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
 	// al principio suponemos que se ha leido mal
 	bool lectura_correcta = false;
 
-	this->inicializarVacio();
+	inicializarVacio();
 
 	// lemos los datos del fichero de entrada
-	lectura_correcta = this->leerDatos(fichero_datos, char_comentario, delimitador);
-	this->prof_expresiones = prof;
+	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
+	prof_expresiones = prof;
 
 
 	// inicializamos la semilla
@@ -45,8 +45,8 @@ template <class T>
 void GA_P<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
 									 const double prob_var, const bool sustituir_actual) {
 	if ( sustituir_actual ) {
-		this->poblacion = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
-									 	 		this->getNumVariables(), this->getMaxProfExpresiones());
+		poblacion = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
+									 	 getNumVariables(), getMaxProfExpresiones());
 	}
 
 }
@@ -61,7 +61,7 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 							const double prob_mutacion_ga, const int tam_torneo,
 							const bool mostrar_evolucion) {
 
-	const int NUM_GENERACIONES = num_eval / (double) this->poblacion.getTamPoblacion();
+	const int NUM_GENERACIONES = num_eval / (double) poblacion.getTamPoblacion();
 
 	int generacion = 0;
 	int padre, madre;
@@ -69,9 +69,9 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 	bool modificado_hijo2;
 
 	// evaluo la poblacion al inicio
-	this->poblacion.evaluarPoblacion(this->datos, this->output_datos);
+	poblacion.evaluarPoblacion(datos, output_datos);
 
-	Poblacion<T> poblacion_antigua = this->poblacion;
+	Poblacion<T> poblacion_antigua = poblacion;
 	Poblacion<T> poblacion_tmp;
 
 	Expresion_GAP hijo1, hijo2;
@@ -84,21 +84,21 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		// intercambio la poblacion antigua y la actual
 		poblacion_tmp = poblacion_antigua;
-		poblacion_antigua = this->poblacion;
-		this->poblacion = poblacion_tmp;
+		poblacion_antigua = poblacion;
+		poblacion = poblacion_tmp;
 
 
 		// seleccionamos la poblacion a cruzar
-		this->poblacion = this->seleccionTorneo(tam_torneo);
+		poblacion = seleccionTorneo(tam_torneo);
 
 		// aplicamos los operadores geneticos
-		for ( unsigned i = 0; i < this->poblacion.getTamPoblacion(); i += 2){
+		for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i += 2){
 
 			madre = i;
 			padre = i + 1;
 
-			hijo1 = this->poblacion[madre];
-			hijo2 = this->poblacion[padre];
+			hijo1 = poblacion[madre];
+			hijo2 = poblacion[padre];
 
 			modificado_hijo1 = modificado_hijo2 = false;
 			cruce_ga = cruce_gp = false;
@@ -106,7 +106,7 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 			// cruce de la parte GA
 			if ( Random::getFloat() < prob_cruce_ga ) {
 				// cruce del cromosoma utilizando BLX_alfa
-				this->poblacion[madre].cruceBLXalfa(this->poblacion[padre], hijo1, hijo2);
+				poblacion[madre].cruceBLXalfa(poblacion[padre], hijo1, hijo2);
 				modificado_hijo1 = modificado_hijo2 = true;
 				cruce_ga = true;
 			}
@@ -115,7 +115,7 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 			if ( Random::getFloat() < prob_cruce_gp ) {
 				// cruce de programacion genetica, se intercambian arboles
 
-				this->poblacion[madre].cruceArbol(this->poblacion[padre], hijo1, hijo2);
+				poblacion[madre].cruceArbol(poblacion[padre], hijo1, hijo2);
 				modificado_hijo1 = modificado_hijo2 = true;
 				cruce_gp = true;
 			}
@@ -124,12 +124,12 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 				// si hay algun tipo de cruce
 				if ( !cruce_gp ) {
 					// no se ha cruzado el arbol
-					hijo1.asignarArbol(this->poblacion[madre].getArbol(), this->poblacion[madre].getLongitudArbol());
-					hijo2.asignarArbol(this->poblacion[padre].getArbol(), this->poblacion[padre].getLongitudArbol());
+					hijo1.asignarArbol(poblacion[madre].getArbol(), poblacion[madre].getLongitudArbol());
+					hijo2.asignarArbol(poblacion[padre].getArbol(), poblacion[padre].getLongitudArbol());
 				} else {
 					// no se ha cruzado el cromosoma
-					hijo1.asignarCromosoma(this->poblacion[madre].getCromosoma(), this->poblacion[madre].getLongitudCromosoma());
-					hijo2.asignarCromosoma(this->poblacion[padre].getCromosoma(), this->poblacion[padre].getLongitudCromosoma());
+					hijo1.asignarCromosoma(poblacion[madre].getCromosoma(), poblacion[madre].getLongitudCromosoma());
+					hijo2.asignarCromosoma(poblacion[padre].getCromosoma(), poblacion[padre].getLongitudCromosoma());
 
 				}
 			}
@@ -149,24 +149,24 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 			if ( Random::getFloat() < prob_mutacion_gp ) {
 				// mutacion GP en el primer hijo
-				hijo1.mutarGP(this->getNumVariables());
+				hijo1.mutarGP(getNumVariables());
 				modificado_hijo1 = true;
 			}
 
 			if ( Random::getFloat() < prob_mutacion_gp ) {
 				// mutacion GP en el segundo hijo
-				hijo2.mutarGP(this->getNumVariables());
+				hijo2.mutarGP(getNumVariables());
 				modificado_hijo2 = true;
 			}
 
 			if ( modificado_hijo1 ) {
-				this->poblacion[madre] = hijo1;
-				this->poblacion[madre].dejaEstarEvaluada();
+				poblacion[madre] = hijo1;
+				poblacion[madre].dejaEstarEvaluada();
 			}
 
 			if ( modificado_hijo2) {
-				this->poblacion[padre] = hijo2;
-				this->poblacion[padre].dejaEstarEvaluada();
+				poblacion[padre] = hijo2;
+				poblacion[padre].dejaEstarEvaluada();
 			}
 
 		}
@@ -175,8 +175,8 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 		bool mejor_encontrado = false;
 		unsigned i = 0;
 
-		while (i < this->poblacion.getTamPoblacion() && !mejor_encontrado) {
-			mejor_encontrado = this->poblacion[i].totalmenteIguales(poblacion_antigua.getMejorIndividuo());
+		while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
+			mejor_encontrado = poblacion[i].totalmenteIguales(poblacion_antigua.getMejorIndividuo());
 			i++;
 		}
 
@@ -184,18 +184,18 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		// si no esta el mejor, aplico elitismo
 		if ( !mejor_encontrado ){
-			this->poblacion[this->poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
+			poblacion[poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
 		}
 
 		// evaluamos
-		this->poblacion.evaluarPoblacion(this->datos, this->output_datos);
+		poblacion.evaluarPoblacion(datos, output_datos);
 
 
 
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
-			std::cout << generacion << "\t" << this->poblacion.getMejorIndividuo().getFitness() << std::endl;
+			std::cout << generacion << "\t" << poblacion.getMejorIndividuo().getFitness() << std::endl;
 		}
 
 		generacion++;

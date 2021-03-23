@@ -36,6 +36,17 @@ namespace PG_ALGS {
 template <class T>
 class GA_P : public PG_ALG<T> {
 	private:
+		using PG_ALG<T>::poblacion;
+		using PG_ALG<T>::inicializarVacio;
+		using PG_ALG<T>::datos;
+		using PG_ALG<T>::output_datos;
+
+		using PG_ALG<T>::leerDatos;
+		using PG_ALG<T>::prof_expresiones;
+		using PG_ALG<T>::getNumVariables;
+		using PG_ALG<T>::getMaxProfExpresiones;
+		using PG_ALG<T>::seleccionTorneo;
+
 
 		/**
 		  * @page repGA_P Representación de la clase GA_P
