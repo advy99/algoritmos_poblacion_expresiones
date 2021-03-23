@@ -45,7 +45,7 @@ int main(int argc, char ** argv){
 		omp_set_num_threads(num_trabajos);
 	#endif
 
-	PG_ALGS::GA_P myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	PG_ALGS::GA_P<PG_ALGS::Expresion_GAP> myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
