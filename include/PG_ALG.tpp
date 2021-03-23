@@ -2,6 +2,11 @@
 namespace PG_ALGS {
 
 template <class T>
+PG_ALG<T> :: PG_ALG() {
+	
+}
+
+template <class T>
 void PG_ALG<T> :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
 	datos = caracteristicas;
 	output_datos = etiquetas;

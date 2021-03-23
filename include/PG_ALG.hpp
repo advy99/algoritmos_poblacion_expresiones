@@ -9,6 +9,9 @@ namespace PG_ALGS {
 template <class T>
 class PG_ALG {
 	protected:
+
+		PG_ALG<T> ();
+
 		/**
 		  * @brief Datos con los que ajustar el algoritmo
 		  *
