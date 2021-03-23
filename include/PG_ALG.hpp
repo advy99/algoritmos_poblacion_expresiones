@@ -53,6 +53,11 @@ class PG_ALG {
 
 		 Poblacion<T> seleccionTorneo(const unsigned tam_torneo);
 
+
+
+		 std::pair<bool, bool> aplicarMutacionesGP(T & hijo1, T & hijo2,
+			 													 const double prob_mutacion);
+
 	public:
 
 		/**
@@ -99,6 +104,25 @@ class PG_ALG {
 		  */
 
 		int getNumDatos() const;
+
+		/**
+		  * @brief Generar la población en base a los datos cargados
+		  *
+		  * @param tam_poblacion Tamaño de la poblacion a generar
+		  *
+		  * @param profundidad_exp Profundidad máxima de las expresiones de la población
+		  *
+		  * @param prob_var Probabilidad de que un nodo terminal sea una variable
+		  *
+		  * @param sustituir_actual Booleano para sustituir la población por una nueva, en caso de que ya exista una población
+		  *
+		  * @pre datos.size != 0
+		  *
+		  */
+
+		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
+
+
 
 		/**
 		  * @brief Obtener los datos
@@ -156,6 +180,11 @@ class PG_ALG {
 		 */
 
 		unsigned getMaxProfExpresiones() const;
+
+
+
+
+		void aplicarElitismo(const Poblacion<T> & poblacion_antigua);
 
 };
 
