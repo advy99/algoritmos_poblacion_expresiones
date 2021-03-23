@@ -12,11 +12,13 @@ Poblacion :: Poblacion(){
 
 Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
 							const double prob_var, const unsigned num_vars,
-							const unsigned prof_expre, const bool expresion_gap){
+							const unsigned prof_expre, const bool exp_gap){
 	// liberamos memoria para inicializar a vacio
 	expresiones = nullptr;
 
 	liberarMemoria();
+
+	expresion_gap = exp_gap;
 
 	// reservamos memoria para tam individuos
 	reservarMemoria(tam);
@@ -60,7 +62,11 @@ void Poblacion :: liberarMemoria(){
 }
 
 void Poblacion :: reservarMemoria(const unsigned tam){
-	expresiones   = new Expresion[tam];
+	if ( expresion_gap ) {
+		expresiones = new Expresion_GAP[tam];
+	} else {
+		expresiones = new Expresion[tam];
+	}
 	tam_poblacion = tam;
 }
 

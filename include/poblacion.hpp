@@ -72,6 +72,9 @@ class Poblacion{
 		  */
 		int mejor_individuo;
 
+
+		bool expresion_gap;
+
 		/**
 		  * @brief Reservar memoria para una población de tam individuos.
 		  *
