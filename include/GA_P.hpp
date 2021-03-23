@@ -33,7 +33,8 @@ namespace PG_ALGS {
   * @date Julio 2020
   */
 
-class GA_P : public PG_ALG {
+template <class T>
+class GA_P : public PG_ALG<T> {
 	private:
 
 		/**
@@ -142,5 +143,8 @@ class GA_P : public PG_ALG {
 };
 
 } // namespace PG_ALGS
+
+
+#include "GA_P.tpp"
 
 #endif
