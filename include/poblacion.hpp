@@ -25,6 +25,7 @@ namespace PG_ALGS {
   * @date Julio 2020
   */
 
+template <class T>
 class Poblacion{
 	private:
 
@@ -56,7 +57,7 @@ class Poblacion{
 		  *
 		  */
 
-		Expresion * expresiones = nullptr;
+		T * expresiones = nullptr;
 
 
 		/**
@@ -145,7 +146,7 @@ class Poblacion{
 
 		Poblacion(const unsigned tam, const unsigned lon_expre,
 					 const double prob_var, const unsigned num_vars,
-					 const unsigned prof_expre, const bool expresion_gap = false);
+					 const unsigned prof_expre);
 
 		/**
 		  * @brief Destructor de la Población
@@ -161,7 +162,7 @@ class Poblacion{
 		  * @return Mejor individuo de la población
 		  */
 
-		Expresion getMejorIndividuo() const;
+		T getMejorIndividuo() const;
 
 		/**
 		  * @brief Obtener el indice del mejor individuo de la poblacion.
@@ -187,7 +188,7 @@ class Poblacion{
 		  * @return Individuo en la posicion indice de la población.
 		  */
 
-		Expresion & operator [] (const unsigned indice);
+		T & operator [] (const unsigned indice);
 
 		/**
 		  * @brief Obtener el individuo indice de la poblacion.
@@ -197,7 +198,7 @@ class Poblacion{
 		  * @return Individuo en la posicion indice de la población.
 		  */
 
-		const Expresion & operator [] (const unsigned indice) const;
+		const T & operator [] (const unsigned indice) const;
 
 
 		/**
@@ -244,7 +245,10 @@ class Poblacion{
 
 };
 
-
 } // namespace PG_ALGS
+
+#include "poblacion.tpp"
+
+
 
 #endif
