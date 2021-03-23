@@ -7,10 +7,12 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 #include "random.hpp"
 #include "expresion.hpp"
 #include "poblacion.hpp"
+
+#include "PG_ALG.hpp"
 
 /**
  * @brief Clases, definiciones y estructuras necesarias para el algoritmo GA_P
@@ -31,8 +33,20 @@ namespace PG_ALGS {
   * @date Julio 2020
   */
 
-class GA_P{
+template <class T>
+class GA_P : public PG_ALG<T> {
 	private:
+		using PG_ALG<T>::poblacion;
+		using PG_ALG<T>::inicializarVacio;
+		using PG_ALG<T>::datos;
+		using PG_ALG<T>::output_datos;
+
+		using PG_ALG<T>::leerDatos;
+		using PG_ALG<T>::prof_expresiones;
+		using PG_ALG<T>::getNumVariables;
+		using PG_ALG<T>::getMaxProfExpresiones;
+		using PG_ALG<T>::seleccionTorneo;
+
 
 		/**
 		  * @page repGA_P Representación de la clase GA_P
@@ -54,53 +68,6 @@ class GA_P{
 		  * rep.poblacion
 		  *
 		  */
-
-		/**
-		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
-		  * GA_P
-		  */
-		Poblacion poblacion;
-
-		/**
-		  * @brief Datos con los que ajustar el algoritmo
-		  *
-		  */
-		std::vector<std::vector<double> > datos;
-
-		/**
-		  * @brief Etiquetas para comprobar el error de la estimación.
-		  */
-		std::vector<double> output_datos;
-
-		/**
-		  * @brief Profundidad maxima de las expresiones utilizadas
-		  *
-		  */
-
-		unsigned prof_expresiones;
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por GA_P
-		  */
-
-		void liberarMemoria();
-
-		/**
-		  * @brief Inicializar GA_P vacio
-		  *
-		 */
-
-		 void inicializarVacio();
-
-		/**
-		 *  @brief Selección de una nueva población por torneo a partir de
-		 * la poblacion actual
-		 *
-		 * @param tam_torneo Tamaño del torneo
-		 *
-		 */
-
-		 Poblacion seleccionTorneo(const unsigned tam_torneo);
 
 	public:
 
@@ -150,34 +117,6 @@ class GA_P{
 
 		~GA_P();
 
-		/**
-		  * @brief Leer datos de entrada para el algoritmo
-		  *
-		  * @param fichero_datos Fichero donde se almacenan los datos
-		  * @param char_comentario Caracter que marca que una linea es un
-		  * comentario y ha de ser ignorada
-		  * @param delimitador Caracter que marca como están separados los
-		  * datos de entrada
-		  *
-		  * @pre Los datos han sido preprocesados y los datos a leer vienen
-		  * dados separados por delimitador. Cada dato es una linea.
-		  *
-		  */
-
-		bool leerDatos(const std::string fichero_datos,
-							const char char_comentario, const char delimitador = ',');
-
-		/**
-		  * @brief Cargar vectores de datos y etiquetas en GA_P
-		  *
-		  * @param caracteristicas Matriz de caracteristicas de cada dato
-		  *
-		  * @param etiquetas Vector de etiquetas, asociadas a cada fila de la matriz de datos
-		  *
-		  *
-		 */
-
-		void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
 
 		/**
 		  * @brief Generar la población en base a los datos cargados
@@ -196,70 +135,8 @@ class GA_P{
 
 		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
 
-		/**
-		  * @brief Obtener el numero de variables de los datos
-		  *
-		  * @return Numero de variables del problema
-		  */
-
-		int getNumVariables() const ;
-
-		/**
-		  * @brief Obtener el numero de datos
-		  *
-		  * @return Numero de datos
-		  */
-
-		int getNumDatos() const;
-
-		/**
-		  * @brief Obtener los datos
-		  *
-		  * @return Datos.
-		  */
-		std::vector<std::vector<double> > getDatos() const;
 
 
-		/**
-		  * @brief Obtener el dato de la fila indice
-		  *
-		  * @param indice Indice del dato a obtener
-		  *
-		  * @pre indice >= 0 && indice < datos.size
-		  *
-		  * @return Dato de la columna indice.
-		  */
-		std::vector<double > getDato(const unsigned indice) const;
-
-
-		/**
-		  * @brief Obtener las etiquetas asociadas a los datos
-		  *
-		  * @return Etiquetas asociadas a los datos.
-		  */
-
-		std::vector<double> getOutputDatos() const;
-
-
-		/**
-		  * @brief Obtener la etiqueta asociada al dato indice
-		  *
-		  * @param indice Indice de la etiqueta a obtener
-		  *
-		  * @pre indice >= 0 && indice < output_datos.size
-		  *
-		  * @return Etiqueta asociada al dato indice.
-		  */
-
-		double getOutputDato(const unsigned indice) const ;
-
-		/**
-		 * @brief Obtener la profundidad máxima de las expresiones
-		 *
-		 * @return Profundidad máxima de las expresiones
-		 */
-
-		unsigned getMaxProfExpresiones() const;
 
 		/**
 		 *  @brief Ajustar la poblacion utilizando los datos actuales
@@ -274,16 +151,11 @@ class GA_P{
 						 const int tam_torneo,
 						 const bool mostrar_evolucion = true) ;
 
-		/**
-		  * @brief Obtener el mejor individuo de la poblacion.
-		  *
-		  * @return Mejor individuo de la población
-		  */
-
-		Expresion getMejorIndividuo() const;
-
 };
 
 } // namespace PG_ALGS
+
+
+#include "GA_P.tpp"
 
 #endif

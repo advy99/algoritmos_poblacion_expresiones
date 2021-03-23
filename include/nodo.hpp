@@ -7,7 +7,7 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 
 namespace PG_ALGS {
 
@@ -56,6 +56,10 @@ class Nodo {
 
 		int valor;
 
+
+
+		double valor_numerico;
+
 	public:
 
 		/**
@@ -89,6 +93,19 @@ class Nodo {
 
 		void setTerminoAleatorio(const int num_numeros, const int num_variables);
 
+
+
+		/**
+		  * @brief Establecer el valor del nodo a un termino aleatorio.
+		  *
+		  * @param num_variables Cantidad de variables a tener en cuenta para
+		  * escoger el valor.
+		  *
+		  * @pre tipo_nodo == TipoNodo::VARIABLE
+		  */
+
+		void setTerminoAleatorio(const int num_variables);
+
 		/**
 		 * @brief Obtener el tipo del nodo asociado al Nodo.
 		 *
@@ -107,6 +124,8 @@ class Nodo {
 		 */
 
 		int getValor() const;
+
+		double getValorNumerico() const;
 
 
 		/**

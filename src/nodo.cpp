@@ -17,6 +17,12 @@ void Nodo :: setTerminoAleatorio(const int num_numeros, const int num_variables)
 	}
 }
 
+
+void Nodo :: setTerminoAleatorio(const int num_variables){
+	// si no, escogemos un aleatorio entre las posibles variables
+	valor = Random::getInt(num_variables);
+}
+
 void Nodo :: setTipoNodoOperadorAleatorio(){
 	// obtenemos un aleatorio
 	float aleatorio = Random::getFloat();
@@ -42,6 +48,10 @@ TipoNodo Nodo :: getTipoNodo() const {
 
 int Nodo :: getValor() const {
 	return valor;
+}
+
+double Nodo :: getValorNumerico() const {
+	return valor_numerico;
 }
 
 

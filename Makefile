@@ -1,6 +1,6 @@
 # variables
-CXX      = g++
-HOME     = .
+CXX      := g++
+HOME     := .
 BIN      = $(HOME)/bin
 INC	   = $(HOME)/include
 SRC      = $(HOME)/src
@@ -11,20 +11,33 @@ DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas/datos
 
 # flags de compilacion por defecto
-MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
-OPTIMIZACION = -O3
-GPROF ?=
-OPENMP = -fopenmp
+MENSAJE := "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
+OPTIMIZACION ?= 3
+GPROF ?= 0
+OPENMP ?= 1
 
-ifeq ($(debug), 1)
+ifeq ($(DEBUG), 1)
 # target para debug (cambiamos flags y el mensaje)
-OPTIMIZACION = -g
-GPROF = -pg
-OPENMP =
+OPTIMIZACION = g -g
+OPENMP = 0
 MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
 
-CXXFLAGS = -std=c++17 $(OPTIMIZACION) $(OPENMP) $(GPROF) -Wall -Wextra -Wfloat-equal -Wpedantic
+ifeq ($(GPROF), 1)
+F_GPROF = -pg
+else
+F_GPROF =
+endif
+
+ifeq ($(OPENMP), 1)
+F_OPENMP = -fopenmp
+else
+F_OPENMP =
+endif
+
+O_LEVEL := -O$(strip $(OPTIMIZACION))
+
+CXXFLAGS = -std=c++17 $(O_LEVEL) $(F_OPENMP) $(F_GPROF) -Wall -Wextra -Wfloat-equal -Wpedantic
 
 
 # objetivo principal
@@ -32,9 +45,9 @@ OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(LIB)/libPG_ALGS.a $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_LIB_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/poblacion.o $(OBJ)/GA_P.o $(OBJ)/random.o $(OBJ)/aux_gap.o
+OBJETOS_LIB_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
 
-PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_gap.hpp
+PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
@@ -70,7 +83,7 @@ ejecutar-tests: $(OBJETIVO_TEST)
 $(OBJETIVO_TEST): $(LIB)/libPG_ALGS.a $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
-	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(OPENMP) $(gtestflags) -L$(LIB) -lPG_ALGS
+	@$(CXX) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -L$(LIB) -lPG_ALGS
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\n\n"
 
 
@@ -93,25 +106,32 @@ INICIO:
 $(OBJETIVO): $(OBJETOS)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJ)/main.o -o $@ $(OPENMP) -L$(LIB) -lPG_ALGS $(GPROF)
+	@$(CXX) $(OBJ)/main.o -o $@ $(F_OPENMP) -L$(LIB) -lPG_ALGS $(F_GPROF)
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
 
-$(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+$(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+$(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/poblacion.o: $(SRC)/poblacion.cpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+$(OBJ)/expresion_gap.o: $(SRC)/expresion_gap.cpp $(INC)/expresion_gap.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/GA_P.o: $(SRC)/GA_P.cpp $(INC)/GA_P.hpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(GAP_INC_COMUNES)
+# $(OBJ)/poblacion.o: $(SRC)/poblacion.cpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+# 	$(call compilar_objeto,$<,$@)
+#
+# $(OBJ)/GA_P.o: $(SRC)/GA_P.cpp $(INC)/GA_P.hpp $(INC)/poblacion.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+# 	$(call compilar_objeto,$<,$@)
+#
+# $(OBJ)/PG_ALG.o: $(SRC)/PG_ALG.cpp $(INC)/aux_pg_algs.hpp
+# 	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/aux_gap.o: $(SRC)/aux_gap.cpp $(INC)/aux_gap.hpp
-	$(call compilar_objeto,$<,$@)
 
 
 
@@ -169,11 +189,15 @@ crear-carpetas:
 
 # target para mostrar ayuda
 help:
-	@printf "\e[36mUso del Makefile:\n"
+	@printf "\e[33mUso del Makefile:\n"
 	@printf "\t\e[36mCompilar con optimización: \t     \e[94mmake\n"
-	@printf "\t\e[36mCompilar con símbolos de depuración: \e[94mmake \e[0mdebug\n"
 	@printf "\t\e[36mCompilar y ejecutar tests: \t     \e[94mmake \e[0mtests\n"
 	@printf "\t\e[36mCompilar documentación: \t     \e[94mmake \e[0mdoc\n"
 	@printf "\t\e[36mLimpiar binarios y objetos: \t     \e[94mmake \e[0mclean\n"
 	@printf "\t\e[36mLimpiar documentación: \t\t     \e[94mmake \e[0mclean-doc\n"
-	@printf "\t\e[36mLimpiar todo: \t\t\t     \e[94mmake \e[0mmrproper\n"
+	@printf "\t\e[36mLimpiar todo: \t\t\t     \e[94mmake \e[0mmrproper\n\n"
+	@printf "\e[33mTambién tienes disponibles las siguientes variables:\n"
+	@printf "\t\e[36mNivel optimizacion(0, 1, 2, 3, g):   \e[94mmake \e[0mOPTIMIZACION=3\n"
+	@printf "\t\e[36mCompilar con OpenMP(0, 1): \t     \e[94mmake \e[0mOPENMP=1\n"
+	@printf "\t\e[36mActivar símbolos depuracion(0, 1):   \e[94mmake \e[0mDEBUG=0\n"
+	@printf "\t\e[36mCompilar para GPROF(0, 1): \t     \e[94mmake \e[0mGPROF=0\n"

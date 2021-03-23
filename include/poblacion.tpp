@@ -1,16 +1,15 @@
-#include "poblacion.hpp"
-
 namespace PG_ALGS {
 
-Poblacion :: Poblacion(){
+template <class T>
+Poblacion<T> :: Poblacion(){
 	// una poblacion vacia no tiene nada
 	expresiones     = nullptr;
 	tam_poblacion   = 0;
 	mejor_individuo = -1;
 }
 
-
-Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
+template <class T>
+Poblacion<T> :: Poblacion(const unsigned tam, const unsigned lon_expre,
 							const double prob_var, const unsigned num_vars,
 							const unsigned prof_expre){
 	// liberamos memoria para inicializar a vacio
@@ -22,26 +21,29 @@ Poblacion :: Poblacion(const unsigned tam, const unsigned lon_expre,
 	reservarMemoria(tam);
 	tam_poblacion = tam;
 	// inicializamos todas las expresiones de la poblacion
+
+	// TODO : comprobar que T es Expresion o Expresion_GAP
 	for (unsigned i = 0; i < tam; i++){
-		expresiones[i] = Expresion(lon_expre, prob_var, num_vars, prof_expre);
+		expresiones[i] = T(lon_expre, prob_var, num_vars, prof_expre);
 	}
 }
 
-Poblacion :: Poblacion ( const Poblacion & otra) {
+template <class T>
+Poblacion<T> :: Poblacion ( const Poblacion & otra) {
 	expresiones = nullptr;
 
 	tam_poblacion = 0;
 
-
 	(*this) = otra;
 }
 
-
-Poblacion :: ~Poblacion(){
+template <class T>
+Poblacion<T> :: ~Poblacion(){
 	liberarMemoria();
 }
 
-void Poblacion :: liberarMemoria(){
+template <class T>
+void Poblacion<T> :: liberarMemoria(){
 	// si tiene asignada una direccion de memoria, liberamos la poblacion
 	if (expresiones != nullptr){
 		delete [] expresiones;
@@ -55,12 +57,14 @@ void Poblacion :: liberarMemoria(){
 
 }
 
-void Poblacion :: reservarMemoria(const unsigned tam){
-	expresiones   = new Expresion[tam];
+template <class T>
+void Poblacion<T> :: reservarMemoria(const unsigned tam){
+	expresiones = new T[tam];
 	tam_poblacion = tam;
 }
 
-void Poblacion :: copiarDatos(const Poblacion & otra){
+template <class T>
+void Poblacion<T> :: copiarDatos(const Poblacion & otra){
 	// copiamos los atributos
 	tam_poblacion = otra.tam_poblacion;
 	mejor_individuo = otra.mejor_individuo;
@@ -70,11 +74,11 @@ void Poblacion :: copiarDatos(const Poblacion & otra){
 	// utilizan memoria dinamica de forma interna
 	for (unsigned i = 0; i < tam_poblacion; i++){
 		expresiones[i] = otra.expresiones[i];
-
 	}
 }
 
-void Poblacion :: evaluarPoblacion(const std::vector<std::vector<double> > & datos,
+template <class T>
+void Poblacion<T> :: evaluarPoblacion(const std::vector<std::vector<double> > & datos,
 											const std::vector<double> & etiquetas){
 	// establecemos el mejor individuo al primero
 	mejor_individuo = 0;
@@ -100,8 +104,8 @@ void Poblacion :: evaluarPoblacion(const std::vector<std::vector<double> > & dat
 	}
 }
 
-
-double Poblacion :: sumaFitness() const {
+template <class T>
+double Poblacion<T> :: sumaFitness() const {
 	double suma = 0.0;
 
 	for (unsigned i = 0; i < tam_poblacion; i++){
@@ -111,7 +115,8 @@ double Poblacion :: sumaFitness() const {
 	return suma;
 }
 
-unsigned Poblacion :: seleccionIndividuo() const {
+template <class T>
+unsigned Poblacion<T> :: seleccionIndividuo() const {
 
 	double * probabilidad = new double [tam_poblacion];
 
@@ -142,31 +147,39 @@ unsigned Poblacion :: seleccionIndividuo() const {
 
 }
 
-Expresion Poblacion :: getMejorIndividuo() const {
+template <class T>
+T Poblacion<T> :: getMejorIndividuo() const {
 	return expresiones[mejor_individuo];
 }
 
-unsigned Poblacion :: getIndiceMejorIndividuo() const {
+template <class T>
+unsigned Poblacion<T> :: getIndiceMejorIndividuo() const {
 	return mejor_individuo;
 }
 
-unsigned Poblacion :: getTamPoblacion() const {
+template <class T>
+unsigned Poblacion<T> :: getTamPoblacion() const {
 	return tam_poblacion;
 }
 
-Expresion & Poblacion :: operator[] (const unsigned indice) {
+template <class T>
+T & Poblacion<T> :: operator[] (const unsigned indice) {
 	return expresiones[indice];
 }
 
-const Expresion & Poblacion :: operator[] (const unsigned indice) const {
+template <class T>
+const T & Poblacion<T> :: operator[] (const unsigned indice) const {
 	return expresiones[indice];
 }
 
-Poblacion & Poblacion :: operator= (const Poblacion & otra) {
+template <class T>
+Poblacion<T> & Poblacion<T> :: operator= (const Poblacion & otra) {
 
 	liberarMemoria();
 
 	tam_poblacion = otra.tam_poblacion;
+
+	expresion_gap = otra.expresion_gap;
 
 	reservarMemoria(tam_poblacion);
 

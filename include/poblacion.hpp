@@ -7,8 +7,9 @@
 #ifndef POBLACION_H_INCLUDED
 #define POBLACION_H_INCLUDED
 
-#include "aux_gap.hpp"
+#include "aux_pg_algs.hpp"
 #include "expresion.hpp"
+#include "expresion_gap.hpp"
 
 namespace PG_ALGS {
 
@@ -24,6 +25,7 @@ namespace PG_ALGS {
   * @date Julio 2020
   */
 
+template <class T>
 class Poblacion{
 	private:
 
@@ -55,7 +57,7 @@ class Poblacion{
 		  *
 		  */
 
-		Expresion * expresiones = nullptr;
+		T * expresiones = nullptr;
 
 
 		/**
@@ -70,6 +72,9 @@ class Poblacion{
 		  * @brief Mejor individuo de la población
 		  */
 		int mejor_individuo;
+
+
+		bool expresion_gap;
 
 		/**
 		  * @brief Reservar memoria para una población de tam individuos.
@@ -157,7 +162,7 @@ class Poblacion{
 		  * @return Mejor individuo de la población
 		  */
 
-		Expresion getMejorIndividuo() const;
+		T getMejorIndividuo() const;
 
 		/**
 		  * @brief Obtener el indice del mejor individuo de la poblacion.
@@ -183,7 +188,7 @@ class Poblacion{
 		  * @return Individuo en la posicion indice de la población.
 		  */
 
-		Expresion & operator [] (const unsigned indice);
+		T & operator [] (const unsigned indice);
 
 		/**
 		  * @brief Obtener el individuo indice de la poblacion.
@@ -193,7 +198,7 @@ class Poblacion{
 		  * @return Individuo en la posicion indice de la población.
 		  */
 
-		const Expresion & operator [] (const unsigned indice) const;
+		const T & operator [] (const unsigned indice) const;
 
 
 		/**
@@ -240,7 +245,10 @@ class Poblacion{
 
 };
 
-
 } // namespace PG_ALGS
+
+#include "poblacion.tpp"
+
+
 
 #endif
