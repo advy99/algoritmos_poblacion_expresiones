@@ -336,6 +336,9 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 
 		// hacemos la media de los cuadrados
 		resultado = suma / static_cast<double>(datos.size());
+
+		// resultado = RMSE
+		resultado = std::sqrt(resultado);
 	}
 
 	// actualizamos el fitness y que esta evaluada y devolvemos el resultado
