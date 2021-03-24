@@ -163,7 +163,7 @@ bool Expresion_GAP :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 
 // en reemplazo de evaluarDato, usa la del padre paro llama a esta para obtener un NUMERO
-double Expresion_GAP :: obtenerNumero ( const Nodo & n) {
+double Expresion_GAP :: obtenerNumero ( const Nodo & n) const {
 	return cromosoma[n.getValor()];
 }
 
