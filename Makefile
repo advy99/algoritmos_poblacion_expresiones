@@ -18,7 +18,7 @@ OPENMP ?= 1
 
 ifeq ($(DEBUG), 1)
 # target para debug (cambiamos flags y el mensaje)
-OPTIMIZACION = g -g
+OPTIMIZACION = 0 -g
 OPENMP = 0
 MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
