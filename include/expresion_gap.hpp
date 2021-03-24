@@ -116,6 +116,9 @@ class Expresion_GAP : public Expresion {
 		double delta(const int generacion, const int max_gen, const double valor);
 
 
+		double obtenerNumero(const Nodo & n) override;
+
+
 	public:
 		/**
 		  * @brief Constructor con un parámetro, genera una expresión vacia.

@@ -184,8 +184,8 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 	// mientras tengamos longitud y tengamos ramas sueltas
 	while (i < longitud_maxima && ramas_libres > 0){
 		// obtenemos la probabilidad de que sea un operador
-		float prob_operador = (float)(ramas_libres*ramas_libres+1) /
-									 (float)(longitud_maxima-i);
+		float prob_operador = static_cast<float>(ramas_libres*ramas_libres+1) /
+									 static_cast<float>(longitud_maxima-i);
 
 		// si es un operador, lo generamos
 		if (Random::getFloat() > prob_operador){
@@ -199,15 +199,12 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 			// para ver si es variable o numero
 			if (Random::getFloat() < prob_variable){
 				arbol[i].setTipoNodo(TipoNodo::VARIABLE);
+				arbol[i].setTerminoAleatorio(num_variables);
 			} else {
 				arbol[i].setTipoNodo(TipoNodo::NUMERO);
+				arbol[i].setValorNumerico(Random::getFloat(-10.0, 10.0));
 			}
 
-			// TODO: Para adaptar a Expresion/Expersion_GAP, si es una variable hacer la llamada,
-			// pero si es un numero ya poner un valor asignado, y en GAP que se rellene el cromosoma
-			// generamos el termino aleatorio entre los posibles valores, ya sean
-			// una variable o un numero
-			arbol[i].setTerminoAleatorio(num_variables);
 
 			// al ser un terminal, esta rama ya no esta libre y quitamos una
 			ramas_libres--;
@@ -231,8 +228,10 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 	return exito;
 
+}
 
-
+double Expresion :: obtenerNumero ( const Nodo & n) {
+	return n.getValorNumerico();
 }
 
 double Expresion :: evaluarDato(std::stack<Nodo> & pila,
@@ -247,7 +246,7 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
 		// posicion del cromosoma correspondiente
-		resultado = pila.top().getValorNumerico();
+		resultado = obtenerNumero(pila.top());
 
 		// eliminamos de la pila, y lo devolvemos
 		pila.pop();
@@ -285,8 +284,6 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 			} else {
 				resultado = 1.0f;
 			}
-		} else if (operacion == TipoNodo::ELEVADO) {
-			resultado = std::pow(valor_izda, valor_dcha);
 		}
 
 	}
@@ -557,8 +554,6 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 			valor = "*";
 		} else if (pila.top().getTipoNodo() == TipoNodo::ENTRE){
 			valor = "/";
-		} else if (pila.top().getTipoNodo() == TipoNodo::ELEVADO){
-			valor = "^";
 		}
 
 

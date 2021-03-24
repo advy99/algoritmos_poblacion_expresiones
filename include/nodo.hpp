@@ -16,7 +16,7 @@ namespace PG_ALGS {
   */
 
 // aqui faltan tipos, tengo que revisar el paper + los que use
-enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE, ELEVADO};
+enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 
 /**
   *  @brief Clase Nodo
@@ -126,6 +126,8 @@ class Nodo {
 		int getValor() const;
 
 		double getValorNumerico() const;
+
+		void setValorNumerico(const double valor);
 
 
 		/**
