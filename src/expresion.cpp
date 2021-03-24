@@ -230,7 +230,7 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-double Expresion :: obtenerNumero ( const Nodo & n) {
+double Expresion :: obtenerNumero ( const Nodo & n) const {
 	return n.getValorNumerico();
 }
 
@@ -330,11 +330,11 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 			valor = evaluarDato(datos[i]);
 
 			// lo sumamos al cuadrado
-			suma += std::pow( etiquetas[i] - valor , 2.0);
+			suma += std::pow( valor - etiquetas[i] , 2.0);
 		}
 
 		// hacemos la media de los cuadrados
-		resultado = suma / (double)datos.size();
+		resultado = suma / static_cast<double>(datos.size());
 	}
 
 	// actualizamos el fitness y que esta evaluada y devolvemos el resultado
@@ -516,11 +516,11 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 		// o lo que llevamos y el numero
 		if (izda){
 			// resultado = std::to_string(cromosoma[pila.top().getValor()]) +
-			resultado = std::to_string(pila.top().getValorNumerico()) +
+			resultado = std::to_string(obtenerNumero(pila.top()) ) +
 							" " + resultado;
 		} else {
 			resultado = resultado + " " +
-							std::to_string(pila.top().getValorNumerico());
+							std::to_string(obtenerNumero(pila.top()));
 		}
 
 		// eliminamos el nodo de la pila y devolvemos el resultado

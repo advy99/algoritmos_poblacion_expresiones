@@ -150,7 +150,7 @@ class Expresion{
 		double evaluarDato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato);
 
-		virtual double obtenerNumero(const Nodo & n);
+		virtual double obtenerNumero(const Nodo & n) const;
 
 		public:
 
