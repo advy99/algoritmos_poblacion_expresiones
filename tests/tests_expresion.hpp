@@ -3,6 +3,8 @@
 
 #include <gtest/gtest.h>
 #include "expresion.hpp"
+#include "expresion_gap.hpp"
+
 #include "aux_pg_algs.hpp"
 
 TEST (Expresion, IgualElMismo) {
@@ -95,42 +97,42 @@ TEST (Expresion, MismaCadena) {
 
 }
 
-// TEST (Expresion, EvaluarDato) {
-//
-// 	PG_ALGS::Expresion exp1;
-//
-// 	PG_ALGS::Arbol arbol_tmp = new PG_ALGS::Nodo[5];
-//
-// 	arbol_tmp[0].setTipoNodo(PG_ALGS::TipoNodo::MAS);
-//
-// 	arbol_tmp[1].setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
-// 	arbol_tmp[1].setValor(0);
-//
-// 	arbol_tmp[2].setTipoNodo(PG_ALGS::TipoNodo::POR);
-//
-// 	arbol_tmp[3].setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
-// 	arbol_tmp[3].setValor(1);
-// 	arbol_tmp[4].setTipoNodo(PG_ALGS::TipoNodo::NUMERO);
-// 	arbol_tmp[4].setValor(1);
-//
-// 	double * n_cromosoma = new double[5];
-//
-// 	for ( int i = 0; i < 5; i++) {
-// 		n_cromosoma[i] = 2.2;
-// 	}
-//
-// 	exp1.asignarArbol(arbol_tmp, 5);
-// 	exp1.asignarCromosoma(n_cromosoma, 5);
-//
-// 	delete [] arbol_tmp;
-// 	delete [] n_cromosoma;
-//
-// 	std::vector<double> dato = {2.5, 3.2};
-//
-// 	double resultado = exp1.evaluarDato(dato);
-//
-// 	EXPECT_TRUE( PG_ALGS::comparar_reales(resultado, 9.54 ));
-//
-// }
+TEST (Expresion, EvaluarDato) {
+
+	PG_ALGS::Expresion_GAP exp1;
+
+	PG_ALGS::Arbol arbol_tmp = new PG_ALGS::Nodo[5];
+
+	arbol_tmp[0].setTipoNodo(PG_ALGS::TipoNodo::MAS);
+
+	arbol_tmp[1].setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
+	arbol_tmp[1].setValor(0);
+
+	arbol_tmp[2].setTipoNodo(PG_ALGS::TipoNodo::POR);
+
+	arbol_tmp[3].setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
+	arbol_tmp[3].setValor(1);
+	arbol_tmp[4].setTipoNodo(PG_ALGS::TipoNodo::NUMERO);
+	arbol_tmp[4].setValor(1);
+
+	double * n_cromosoma = new double[5];
+
+	for ( int i = 0; i < 5; i++) {
+		n_cromosoma[i] = 2.2;
+	}
+
+	exp1.asignarArbol(arbol_tmp, 5);
+	exp1.asignarCromosoma(n_cromosoma, 5);
+
+	delete [] arbol_tmp;
+	delete [] n_cromosoma;
+
+	std::vector<double> dato = {2.5, 3.2};
+
+	double resultado = exp1.evaluarDato(dato);
+
+	EXPECT_TRUE( PG_ALGS::comparar_reales(resultado, 9.54 ));
+
+}
 
 #endif
