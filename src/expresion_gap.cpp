@@ -161,66 +161,10 @@ bool Expresion_GAP :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 }
 
-// TODO : mirar si puedo parametrizar el lamar al cromosoma o no unicamente, porque por lo demas es igual
 
-double Expresion_GAP :: evaluarDato(std::stack<Nodo> & pila,
-										const std::vector<double> & dato){
-
-	double resultado = 0.0;
-
-	// si la pila esta vacia, devolvemos el valor
-	if (pila.empty()){
-		resultado = 0.0;
-
-	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
-		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
-		// posicion del cromosoma correspondiente
-		resultado = cromosoma[pila.top().getValor()];
-
-		// eliminamos de la pila, y lo devolvemos
-		pila.pop();
-
-	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
-		// si es una variable, la consultamos en el dato dado, eliminamos el nodo
-		// de la pila y devolvemos el valor del dato
-		resultado = dato[pila.top().getValor()];
-		pila.pop();
-
-	} else {
-		// si es un operador, guardamos la operacion
-		TipoNodo operacion = pila.top().getTipoNodo();
-
-		// la eliminamos de la pila
-		pila.pop();
-
-		// consultamos el valor de la rama izquierda y la derecha
-		double valor_izda = evaluarDato(pila, dato);
-		double valor_dcha = evaluarDato(pila, dato);
-
-		// aplicamos el operador con ambas ramas y devolvemos el resultado
-		if (operacion == TipoNodo::MAS){
-			resultado = valor_izda + valor_dcha;
-
-		} else if (operacion == TipoNodo::MENOS){
-			resultado = valor_izda - valor_dcha;
-
-		} else if (operacion == TipoNodo::POR){
-			resultado = valor_izda * valor_dcha;
-
-		} else if (operacion == TipoNodo::ENTRE){
-			if (!comparar_reales(valor_dcha, 0.0) ){
-				resultado = valor_izda / valor_dcha;
-			} else {
-				resultado = 1.0f;
-			}
-		} else if (operacion == TipoNodo::ELEVADO) {
-			resultado = std::pow(valor_izda, valor_dcha);
-		}
-
-	}
-
-	return resultado;
-
+// en reemplazo de evaluarDato, usa la del padre paro llama a esta para obtener un NUMERO
+double Expresion_GAP :: obtenerNumero ( const Nodo & n) const {
+	return cromosoma[n.getValor()];
 }
 
 

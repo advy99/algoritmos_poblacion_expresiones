@@ -5,6 +5,7 @@ namespace PG_ALGS {
 Nodo :: Nodo(){
 	tipo_nodo = TipoNodo::NUMERO;
 	valor = 0;
+	valor_numerico = Random::getFloat(-10.0, 10.0);
 }
 
 void Nodo :: setTerminoAleatorio(const int num_numeros, const int num_variables){
@@ -28,16 +29,14 @@ void Nodo :: setTipoNodoOperadorAleatorio(){
 	float aleatorio = Random::getFloat();
 
 	// le damos la misma probabilidad a cada operador
-	if (aleatorio < 1.0/5.0){
+	if (aleatorio < 1.0/4.0){
 		tipo_nodo = TipoNodo::MAS;
-	} else if (aleatorio < 2.0/5.0) {
+	} else if (aleatorio < 2.0/4.0) {
 		tipo_nodo = TipoNodo::MENOS;
-	} else if (aleatorio < 3.0/5.0) {
+	} else if (aleatorio < 3.0/4.0) {
 		tipo_nodo = TipoNodo::POR;
-	} else if (aleatorio < 4.0/5.0) {
-		tipo_nodo = TipoNodo::ENTRE;
 	} else {
-		tipo_nodo = TipoNodo::ELEVADO;
+		tipo_nodo = TipoNodo::ENTRE;
 	}
 }
 
@@ -54,6 +53,9 @@ double Nodo :: getValorNumerico() const {
 	return valor_numerico;
 }
 
+void Nodo :: setValorNumerico(const double valor) {
+	valor_numerico = valor;
+}
 
 
 void Nodo :: setTipoNodo(const TipoNodo tipo){

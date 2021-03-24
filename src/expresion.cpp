@@ -184,8 +184,8 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 	// mientras tengamos longitud y tengamos ramas sueltas
 	while (i < longitud_maxima && ramas_libres > 0){
 		// obtenemos la probabilidad de que sea un operador
-		float prob_operador = (float)(ramas_libres*ramas_libres+1) /
-									 (float)(longitud_maxima-i);
+		float prob_operador = static_cast<float>(ramas_libres*ramas_libres+1) /
+									 static_cast<float>(longitud_maxima-i);
 
 		// si es un operador, lo generamos
 		if (Random::getFloat() > prob_operador){
@@ -199,15 +199,12 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 			// para ver si es variable o numero
 			if (Random::getFloat() < prob_variable){
 				arbol[i].setTipoNodo(TipoNodo::VARIABLE);
+				arbol[i].setTerminoAleatorio(num_variables);
 			} else {
 				arbol[i].setTipoNodo(TipoNodo::NUMERO);
+				arbol[i].setValorNumerico(Random::getFloat(-10.0, 10.0));
 			}
 
-			// TODO: Para adaptar a Expresion/Expersion_GAP, si es una variable hacer la llamada,
-			// pero si es un numero ya poner un valor asignado, y en GAP que se rellene el cromosoma
-			// generamos el termino aleatorio entre los posibles valores, ya sean
-			// una variable o un numero
-			arbol[i].setTerminoAleatorio(num_variables);
 
 			// al ser un terminal, esta rama ya no esta libre y quitamos una
 			ramas_libres--;
@@ -231,8 +228,10 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 	return exito;
 
+}
 
-
+double Expresion :: obtenerNumero ( const Nodo & n) const {
+	return n.getValorNumerico();
 }
 
 double Expresion :: evaluarDato(std::stack<Nodo> & pila,
@@ -247,7 +246,7 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
 		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
 		// posicion del cromosoma correspondiente
-		resultado = pila.top().getValorNumerico();
+		resultado = obtenerNumero(pila.top());
 
 		// eliminamos de la pila, y lo devolvemos
 		pila.pop();
@@ -285,8 +284,6 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 			} else {
 				resultado = 1.0f;
 			}
-		} else if (operacion == TipoNodo::ELEVADO) {
-			resultado = std::pow(valor_izda, valor_dcha);
 		}
 
 	}
@@ -333,11 +330,12 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 			valor = evaluarDato(datos[i]);
 
 			// lo sumamos al cuadrado
-			suma += std::pow( etiquetas[i] - valor , 2.0);
+			suma += std::pow( valor - etiquetas[i] , 2.0);
+
 		}
 
 		// hacemos la media de los cuadrados
-		resultado = suma / (double)datos.size();
+		resultado = suma / static_cast<double>(datos.size());
 	}
 
 	// actualizamos el fitness y que esta evaluada y devolvemos el resultado
@@ -446,7 +444,7 @@ void Expresion :: asignarArbol (const Arbol nuevo_arbol, const unsigned longitud
 void Expresion :: dejaEstarEvaluada(){
 	// ponemos la flag a false y establecemos el fitness a NaN
 	evaluada = false;
-	fitness = std::numeric_limits<double>::quiet_NaN();
+	fitness = std::numeric_limits<double>::infinity();
 }
 
 
@@ -486,7 +484,7 @@ unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 	std::stack<Nodo> pila;
 
 	//volcamos la expresion en la pila
-	for (int i = (int)getLongitudArbol() - 1; i >= (int)comienzo; i--){
+	for (int i = static_cast<int>(getLongitudArbol() - 1); i >= static_cast<int>(comienzo); i--){
 		pila.push(arbol[i]);
 	}
 	// contamos los niveles de toda la pila
@@ -519,11 +517,11 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 		// o lo que llevamos y el numero
 		if (izda){
 			// resultado = std::to_string(cromosoma[pila.top().getValor()]) +
-			resultado = std::to_string(pila.top().getValorNumerico()) +
+			resultado = std::to_string(obtenerNumero(pila.top()) ) +
 							" " + resultado;
 		} else {
 			resultado = resultado + " " +
-							std::to_string(pila.top().getValorNumerico());
+							std::to_string(obtenerNumero(pila.top()));
 		}
 
 		// eliminamos el nodo de la pila y devolvemos el resultado
@@ -557,8 +555,6 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 			valor = "*";
 		} else if (pila.top().getTipoNodo() == TipoNodo::ENTRE){
 			valor = "/";
-		} else if (pila.top().getTipoNodo() == TipoNodo::ELEVADO){
-			valor = "^";
 		}
 
 

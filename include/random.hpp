@@ -35,8 +35,7 @@ class Random{
 		static const unsigned long int MASK;
 		static const unsigned long int PRIME;
 		static const double SCALE;
-		static bool inicializado;
-
+		
 		/**
 		  * @brief Constructor sin parámetros que iniciliza la semilla a un valor aleatorio
 		  */

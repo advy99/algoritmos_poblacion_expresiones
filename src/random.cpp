@@ -3,12 +3,7 @@
 #include <iostream>
 
 void Random :: setSeed(const unsigned long semilla){
-	if ( !inicializado ){
-		SEED = semilla;
-		inicializado = true;
-	} else {
-		std::cerr << "WARNING: Intentando inicializar dos veces el generador de aleatorios, no hacemos nada" << std::endl;
-	}
+	SEED = semilla;
 }
 
 
@@ -49,4 +44,3 @@ const double Random :: SCALE = 0.4656612875e-9;
 const unsigned long int Random :: PRIME = 3013427L;
 const unsigned long int Random :: MASK = 2147483647L;
 unsigned long Random :: SEED = std::time(NULL);
-bool Random :: inicializado = false;

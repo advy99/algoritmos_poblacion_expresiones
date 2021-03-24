@@ -92,15 +92,6 @@ class Expresion_GAP : public Expresion {
 
 		void copiarCromosoma(const double * otro_cromosoma);
 
-		/**
-		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
-		  * la expresión.
-		  *
-		  * @return Valor estimado de la regresión para ese dato.
-		  */
-
-		double evaluarDato(std::stack<Nodo> & pila,
-								 const std::vector<double> & dato) override;
 
 	 	/**
 		  * @brief Función delta para la mutación no uniforme de GA
@@ -114,6 +105,9 @@ class Expresion_GAP : public Expresion {
 
 
 		double delta(const int generacion, const int max_gen, const double valor);
+
+
+		double obtenerNumero(const Nodo & n) const override;
 
 
 	public:

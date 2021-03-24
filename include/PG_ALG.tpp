@@ -2,6 +2,11 @@
 namespace PG_ALGS {
 
 template <class T>
+PG_ALG<T> :: PG_ALG() {
+	
+}
+
+template <class T>
 void PG_ALG<T> :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
 	datos = caracteristicas;
 	output_datos = etiquetas;
@@ -76,6 +81,18 @@ template <class T>
 int PG_ALG<T> :: getNumDatos() const {
 	return datos.size();
 }
+
+template <class T>
+void PG_ALG<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
+									 const double prob_var, const bool sustituir_actual) {
+	if ( sustituir_actual ) {
+		poblacion = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
+									 	 getNumVariables(), getMaxProfExpresiones());
+	}
+
+}
+
+
 
 template <class T>
 int PG_ALG<T> :: getNumVariables() const {
@@ -171,6 +188,47 @@ T PG_ALG<T> :: getMejorIndividuo() const {
 template <class T>
 unsigned PG_ALG<T> :: getMaxProfExpresiones() const {
 	return prof_expresiones;
+}
+
+
+
+template <class T>
+void PG_ALG<T> :: aplicarElitismo(const Poblacion<T> & poblacion_antigua) {
+	// elitismo
+	bool mejor_encontrado = false;
+	unsigned i = 0;
+
+	while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
+		mejor_encontrado = poblacion[i] == poblacion_antigua.getMejorIndividuo();
+		i++;
+	}
+
+
+
+	// si no esta el mejor, aplico elitismo
+	if ( !mejor_encontrado ){
+		poblacion[poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
+	}
+
+}
+
+template <class T>
+std::pair<bool, bool> PG_ALG<T> :: aplicarMutacionesGP(T & hijo1, T & hijo2, const double prob_mutacion) {
+	std::pair<bool, bool> resultado = std::make_pair(false, false);
+
+	if ( Random::getFloat() < prob_mutacion ) {
+		// mutacion GP en el primer hijo
+		hijo1.mutarGP(getNumVariables());
+		resultado.first = true;
+	}
+
+	if ( Random::getFloat() < prob_mutacion ) {
+		// mutacion GP en el segundo hijo
+		hijo2.mutarGP(getNumVariables());
+		resultado.second = true;
+	}
+
+	return resultado;
 }
 
 } // namespace PG_ALGS

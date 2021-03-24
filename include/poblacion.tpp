@@ -179,8 +179,6 @@ Poblacion<T> & Poblacion<T> :: operator= (const Poblacion & otra) {
 
 	tam_poblacion = otra.tam_poblacion;
 
-	expresion_gap = otra.expresion_gap;
-
 	reservarMemoria(tam_poblacion);
 
 	for ( unsigned i = 0; i < tam_poblacion; i++ ) {

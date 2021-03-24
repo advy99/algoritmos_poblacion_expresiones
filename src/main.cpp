@@ -1,5 +1,7 @@
 #include <iostream>
 #include "GA_P.hpp"
+#include "PG.hpp"
+
 #include <ctime>
 #include "random.hpp"
 #include <chrono>
@@ -59,9 +61,34 @@ int main(int argc, char ** argv){
 				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
 
 
-	std::cout << "El mejor individuo es: " << std::endl;
+	std::cout << "El mejor individuo de GA_P es: " << std::endl;
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
 	std::cout << "Con un ajuste de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
+
+
+	PG_ALGS::PG<PG_ALGS::Expresion> myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+
+	tiempo_inicio = std::chrono::high_resolution_clock::now();
+
+	myPG.ajustar(evaluaciones, prob_cruce_gp, prob_muta_gp, tam_torneo, false);
+
+	tiempo_fin = std::chrono::high_resolution_clock::now();
+
+	t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
+
+	std::cout << "Tiempo de ejecución con " << num_trabajos << " hilos en una poblacion de " << tam_pob << " individuos con tamaño máximo "
+				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
+
+
+	std::cout << "El mejor individuo de PG es: " << std::endl;
+	std::cout << myPG.getMejorIndividuo() << std::endl;
+	std::cout << "Con un ajuste de: " << myPG.getMejorIndividuo().getFitness() << std::endl;
+
+
+
+
+
+
 
 	return 0;
 
