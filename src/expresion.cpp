@@ -331,6 +331,7 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 
 			// lo sumamos al cuadrado
 			suma += std::pow( valor - etiquetas[i] , 2.0);
+
 		}
 
 		// hacemos la media de los cuadrados
@@ -443,7 +444,7 @@ void Expresion :: asignarArbol (const Arbol nuevo_arbol, const unsigned longitud
 void Expresion :: dejaEstarEvaluada(){
 	// ponemos la flag a false y establecemos el fitness a NaN
 	evaluada = false;
-	fitness = std::numeric_limits<double>::quiet_NaN();
+	fitness = std::numeric_limits<double>::infinity();
 }
 
 
@@ -483,7 +484,7 @@ unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 	std::stack<Nodo> pila;
 
 	//volcamos la expresion en la pila
-	for (int i = (int)getLongitudArbol() - 1; i >= (int)comienzo; i--){
+	for (int i = static_cast<int>(getLongitudArbol() - 1); i >= static_cast<int>(comienzo); i--){
 		pila.push(arbol[i]);
 	}
 	// contamos los niveles de toda la pila

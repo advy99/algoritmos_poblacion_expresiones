@@ -115,9 +115,6 @@ void PG<T> :: ajustar(const int num_eval, const double prob_cruce,
 		// evaluamos
 		poblacion.evaluarPoblacion(datos, output_datos);
 
-
-
-
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
 			std::cout << generacion << "\t" << poblacion.getMejorIndividuo().getFitness() << std::endl;
