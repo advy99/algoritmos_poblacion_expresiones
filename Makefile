@@ -45,7 +45,7 @@ OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/preprocesado.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
 CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
 
 PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
@@ -76,7 +76,7 @@ tests: clean crear-carpetas INICIO $(OBJETIVO_TEST) ejecutar-tests FIN
 
 # reglas para compilar y ejecutar los test
 ejecutar-tests: $(OBJETIVO_TEST)
-	@$(OBJETIVO_TEST) || (printf "\e[31mERROR: No se ha conseguido pasar todos los tests, abortando la compilación\n"; false)
+	@$(OBJETIVO_TEST) --gtest_color=yes || (printf "\e[31mERROR: No se ha conseguido pasar todos los tests, abortando la compilación\n"; false)
 	@printf "\n\e[32mTests ejecutados correctamente\n\n"
 
 
@@ -85,7 +85,7 @@ $(OBJETIVO_TEST): $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)  $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
 	@$(CXX) $(OBJETOS_PG_ALGS) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -I$(INC)
-	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\n\n"
+	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\e[0m\n\n"
 
 
 # funcion para compilar un objeto
@@ -113,6 +113,9 @@ $(OBJETIVO): $(OBJETOS) $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)
 
 
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/preprocesado.o: $(SRC)/preprocesado.cpp $(INC)/preprocesado.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
