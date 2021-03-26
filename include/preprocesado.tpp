@@ -1,15 +1,14 @@
-#include "preprocesado.hpp"
-
+namespace PG_ALGS {
 
 
 template <class T>
-std::pair<matriz<T>, matriz<T> > leerDatos(const std::string fichero_datos,
+std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string fichero_datos,
 												const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
 
 	matriz<T> datos;
-	matriz<T> output_datos;
+	std::vector<T> output_datos;
 
 	// mostramos un error si no podemos abrirlo
 	if (!file){
@@ -70,7 +69,7 @@ std::pair<matriz<T>, matriz<T> > leerDatos(const std::string fichero_datos,
 template <class T>
 std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
 	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
-							 const double PORCENTAJE_TEST = 0.2) {
+							 const double PORCENTAJE_TEST) {
 
 
 	matriz<T> datos_test;
@@ -96,5 +95,7 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
 	}
 
 	return std::make_pair(std::make_pair(datos, etiquetas), std::make_pair(datos_test, etiquetas_test));
+
+}
 
 }

@@ -39,4 +39,6 @@ std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string fichero_datos
 
 }
 
+#include "preprocesado.tpp"
+
 #endif
