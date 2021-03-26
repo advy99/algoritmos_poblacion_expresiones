@@ -5,10 +5,10 @@ BIN      = $(HOME)/bin
 INC	   = $(HOME)/include
 SRC      = $(HOME)/src
 OBJ      = $(HOME)/obj
-LIB      = $(HOME)/lib
 DATOS	   = $(HOME)/datos
 DOC      = $(HOME)/doc
-GRAFICAS = $(HOME)/graficas/datos
+GRAFICAS = $(HOME)/graficas
+
 
 # flags de compilacion por defecto
 MENSAJE := "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
@@ -54,6 +54,9 @@ PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
 OBJETIVO_TEST = $(BIN)/main_test
 OBJETOS_TEST = $(OBJ)/main_test.o
 
+OBJETIVO_PREPROCESADO = $(BIN)/main_preprocesar
+OBJETOS_PREPROCESADO = $(OBJ)/main_preprocesar.o
+
 # variables para el contador de reglas
 N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_PG_ALGS) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
 X := 0
@@ -68,7 +71,7 @@ gtestflags = -I$(gtest) $(gtestlibs)
 .PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
 
 # target por defecto
-all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) doc FIN
+all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) doc FIN
 
 
 # target para compilar solo los tests
@@ -86,6 +89,12 @@ $(OBJETIVO_TEST): $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)  $(OBJETOS_TEST)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
 	@$(CXX) $(OBJETOS_PG_ALGS) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\e[0m\n\n"
+
+$(OBJETIVO_PREPROCESADO): $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)  $(OBJETOS_PREPROCESADO)
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_PREPROCESADO) a partir de $(OBJETOS_PREPROCESADO)\n"
+	@$(CXX) $(OBJETOS_PG_ALGS) $(OBJETOS_PREPROCESADO) -o $(OBJETIVO_PREPROCESADO) $(F_OPENMP) $(gtestflags) -I$(INC)
+	@printf "\n\e[36mCompilación de $(OBJETIVO_PREPROCESADO) finalizada con exito.\e[0m\n\n"
 
 
 # funcion para compilar un objeto
@@ -137,6 +146,8 @@ $(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
 $(OBJ)/main.o: $(SRC)/main.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
+$(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC)/preprocesado.hpp
+	$(call compilar_objeto,$<,$@)
 
 # mensaje de fin
 FIN:
@@ -169,7 +180,9 @@ crear-carpetas:
 	@printf "\e[36mCreando carpetas necesarias\e[0m\n"
 	-@mkdir $(OBJ) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(OBJ)\n"
 	-@mkdir $(BIN) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(BIN)\n"
-	-@mkdir $(LIB) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(LIB)\n"
+	-@mkdir $(GRAFICAS) 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(GRAFICAS)\n"
+	-@mkdir $(GRAFICAS)/datos 2> /dev/null || printf "\t\e[33mYa existe la carpeta $(GRAFICAS)/datos\n"
+
 
 # target para mostrar ayuda
 help:
