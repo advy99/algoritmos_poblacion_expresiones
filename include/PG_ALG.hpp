@@ -10,7 +10,9 @@ template <class T>
 class PG_ALG {
 	protected:
 
-		PG_ALG<T> ();
+		PG_ALG ();
+		void inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
+
 
 		/**
 		  * @brief Datos con los que ajustar el algoritmo
@@ -62,8 +64,6 @@ class PG_ALG {
 			 													 const double prob_mutacion);
 
 	public:
-
-		PG_ALG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 		void leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');

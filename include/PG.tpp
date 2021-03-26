@@ -1,6 +1,14 @@
 
 namespace PG_ALGS {
 
+
+template <class T>
+PG<T> :: PG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var){
+	inicializar(seed, tam_poblacion, prof, prob_var);
+
+}
+
+
 template <class T>
 PG<T> :: PG(const std::string fichero_datos, const char char_comentario,
 		  const unsigned tam_poblacion, const double prob_var,

@@ -49,6 +49,7 @@ class GA_P : public PG_ALG<T> {
 		using PG_ALG<T>::generarPoblacion;
 		using PG_ALG<T>::aplicarElitismo;
 		using PG_ALG<T>::aplicarMutacionesGP;
+		using PG_ALG<T>::inicializar;
 
 		/**
 		  * @page repGA_P Representación de la clase GA_P
@@ -72,6 +73,9 @@ class GA_P : public PG_ALG<T> {
 		  */
 
 	public:
+
+		GA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
+
 
 		/**
 		  * @brief Constructor con dos parámetros

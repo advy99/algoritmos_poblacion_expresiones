@@ -2,7 +2,12 @@
 namespace PG_ALGS {
 
 template <class T>
-PG_ALG<T> :: PG_ALG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+PG_ALG<T> :: PG_ALG() {
+	
+}
+
+template <class T>
+void PG_ALG<T> :: inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 
 	// inicializamos la semilla
 	Random::setSeed(seed);
