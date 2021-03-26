@@ -26,7 +26,7 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string fichero_datos
 			if (linea.size() > 0 && linea[0] != char_comentario &&
 				 !isblank(linea[0]) ) {
 				// leemos por linea
-				std::vector<double> datos_linea;
+				std::vector<T> datos_linea;
 				ss.str(linea);
 
 				std::string str_valor;
@@ -35,14 +35,31 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string fichero_datos
 
 				// mientras queden valores en la linea
 				while (!ss.eof()){
+
+					T dato_a_insertar;
+
+					if ( std::is_same<T, double>::value ) {
+						dato_a_insertar = strtod(str_valor.c_str(), nullptr);
+					} else {
+						dato_a_insertar = str_valor;
+					}
+
 					// los metemos en ese dato
-					datos_linea.push_back(strtod(str_valor.c_str(), nullptr));
+					datos_linea.push_back(dato_a_insertar);
 					std::getline(ss, str_valor, delimitador);
 
 				}
 
+				T dato_a_insertar;
+
+				if ( std::is_same<T, double>::value ) {
+					dato_a_insertar = strtod(str_valor.c_str(), nullptr);
+				} else {
+					dato_a_insertar = str_valor;
+				}
+
 				// el ultimo dato no tiene separador, lo incluimos
-				output_datos.push_back(strtod(str_valor.c_str(), nullptr));
+				output_datos.push_back(dato_a_insertar);
 
 				// introducimos el dato en la matriz final de datos
  				datos.push_back(datos_linea);
