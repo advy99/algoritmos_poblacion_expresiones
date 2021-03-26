@@ -68,7 +68,7 @@ gtestflags = -I$(gtest) $(gtestlibs)
 .PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
 
 # target por defecto
-all: clean crear-carpetas INICIO ejecutar-tests $(OBJETIVO) doc FIN
+all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) doc FIN
 
 
 # target para compilar solo los tests

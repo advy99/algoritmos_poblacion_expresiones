@@ -63,7 +63,7 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de GA_P es: " << std::endl;
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
-	std::cout << "Con un ajuste de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
 
 
 	PG_ALGS::PG<PG_ALGS::Expresion> myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
@@ -82,7 +82,7 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de PG es: " << std::endl;
 	std::cout << myPG.getMejorIndividuo() << std::endl;
-	std::cout << "Con un ajuste de: " << myPG.getMejorIndividuo().getFitness() << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myPG.getMejorIndividuo().getFitness() << std::endl;
 
 
 
