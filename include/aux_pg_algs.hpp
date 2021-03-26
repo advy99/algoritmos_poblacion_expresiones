@@ -24,7 +24,7 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
-
+#include "preprocesado.hpp"
 
 
 namespace PG_ALGS {
