@@ -45,7 +45,7 @@ OBJETIVO = $(BIN)/GA_P
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca GA_P
-OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/preprocesado.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
 CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
 
 PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
@@ -113,9 +113,6 @@ $(OBJETIVO): $(OBJETOS) $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)
 
 
 $(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
-	$(call compilar_objeto,$<,$@)
-
-$(OBJ)/preprocesado.o: $(SRC)/preprocesado.cpp $(INC)/preprocesado.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
