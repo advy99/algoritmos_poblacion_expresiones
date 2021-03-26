@@ -63,21 +63,9 @@ class PG_ALG {
 
 	public:
 
-		/**
-		  * @brief Leer datos de entrada para el algoritmo
-		  *
-		  * @param fichero_datos Fichero donde se almacenan los datos
-		  * @param char_comentario Caracter que marca que una linea es un
-		  * comentario y ha de ser ignorada
-		  * @param delimitador Caracter que marca como están separados los
-		  * datos de entrada
-		  *
-		  * @pre Los datos han sido preprocesados y los datos a leer vienen
-		  * dados separados por delimitador. Cada dato es una linea.
-		  *
-		  */
+		PG_ALG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
-		bool leerDatos(const std::string fichero_datos,
+		void leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');
 
 		/**
