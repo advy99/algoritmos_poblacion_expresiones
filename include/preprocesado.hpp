@@ -1,18 +1,19 @@
 #ifndef PREPROCESADO_H_INCLUDED
 #define PREPROCESADO_H_INCLUDED
 
-#include "random.hpp"
+#include "aux_pg_algs.hpp"
 
-
-namespace PG_ALGS {
 
 template <class T>
 using matriz = std::vector<std::vector<T>>;
 
 
+namespace PG_ALGS {
+
+
 template <class T>
-std::pair<std::pair<matriz, matriz >, std::pair<matriz, matriz > >
-	separar_train_test(matriz datos, matriz etiquetas,
+std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
+	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
 							 const double PORCENTAJE_TEST = 0.2);
 
 
@@ -32,8 +33,8 @@ std::pair<std::pair<matriz, matriz >, std::pair<matriz, matriz > >
   */
 
 template <class T>
-std::pair<matriz, matriz >	leer_datos(const std::string fichero_datos,
-				  								  const char char_comentario, const char delimitador = ',');
+std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string fichero_datos,
+				  								  		  const char char_comentario, const char delimitador = ',');
 
 
 }

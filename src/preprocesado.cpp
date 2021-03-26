@@ -3,13 +3,13 @@
 
 
 template <class T>
-std::pair<matriz, matriz> leerDatos(const std::string fichero_datos,
+std::pair<matriz<T>, matriz<T> > leerDatos(const std::string fichero_datos,
 												const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
 
-	matriz datos;
-	matriz output_datos;
+	matriz<T> datos;
+	matriz<T> output_datos;
 
 	// mostramos un error si no podemos abrirlo
 	if (!file){
@@ -68,13 +68,13 @@ std::pair<matriz, matriz> leerDatos(const std::string fichero_datos,
 
 
 template <class T>
-std::pair<std::pair<matriz, matriz >, std::pair<matriz, matriz > >
-	separar_train_test(matriz datos, matriz etiquetas,
+std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
+	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
 							 const double PORCENTAJE_TEST = 0.2) {
 
 
-	matriz datos_test;
-	matriz etiquetas_test;
+	matriz<T> datos_test;
+	std::vector<T> etiquetas_test;
 
 	const unsigned NUM_DATOS_TEST = datos.size() * PORCENTAJE_TEST;
 
