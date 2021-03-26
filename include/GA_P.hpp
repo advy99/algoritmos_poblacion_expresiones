@@ -74,15 +74,6 @@ class GA_P : public PG_ALG<T> {
 	public:
 
 		/**
-		  * @brief Constructor con un parámetro
-		  *
-		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
-		  * la semilla ya ha sido inicializada antes
-		  */
-
-		GA_P(const unsigned long seed = time(nullptr));
-
-		/**
 		  * @brief Constructor con dos parámetros
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos

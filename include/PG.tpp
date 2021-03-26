@@ -2,33 +2,19 @@
 namespace PG_ALGS {
 
 template <class T>
-PG<T> :: PG(const unsigned long seed) {
-	Random::setSeed(seed);
-
-	inicializarVacio();
-}
-
-template <class T>
 PG<T> :: PG(const std::string fichero_datos, const char char_comentario,
 		  const unsigned tam_poblacion, const double prob_var,
 		  const unsigned long seed,
 		  const char delimitador, const unsigned prof){
 
-	bool lectura_correcta = false;
-
 	inicializarVacio();
 
-	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
+	leerDatos(fichero_datos, char_comentario, delimitador);
 	prof_expresiones = prof;
 
 	Random::setSeed(seed);
 
-	if (lectura_correcta) {
-		generarPoblacion(tam_poblacion, prof, prob_var, true);
-	} else {
-		// si no, mostramos un error
-		std::cerr << "Error leyendo los datos de " << fichero_datos << std::endl;
-	}
+	generarPoblacion(tam_poblacion, prof, prob_var, true);
 
 }
 

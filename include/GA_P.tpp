@@ -1,42 +1,23 @@
 namespace PG_ALGS {
 
-template <class T>
-GA_P<T> :: GA_P(const unsigned long seed) {
-
-	// inicializamos la semilla
-	Random::setSeed(seed);
-
-	inicializarVacio();
-
-}
 
 template <class T>
 GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
-	// al principio suponemos que se ha leido mal
-	bool lectura_correcta = false;
-
 	inicializarVacio();
 
 	// lemos los datos del fichero de entrada
-	lectura_correcta = leerDatos(fichero_datos, char_comentario, delimitador);
+	leerDatos(fichero_datos, char_comentario, delimitador);
 	prof_expresiones = prof;
 
 
 	// inicializamos la semilla
 	Random::setSeed(seed);
 
-	// si se han leido bien, inicilizamos la poblacion
-	if (lectura_correcta){
-		// inicilizamos poblacion
-		generarPoblacion(tam_poblacion, prof, prob_var, true);
 
-	} else {
-		// si no, mostramos un error
-		std::cerr << "Error leyendo los datos de " << fichero_datos << std::endl;
-	}
+	generarPoblacion(tam_poblacion, prof, prob_var, true);
 
 }
 

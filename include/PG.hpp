@@ -31,13 +31,11 @@ class PG : public PG_ALG<T> {
 	using PG_ALG<T>::aplicarElitismo;
 	using PG_ALG<T>::aplicarMutacionesGP;
 
-	
+
 	private:
 
 
 	public:
-		PG(const unsigned long seed = time(nullptr));
-
 		PG(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed = time(nullptr),
