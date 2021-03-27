@@ -7,7 +7,6 @@ set style line 6 lc rgb "olivedrab"
 set style line 7 lc rgb "0x20B2AA"
 set style line 8 lc rgb "0x90EE90"
 set style line 9 lc rgb "0xADD8E6"
-set style line 10 lc rgb "0xE9967A"
 
 unset key
 
