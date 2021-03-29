@@ -45,10 +45,10 @@ OBJETIVO = $(BIN)/AlgoritmoGA_P
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca AlgoritmoGA_P
-OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_PG_ALGS = $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/Expresion_GAP.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
 CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
 
-PG_ALGS_INC_COMUNES = $(INC)/random.hpp $(INC)/aux_pg_algs.hpp
+PG_ALGS_INC_COMUNES = $(INC)/Random.hpp $(INC)/aux_pg_algs.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
@@ -121,29 +121,29 @@ $(OBJETIVO): $(OBJETOS) $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)
 
 
 
-$(OBJ)/nodo.o: $(SRC)/nodo.cpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+$(OBJ)/Nodo.o: $(SRC)/Nodo.cpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/expresion.o: $(SRC)/expresion.cpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+$(OBJ)/Expresion.o: $(SRC)/Expresion.cpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/expresion_gap.o: $(SRC)/expresion_gap.cpp $(INC)/expresion_gap.hpp $(INC)/expresion.hpp $(INC)/nodo.hpp $(PG_ALGS_INC_COMUNES)
+$(OBJ)/Expresion_GAP.o: $(SRC)/Expresion_GAP.cpp $(INC)/Expresion_GAP.hpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/random.o: $(SRC)/random.cpp $(INC)/random.hpp
+$(OBJ)/Random.o: $(SRC)/Random.cpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
 
-$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/AlgoritmoPG.hpp $(INC)/AlgoritmoGA_P.hpp $(INC)/random.hpp
+$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/AlgoritmoPG.hpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/random.hpp
+$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/random.hpp
+$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC)/preprocesado.hpp

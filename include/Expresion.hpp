@@ -7,7 +7,7 @@
 #ifndef EXPRESION_H_INCLUDED
 #define EXPRESION_H_INCLUDED
 
-#include "nodo.hpp"
+#include "Nodo.hpp"
 #include "aux_pg_algs.hpp"
 
 

@@ -1,4 +1,4 @@
-#include "nodo.hpp"
+#include "Nodo.hpp"
 
 namespace PG_ALGS {
 

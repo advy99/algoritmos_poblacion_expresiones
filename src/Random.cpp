@@ -1,5 +1,5 @@
 #include <ctime>
-#include "random.hpp"
+#include "Random.hpp"
 #include <iostream>
 
 void Random :: setSeed(const unsigned long semilla){

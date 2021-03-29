@@ -8,9 +8,9 @@
 #define GA_P_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
-#include "random.hpp"
-#include "expresion.hpp"
-#include "poblacion.hpp"
+#include "Random.hpp"
+#include "Expresion.hpp"
+#include "Poblacion.hpp"
 
 #include "AlgoritmoPoblacion.hpp"
 

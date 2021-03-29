@@ -2,7 +2,7 @@
 #define ALGORITMO_POBLACION_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
-#include "poblacion.hpp"
+#include "Poblacion.hpp"
 
 namespace PG_ALGS {
 

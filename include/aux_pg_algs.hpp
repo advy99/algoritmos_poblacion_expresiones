@@ -12,7 +12,7 @@
 #endif
 
 #include <algorithm>
-#include "random.hpp"
+#include "Random.hpp"
 #include <cstring>
 #include <stack>
 #include <limits>

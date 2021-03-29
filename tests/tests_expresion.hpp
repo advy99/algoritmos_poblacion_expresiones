@@ -2,8 +2,8 @@
 #define TESTS_EXPRESION
 
 #include <gtest/gtest.h>
-#include "expresion.hpp"
-#include "expresion_gap.hpp"
+#include "Expresion.hpp"
+#include "Expresion_GAP.hpp"
 
 #include "aux_pg_algs.hpp"
 

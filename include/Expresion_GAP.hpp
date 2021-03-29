@@ -2,7 +2,7 @@
 #define EXPRESION_GAP_H_INCLUDED
 
 
-#include "expresion.hpp"
+#include "Expresion.hpp"
 #include "aux_pg_algs.hpp"
 
 
