@@ -3,7 +3,7 @@ namespace PG_ALGS {
 
 template <class T>
 PG_ALG<T> :: PG_ALG() {
-	
+
 }
 
 template <class T>
@@ -152,13 +152,13 @@ unsigned PG_ALG<T> :: getMaxProfExpresiones() const {
 
 
 template <class T>
-void PG_ALG<T> :: aplicarElitismo(const Poblacion<T> & poblacion_antigua) {
+void PG_ALG<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 	// elitismo
 	bool mejor_encontrado = false;
 	unsigned i = 0;
 
 	while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
-		mejor_encontrado = poblacion[i] == poblacion_antigua.getMejorIndividuo();
+		mejor_encontrado = poblacion[i] == mejor_ind_anterior;
 		i++;
 	}
 
@@ -166,7 +166,7 @@ void PG_ALG<T> :: aplicarElitismo(const Poblacion<T> & poblacion_antigua) {
 
 	// si no esta el mejor, aplico elitismo
 	if ( !mejor_encontrado ){
-		poblacion[poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
+		poblacion[poblacion.getTamPoblacion() - 1] = mejor_ind_anterior;
 	}
 
 }

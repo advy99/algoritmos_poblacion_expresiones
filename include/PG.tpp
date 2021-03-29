@@ -47,19 +47,11 @@ void PG<T> :: ajustar(const int num_eval, const double prob_cruce,
 	// evaluo la poblacion al inicio
 	poblacion.evaluarPoblacion(datos, output_datos);
 
-	Poblacion<T> poblacion_antigua = poblacion;
-	Poblacion<T> poblacion_tmp;
+	Expresion mejor_individuo = poblacion.getMejorIndividuo();
 
 	Expresion hijo1, hijo2;
 
 	while ( generacion < NUM_GENERACIONES) {
-
-
-		// intercambio la poblacion antigua y la actual
-		poblacion_tmp = poblacion_antigua;
-		poblacion_antigua = poblacion;
-		poblacion = poblacion_tmp;
-
 
 		// seleccionamos la poblacion a cruzar
 		poblacion = seleccionTorneo(tam_torneo);
@@ -103,15 +95,17 @@ void PG<T> :: ajustar(const int num_eval, const double prob_cruce,
 		}
 
 
-		aplicarElitismo(poblacion_antigua);
+		aplicarElitismo(mejor_individuo);
 
 
 		// evaluamos
 		poblacion.evaluarPoblacion(datos, output_datos);
 
+		mejor_individuo = poblacion.getMejorIndividuo();
+
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
-			std::cout << generacion << "\t" << poblacion.getMejorIndividuo().getFitness() << std::endl;
+			std::cout << generacion << "\t" << mejor_individuo.getFitness() << std::endl;
 		}
 
 		generacion++;

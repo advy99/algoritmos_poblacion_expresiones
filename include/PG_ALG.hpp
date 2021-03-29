@@ -175,7 +175,7 @@ class PG_ALG {
 
 
 
-		void aplicarElitismo(const Poblacion<T> & poblacion_antigua);
+		void aplicarElitismo(const T & poblacion_antigua);
 
 };
 
