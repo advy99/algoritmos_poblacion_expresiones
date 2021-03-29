@@ -10,27 +10,27 @@
 
 #include "aux_pg_algs.hpp"
 
-#include "PG_ALG.hpp"
+#include "AlgoritmoPoblacion.hpp"
 
 
 namespace PG_ALGS {
 
 template <class T>
-class PG : public PG_ALG<T> {
-	using PG_ALG<T>::poblacion;
-	using PG_ALG<T>::datos;
-	using PG_ALG<T>::output_datos;
+class PG : public AlgoritmoPoblacion<T> {
+	using AlgoritmoPoblacion<T>::poblacion;
+	using AlgoritmoPoblacion<T>::datos;
+	using AlgoritmoPoblacion<T>::output_datos;
 
-	using PG_ALG<T>::leerDatos;
-	using PG_ALG<T>::inicializarVacio;
-	using PG_ALG<T>::prof_expresiones;
-	using PG_ALG<T>::getNumVariables;
-	using PG_ALG<T>::getMaxProfExpresiones;
-	using PG_ALG<T>::seleccionTorneo;
-	using PG_ALG<T>::generarPoblacion;
-	using PG_ALG<T>::aplicarElitismo;
-	using PG_ALG<T>::aplicarMutacionesGP;
-	using PG_ALG<T>::inicializar;
+	using AlgoritmoPoblacion<T>::leerDatos;
+	using AlgoritmoPoblacion<T>::inicializarVacio;
+	using AlgoritmoPoblacion<T>::prof_expresiones;
+	using AlgoritmoPoblacion<T>::getNumVariables;
+	using AlgoritmoPoblacion<T>::getMaxProfExpresiones;
+	using AlgoritmoPoblacion<T>::seleccionTorneo;
+	using AlgoritmoPoblacion<T>::generarPoblacion;
+	using AlgoritmoPoblacion<T>::aplicarElitismo;
+	using AlgoritmoPoblacion<T>::aplicarMutacionesGP;
+	using AlgoritmoPoblacion<T>::inicializar;
 
 
 	private:

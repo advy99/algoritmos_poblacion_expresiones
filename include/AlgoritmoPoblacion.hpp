@@ -1,5 +1,5 @@
-#ifndef PG_ALG_H_INCLUDED
-#define PG_ALG_H_INCLUDED
+#ifndef ALGORITMO_POBLACION_H_INCLUDED
+#define ALGORITMO_POBLACION_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
 #include "poblacion.hpp"
@@ -7,10 +7,10 @@
 namespace PG_ALGS {
 
 template <class T>
-class PG_ALG {
+class AlgoritmoPoblacion {
 	protected:
 
-		PG_ALG ();
+		AlgoritmoPoblacion ();
 		void inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 
@@ -184,7 +184,7 @@ class PG_ALG {
 } // namespace PG_ALGS
 
 
-#include "PG_ALG.tpp"
+#include "AlgoritmoPoblacion.tpp"
 
 
 #endif
