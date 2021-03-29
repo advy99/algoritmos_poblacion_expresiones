@@ -1,6 +1,6 @@
 #include <iostream>
 #include "GA_P.hpp"
-#include "PG.hpp"
+#include "AlgoritmoPG.hpp"
 
 #include <ctime>
 #include "random.hpp"
@@ -66,7 +66,7 @@ int main(int argc, char ** argv){
 	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
 
 
-	PG_ALGS::PG<PG_ALGS::Expresion> myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	PG_ALGS::AlgoritmoPG<PG_ALGS::Expresion> myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
