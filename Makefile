@@ -41,10 +41,10 @@ CXXFLAGS = -std=c++17 $(O_LEVEL) $(F_OPENMP) $(F_GPROF) -Wall -Wextra -Wfloat-eq
 
 
 # objetivo principal
-OBJETIVO = $(BIN)/GA_P
+OBJETIVO = $(BIN)/AlgoritmoGA_P
 OBJETOS = $(OBJ)/main.o
 
-# objetivos de la biblioteca GA_P
+# objetivos de la biblioteca AlgoritmoGA_P
 OBJETOS_PG_ALGS = $(OBJ)/nodo.o $(OBJ)/expresion.o $(OBJ)/expresion_gap.o $(OBJ)/random.o $(OBJ)/aux_pg_algs.o
 CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
 
@@ -108,7 +108,7 @@ endef
 # mensaje de inicio y compilacion del objetivo y objeros
 
 INICIO:
-	@printf "\n\e[36mComenzando compilación de $(BIN)/GA_P\n\n"
+	@printf "\n\e[36mComenzando compilación de $(BIN)/AlgoritmoGA_P\n\n"
 	@printf "\e[94mCompilador: $(CXX)\n"
 	@printf "\e[94mFlags del compilador: $(CXXFLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
@@ -137,13 +137,13 @@ $(OBJ)/random.o: $(SRC)/random.cpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
 
-$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
+$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/AlgoritmoPG.hpp $(INC)/AlgoritmoGA_P.hpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
+$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/GA_P.hpp $(INC)/random.hpp
+$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC)/preprocesado.hpp

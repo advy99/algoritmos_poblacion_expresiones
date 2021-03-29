@@ -1,6 +1,6 @@
 /**
-  * @file GA_P.hpp
-  * @brief Fichero cabecera de la clase GA_P
+  * @file AlgoritmoGA_P.hpp
+  * @brief Fichero cabecera de la clase AlgoritmoGA_P
   *
   */
 
@@ -15,7 +15,7 @@
 #include "AlgoritmoPoblacion.hpp"
 
 /**
- * @brief Clases, definiciones y estructuras necesarias para el algoritmo GA_P
+ * @brief Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P
  *
  */
 
@@ -23,9 +23,9 @@
 namespace PG_ALGS {
 
 /**
-  *  @brief Clase GA_P
+  *  @brief Clase AlgoritmoGA_P
   *
-  *  Una instancia del tipo GA_P representará un estimador para los datos
+  *  Una instancia del tipo AlgoritmoGA_P representará un estimador para los datos
   *  dados, utilizando una Poblacion, conjunto de Expresion.
   *
   *
@@ -34,7 +34,7 @@ namespace PG_ALGS {
   */
 
 template <class T>
-class GA_P : public AlgoritmoPoblacion<T> {
+class AlgoritmoGA_P : public AlgoritmoPoblacion<T> {
 	private:
 		using AlgoritmoPoblacion<T>::poblacion;
 		using AlgoritmoPoblacion<T>::datos;
@@ -52,7 +52,7 @@ class GA_P : public AlgoritmoPoblacion<T> {
 		using AlgoritmoPoblacion<T>::inicializar;
 
 		/**
-		  * @page repGA_P Representación de la clase GA_P
+		  * @page repGA_P Representación de la clase AlgoritmoGA_P
 		  *
 		  * @section invGA_P Invariante de la representación
 		  *
@@ -60,7 +60,7 @@ class GA_P : public AlgoritmoPoblacion<T> {
 		  *
 		  * @section faConjunto Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la clase GA_P representa un conjunto de
+		  * Un objeto valido @e rep de la clase AlgoritmoGA_P representa un conjunto de
 		  * datos con sus respectivas etiquetas
 		  *
 		  * rep.datos
@@ -74,7 +74,7 @@ class GA_P : public AlgoritmoPoblacion<T> {
 
 	public:
 
-		GA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
+		AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 
 		/**
@@ -85,12 +85,12 @@ class GA_P : public AlgoritmoPoblacion<T> {
 		  * @param char_comentario Caracter que marca que una linea es un
 		  * comentario y ha de ser ignorada.
 		  *
-		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
+		  * @param tam_poblacion Tamaño de la población que conformará el AlgoritmoGA_P
 		  *
 		  * @param prob_var Probabilidad de que en una expresión de la población
 		  * un nodo hoja sea una variable.
 		  *
-		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * @param seed Semilla al utilizar en AlgoritmoGA_P. No tiene efecto si la
 		  * la semilla ya ha sido inicializada antes
 		  *
 		  * @param delimitador Caracter que marca como están separados los
@@ -102,7 +102,7 @@ class GA_P : public AlgoritmoPoblacion<T> {
 		  *
 		  */
 
-		GA_P(const std::string fichero_datos, const char char_comentario,
+		AlgoritmoGA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed = time(nullptr),
 			  const char delimitador = ',', const unsigned prof = 20);
@@ -112,7 +112,7 @@ class GA_P : public AlgoritmoPoblacion<T> {
 		  *
 		  */
 
-		~GA_P();
+		~AlgoritmoGA_P();
 
 
 		/**
@@ -133,6 +133,6 @@ class GA_P : public AlgoritmoPoblacion<T> {
 } // namespace PG_ALGS
 
 
-#include "GA_P.tpp"
+#include "AlgoritmoGA_P.tpp"
 
 #endif

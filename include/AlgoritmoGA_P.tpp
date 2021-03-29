@@ -1,14 +1,14 @@
 namespace PG_ALGS {
 
 template <class T>
-GA_P<T> :: GA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+AlgoritmoGA_P<T> :: AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 	inicializar(seed, tam_poblacion, prof, prob_var);
 
 }
 
 
 template <class T>
-GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
+AlgoritmoGA_P<T> :: AlgoritmoGA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
@@ -29,11 +29,11 @@ GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
 
 
 template <class T>
-GA_P<T> :: ~GA_P(){
+AlgoritmoGA_P<T> :: ~AlgoritmoGA_P(){
 }
 
 template <class T>
-void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
+void AlgoritmoGA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 							const double prob_cruce_ga, const double prob_mutacion_gp,
 							const double prob_mutacion_ga, const int tam_torneo,
 							const bool mostrar_evolucion) {
