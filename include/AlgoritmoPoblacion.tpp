@@ -1,5 +1,5 @@
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
 AlgoritmoPoblacion<T> :: AlgoritmoPoblacion() {
@@ -190,4 +190,4 @@ std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicarMutacionesGP(T & hijo1, T 
 	return resultado;
 }
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones

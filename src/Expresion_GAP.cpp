@@ -1,7 +1,7 @@
 #include "Expresion_GAP.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 Expresion_GAP :: Expresion_GAP(const unsigned prof_max){
 

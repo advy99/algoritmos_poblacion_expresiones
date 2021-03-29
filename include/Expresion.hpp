@@ -11,7 +11,7 @@
 #include "aux_pg_algs.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 /**
   *  @brief Clase Expresion
@@ -447,6 +447,6 @@ class Expresion{
 
 };
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 #endif

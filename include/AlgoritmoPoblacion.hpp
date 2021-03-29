@@ -4,7 +4,7 @@
 #include "aux_pg_algs.hpp"
 #include "Poblacion.hpp"
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
 class AlgoritmoPoblacion {
@@ -181,7 +181,7 @@ class AlgoritmoPoblacion {
 
 
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 
 #include "AlgoritmoPoblacion.tpp"

@@ -1,4 +1,4 @@
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 
 template <class T>

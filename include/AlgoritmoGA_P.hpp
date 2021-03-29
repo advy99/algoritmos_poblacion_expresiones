@@ -20,7 +20,7 @@
  */
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 /**
   *  @brief Clase AlgoritmoGA_P
@@ -130,7 +130,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<T> {
 
 };
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 
 #include "AlgoritmoGA_P.tpp"

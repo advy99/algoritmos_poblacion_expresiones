@@ -11,7 +11,7 @@
 #include "Expresion.hpp"
 #include "Expresion_GAP.hpp"
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 
 /**
@@ -242,7 +242,7 @@ class Poblacion{
 
 };
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 #include "Poblacion.tpp"
 

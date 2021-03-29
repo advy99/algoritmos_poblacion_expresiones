@@ -1,4 +1,4 @@
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
 AlgoritmoGA_P<T> :: AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
@@ -150,4 +150,4 @@ void AlgoritmoGA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 }
 
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones

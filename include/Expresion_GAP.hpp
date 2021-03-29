@@ -6,7 +6,7 @@
 #include "aux_pg_algs.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 class Expresion_GAP : public Expresion {
 	private:

@@ -13,7 +13,7 @@
 #include "AlgoritmoPoblacion.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
 class AlgoritmoPG : public AlgoritmoPoblacion<T> {

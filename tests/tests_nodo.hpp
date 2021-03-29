@@ -6,30 +6,30 @@
 
 
 TEST (Nodo, IgualElMismo) {
-	PG_ALGS::Nodo nodo;
+	algoritmos_poblaciones::Nodo nodo;
 
 	EXPECT_EQ(nodo, nodo);
 }
 
 TEST (Nodo, ConstructorCopia) {
-	PG_ALGS::Nodo nodo;
-	PG_ALGS::Nodo otro(nodo);
+	algoritmos_poblaciones::Nodo nodo;
+	algoritmos_poblaciones::Nodo otro(nodo);
 
 	EXPECT_EQ(nodo, otro);
 }
 
 TEST (Nodo, ConstructorDefecto) {
-	PG_ALGS::Nodo nodo;
-	PG_ALGS::Nodo otro;
+	algoritmos_poblaciones::Nodo nodo;
+	algoritmos_poblaciones::Nodo otro;
 
 	EXPECT_EQ(nodo, otro);
 }
 
 TEST (Nodo, Asignacion) {
-	PG_ALGS::Nodo nodo;
-	nodo.setTipoNodo(PG_ALGS::TipoNodo::NUMERO);
+	algoritmos_poblaciones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
 
-	PG_ALGS::Nodo otro;
+	algoritmos_poblaciones::Nodo otro;
 
 	otro = nodo;
 
@@ -37,11 +37,11 @@ TEST (Nodo, Asignacion) {
 }
 
 TEST (Nodo, DistintosTipos) {
-	PG_ALGS::Nodo nodo;
-	nodo.setTipoNodo(PG_ALGS::TipoNodo::NUMERO);
+	algoritmos_poblaciones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
 
-	PG_ALGS::Nodo otro;
-	nodo.setTipoNodo(PG_ALGS::TipoNodo::MAS);
+	algoritmos_poblaciones::Nodo otro;
+	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
 
 
 	EXPECT_NE(nodo, otro);
@@ -49,11 +49,11 @@ TEST (Nodo, DistintosTipos) {
 
 
 TEST (Nodo, MismoTipoValorDistinto) {
-	PG_ALGS::Nodo nodo;
-	nodo.setTipoNodo(PG_ALGS::TipoNodo::MAS);
+	algoritmos_poblaciones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
 
-	PG_ALGS::Nodo otro;
-	otro.setTipoNodo(PG_ALGS::TipoNodo::MAS);
+	algoritmos_poblaciones::Nodo otro;
+	otro.setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
 
 	otro.setValor(-23);
 
@@ -61,12 +61,12 @@ TEST (Nodo, MismoTipoValorDistinto) {
 }
 
 TEST (Nodo, DistintoTipoValorIgual) {
-	PG_ALGS::Nodo nodo;
-	nodo.setTipoNodo(PG_ALGS::TipoNodo::NUMERO);
+	algoritmos_poblaciones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
 	nodo.setValor(1);
 
-	PG_ALGS::Nodo otro;
-	otro.setTipoNodo(PG_ALGS::TipoNodo::VARIABLE);
+	algoritmos_poblaciones::Nodo otro;
+	otro.setTipoNodo(algoritmos_poblaciones::TipoNodo::VARIABLE);
 
 	otro.setValor(1);
 

@@ -28,7 +28,7 @@
 #include "preprocesado.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 /**
   * @brief Comparar si dos números reales son iguales teniendo en cuenta la falta
