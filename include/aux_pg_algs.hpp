@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
+#include <type_traits>
 #include "preprocesado.hpp"
 
 

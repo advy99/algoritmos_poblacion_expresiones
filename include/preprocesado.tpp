@@ -38,7 +38,7 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string fichero_datos
 
 					T dato_a_insertar;
 
-					if ( std::is_same<T, double>::value ) {
+					if constexpr ( std::is_same<T, double>::value ) {
 						dato_a_insertar = strtod(str_valor.c_str(), nullptr);
 					} else {
 						dato_a_insertar = str_valor;
@@ -52,7 +52,7 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string fichero_datos
 
 				T dato_a_insertar;
 
-				if ( std::is_same<T, double>::value ) {
+				if constexpr ( std::is_same<T, double>::value ) {
 					dato_a_insertar = strtod(str_valor.c_str(), nullptr);
 				} else {
 					dato_a_insertar = str_valor;
