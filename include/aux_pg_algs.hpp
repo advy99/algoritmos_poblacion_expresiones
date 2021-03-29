@@ -12,7 +12,7 @@
 #endif
 
 #include <algorithm>
-#include "random.hpp"
+#include "Random.hpp"
 #include <cstring>
 #include <stack>
 #include <limits>
@@ -24,10 +24,11 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
+#include <type_traits>
 #include "preprocesado.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 /**
   * @brief Comparar si dos números reales son iguales teniendo en cuenta la falta

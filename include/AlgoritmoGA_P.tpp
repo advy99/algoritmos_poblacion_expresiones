@@ -1,8 +1,14 @@
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
+
+template <class T>
+AlgoritmoGA_P<T> :: AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+	inicializar(seed, tam_poblacion, prof, prob_var);
+
+}
 
 
 template <class T>
-GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
+AlgoritmoGA_P<T> :: AlgoritmoGA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
@@ -23,11 +29,11 @@ GA_P<T> :: GA_P(const std::string fichero_datos, const char char_comentario,
 
 
 template <class T>
-GA_P<T> :: ~GA_P(){
+AlgoritmoGA_P<T> :: ~AlgoritmoGA_P(){
 }
 
 template <class T>
-void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
+void AlgoritmoGA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 							const double prob_cruce_ga, const double prob_mutacion_gp,
 							const double prob_mutacion_ga, const int tam_torneo,
 							const bool mostrar_evolucion) {
@@ -42,8 +48,7 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 	// evaluo la poblacion al inicio
 	poblacion.evaluarPoblacion(datos, output_datos);
 
-	Poblacion<T> poblacion_antigua = poblacion;
-	Poblacion<T> poblacion_tmp;
+	Expresion_GAP mejor_individuo = poblacion.getMejorIndividuo();
 
 	Expresion_GAP hijo1, hijo2;
 
@@ -51,13 +56,6 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 	bool cruce_gp;
 
 	while ( generacion < NUM_GENERACIONES) {
-
-
-		// intercambio la poblacion antigua y la actual
-		poblacion_tmp = poblacion_antigua;
-		poblacion_antigua = poblacion;
-		poblacion = poblacion_tmp;
-
 
 		// seleccionamos la poblacion a cruzar
 		poblacion = seleccionTorneo(tam_torneo);
@@ -135,13 +133,15 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		}
 
-		aplicarElitismo(poblacion_antigua);
+		aplicarElitismo(mejor_individuo);
 
 		poblacion.evaluarPoblacion(datos, output_datos);
 
+		mejor_individuo = poblacion.getMejorIndividuo();
+
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
-			std::cout << generacion << "\t" << poblacion.getMejorIndividuo().getFitness() << std::endl;
+			std::cout << generacion << "\t" << mejor_individuo.getFitness() << std::endl;
 		}
 
 		generacion++;
@@ -150,4 +150,4 @@ void GA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
 }
 
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones

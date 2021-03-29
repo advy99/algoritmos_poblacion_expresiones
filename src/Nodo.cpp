@@ -1,6 +1,6 @@
-#include "nodo.hpp"
+#include "Nodo.hpp"
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 Nodo :: Nodo(){
 	tipo_nodo = TipoNodo::NUMERO;
@@ -89,4 +89,4 @@ bool Nodo :: operator!=(const Nodo & otro) const {
 }
 
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones

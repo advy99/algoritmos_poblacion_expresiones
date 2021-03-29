@@ -9,7 +9,7 @@
 
 #include "aux_pg_algs.hpp"
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 /**
   * @brief Posibles tipos de nodo que utilizaremos en el GA_P
@@ -180,6 +180,6 @@ class Nodo {
 
 typedef Nodo * Arbol;
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 #endif

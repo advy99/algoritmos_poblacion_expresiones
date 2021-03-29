@@ -2,11 +2,11 @@
 #define EXPRESION_GAP_H_INCLUDED
 
 
-#include "expresion.hpp"
+#include "Expresion.hpp"
 #include "aux_pg_algs.hpp"
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 class Expresion_GAP : public Expresion {
 	private:

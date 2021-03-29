@@ -8,10 +8,10 @@
 #define POBLACION_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
-#include "expresion.hpp"
-#include "expresion_gap.hpp"
+#include "Expresion.hpp"
+#include "Expresion_GAP.hpp"
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 
 /**
@@ -242,9 +242,9 @@ class Poblacion{
 
 };
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
-#include "poblacion.tpp"
+#include "Poblacion.tpp"
 
 
 

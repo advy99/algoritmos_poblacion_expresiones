@@ -1,4 +1,4 @@
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
 Poblacion<T> :: Poblacion(){
@@ -193,4 +193,4 @@ Poblacion<T> & Poblacion<T> :: operator= (const Poblacion & otra) {
 
 
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones

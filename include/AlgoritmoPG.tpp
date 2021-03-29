@@ -1,8 +1,16 @@
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
+
 
 template <class T>
-PG<T> :: PG(const std::string fichero_datos, const char char_comentario,
+AlgoritmoPG<T> :: AlgoritmoPG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var){
+	inicializar(seed, tam_poblacion, prof, prob_var);
+
+}
+
+
+template <class T>
+AlgoritmoPG<T> :: AlgoritmoPG(const std::string fichero_datos, const char char_comentario,
 		  const unsigned tam_poblacion, const double prob_var,
 		  const unsigned long seed,
 		  const char delimitador, const unsigned prof){
@@ -19,12 +27,12 @@ PG<T> :: PG(const std::string fichero_datos, const char char_comentario,
 }
 
 template <class T>
-PG<T> :: ~PG() {
+AlgoritmoPG<T> :: ~AlgoritmoPG() {
 
 }
 
 template <class T>
-void PG<T> :: ajustar(const int num_eval, const double prob_cruce,
+void AlgoritmoPG<T> :: ajustar(const int num_eval, const double prob_cruce,
 							const double prob_mutacion,
 							const int tam_torneo,
 							const bool mostrar_evolucion) {
@@ -39,19 +47,11 @@ void PG<T> :: ajustar(const int num_eval, const double prob_cruce,
 	// evaluo la poblacion al inicio
 	poblacion.evaluarPoblacion(datos, output_datos);
 
-	Poblacion<T> poblacion_antigua = poblacion;
-	Poblacion<T> poblacion_tmp;
+	Expresion mejor_individuo = poblacion.getMejorIndividuo();
 
 	Expresion hijo1, hijo2;
 
 	while ( generacion < NUM_GENERACIONES) {
-
-
-		// intercambio la poblacion antigua y la actual
-		poblacion_tmp = poblacion_antigua;
-		poblacion_antigua = poblacion;
-		poblacion = poblacion_tmp;
-
 
 		// seleccionamos la poblacion a cruzar
 		poblacion = seleccionTorneo(tam_torneo);
@@ -95,15 +95,17 @@ void PG<T> :: ajustar(const int num_eval, const double prob_cruce,
 		}
 
 
-		aplicarElitismo(poblacion_antigua);
+		aplicarElitismo(mejor_individuo);
 
 
 		// evaluamos
 		poblacion.evaluarPoblacion(datos, output_datos);
 
+		mejor_individuo = poblacion.getMejorIndividuo();
+
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
-			std::cout << generacion << "\t" << poblacion.getMejorIndividuo().getFitness() << std::endl;
+			std::cout << generacion << "\t" << mejor_individuo.getFitness() << std::endl;
 		}
 
 		generacion++;

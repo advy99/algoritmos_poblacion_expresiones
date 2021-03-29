@@ -1,6 +1,6 @@
 /**
-  * @file GA_P.hpp
-  * @brief Fichero cabecera de la clase GA_P
+  * @file AlgoritmoGA_P.hpp
+  * @brief Fichero cabecera de la clase AlgoritmoGA_P
   *
   */
 
@@ -8,24 +8,24 @@
 #define GA_P_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
-#include "random.hpp"
-#include "expresion.hpp"
-#include "poblacion.hpp"
+#include "Random.hpp"
+#include "Expresion.hpp"
+#include "Poblacion.hpp"
 
-#include "PG_ALG.hpp"
+#include "AlgoritmoPoblacion.hpp"
 
 /**
- * @brief Clases, definiciones y estructuras necesarias para el algoritmo GA_P
+ * @brief Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P
  *
  */
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 /**
-  *  @brief Clase GA_P
+  *  @brief Clase AlgoritmoGA_P
   *
-  *  Una instancia del tipo GA_P representará un estimador para los datos
+  *  Una instancia del tipo AlgoritmoGA_P representará un estimador para los datos
   *  dados, utilizando una Poblacion, conjunto de Expresion.
   *
   *
@@ -34,24 +34,25 @@ namespace PG_ALGS {
   */
 
 template <class T>
-class GA_P : public PG_ALG<T> {
+class AlgoritmoGA_P : public AlgoritmoPoblacion<T> {
 	private:
-		using PG_ALG<T>::poblacion;
-		using PG_ALG<T>::datos;
-		using PG_ALG<T>::output_datos;
+		using AlgoritmoPoblacion<T>::poblacion;
+		using AlgoritmoPoblacion<T>::datos;
+		using AlgoritmoPoblacion<T>::output_datos;
 
-		using PG_ALG<T>::leerDatos;
-		using PG_ALG<T>::inicializarVacio;
-		using PG_ALG<T>::prof_expresiones;
-		using PG_ALG<T>::getNumVariables;
-		using PG_ALG<T>::getMaxProfExpresiones;
-		using PG_ALG<T>::seleccionTorneo;
-		using PG_ALG<T>::generarPoblacion;
-		using PG_ALG<T>::aplicarElitismo;
-		using PG_ALG<T>::aplicarMutacionesGP;
+		using AlgoritmoPoblacion<T>::leerDatos;
+		using AlgoritmoPoblacion<T>::inicializarVacio;
+		using AlgoritmoPoblacion<T>::prof_expresiones;
+		using AlgoritmoPoblacion<T>::getNumVariables;
+		using AlgoritmoPoblacion<T>::getMaxProfExpresiones;
+		using AlgoritmoPoblacion<T>::seleccionTorneo;
+		using AlgoritmoPoblacion<T>::generarPoblacion;
+		using AlgoritmoPoblacion<T>::aplicarElitismo;
+		using AlgoritmoPoblacion<T>::aplicarMutacionesGP;
+		using AlgoritmoPoblacion<T>::inicializar;
 
 		/**
-		  * @page repGA_P Representación de la clase GA_P
+		  * @page repGA_P Representación de la clase AlgoritmoGA_P
 		  *
 		  * @section invGA_P Invariante de la representación
 		  *
@@ -59,7 +60,7 @@ class GA_P : public PG_ALG<T> {
 		  *
 		  * @section faConjunto Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la clase GA_P representa un conjunto de
+		  * Un objeto valido @e rep de la clase AlgoritmoGA_P representa un conjunto de
 		  * datos con sus respectivas etiquetas
 		  *
 		  * rep.datos
@@ -73,6 +74,9 @@ class GA_P : public PG_ALG<T> {
 
 	public:
 
+		AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
+
+
 		/**
 		  * @brief Constructor con dos parámetros
 		  *
@@ -81,12 +85,12 @@ class GA_P : public PG_ALG<T> {
 		  * @param char_comentario Caracter que marca que una linea es un
 		  * comentario y ha de ser ignorada.
 		  *
-		  * @param tam_poblacion Tamaño de la población que conformará el GA_P
+		  * @param tam_poblacion Tamaño de la población que conformará el AlgoritmoGA_P
 		  *
 		  * @param prob_var Probabilidad de que en una expresión de la población
 		  * un nodo hoja sea una variable.
 		  *
-		  * @param seed Semilla al utilizar en GA_P. No tiene efecto si la
+		  * @param seed Semilla al utilizar en AlgoritmoGA_P. No tiene efecto si la
 		  * la semilla ya ha sido inicializada antes
 		  *
 		  * @param delimitador Caracter que marca como están separados los
@@ -98,7 +102,7 @@ class GA_P : public PG_ALG<T> {
 		  *
 		  */
 
-		GA_P(const std::string fichero_datos, const char char_comentario,
+		AlgoritmoGA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed = time(nullptr),
 			  const char delimitador = ',', const unsigned prof = 20);
@@ -108,7 +112,7 @@ class GA_P : public PG_ALG<T> {
 		  *
 		  */
 
-		~GA_P();
+		~AlgoritmoGA_P();
 
 
 		/**
@@ -126,9 +130,9 @@ class GA_P : public PG_ALG<T> {
 
 };
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 
-#include "GA_P.tpp"
+#include "AlgoritmoGA_P.tpp"
 
 #endif

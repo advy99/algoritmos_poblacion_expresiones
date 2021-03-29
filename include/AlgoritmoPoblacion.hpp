@@ -1,16 +1,18 @@
-#ifndef PG_ALG_H_INCLUDED
-#define PG_ALG_H_INCLUDED
+#ifndef ALGORITMO_POBLACION_H_INCLUDED
+#define ALGORITMO_POBLACION_H_INCLUDED
 
 #include "aux_pg_algs.hpp"
-#include "poblacion.hpp"
+#include "Poblacion.hpp"
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
-class PG_ALG {
+class AlgoritmoPoblacion {
 	protected:
 
-		PG_ALG<T> ();
+		AlgoritmoPoblacion ();
+		void inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
+
 
 		/**
 		  * @brief Datos con los que ajustar el algoritmo
@@ -62,8 +64,6 @@ class PG_ALG {
 			 													 const double prob_mutacion);
 
 	public:
-
-		PG_ALG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 		void leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');
@@ -175,16 +175,16 @@ class PG_ALG {
 
 
 
-		void aplicarElitismo(const Poblacion<T> & poblacion_antigua);
+		void aplicarElitismo(const T & poblacion_antigua);
 
 };
 
 
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones
 
 
-#include "PG_ALG.tpp"
+#include "AlgoritmoPoblacion.tpp"
 
 
 #endif

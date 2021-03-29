@@ -1,8 +1,13 @@
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 template <class T>
-PG_ALG<T> :: PG_ALG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+AlgoritmoPoblacion<T> :: AlgoritmoPoblacion() {
+
+}
+
+template <class T>
+void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 
 	// inicializamos la semilla
 	Random::setSeed(seed);
@@ -14,13 +19,13 @@ PG_ALG<T> :: PG_ALG(const unsigned long seed, const unsigned tam_poblacion, cons
 
 
 template <class T>
-void PG_ALG<T> :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
+void AlgoritmoPoblacion<T> :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
 	datos = caracteristicas;
 	output_datos = etiquetas;
 }
 
 template <class T>
-void PG_ALG<T> :: leerDatos(const std::string fichero_datos,
+void AlgoritmoPoblacion<T> :: leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	auto resultado = leer_datos<double>(fichero_datos, char_comentario, delimitador);
@@ -32,12 +37,12 @@ void PG_ALG<T> :: leerDatos(const std::string fichero_datos,
 
 
 template <class T>
-int PG_ALG<T> :: getNumDatos() const {
+int AlgoritmoPoblacion<T> :: getNumDatos() const {
 	return datos.size();
 }
 
 template <class T>
-void PG_ALG<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
+void AlgoritmoPoblacion<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
 									 const double prob_var, const bool sustituir_actual) {
 	if ( sustituir_actual ) {
 		poblacion = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
@@ -49,33 +54,33 @@ void PG_ALG<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned 
 
 
 template <class T>
-int PG_ALG<T> :: getNumVariables() const {
+int AlgoritmoPoblacion<T> :: getNumVariables() const {
 	return datos[0].size();
 }
 
 template <class T>
-std::vector<std::vector<double> > PG_ALG<T> :: getDatos() const {
+std::vector<std::vector<double> > AlgoritmoPoblacion<T> :: getDatos() const {
 	return datos;
 }
 
 template <class T>
-std::vector<double> PG_ALG<T> :: getDato(const unsigned i) const {
+std::vector<double> AlgoritmoPoblacion<T> :: getDato(const unsigned i) const {
 	return datos[i];
 }
 
 template <class T>
-std::vector<double> PG_ALG<T> :: getOutputDatos() const {
+std::vector<double> AlgoritmoPoblacion<T> :: getOutputDatos() const {
 	return output_datos;
 }
 
 
 template <class T>
-double PG_ALG<T> :: getOutputDato(const unsigned indice) const {
+double AlgoritmoPoblacion<T> :: getOutputDato(const unsigned indice) const {
 	return output_datos[indice];
 }
 
 template <class T>
-void PG_ALG<T> :: inicializarVacio() {
+void AlgoritmoPoblacion<T> :: inicializarVacio() {
 	prof_expresiones = 0;
 	datos.clear();
 	output_datos.clear();
@@ -83,7 +88,7 @@ void PG_ALG<T> :: inicializarVacio() {
 
 
 template <class T>
-Poblacion<T> PG_ALG<T> :: seleccionTorneo(const unsigned tam_torneo) {
+Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion<T> resultado = poblacion;
 
@@ -135,25 +140,25 @@ Poblacion<T> PG_ALG<T> :: seleccionTorneo(const unsigned tam_torneo) {
 }
 
 template <class T>
-T PG_ALG<T> :: getMejorIndividuo() const {
+T AlgoritmoPoblacion<T> :: getMejorIndividuo() const {
 	return poblacion.getMejorIndividuo();
 }
 
 template <class T>
-unsigned PG_ALG<T> :: getMaxProfExpresiones() const {
+unsigned AlgoritmoPoblacion<T> :: getMaxProfExpresiones() const {
 	return prof_expresiones;
 }
 
 
 
 template <class T>
-void PG_ALG<T> :: aplicarElitismo(const Poblacion<T> & poblacion_antigua) {
+void AlgoritmoPoblacion<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 	// elitismo
 	bool mejor_encontrado = false;
 	unsigned i = 0;
 
 	while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
-		mejor_encontrado = poblacion[i] == poblacion_antigua.getMejorIndividuo();
+		mejor_encontrado = poblacion[i] == mejor_ind_anterior;
 		i++;
 	}
 
@@ -161,13 +166,13 @@ void PG_ALG<T> :: aplicarElitismo(const Poblacion<T> & poblacion_antigua) {
 
 	// si no esta el mejor, aplico elitismo
 	if ( !mejor_encontrado ){
-		poblacion[poblacion.getTamPoblacion() - 1] = poblacion_antigua.getMejorIndividuo();
+		poblacion[poblacion.getTamPoblacion() - 1] = mejor_ind_anterior;
 	}
 
 }
 
 template <class T>
-std::pair<bool, bool> PG_ALG<T> :: aplicarMutacionesGP(T & hijo1, T & hijo2, const double prob_mutacion) {
+std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicarMutacionesGP(T & hijo1, T & hijo2, const double prob_mutacion) {
 	std::pair<bool, bool> resultado = std::make_pair(false, false);
 
 	if ( Random::getFloat() < prob_mutacion ) {
@@ -185,4 +190,4 @@ std::pair<bool, bool> PG_ALG<T> :: aplicarMutacionesGP(T & hijo1, T & hijo2, con
 	return resultado;
 }
 
-} // namespace PG_ALGS
+} // namespace algoritmos_poblaciones

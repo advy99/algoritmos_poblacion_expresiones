@@ -8,7 +8,7 @@ template <class T>
 using matriz = std::vector<std::vector<T>>;
 
 
-namespace PG_ALGS {
+namespace algoritmos_poblaciones {
 
 
 template <class T>
@@ -38,5 +38,7 @@ std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string fichero_datos
 
 
 }
+
+#include "preprocesado.tpp"
 
 #endif
