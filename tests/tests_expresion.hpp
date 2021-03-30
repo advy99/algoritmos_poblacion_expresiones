@@ -2,10 +2,10 @@
 #define TESTS_EXPRESION
 
 #include <gtest/gtest.h>
-#include "Expresion.hpp"
-#include "Expresion_GAP.hpp"
+#include "algoritmos_poblaciones/Expresion.hpp"
+#include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
-#include "aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
 
 TEST (Expresion, IgualElMismo) {
 	algoritmos_poblaciones::Expresion exp;

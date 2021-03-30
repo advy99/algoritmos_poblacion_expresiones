@@ -1,8 +1,8 @@
 #ifndef ALGORITMO_POBLACION_H_INCLUDED
 #define ALGORITMO_POBLACION_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
-#include "Poblacion.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/Poblacion.hpp"
 
 namespace algoritmos_poblaciones {
 
@@ -184,7 +184,7 @@ class AlgoritmoPoblacion {
 } // namespace algoritmos_poblaciones
 
 
-#include "AlgoritmoPoblacion.tpp"
+#include "algoritmos_poblaciones/AlgoritmoPoblacion.tpp"
 
 
 #endif

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "AlgoritmoGA_P.hpp"
-#include "AlgoritmoPG.hpp"
+#include "algoritmos_poblaciones/AlgoritmoGA_P.hpp"
+#include "algoritmos_poblaciones/AlgoritmoPG.hpp"
 
 #include <ctime>
 #include "Random.hpp"

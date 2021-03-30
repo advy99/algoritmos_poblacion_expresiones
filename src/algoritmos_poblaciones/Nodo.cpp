@@ -1,4 +1,4 @@
-#include "Nodo.hpp"
+#include "algoritmos_poblaciones/Nodo.hpp"
 
 namespace algoritmos_poblaciones {
 

@@ -7,7 +7,7 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
 
 namespace algoritmos_poblaciones {
 

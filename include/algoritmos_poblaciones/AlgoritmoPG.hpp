@@ -8,9 +8,9 @@
 #ifndef ALGORITMO_PG_H_INCLUDED
 #define ALGORITMO_PG_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
 
-#include "AlgoritmoPoblacion.hpp"
+#include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
 
 namespace algoritmos_poblaciones {

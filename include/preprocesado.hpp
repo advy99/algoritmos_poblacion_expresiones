@@ -1,7 +1,7 @@
 #ifndef PREPROCESADO_H_INCLUDED
 #define PREPROCESADO_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
 
 
 template <class T>

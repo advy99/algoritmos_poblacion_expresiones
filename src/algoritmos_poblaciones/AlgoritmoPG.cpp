@@ -1,4 +1,4 @@
-#include "AlgoritmoPG.hpp"
+#include "algoritmos_poblaciones/AlgoritmoPG.hpp"
 
 namespace algoritmos_poblaciones {
 

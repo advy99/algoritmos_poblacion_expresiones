@@ -7,12 +7,12 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
-#include "Random.hpp"
-#include "Expresion.hpp"
-#include "Poblacion.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/Expresion.hpp"
+#include "algoritmos_poblaciones/Poblacion.hpp"
+#include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
-#include "AlgoritmoPoblacion.hpp"
+#include "Random.hpp"
 
 /**
  * @brief Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P
