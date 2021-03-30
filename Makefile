@@ -45,7 +45,7 @@ OBJETIVO = $(BIN)/AlgoritmoGA_P
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca AlgoritmoGA_P
-OBJETOS_PG_ALGS = $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/Expresion_GAP.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_PG_ALGS = $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
 CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
 
 PG_ALGS_INC_COMUNES = $(INC)/Random.hpp $(INC)/aux_pg_algs.hpp
@@ -128,6 +128,9 @@ $(OBJ)/Expresion.o: $(SRC)/Expresion.cpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/Expresion_GAP.o: $(SRC)/Expresion_GAP.cpp $(INC)/Expresion_GAP.hpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/AlgoritmoGA_P.o: $(SRC)/AlgoritmoGA_P.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Expresion_GAP.hpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp

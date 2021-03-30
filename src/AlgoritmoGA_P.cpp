@@ -1,14 +1,16 @@
+#include "AlgoritmoGA_P.hpp"
+
 namespace algoritmos_poblaciones {
 
-template <class T>
-AlgoritmoGA_P<T> :: AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+
+AlgoritmoGA_P :: AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 	inicializar(seed, tam_poblacion, prof, prob_var);
 
 }
 
 
-template <class T>
-AlgoritmoGA_P<T> :: AlgoritmoGA_P(const std::string fichero_datos, const char char_comentario,
+
+AlgoritmoGA_P :: AlgoritmoGA_P(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
@@ -28,12 +30,12 @@ AlgoritmoGA_P<T> :: AlgoritmoGA_P(const std::string fichero_datos, const char ch
 }
 
 
-template <class T>
-AlgoritmoGA_P<T> :: ~AlgoritmoGA_P(){
+
+AlgoritmoGA_P :: ~AlgoritmoGA_P(){
 }
 
-template <class T>
-void AlgoritmoGA_P<T> :: ajustar(const int num_eval, const double prob_cruce_gp,
+
+void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 							const double prob_cruce_ga, const double prob_mutacion_gp,
 							const double prob_mutacion_ga, const int tam_torneo,
 							const bool mostrar_evolucion) {

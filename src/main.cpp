@@ -47,7 +47,7 @@ int main(int argc, char ** argv){
 		omp_set_num_threads(num_trabajos);
 	#endif
 
-	algoritmos_poblaciones::AlgoritmoGA_P<algoritmos_poblaciones::Expresion_GAP> myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	algoritmos_poblaciones::AlgoritmoGA_P myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
