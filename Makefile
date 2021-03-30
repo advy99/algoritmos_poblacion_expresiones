@@ -9,6 +9,9 @@ DATOS	   = $(HOME)/datos
 DOC      = $(HOME)/doc
 GRAFICAS = $(HOME)/graficas
 
+SRC_ALG_POB = $(SRC)/algoritmos_poblaciones
+INC_ALG_POB = $(INC)/algoritmos_poblaciones
+
 
 # flags de compilacion por defecto
 MENSAJE := "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
@@ -41,14 +44,14 @@ CXXFLAGS = -std=c++17 $(O_LEVEL) $(F_OPENMP) $(F_GPROF) -Wall -Wextra -Wfloat-eq
 
 
 # objetivo principal
-OBJETIVO = $(BIN)/AlgoritmoGA_P
+OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca AlgoritmoGA_P
-OBJETOS_PG_ALGS = $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/Expresion_GAP.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
-CABECERAS_PG_ALGS = $(wildcard include/*.hpp)
+OBJETOS_ALGS_POB = $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/AlgoritmoPG.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
+CABECERAS_ALGS_POB = $(wildcard include/algoritmos_poblaciones/*.hpp)
 
-PG_ALGS_INC_COMUNES = $(INC)/Random.hpp $(INC)/aux_pg_algs.hpp
+ALGS_POB_INC_COMUNES = $(INC)/Random.hpp $(INC_ALG_POB)/aux_pg_algs.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
@@ -58,7 +61,7 @@ OBJETIVO_PREPROCESADO = $(BIN)/main_preprocesar
 OBJETOS_PREPROCESADO = $(OBJ)/main_preprocesar.o
 
 # variables para el contador de reglas
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_PG_ALGS) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -84,16 +87,16 @@ ejecutar-tests: $(OBJETIVO_TEST)
 
 
 
-$(OBJETIVO_TEST): $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)  $(OBJETOS_TEST)
+$(OBJETIVO_TEST): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_TEST)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_TEST) a partir de $(OBJETOS_TEST)\n"
-	@$(CXX) $(OBJETOS_PG_ALGS) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -I$(INC)
+	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\e[0m\n\n"
 
-$(OBJETIVO_PREPROCESADO): $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)  $(OBJETOS_PREPROCESADO)
+$(OBJETIVO_PREPROCESADO): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_PREPROCESADO)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_PREPROCESADO) a partir de $(OBJETOS_PREPROCESADO)\n"
-	@$(CXX) $(OBJETOS_PG_ALGS) $(OBJETOS_PREPROCESADO) -o $(OBJETIVO_PREPROCESADO) $(F_OPENMP) $(gtestflags) -I$(INC)
+	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJETOS_PREPROCESADO) -o $(OBJETIVO_PREPROCESADO) $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(OBJETIVO_PREPROCESADO) finalizada con exito.\e[0m\n\n"
 
 
@@ -113,37 +116,41 @@ INICIO:
 	@printf "\e[94mFlags del compilador: $(CXXFLAGS)\n\n"
 	@printf "\e[94m$(MENSAJE)\n\n"
 
-$(OBJETIVO): $(OBJETOS) $(OBJETOS_PG_ALGS) $(CABECERAS_PG_ALGS)
+$(OBJETIVO): $(OBJETOS) $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)
 	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO) a partir de $(OBJETOS)\n"
-	@$(CXX) $(OBJETOS) $(OBJETOS_PG_ALGS) $(CXXFLAGS) -o $@ -I$(INC) $(F_OPENMP) $(F_GPROF)
+	@$(CXX) $(OBJETOS) $(OBJETOS_ALGS_POB) $(CXXFLAGS) -o $@ -I$(INC) $(F_OPENMP) $(F_GPROF)
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
 
-$(OBJ)/Nodo.o: $(SRC)/Nodo.cpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
+$(OBJ)/Nodo.o: $(SRC_ALG_POB)/Nodo.cpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/Expresion.o: $(SRC)/Expresion.cpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
+$(OBJ)/Expresion.o: $(SRC_ALG_POB)/Expresion.cpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/Expresion_GAP.o: $(SRC)/Expresion_GAP.cpp $(INC)/Expresion_GAP.hpp $(INC)/Expresion.hpp $(INC)/Nodo.hpp $(PG_ALGS_INC_COMUNES)
+$(OBJ)/Expresion_GAP.o: $(SRC_ALG_POB)/Expresion_GAP.cpp $(INC_ALG_POB)/Expresion_GAP.hpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/aux_pg_algs.o: $(SRC)/aux_pg_algs.cpp $(INC)/aux_pg_algs.hpp
+$(OBJ)/AlgoritmoGA_P.o: $(SRC_ALG_POB)/AlgoritmoGA_P.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC_ALG_POB)/Expresion_GAP.hpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/AlgoritmoPG.o: $(SRC_ALG_POB)/AlgoritmoPG.cpp $(INC_ALG_POB)/AlgoritmoPG.hpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/aux_pg_algs.o: $(SRC_ALG_POB)/aux_pg_algs.cpp $(INC_ALG_POB)/aux_pg_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/Random.o: $(SRC)/Random.cpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
 
-$(OBJ)/main_pruebas.o: $(SRC)/main_pruebas.cpp $(INC)/AlgoritmoPG.hpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
+
+$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
-	$(call compilar_objeto,$<,$@)
-
-$(OBJ)/main.o: $(SRC)/main.cpp $(INC)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
+$(OBJ)/main.o: $(SRC)/main.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC)/preprocesado.hpp

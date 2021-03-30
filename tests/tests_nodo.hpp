@@ -2,7 +2,7 @@
 #define TESTS_NODO
 
 #include <gtest/gtest.h>
-#include "Nodo.hpp"
+#include "algoritmos_poblaciones/Nodo.hpp"
 
 
 TEST (Nodo, IgualElMismo) {

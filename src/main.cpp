@@ -1,6 +1,6 @@
 #include <iostream>
-#include "AlgoritmoGA_P.hpp"
-#include "AlgoritmoPG.hpp"
+#include "algoritmos_poblaciones/AlgoritmoGA_P.hpp"
+#include "algoritmos_poblaciones/AlgoritmoPG.hpp"
 
 #include <ctime>
 #include "Random.hpp"
@@ -47,7 +47,7 @@ int main(int argc, char ** argv){
 		omp_set_num_threads(num_trabajos);
 	#endif
 
-	algoritmos_poblaciones::AlgoritmoGA_P<algoritmos_poblaciones::Expresion_GAP> myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	algoritmos_poblaciones::AlgoritmoGA_P myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
@@ -66,7 +66,7 @@ int main(int argc, char ** argv){
 	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
 
 
-	algoritmos_poblaciones::AlgoritmoPG<algoritmos_poblaciones::Expresion> myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	algoritmos_poblaciones::AlgoritmoPG myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 

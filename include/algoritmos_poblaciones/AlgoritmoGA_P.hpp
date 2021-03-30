@@ -7,12 +7,12 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
-#include "Random.hpp"
-#include "Expresion.hpp"
-#include "Poblacion.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/Expresion.hpp"
+#include "algoritmos_poblaciones/Poblacion.hpp"
+#include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
-#include "AlgoritmoPoblacion.hpp"
+#include "Random.hpp"
 
 /**
  * @brief Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P
@@ -33,23 +33,22 @@ namespace algoritmos_poblaciones {
   * @date Julio 2020
   */
 
-template <class T>
-class AlgoritmoGA_P : public AlgoritmoPoblacion<T> {
+class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 	private:
-		using AlgoritmoPoblacion<T>::poblacion;
-		using AlgoritmoPoblacion<T>::datos;
-		using AlgoritmoPoblacion<T>::output_datos;
+		using AlgoritmoPoblacion<Expresion_GAP>::poblacion;
+		using AlgoritmoPoblacion<Expresion_GAP>::datos;
+		using AlgoritmoPoblacion<Expresion_GAP>::output_datos;
 
-		using AlgoritmoPoblacion<T>::leerDatos;
-		using AlgoritmoPoblacion<T>::inicializarVacio;
-		using AlgoritmoPoblacion<T>::prof_expresiones;
-		using AlgoritmoPoblacion<T>::getNumVariables;
-		using AlgoritmoPoblacion<T>::getMaxProfExpresiones;
-		using AlgoritmoPoblacion<T>::seleccionTorneo;
-		using AlgoritmoPoblacion<T>::generarPoblacion;
-		using AlgoritmoPoblacion<T>::aplicarElitismo;
-		using AlgoritmoPoblacion<T>::aplicarMutacionesGP;
-		using AlgoritmoPoblacion<T>::inicializar;
+		using AlgoritmoPoblacion<Expresion_GAP>::leerDatos;
+		using AlgoritmoPoblacion<Expresion_GAP>::inicializarVacio;
+		using AlgoritmoPoblacion<Expresion_GAP>::prof_expresiones;
+		using AlgoritmoPoblacion<Expresion_GAP>::getNumVariables;
+		using AlgoritmoPoblacion<Expresion_GAP>::getMaxProfExpresiones;
+		using AlgoritmoPoblacion<Expresion_GAP>::seleccionTorneo;
+		using AlgoritmoPoblacion<Expresion_GAP>::generarPoblacion;
+		using AlgoritmoPoblacion<Expresion_GAP>::aplicarElitismo;
+		using AlgoritmoPoblacion<Expresion_GAP>::aplicarMutacionesGP;
+		using AlgoritmoPoblacion<Expresion_GAP>::inicializar;
 
 		/**
 		  * @page repGA_P Representación de la clase AlgoritmoGA_P
@@ -132,7 +131,5 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<T> {
 
 } // namespace algoritmos_poblaciones
 
-
-#include "AlgoritmoGA_P.tpp"
 
 #endif

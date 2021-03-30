@@ -7,9 +7,9 @@
 #ifndef POBLACION_H_INCLUDED
 #define POBLACION_H_INCLUDED
 
-#include "aux_pg_algs.hpp"
-#include "Expresion.hpp"
-#include "Expresion_GAP.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/Expresion.hpp"
+#include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
 namespace algoritmos_poblaciones {
 
@@ -244,7 +244,7 @@ class Poblacion{
 
 } // namespace algoritmos_poblaciones
 
-#include "Poblacion.tpp"
+#include "algoritmos_poblaciones/Poblacion.tpp"
 
 
 

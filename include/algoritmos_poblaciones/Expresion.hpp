@@ -7,8 +7,8 @@
 #ifndef EXPRESION_H_INCLUDED
 #define EXPRESION_H_INCLUDED
 
-#include "Nodo.hpp"
-#include "aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/Nodo.hpp"
+#include "algoritmos_poblaciones/aux_pg_algs.hpp"
 
 
 namespace algoritmos_poblaciones {
