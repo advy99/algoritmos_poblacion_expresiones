@@ -15,22 +15,21 @@
 
 namespace algoritmos_poblaciones {
 
-template <class T>
-class AlgoritmoPG : public AlgoritmoPoblacion<T> {
-	using AlgoritmoPoblacion<T>::poblacion;
-	using AlgoritmoPoblacion<T>::datos;
-	using AlgoritmoPoblacion<T>::output_datos;
+class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
+	using AlgoritmoPoblacion<Expresion>::poblacion;
+	using AlgoritmoPoblacion<Expresion>::datos;
+	using AlgoritmoPoblacion<Expresion>::output_datos;
 
-	using AlgoritmoPoblacion<T>::leerDatos;
-	using AlgoritmoPoblacion<T>::inicializarVacio;
-	using AlgoritmoPoblacion<T>::prof_expresiones;
-	using AlgoritmoPoblacion<T>::getNumVariables;
-	using AlgoritmoPoblacion<T>::getMaxProfExpresiones;
-	using AlgoritmoPoblacion<T>::seleccionTorneo;
-	using AlgoritmoPoblacion<T>::generarPoblacion;
-	using AlgoritmoPoblacion<T>::aplicarElitismo;
-	using AlgoritmoPoblacion<T>::aplicarMutacionesGP;
-	using AlgoritmoPoblacion<T>::inicializar;
+	using AlgoritmoPoblacion<Expresion>::leerDatos;
+	using AlgoritmoPoblacion<Expresion>::inicializarVacio;
+	using AlgoritmoPoblacion<Expresion>::prof_expresiones;
+	using AlgoritmoPoblacion<Expresion>::getNumVariables;
+	using AlgoritmoPoblacion<Expresion>::getMaxProfExpresiones;
+	using AlgoritmoPoblacion<Expresion>::seleccionTorneo;
+	using AlgoritmoPoblacion<Expresion>::generarPoblacion;
+	using AlgoritmoPoblacion<Expresion>::aplicarElitismo;
+	using AlgoritmoPoblacion<Expresion>::aplicarMutacionesGP;
+	using AlgoritmoPoblacion<Expresion>::inicializar;
 
 
 	private:
@@ -56,7 +55,6 @@ class AlgoritmoPG : public AlgoritmoPoblacion<T> {
 
 }
 
-#include "AlgoritmoPG.tpp"
 
 
 #endif

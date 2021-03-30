@@ -66,7 +66,7 @@ int main(int argc, char ** argv){
 	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
 
 
-	algoritmos_poblaciones::AlgoritmoPG<algoritmos_poblaciones::Expresion> myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	algoritmos_poblaciones::AlgoritmoPG myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
