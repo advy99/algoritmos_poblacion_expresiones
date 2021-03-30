@@ -638,7 +638,7 @@ void Expresion :: mutarGP (const int num_vars) {
 			arbol[posicion].setTerminoAleatorio(num_vars);
 		} else {
 			arbol[posicion].setTipoNodo(TipoNodo::NUMERO);
-			// TODO: ser valor aleatorio al valor numerico
+			arbol[posicion].setValorNumerico(Random::getFloat(-10.0, 10.0));
 		}
 
 	} else {
