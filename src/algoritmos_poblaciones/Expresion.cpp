@@ -31,6 +31,8 @@ Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 
 	profundidad_maxima = prof_max;
 
+	numero_variables = num_vars;
+
 	inicializarVacia();
 
 	// generamos una expresion aleatoria
@@ -83,6 +85,7 @@ void Expresion :: inicializarVacia(){
 	// una expresion vacia no tiene arbol
 	arbol              = nullptr;
 	longitud_arbol     = 0;
+	numero_variables = 0;
 	dejaEstarEvaluada();
 }
 
@@ -130,6 +133,7 @@ void Expresion :: copiarDatos(const Expresion & otra){
 	evaluada           = otra.evaluada;
 	longitud_arbol     = otra.longitud_arbol;
 	profundidad_maxima = otra.profundidad_maxima;
+	numero_variables   = otra.numero_variables;
 
 	if ( otra.arbol == nullptr) {
 		arbol = nullptr;
@@ -628,21 +632,40 @@ void Expresion :: mutarGP (const int num_vars) {
 
 	int posicion = Random::getInt(longitud_arbol);
 
-	// primera opcion, cambiar un termino por otro
+	float aleatorio = Random::getFloat();
 
-	TipoNodo tipo = arbol[posicion].getTipoNodo();
+	if ( aleatorio < 0.5) {
+		// primera opcion, cambiar un termino por otro
+		TipoNodo tipo = arbol[posicion].getTipoNodo();
 
-	if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
-		if ( Random::getFloat() < 0.5) {
-			arbol[posicion].setTipoNodo(TipoNodo::VARIABLE);
-			arbol[posicion].setTerminoAleatorio(num_vars);
+		if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
+			if ( Random::getFloat() < 0.5) {
+				arbol[posicion].setTipoNodo(TipoNodo::VARIABLE);
+				arbol[posicion].setTerminoAleatorio(num_vars);
+			} else {
+				arbol[posicion].setTipoNodo(TipoNodo::NUMERO);
+				arbol[posicion].setValorNumerico(Random::getFloat(-10.0, 10.0));
+			}
+
 		} else {
-			arbol[posicion].setTipoNodo(TipoNodo::NUMERO);
-			arbol[posicion].setValorNumerico(Random::getFloat(-10.0, 10.0));
+			arbol[posicion].setTipoNodoOperadorAleatorio();
 		}
-
 	} else {
-		arbol[posicion].setTipoNodoOperadorAleatorio();
+		// generamos un arbol aleatorio en la posicion
+
+		bool cruce_mal;
+		Expresion hijo = (*this);
+
+		do {
+
+			Expresion exp_aleatorio(profundidad_maxima, 0.3, numero_variables, profundidad_maxima);
+
+			cruce_mal = !(intercambiarSubarbol(exp_aleatorio, posicion, 0, hijo));
+
+		} while (cruce_mal);
+
+		asignarArbol(hijo.arbol, hijo.longitud_arbol);
+
 	}
 
 }

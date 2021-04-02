@@ -81,6 +81,8 @@ class Expresion{
 		  */
 		Arbol arbol = nullptr;
 
+		unsigned numero_variables;
+
 		/**
 		  * @brief Inicializar una expresión vacia.
 		  *
