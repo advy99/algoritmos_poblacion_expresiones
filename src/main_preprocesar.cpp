@@ -6,6 +6,30 @@ std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<s
 	matriz<double> datos_resultado;
 	std::vector<double> etiquetas_resultado;
 
+	datos_resultado.resize(datos.size());
+	for(unsigned i = 0; i < datos.size(); i++) {
+		datos_resultado[i].resize(datos[i].size());
+
+		for ( unsigned j = 0; j < datos[i].size(); j++) {
+			if ( datos[i][j] == "RegularPorosity" || datos[i][j] == "Absence" || datos[i][j] == "NotDefined"
+				  || datos[i][j] == "Absent" ) {
+				datos_resultado[i][j] = 1;
+			} else if (  datos[i][j] == "RidgesFormation" || datos[i][j] == "Medium" || datos[i][j] == "Defined"
+						||	 (datos[i][j] == "Present" && j != 7 ) || datos[i][j] == "InProcess" || datos[i][j] == "PartiallyFormed"  ) {
+				datos_resultado[i][j] = 2;
+			} else if (  datos[i][j] == "RidgesAndGrooves" || datos[i][j] == "Much" || datos[i][j] == "Present" || datos[i][j] == "FormedWithoutRarefactions"  ) {
+				datos_resultado[i][j] = 3;
+			} else if (  datos[i][j] == "GroovesShallow" || datos[i][j] == "FormedWitFewRarefactions"  ) {
+				datos_resultado[i][j] = 4;
+			} else if (  datos[i][j] == "GroovesRest" || datos[i][j] == "FormedWithLotRecessesAndProtrusions" ) {
+				datos_resultado[i][j] = 5;
+			} else if (  datos[i][j] == "NoGrooves" ) {
+				datos_resultado[i][j] = 6;
+			}
+		}
+
+	}
+
 	etiquetas_resultado.resize(etiquetas.size());
 	for ( unsigned i = 0; i < etiquetas.size() ; ++i) {
 		if ( etiquetas[i] == "Ph01-19") {
@@ -40,22 +64,23 @@ std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<s
 
 int main(int argc, char ** argv) {
 
-	if ( argc < 2 ) {
-		std::cerr << "ERROR: Se necesita al menos un argumento, la ruta al fichero." << std::endl;
-		std::cerr << "\t Uso: " << argv[0] << " <fichero> [char_comentario] [char_separador]" << std::endl;
+	if ( argc < 3 ) {
+		std::cerr << "ERROR: Se necesita al menos dos argumentos, la ruta al fichero y la salida." << std::endl;
+		std::cerr << "\t Uso: " << argv[0] << " <fichero> <fichero_salida> [char_comentario] [char_separador]" << std::endl;
 		exit(-1);
 	}
 
 	std::string fichero = argv[1];
+	std::string salida = argv[2];
 	char comentario = '@';
 	char separador = ',';
 
-	if (argc >= 3) {
-		comentario = argv[2][0];
+	if (argc >= 4) {
+		comentario = argv[3][0];
 	}
 
-	if (argc == 4) {
-		separador = argv[3][0];
+	if (argc == 5) {
+		separador = argv[4][0];
 	}
 
 	auto resultado = algoritmos_poblaciones::leer_datos<std::string>(fichero, comentario, separador);
@@ -66,37 +91,15 @@ int main(int argc, char ** argv) {
 	auto resultado_fases = preprocesar_fases(datos, etiquetas);
 
 
-	std::vector<int> elementos_cada_fase(10, 0);
+	algoritmos_poblaciones::conteo_clases(resultado_fases.second, "graficas/datos/num_elementos_fase_original.dat");
 
-	for ( auto it = resultado_fases.second.begin(); it != resultado_fases.second.end(); ++it) {
-		if ( algoritmos_poblaciones::comparar_reales((*it), 19.0) ) {
-			elementos_cada_fase[0]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 20.5)) {
-			elementos_cada_fase[1]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 23.0)) {
-			elementos_cada_fase[2]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 25.5)) {
-			elementos_cada_fase[3]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 28.5)) {
-			elementos_cada_fase[4]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 32.5)) {
-			elementos_cada_fase[5]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 37.0)) {
-			elementos_cada_fase[6]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 42.0)) {
-			elementos_cada_fase[7]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 47.0)) {
-			elementos_cada_fase[8]++;
-		} else {
-			elementos_cada_fase[9]++;
-		}
-	}
 
-	std::ofstream salida_conteo;
-	salida_conteo.open("graficas/datos/num_elementos_fase.dat");
-	for ( unsigned i = 0; i < elementos_cada_fase.size(); ++i) {
-		salida_conteo << i + 1 << "\t" << elementos_cada_fase[i] << std::endl;
-	}
+	auto over_s = algoritmos_poblaciones::leer_datos<double>(std::string("salida_over_sampling.dat"), comentario, separador);
+
+	algoritmos_poblaciones::conteo_clases(over_s.second, "graficas/datos/num_elementos_fase_over_sampling.dat");
+
+
+	algoritmos_poblaciones::escribir_datos(salida, resultado_fases.first, resultado_fases.second, separador);
 
 
 
