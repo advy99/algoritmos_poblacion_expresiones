@@ -25,7 +25,6 @@
 #include <string>
 #include <cmath>
 #include <type_traits>
-#include "preprocesado.hpp"
 
 
 namespace algoritmos_poblaciones {
@@ -46,6 +45,8 @@ namespace algoritmos_poblaciones {
 bool comparar_reales(const double a, const double b, const double epsilon = 0.005);
 
 }
+
+#include "preprocesado.hpp"
 
 
 #endif
