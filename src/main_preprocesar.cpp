@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "preprocesado.hpp"
+#include "algoritmos_poblaciones/preprocesado.hpp"
 
 std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<std::string> & datos, const std::vector<std::string> etiquetas) {
 	matriz<double> datos_resultado;

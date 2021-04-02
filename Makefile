@@ -153,7 +153,7 @@ $(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)
 $(OBJ)/main.o: $(SRC)/main.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/Random.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC)/preprocesado.hpp
+$(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC_ALG_POB)/preprocesado.hpp
 	$(call compilar_objeto,$<,$@)
 
 # mensaje de fin
