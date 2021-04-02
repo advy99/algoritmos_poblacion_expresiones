@@ -2,7 +2,7 @@ namespace algoritmos_poblaciones {
 
 
 template <class T>
-std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string fichero_datos,
+std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_datos,
 												const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
@@ -112,6 +112,60 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
 	}
 
 	return std::make_pair(std::make_pair(datos, etiquetas), std::make_pair(datos_test, etiquetas_test));
+
+}
+
+template <class T>
+void escribir_datos(const std::string & salida, const matriz<T> & datos, const std::vector<T> & etiquetas, const char DELIMITADOR) {
+	std::ofstream salida_datos(salida);
+
+	for ( unsigned i = 0; i < datos.size(); i++) {
+		for ( unsigned j = 0; j < datos[i].size(); j++) {
+			salida_datos << datos[i][j] << DELIMITADOR;
+		}
+
+		salida_datos << etiquetas[i] << std::endl;
+	}
+
+}
+
+
+template <class T>
+void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida) {
+	std::vector<int> elementos_cada_fase(10, 0);
+
+	for ( auto it = etiquetas.begin(); it != etiquetas.end(); ++it) {
+		if ( algoritmos_poblaciones::comparar_reales((*it), 19.0) ) {
+			elementos_cada_fase[0]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 20.5)) {
+			elementos_cada_fase[1]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 23.0)) {
+			elementos_cada_fase[2]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 25.5)) {
+			elementos_cada_fase[3]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 28.5)) {
+			elementos_cada_fase[4]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 32.5)) {
+			elementos_cada_fase[5]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 37.0)) {
+			elementos_cada_fase[6]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 42.0)) {
+			elementos_cada_fase[7]++;
+		} else if ( algoritmos_poblaciones::comparar_reales((*it), 47.0)) {
+			elementos_cada_fase[8]++;
+		} else {
+			elementos_cada_fase[9]++;
+		}
+	}
+
+	std::ofstream salida_conteo;
+	salida_conteo.open(salida);
+
+	for ( unsigned i = 0; i < elementos_cada_fase.size(); ++i) {
+		salida_conteo << i + 1 << "\t" << elementos_cada_fase[i] << std::endl;
+	}
+
+	salida_conteo.close();
 
 }
 
