@@ -33,9 +33,14 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
   */
 
 template <class T>
-std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string fichero_datos,
+std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string & fichero_datos,
 				  								  		  const char char_comentario, const char delimitador = ',');
 
+template <class T>
+void escribir_datos(const std::string & salida, const matriz<T> & datos, const std::vector<T> & etiquetas, const char delimitador = ',');
+
+template <class T>
+void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida);
 
 }
 

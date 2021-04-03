@@ -6,13 +6,13 @@ namespace algoritmos_poblaciones {
 Expresion_GAP :: Expresion_GAP(const unsigned prof_max){
 
 	// establecemos la profundidad a la maxima dada
-	profundidad_maxima = prof_max;
+	profundidad_maxima_ = prof_max;
 
 	// inicilizamos la expresion vacia
 	inicializarVacia();
 
 	// reservamos memoria para el cromosoma
-	reservarMemoriaCromosoma(profundidad_maxima);
+	reservarMemoriaCromosoma(profundidad_maxima_);
 
 	// inicializamos el cromosoma de forma aleatoria
 	inicializarCromosoma();
@@ -21,7 +21,7 @@ Expresion_GAP :: Expresion_GAP(const unsigned prof_max){
 Expresion_GAP :: Expresion_GAP(const Arbol subarbol, const unsigned prof_max){
 
 	// establecemos la profundidad maxima a la dada
-	profundidad_maxima = prof_max;
+	profundidad_maxima_ = prof_max;
 
 	// inicializamos la expresion vacia
 	inicializarVacia();
@@ -29,7 +29,7 @@ Expresion_GAP :: Expresion_GAP(const Arbol subarbol, const unsigned prof_max){
 	// obtenemos el subarbol
 	(*this) = dynamic_cast<Expresion_GAP &>(obtenerSubarbol(subarbol));
 
-	reservarMemoriaCromosoma(profundidad_maxima);
+	reservarMemoriaCromosoma(profundidad_maxima_);
 
 	inicializarCromosoma();
 
@@ -43,12 +43,12 @@ Expresion_GAP :: ~Expresion_GAP(){
 Expresion_GAP :: Expresion_GAP(const unsigned longitud_max, const double prob_variable,
 							const unsigned num_vars, const unsigned prof_max){
 
-	profundidad_maxima = prof_max;
+	profundidad_maxima_ = prof_max;
 
 	inicializarVacia();
 
 	// reservamos la profundidad maxima
-	reservarMemoriaCromosoma(profundidad_maxima);
+	reservarMemoriaCromosoma(profundidad_maxima_);
 
 	// inicializamos el cromosoma el cromosoma
 	inicializarCromosoma();
@@ -60,8 +60,8 @@ Expresion_GAP :: Expresion_GAP(const unsigned longitud_max, const double prob_va
 
 void Expresion_GAP :: inicializarCromosoma(){
 	// para cada elemento escogemos un numero aleatorio en [-10, 10]
-	for (unsigned i = 0; i < longitud_cromosoma; i++){
-		cromosoma[i] = Random::getFloat(-10.0f, 10.0f);
+	for (unsigned i = 0; i < longitud_cromosoma_; i++){
+		cromosoma_[i] = Random::getFloat(-10.0f, 10.0f);
 	}
 
 }
@@ -70,16 +70,16 @@ void Expresion_GAP :: inicializarVacia(){
 
 	Expresion::inicializarVacia();
 
-	cromosoma          = nullptr;
-	longitud_cromosoma = profundidad_maxima;
+	cromosoma_          = nullptr;
+	longitud_cromosoma_ = profundidad_maxima_;
 }
 
 
 void Expresion_GAP :: liberarMemoriaCromosoma() {
 	// y lo mismo con el cromosoma
-	if (cromosoma != nullptr){
-		delete [] cromosoma;
-		cromosoma = nullptr;
+	if (cromosoma_ != nullptr){
+		delete [] cromosoma_;
+		cromosoma_ = nullptr;
 	}
 }
 
@@ -96,20 +96,20 @@ void Expresion_GAP :: copiarDatos(const Expresion_GAP & otra){
 
 	Expresion::copiarDatos(otra);
 
-	longitud_cromosoma = otra.longitud_cromosoma;
+	longitud_cromosoma_ = otra.longitud_cromosoma_;
 
 	// copiamos el cromosoma de la otra expresion
-	if ( otra.cromosoma == nullptr) {
-		cromosoma = nullptr;
+	if ( otra.cromosoma_ == nullptr) {
+		cromosoma_ = nullptr;
 	} else {
-		asignarCromosoma(otra.cromosoma, otra.longitud_cromosoma);
+		asignarCromosoma(otra.cromosoma_, otra.longitud_cromosoma_);
 	}
 }
 
 
 Expresion_GAP :: Expresion_GAP(const Expresion_GAP & otra) : Expresion(otra){
 	// al inicializar vacia mantenemos la prfuncidad que queramos
-	profundidad_maxima = otra.profundidad_maxima;
+	profundidad_maxima_ = otra.profundidad_maxima_;
 
 	// inicializamos vacia para poner punteros a nullptr
 	inicializarVacia();
@@ -138,8 +138,8 @@ Expresion_GAP & Expresion_GAP :: operator= (const Expresion_GAP & otra){
 
 void Expresion_GAP :: reservarMemoriaCromosoma(const int tam){
 	if (tam > 0){
-		cromosoma = new double[tam];
-		longitud_cromosoma = tam;
+		cromosoma_ = new double[tam];
+		longitud_cromosoma_ = tam;
 	}
 }
 
@@ -151,9 +151,9 @@ bool Expresion_GAP :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 	bool exito = Expresion::generarExpresionAleatoria(longitud_maxima, prob_variable, num_variables);
 
-	for (unsigned i = 0; i < longitud_arbol; i++) {
-		if (arbol[i].getTipoNodo() == TipoNodo::NUMERO) {
-			arbol[i].setTerminoAleatorio(longitud_cromosoma, num_variables);
+	for (unsigned i = 0; i < longitud_arbol_; i++) {
+		if (arbol_[i].getTipoNodo() == TipoNodo::NUMERO) {
+			arbol_[i].setTerminoAleatorio(longitud_cromosoma_, num_variables);
 		}
 	}
 
@@ -164,7 +164,7 @@ bool Expresion_GAP :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 // en reemplazo de evaluarDato, usa la del padre paro llama a esta para obtener un NUMERO
 double Expresion_GAP :: obtenerNumero ( const Nodo & n) const {
-	return cromosoma[n.getValor()];
+	return cromosoma_[n.getValor()];
 }
 
 
@@ -183,12 +183,12 @@ double Expresion_GAP :: delta(const int generacion, const int max_generaciones, 
 
 void Expresion_GAP :: mutarGA(const int generacion, const int max_generaciones) {
 
-	int pos_mutacion = Random::getInt(longitud_cromosoma);
+	int pos_mutacion = Random::getInt(longitud_cromosoma_);
 
 	if ( Random::getFloat() < 0.5) {
-		cromosoma[pos_mutacion] += delta(generacion, max_generaciones, 1.0 - cromosoma[pos_mutacion]);
+		cromosoma_[pos_mutacion] += delta(generacion, max_generaciones, 1.0 - cromosoma_[pos_mutacion]);
 	} else {
-		cromosoma[pos_mutacion] -= delta(generacion, max_generaciones, cromosoma[pos_mutacion]);
+		cromosoma_[pos_mutacion] -= delta(generacion, max_generaciones, cromosoma_[pos_mutacion]);
 	}
 }
 
@@ -201,7 +201,7 @@ bool Expresion_GAP :: totalmenteIguales ( const Expresion_GAP & otra) const {
 	// si el arbol coincide, comparamos el cromosoma
 	if ( resultado ) {
 		for ( unsigned i = 0; i < getLongitudCromosoma(); i++) {
-			resultado = resultado && comparar_reales(cromosoma[i], otra.cromosoma[i], 0.00005);
+			resultado = resultado && comparar_reales(cromosoma_[i], otra.cromosoma_[i], 0.00005);
 		}
 	}
 
@@ -211,24 +211,24 @@ bool Expresion_GAP :: totalmenteIguales ( const Expresion_GAP & otra) const {
 
 
 double * Expresion_GAP :: getCromosoma () const {
-	return cromosoma;
+	return cromosoma_;
 }
 
 
 void Expresion_GAP :: cruceBLXalfa(const Expresion_GAP & otra, Expresion_GAP & hijo1, Expresion_GAP & hijo2, const double alfa) const{
 
-	if ( otra.longitud_cromosoma != this->longitud_cromosoma ) {
+	if ( otra.longitud_cromosoma_ != this->longitud_cromosoma_ ) {
 		std::cerr << "Cruzando dos cromosomas de distinta longitud" << std::endl;
 	}
 
-	double * cromosoma_actual = new double[this->longitud_cromosoma];
-	double * cromosoma_otro = new double[otra.longitud_cromosoma];
+	double * cromosoma_actual = new double[this->longitud_cromosoma_];
+	double * cromosoma_otro = new double[otra.longitud_cromosoma_];
 
 	double punto_padre, punto_madre, seccion;
 
-	for ( unsigned i = 0; i < longitud_cromosoma; i++){
-		punto_madre = this->cromosoma[i];
-		punto_padre = otra.cromosoma[i];
+	for ( unsigned i = 0; i < longitud_cromosoma_; i++){
+		punto_madre = this->cromosoma_[i];
+		punto_padre = otra.cromosoma_[i];
 
 		if ( punto_madre > punto_padre ) {
 			double intercamio = punto_madre;
@@ -257,8 +257,8 @@ void Expresion_GAP :: cruceBLXalfa(const Expresion_GAP & otra, Expresion_GAP & h
 	}
 
 
-	hijo1.asignarCromosoma(cromosoma_actual, this->longitud_cromosoma);
-	hijo2.asignarCromosoma(cromosoma_otro, otra.longitud_cromosoma);
+	hijo1.asignarCromosoma(cromosoma_actual, this->longitud_cromosoma_);
+	hijo2.asignarCromosoma(cromosoma_otro, otra.longitud_cromosoma_);
 
 	delete [] cromosoma_actual;
 	delete [] cromosoma_otro;
@@ -267,7 +267,7 @@ void Expresion_GAP :: cruceBLXalfa(const Expresion_GAP & otra, Expresion_GAP & h
 
 
 unsigned Expresion_GAP :: getLongitudCromosoma() const{
-	return longitud_cromosoma;
+	return longitud_cromosoma_;
 }
 
 
@@ -278,9 +278,9 @@ void Expresion_GAP :: asignarCromosoma(const double * nuevo_cromosoma, const uns
 
 	reservarMemoriaCromosoma(longitud);
 
-	memcpy(cromosoma, nuevo_cromosoma, longitud*sizeof(double));
+	memcpy(cromosoma_, nuevo_cromosoma, longitud*sizeof(double));
 
-	longitud_cromosoma = longitud;
+	longitud_cromosoma_ = longitud;
 
 }
 

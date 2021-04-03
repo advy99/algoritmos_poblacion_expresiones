@@ -12,7 +12,7 @@ void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsign
 	// inicializamos la semilla
 	Random::setSeed(seed);
 
-	prof_expresiones = prof;
+	prof_expresiones_ = prof;
 	generarPoblacion(tam_poblacion, prof, prob_var, true);
 
 }
@@ -20,8 +20,8 @@ void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsign
 
 template <class T>
 void AlgoritmoPoblacion<T> :: cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
-	datos = caracteristicas;
-	output_datos = etiquetas;
+	datos_ = caracteristicas;
+	output_datos_ = etiquetas;
 }
 
 template <class T>
@@ -30,22 +30,22 @@ void AlgoritmoPoblacion<T> :: leerDatos(const std::string fichero_datos,
 	// abrimos el fichero de lectura
 	auto resultado = leer_datos<double>(fichero_datos, char_comentario, delimitador);
 
-	datos = resultado.first;
-	output_datos = resultado.second;
+	datos_ = resultado.first;
+	output_datos_ = resultado.second;
 
 }
 
 
 template <class T>
 int AlgoritmoPoblacion<T> :: getNumDatos() const {
-	return datos.size();
+	return datos_.size();
 }
 
 template <class T>
 void AlgoritmoPoblacion<T> :: generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
 									 const double prob_var, const bool sustituir_actual) {
 	if ( sustituir_actual ) {
-		poblacion = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
+		poblacion_ = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
 									 	 getNumVariables(), getMaxProfExpresiones());
 	}
 
@@ -55,42 +55,42 @@ void AlgoritmoPoblacion<T> :: generarPoblacion(const unsigned tam_poblacion, con
 
 template <class T>
 int AlgoritmoPoblacion<T> :: getNumVariables() const {
-	return datos[0].size();
+	return datos_[0].size();
 }
 
 template <class T>
 std::vector<std::vector<double> > AlgoritmoPoblacion<T> :: getDatos() const {
-	return datos;
+	return datos_;
 }
 
 template <class T>
 std::vector<double> AlgoritmoPoblacion<T> :: getDato(const unsigned i) const {
-	return datos[i];
+	return datos_[i];
 }
 
 template <class T>
 std::vector<double> AlgoritmoPoblacion<T> :: getOutputDatos() const {
-	return output_datos;
+	return output_datos_;
 }
 
 
 template <class T>
 double AlgoritmoPoblacion<T> :: getOutputDato(const unsigned indice) const {
-	return output_datos[indice];
+	return output_datos_[indice];
 }
 
 template <class T>
 void AlgoritmoPoblacion<T> :: inicializarVacio() {
-	prof_expresiones = 0;
-	datos.clear();
-	output_datos.clear();
+	prof_expresiones_ = 0;
+	datos_.clear();
+	output_datos_.clear();
 }
 
 
 template <class T>
 Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
-	Poblacion<T> resultado = poblacion;
+	Poblacion<T> resultado = poblacion_;
 
 	std::vector<int> ganadores_torneo;
 
@@ -98,20 +98,20 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 
 	// escojo una nueva poblacion del mismo tamaño
 	#pragma omp parallel for
-	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
+	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
 
 		std::vector<int> participantes_torneo;
 		int nuevo_participante;
 		int mejor_torneo;
 
 		// generamos el inicial y lo insertamos en los generados
-		mejor_torneo = Random::getInt(poblacion.getTamPoblacion());
+		mejor_torneo = Random::getInt(poblacion_.getTamPoblacion());
 
 		participantes_torneo.push_back(mejor_torneo);
 
 		// insertamos participantes hasta llegar al tamaño indicado
 		while ( tam_torneo > participantes_torneo.size()) {
-			nuevo_participante = Random::getInt(poblacion.getTamPoblacion());
+			nuevo_participante = Random::getInt(poblacion_.getTamPoblacion());
 
 			auto encontrado = std::find(participantes_torneo.begin(), participantes_torneo.end(), nuevo_participante);
 
@@ -119,7 +119,7 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 			if ( encontrado != participantes_torneo.end() ) {
 				participantes_torneo.push_back(nuevo_participante);
 				// si este nuevo participante tiene mejor fitness, lo cojemos como mejor
-				if ( poblacion[nuevo_participante].getFitness() < poblacion[mejor_torneo].getFitness() ) {
+				if ( poblacion_[nuevo_participante].getFitness() < poblacion_[mejor_torneo].getFitness() ) {
 					mejor_torneo = nuevo_participante;
 				}
 
@@ -132,8 +132,8 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 	}
 
 	// actualizamos el resultado con los ganadores del torneo
-	for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i++) {
-		resultado[i] = poblacion[ganadores_torneo[i]];
+	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
+		resultado[i] = poblacion_[ganadores_torneo[i]];
 	}
 
 	return resultado;
@@ -141,12 +141,12 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 
 template <class T>
 T AlgoritmoPoblacion<T> :: getMejorIndividuo() const {
-	return poblacion.getMejorIndividuo();
+	return poblacion_.getMejorIndividuo();
 }
 
 template <class T>
 unsigned AlgoritmoPoblacion<T> :: getMaxProfExpresiones() const {
-	return prof_expresiones;
+	return prof_expresiones_;
 }
 
 
@@ -157,8 +157,8 @@ void AlgoritmoPoblacion<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 	bool mejor_encontrado = false;
 	unsigned i = 0;
 
-	while (i < poblacion.getTamPoblacion() && !mejor_encontrado) {
-		mejor_encontrado = poblacion[i] == mejor_ind_anterior;
+	while (i < poblacion_.getTamPoblacion() && !mejor_encontrado) {
+		mejor_encontrado = poblacion_[i] == mejor_ind_anterior;
 		i++;
 	}
 
@@ -166,7 +166,7 @@ void AlgoritmoPoblacion<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 
 	// si no esta el mejor, aplico elitismo
 	if ( !mejor_encontrado ){
-		poblacion[poblacion.getTamPoblacion() - 1] = mejor_ind_anterior;
+		poblacion_[poblacion_.getTamPoblacion() - 1] = mejor_ind_anterior;
 	}
 
 }

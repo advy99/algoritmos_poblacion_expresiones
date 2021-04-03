@@ -49,6 +49,8 @@ int main(int argc, char ** argv){
 
 	algoritmos_poblaciones::AlgoritmoGA_P myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
+
+	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	myGAP.ajustar(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo, false);
@@ -57,6 +59,8 @@ int main(int argc, char ** argv){
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
+
+	// mostramos el resultado
 	std::cout << "Tiempo de ejecución con " << num_trabajos << " hilos en una poblacion de " << tam_pob << " individuos con tamaño máximo "
 				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
 
@@ -66,6 +70,7 @@ int main(int argc, char ** argv){
 	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
 
 
+	// hacemos lo mismo pero con PG
 	algoritmos_poblaciones::AlgoritmoPG myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
@@ -83,9 +88,6 @@ int main(int argc, char ** argv){
 	std::cout << "El mejor individuo de PG es: " << std::endl;
 	std::cout << myPG.getMejorIndividuo() << std::endl;
 	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myPG.getMejorIndividuo().getFitness() << std::endl;
-
-
-
 
 
 
