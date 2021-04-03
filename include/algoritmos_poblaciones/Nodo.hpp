@@ -48,17 +48,17 @@ class Nodo {
 		/**
 		  * @brief Tipo de nodo
 		  */
-		TipoNodo tipo_nodo;
+		TipoNodo tipo_nodo_;
 
 		/**
 		  * @brief Valor asociado al nodo
 		  */
 
-		int valor;
+		int valor_;
 
 
 
-		double valor_numerico;
+		double valor_numerico_;
 
 	public:
 
