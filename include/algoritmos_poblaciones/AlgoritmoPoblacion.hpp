@@ -18,19 +18,19 @@ class AlgoritmoPoblacion {
 		  * @brief Datos con los que ajustar el algoritmo
 		  *
 		  */
-		std::vector<std::vector<double> > datos;
+		std::vector<std::vector<double> > datos_;
 
 		/**
 		  * @brief Etiquetas para comprobar el error de la estimación.
 		  */
-		std::vector<double> output_datos;
+		std::vector<double> output_datos_;
 
 
 		/**
 		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
 		  * GA_P
 		  */
-		Poblacion<T> poblacion;
+		Poblacion<T> poblacion_;
 
 
 		/**
@@ -38,7 +38,7 @@ class AlgoritmoPoblacion {
 		  *
 		  */
 
-		unsigned prof_expresiones;
+		unsigned prof_expresiones_;
 
 
 		/**

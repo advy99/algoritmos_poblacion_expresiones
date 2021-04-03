@@ -35,13 +35,13 @@ namespace algoritmos_poblaciones {
 
 class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 	private:
-		using AlgoritmoPoblacion<Expresion_GAP>::poblacion;
-		using AlgoritmoPoblacion<Expresion_GAP>::datos;
-		using AlgoritmoPoblacion<Expresion_GAP>::output_datos;
+		using AlgoritmoPoblacion<Expresion_GAP>::poblacion_;
+		using AlgoritmoPoblacion<Expresion_GAP>::datos_;
+		using AlgoritmoPoblacion<Expresion_GAP>::output_datos_;
+		using AlgoritmoPoblacion<Expresion_GAP>::prof_expresiones_;
 
 		using AlgoritmoPoblacion<Expresion_GAP>::leerDatos;
 		using AlgoritmoPoblacion<Expresion_GAP>::inicializarVacio;
-		using AlgoritmoPoblacion<Expresion_GAP>::prof_expresiones;
 		using AlgoritmoPoblacion<Expresion_GAP>::getNumVariables;
 		using AlgoritmoPoblacion<Expresion_GAP>::getMaxProfExpresiones;
 		using AlgoritmoPoblacion<Expresion_GAP>::seleccionTorneo;

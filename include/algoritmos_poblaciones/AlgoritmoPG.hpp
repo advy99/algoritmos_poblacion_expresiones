@@ -16,13 +16,13 @@
 namespace algoritmos_poblaciones {
 
 class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
-	using AlgoritmoPoblacion<Expresion>::poblacion;
-	using AlgoritmoPoblacion<Expresion>::datos;
-	using AlgoritmoPoblacion<Expresion>::output_datos;
+	using AlgoritmoPoblacion<Expresion>::poblacion_;
+	using AlgoritmoPoblacion<Expresion>::datos_;
+	using AlgoritmoPoblacion<Expresion>::output_datos_;
+	using AlgoritmoPoblacion<Expresion>::prof_expresiones_;
 
 	using AlgoritmoPoblacion<Expresion>::leerDatos;
 	using AlgoritmoPoblacion<Expresion>::inicializarVacio;
-	using AlgoritmoPoblacion<Expresion>::prof_expresiones;
 	using AlgoritmoPoblacion<Expresion>::getNumVariables;
 	using AlgoritmoPoblacion<Expresion>::getMaxProfExpresiones;
 	using AlgoritmoPoblacion<Expresion>::seleccionTorneo;

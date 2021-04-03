@@ -19,7 +19,7 @@ AlgoritmoPG :: AlgoritmoPG(const std::string fichero_datos, const char char_come
 	inicializarVacio();
 
 	leerDatos(fichero_datos, char_comentario, delimitador);
-	prof_expresiones = prof;
+	prof_expresiones_ = prof;
 
 	Random::setSeed(seed);
 
@@ -38,7 +38,7 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 							const int tam_torneo,
 							const bool mostrar_evolucion) {
 
-	const int NUM_GENERACIONES = num_eval / static_cast<double>(poblacion.getTamPoblacion());
+	const int NUM_GENERACIONES = num_eval / static_cast<double>(poblacion_.getTamPoblacion());
 
 	int generacion = 0;
 	int padre, madre;
@@ -46,25 +46,25 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 	bool modificado_hijo2;
 
 	// evaluo la poblacion al inicio
-	poblacion.evaluarPoblacion(datos, output_datos);
+	poblacion_.evaluarPoblacion(datos_, output_datos_);
 
-	Expresion mejor_individuo = poblacion.getMejorIndividuo();
+	Expresion mejor_individuo = poblacion_.getMejorIndividuo();
 
 	Expresion hijo1, hijo2;
 
 	while ( generacion < NUM_GENERACIONES) {
 
 		// seleccionamos la poblacion a cruzar
-		poblacion = seleccionTorneo(tam_torneo);
+		poblacion_ = seleccionTorneo(tam_torneo);
 
 		// aplicamos los operadores geneticos
-		for ( unsigned i = 0; i < poblacion.getTamPoblacion(); i += 2){
+		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i += 2){
 
 			madre = i;
 			padre = i + 1;
 
-			hijo1 = poblacion[madre];
-			hijo2 = poblacion[padre];
+			hijo1 = poblacion_[madre];
+			hijo2 = poblacion_[padre];
 
 			modificado_hijo1 = modificado_hijo2 = false;
 
@@ -72,7 +72,7 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 			if ( Random::getFloat() < prob_cruce ) {
 				// cruce de programacion genetica, se intercambian arboles
 
-				poblacion[madre].cruceArbol(poblacion[padre], hijo1, hijo2);
+				poblacion_[madre].cruceArbol(poblacion_[padre], hijo1, hijo2);
 				modificado_hijo1 = modificado_hijo2 = true;
 			}
 
@@ -84,13 +84,13 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 			modificado_hijo2 = modificado_hijo2 || resultado_mut_gp.second;
 
 			if ( modificado_hijo1 ) {
-				poblacion[madre] = hijo1;
-				poblacion[madre].dejaEstarEvaluada();
+				poblacion_[madre] = hijo1;
+				poblacion_[madre].dejaEstarEvaluada();
 			}
 
 			if ( modificado_hijo2) {
-				poblacion[padre] = hijo2;
-				poblacion[padre].dejaEstarEvaluada();
+				poblacion_[padre] = hijo2;
+				poblacion_[padre].dejaEstarEvaluada();
 			}
 
 		}
@@ -100,9 +100,9 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 
 
 		// evaluamos
-		poblacion.evaluarPoblacion(datos, output_datos);
+		poblacion_.evaluarPoblacion(datos_, output_datos_);
 
-		mejor_individuo = poblacion.getMejorIndividuo();
+		mejor_individuo = poblacion_.getMejorIndividuo();
 
 		if ( mostrar_evolucion ) {
 			// mostramos el mejor individuo
