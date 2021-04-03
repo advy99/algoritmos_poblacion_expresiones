@@ -16,14 +16,14 @@ class Expresion_GAP : public Expresion {
 		  *
 		  */
 
-		double * cromosoma = nullptr;
+		double * cromosoma_ = nullptr;
 
 		/**
 		  * @brief Longitud del array cromosoma
 		  *
 		  */
 
-		unsigned longitud_cromosoma;
+		unsigned longitud_cromosoma_;
 
 		/**
 		  * @brief Inicializar una expresión vacia.

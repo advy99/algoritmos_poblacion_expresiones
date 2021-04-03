@@ -56,32 +56,32 @@ class Expresion{
 		  * que se ha evaluado.
 		  */
 
-		double fitness;
+		double fitness_;
 
 		/**
 		  * @brief Atributo para comprobar si es necesario reevaluar la
 		  * expresión de nuevo.
 		  */
 
-		bool evaluada;
+		bool evaluada_;
 
 		/**
 		  * @brief Longitud del árbol de la expresión.
 		  */
-		unsigned longitud_arbol;
+		unsigned longitud_arbol_;
 
 
 		/**
 		  * @brief Profundidad máxima permitida para el árbol.
 		  */
-		unsigned profundidad_maxima;
+		unsigned profundidad_maxima_;
 
 		/**
 		  * @brief Conjunto de nodos que conformarán la expresión.
 		  */
-		Arbol arbol = nullptr;
+		Arbol arbol_ = nullptr;
 
-		unsigned numero_variables;
+		unsigned numero_variables_;
 
 		/**
 		  * @brief Inicializar una expresión vacia.
