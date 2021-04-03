@@ -57,7 +57,7 @@ class Poblacion{
 		  *
 		  */
 
-		T * expresiones = nullptr;
+		T * expresiones_ = nullptr;
 
 
 		/**
@@ -66,12 +66,12 @@ class Poblacion{
 		  *
 		  */
 
-		unsigned tam_poblacion;
+		unsigned tam_poblacion_;
 
 		/**
 		  * @brief Mejor individuo de la población
 		  */
-		int mejor_individuo;
+		int mejor_individuo_;
 
 		/**
 		  * @brief Reservar memoria para una población de tam individuos.
