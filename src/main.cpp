@@ -47,8 +47,11 @@ int main(int argc, char ** argv){
 		omp_set_num_threads(num_trabajos);
 	#endif
 
-	algoritmos_poblaciones::AlgoritmoGA_P myGAP (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
 
+	auto datos = algoritmos_poblaciones::leer_datos<double>(std::string(argv[1]), '@', ',');
+	auto train_test_split = algoritmos_poblaciones::separar_train_test(datos.first, datos.second);
+
+	algoritmos_poblaciones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
@@ -59,7 +62,6 @@ int main(int argc, char ** argv){
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
-
 	// mostramos el resultado
 	std::cout << "Tiempo de ejecución con " << num_trabajos << " hilos en una poblacion de " << tam_pob << " individuos con tamaño máximo "
 				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
@@ -68,6 +70,14 @@ int main(int argc, char ** argv){
 	std::cout << "El mejor individuo de GA_P es: " << std::endl;
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
 	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
+
+
+	auto predecidos = myGAP.predecir(train_test_split.second.first);
+
+
+	for (unsigned i = 0; i < predecidos.size(); i++ ) {
+		std::cout << "Valor predecido: " << predecidos[i] << " , valor real: " << train_test_split.second.second[i] << std::endl;
+	}
 
 
 	// hacemos lo mismo pero con PG

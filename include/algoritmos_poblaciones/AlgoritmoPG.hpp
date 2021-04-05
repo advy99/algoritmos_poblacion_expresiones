@@ -37,7 +37,8 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 
 	public:
 
-		AlgoritmoPG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
+		AlgoritmoPG(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
+						const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 		AlgoritmoPG(const std::string fichero_datos, const char char_comentario,
 			  const unsigned tam_poblacion, const double prob_var,
