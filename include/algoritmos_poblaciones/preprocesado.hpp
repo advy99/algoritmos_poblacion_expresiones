@@ -14,7 +14,7 @@ namespace algoritmos_poblaciones {
 template <class T>
 std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
 	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
-							 const double PORCENTAJE_TEST = 0.2);
+							 const double PORCENTAJE_TEST = 0.2, const int COMIENZO = -1);
 
 
 /**
