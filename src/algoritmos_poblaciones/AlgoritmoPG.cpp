@@ -4,7 +4,9 @@ namespace algoritmos_poblaciones {
 
 
 
-AlgoritmoPG :: AlgoritmoPG(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var){
+AlgoritmoPG :: AlgoritmoPG(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
+									const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var){
+	cargarDatos(datos, etiquetas);
 	inicializar(seed, tam_poblacion, prof, prob_var);
 
 }

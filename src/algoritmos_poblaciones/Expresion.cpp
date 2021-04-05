@@ -239,7 +239,7 @@ double Expresion :: obtenerNumero ( const Nodo & n) const {
 }
 
 double Expresion :: evaluarDato(std::stack<Nodo> & pila,
-										const std::vector<double> & dato){
+										const std::vector<double> & dato) const {
 
 	double resultado = 0.0;
 
@@ -296,7 +296,7 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 
 }
 
-double Expresion :: evaluarDato(const std::vector<double> & dato){
+double Expresion :: evaluarDato(const std::vector<double> & dato) const {
 	double resultado;
 
 	// pila donde almacenaremos la expresion

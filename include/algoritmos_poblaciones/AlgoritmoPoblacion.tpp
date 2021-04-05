@@ -190,4 +190,28 @@ std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicarMutacionesGP(T & hijo1, T 
 	return resultado;
 }
 
+
+template <class T>
+double AlgoritmoPoblacion<T> :: predecir(const std::vector<double> & dato) const {
+	double resultado = poblacion_.getMejorIndividuo().evaluarDato(dato);
+
+	return resultado;
+}
+
+template <class T>
+std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vector<double> > & datos) const {
+
+	std::vector<double> resultado;
+
+	resultado.resize(datos.size());
+
+	#pragma omp parallel for
+	for ( unsigned i = 0; i < datos.size(); i++) {
+		resultado[i] = predecir(datos[i]);
+	}
+
+	return resultado;
+}
+
+
 } // namespace algoritmos_poblaciones
