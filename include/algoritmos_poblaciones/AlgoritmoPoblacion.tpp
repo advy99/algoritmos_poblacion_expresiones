@@ -192,14 +192,14 @@ std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicarMutacionesGP(T & hijo1, T 
 
 
 template <class T>
-double AlgoritmoPoblacion<T> :: predecir(const std::vector<double> dato) const {
+double AlgoritmoPoblacion<T> :: predecir(const std::vector<double> & dato) const {
 	double resultado = poblacion_.getMejorIndividuo().evaluarDato(dato);
 
 	return resultado;
 }
 
 template <class T>
-std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vector<double> > datos) const {
+std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vector<double> > & datos) const {
 
 	std::vector<double> resultado;
 
