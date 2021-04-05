@@ -3,7 +3,9 @@
 namespace algoritmos_poblaciones {
 
 
-AlgoritmoGA_P :: AlgoritmoGA_P(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+AlgoritmoGA_P :: AlgoritmoGA_P(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
+										 const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+	cargarDatos(datos, etiquetas);
 	inicializar(seed, tam_poblacion, prof, prob_var);
 
 }
