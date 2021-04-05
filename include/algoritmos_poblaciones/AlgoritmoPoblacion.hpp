@@ -177,6 +177,10 @@ class AlgoritmoPoblacion {
 
 		void aplicarElitismo(const T & poblacion_antigua);
 
+		double predecir(const std::vector<double> & dato) const ;
+
+		std::vector<double> predecir(const std::vector<std::vector<double> > & datos) const;
+
 };
 
 
