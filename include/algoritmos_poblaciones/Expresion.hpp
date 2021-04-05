@@ -150,7 +150,7 @@ class Expresion{
 		  */
 
 		double evaluarDato(std::stack<Nodo> & pila,
-								 const std::vector<double> & dato);
+								 const std::vector<double> & dato) const;
 
 		virtual double obtenerNumero(const Nodo & n) const;
 
@@ -281,7 +281,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(const std::vector<double> & dato);
+		double evaluarDato(const std::vector<double> & dato) const ;
 
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.
