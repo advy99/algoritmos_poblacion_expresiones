@@ -41,25 +41,44 @@ double AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 				 const unsigned numero_val_cruzada,
 				 const bool mostrar_evolucion) {
 
-	double error = 0.0;
+	const std::vector<std::vector<double> > datos_originales = datos_;
+	const std::vector<double> etiquetas_originales = output_datos_;
+
+	auto resultado_datos_aleatorios = reordenar_datos_aleatorio(datos_, output_datos_);
+
+	const int NUM_DATOS_TEST_ITERACION = datos_.size() / numero_val_cruzada;
+
+	double media_error = 0.0;
 
 	// para cada iteracion de la validación cruzada;
 	for ( unsigned i = 0; i < numero_val_cruzada; i++) {
 		// tenemos que hacer la separacion en train/test para esta iteracion
+		auto train_test_separado = separar_train_test<double>(resultado_datos_aleatorios.first,
+																				resultado_datos_aleatorios.second,
+																				1.0/numero_val_cruzada,
+																				NUM_DATOS_TEST_ITERACION * i);
 
+		cargarDatos(train_test_separado.first.first, train_test_separado.first.second);
 
 		// ajustamos para estos nuevos valores
-
+		ajustar(num_eval, prob_cruce, prob_mutacion, tam_torneo, mostrar_evolucion);
 
 		// predecimos test para mirar el error
 
+		// predecimos los datos del test
+		auto predicciones = predecir(train_test_separado.second.first);
+
+		media_error += raiz_error_cuadratico_medio(predicciones, train_test_separado.second.second);
 
 	}
 
+	media_error /= numero_val_cruzada;
+
 	// reestablecer datos originales
+	cargarDatos(datos_originales, etiquetas_originales);
 
 
-	return error;
+	return media_error;
 
 }
 
