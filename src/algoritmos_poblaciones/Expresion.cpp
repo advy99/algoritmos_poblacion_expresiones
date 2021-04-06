@@ -324,6 +324,9 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 	double valor = 0.0;
 	double suma = 0.0;
 
+	std::vector<double> valores_predecidos;
+	valores_predecidos.resize(etiquetas.size());
+
 	// si no esta evaluada y el arbol contiene una expresion
 	if (!evaluada_ && arbol_ != nullptr){
 
@@ -331,18 +334,14 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 		for (unsigned i = 0; i < datos.size(); i++){
 
 			// la evaluamos para el dato i
-			valor = evaluarDato(datos[i]);
-
-			// lo sumamos al cuadrado
-			suma += std::pow( valor - etiquetas[i] , 2.0);
+			valores_predecidos[i] = evaluarDato(datos[i]);
 
 		}
 
 		// hacemos la media de los cuadrados
-		resultado = suma / static_cast<double>(datos.size());
+		resultado = raiz_error_cuadratico_medio(valores_predecidos, etiquetas);
 
-		// resultado = RMSE
-		resultado = std::sqrt(resultado);
+
 	}
 
 	// actualizamos el fitness y que esta evaluada y devolvemos el resultado
