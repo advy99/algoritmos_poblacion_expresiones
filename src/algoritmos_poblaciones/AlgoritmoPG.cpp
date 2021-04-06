@@ -35,6 +35,34 @@ AlgoritmoPG :: ~AlgoritmoPG() {
 }
 
 
+double AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
+				 const double prob_mutacion,
+				 const int tam_torneo,
+				 const unsigned numero_val_cruzada,
+				 const bool mostrar_evolucion) {
+
+	double error = 0.0;
+
+	// para cada iteracion de la validación cruzada;
+	for ( unsigned i = 0; i < numero_val_cruzada; i++) {
+		// tenemos que hacer la separacion en train/test para esta iteracion
+
+
+		// ajustamos para estos nuevos valores
+
+
+		// predecimos test para mirar el error
+
+
+	}
+
+	// reestablecer datos originales
+
+
+	return error;
+
+}
+
 void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 							const double prob_mutacion,
 							const int tam_torneo,

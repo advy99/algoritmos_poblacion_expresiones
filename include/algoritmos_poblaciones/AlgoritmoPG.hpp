@@ -52,6 +52,12 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 					 	 const int tam_torneo,
 					 	 const bool mostrar_evolucion = true);
 
+		double ajustar(const int num_eval, const double prob_cruce,
+ 						 const double prob_mutacion,
+ 					 	 const int tam_torneo,
+						 const unsigned numero_val_cruzada,
+ 					 	 const bool mostrar_evolucion = true);
+
 };
 
 }

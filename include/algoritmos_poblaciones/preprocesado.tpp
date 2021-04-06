@@ -86,7 +86,7 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_dat
 template <class T>
 std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
 	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
-							 const double PORCENTAJE_TEST) {
+							 const double PORCENTAJE_TEST, const int COMIENZO) {
 
 
 	matriz<T> datos_test;
@@ -97,8 +97,14 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
 	datos_test.resize(NUM_DATOS_TEST);
 	etiquetas_test.resize(NUM_DATOS_TEST);
 
+	bool aleatorio = COMIENZO == -1;
+	int indice = COMIENZO;
+
 	for ( unsigned i = 0; i < NUM_DATOS_TEST; i++) {
-		int indice = Random::getInt(0, datos.size());
+
+		if (aleatorio ) {
+			indice = Random::getInt(0, datos.size());
+		}
 
 		datos_test[i] = datos[indice];
 		etiquetas_test[i] = etiquetas[indice];
