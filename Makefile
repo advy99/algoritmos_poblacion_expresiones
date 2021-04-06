@@ -48,7 +48,7 @@ OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca AlgoritmoGA_P
-OBJETOS_ALGS_POB = $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/AlgoritmoPG.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_ALGS_POB = $(OBJ)/Parametros.o $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/AlgoritmoPG.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
 CABECERAS_ALGS_POB = $(wildcard include/algoritmos_poblaciones/*.hpp)
 
 ALGS_POB_INC_COMUNES = $(INC)/Random.hpp $(INC_ALG_POB)/aux_pg_algs.hpp
@@ -123,6 +123,8 @@ $(OBJETIVO): $(OBJETOS) $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)
 	@printf "\n\e[36mCompilación de $(OBJETIVO) finalizada con exito.\n\n"
 
 
+$(OBJ)/Parametros.o: $(SRC_ALG_POB)/Parametros.cpp $(INC_ALG_POB)/Parametros.hpp $(ALGS_POB_INC_COMUNES)
+	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/Nodo.o: $(SRC_ALG_POB)/Nodo.cpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
