@@ -10,6 +10,7 @@
 
 #include "algoritmos_poblaciones/aux_pg_algs.hpp"
 
+#include "algoritmos_poblaciones/Parametros.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
 
@@ -47,16 +48,10 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 
 		~AlgoritmoPG();
 
-		void ajustar(const int num_eval, const double prob_cruce,
-						 const double prob_mutacion,
-					 	 const int tam_torneo,
-					 	 const bool mostrar_evolucion = true);
+		void ajustar(const Parametros & parametros);
 
-		double ajustar(const int num_eval, const double prob_cruce,
- 						 const double prob_mutacion,
- 					 	 const int tam_torneo,
-						 const unsigned numero_val_cruzada,
- 					 	 const bool mostrar_evolucion = true);
+		double ajustar(const unsigned numero_val_cruzada,
+ 					 	   const Parametros & parametros);
 
 };
 
