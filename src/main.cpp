@@ -41,6 +41,7 @@ int main(int argc, char ** argv){
 
 	int num_trabajos = atoi(argv[11]);
 
+	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo, false);
 
 	// si utilizamos openMP, establecemos el número de trabajos
 	#ifdef _OPENMP
@@ -56,7 +57,7 @@ int main(int argc, char ** argv){
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	myGAP.ajustar(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo, false);
+	myGAP.ajustar(parametros_ejecucion);
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
@@ -85,7 +86,7 @@ int main(int argc, char ** argv){
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	myPG.ajustar(evaluaciones, prob_cruce_gp, prob_muta_gp, tam_torneo, false);
+	myPG.ajustar(parametros_ejecucion);
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
 
