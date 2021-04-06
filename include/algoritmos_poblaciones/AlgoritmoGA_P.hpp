@@ -11,6 +11,7 @@
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Poblacion.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
+#include "algoritmos_poblaciones/Parametros.hpp"
 
 #include "Random.hpp"
 
@@ -121,12 +122,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		 *
 		 **/
 
-		void ajustar(const int num_eval, const double prob_cruce_gp,
-						 const double prob_cruce_ga,
-						 const double prob_mutacion_gp,
-						 const double prob_mutacion_ga,
-						 const int tam_torneo,
-						 const bool mostrar_evolucion = true) ;
+		void ajustar(const Parametros & parametros) ;
 
 };
 

@@ -37,12 +37,9 @@ AlgoritmoGA_P :: ~AlgoritmoGA_P(){
 }
 
 
-void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
-							const double prob_cruce_ga, const double prob_mutacion_gp,
-							const double prob_mutacion_ga, const int tam_torneo,
-							const bool mostrar_evolucion) {
+void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
-	const int NUM_GENERACIONES = num_eval / static_cast<double>(poblacion_.getTamPoblacion());
+	const int NUM_GENERACIONES = parametros.getNumeroEvaluaciones() / static_cast<double>(poblacion_.getTamPoblacion());
 
 	int generacion = 0;
 	int padre, madre;
@@ -62,7 +59,7 @@ void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 	while ( generacion < NUM_GENERACIONES) {
 
 		// seleccionamos la poblacion a cruzar
-		poblacion_ = seleccionTorneo(tam_torneo);
+		poblacion_ = seleccionTorneo(parametros.getTamanioTorneo());
 
 		// aplicamos los operadores geneticos
 		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i += 2){
@@ -77,7 +74,7 @@ void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 			cruce_ga = cruce_gp = false;
 
 			// cruce de la parte GA
-			if ( Random::getFloat() < prob_cruce_ga ) {
+			if ( Random::getFloat() < parametros.getProbabilidadCruceGA() ) {
 				// cruce del cromosoma utilizando BLX_alfa
 				poblacion_[madre].cruceBLXalfa(poblacion_[padre], hijo1, hijo2);
 				modificado_hijo1 = modificado_hijo2 = true;
@@ -85,7 +82,7 @@ void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 			}
 
 			// cruce de la parte GP
-			if ( Random::getFloat() < prob_cruce_gp ) {
+			if ( Random::getFloat() <  parametros.getProbabilidadCruceGP() ) {
 				// cruce de programacion genetica, se intercambian arboles
 
 				poblacion_[madre].cruceArbol(poblacion_[padre], hijo1, hijo2);
@@ -107,20 +104,20 @@ void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 				}
 			}
 			// si no hay cruce, los hijos ya estaban con el valor de los padres
-			if ( Random::getFloat() < prob_mutacion_ga ) {
+			if ( Random::getFloat() < parametros.getProbabilidadMutacionGA() ) {
 				// mutacion GP en el primer hijo
 				hijo1.mutarGA(generacion, NUM_GENERACIONES);
 				modificado_hijo1 = true;
 			}
 
-			if ( Random::getFloat() < prob_mutacion_ga ) {
+			if ( Random::getFloat() < parametros.getProbabilidadMutacionGA() ) {
 				// mutacion GP en el segundo hijo
 				hijo2.mutarGA(generacion, NUM_GENERACIONES);
 				modificado_hijo2 = true;
 			}
 
 
-			auto resultado_mut_gp = aplicarMutacionesGP(hijo1, hijo2, prob_mutacion_gp);
+			auto resultado_mut_gp = aplicarMutacionesGP(hijo1, hijo2, parametros.getProbabilidadMutacionGP());
 
 			modificado_hijo1 = modificado_hijo1 || resultado_mut_gp.first;
 			modificado_hijo2 = modificado_hijo2 || resultado_mut_gp.second;
@@ -143,7 +140,7 @@ void AlgoritmoGA_P :: ajustar(const int num_eval, const double prob_cruce_gp,
 
 		mejor_individuo = poblacion_.getMejorIndividuo();
 
-		if ( mostrar_evolucion ) {
+		if ( parametros.getMostrarEvaluacion() ) {
 			// mostramos el mejor individuo
 			std::cout << generacion << "\t" << mejor_individuo.getFitness() << std::endl;
 		}
