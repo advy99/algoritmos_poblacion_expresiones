@@ -57,7 +57,7 @@ int main(int argc, char ** argv){
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	myGAP.ajustar(parametros_ejecucion);
+	double error_cross_val = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
@@ -70,7 +70,7 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de GA_P es: " << std::endl;
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
 
 	auto predecidos = myGAP.predecir(train_test_split.second.first);
@@ -86,7 +86,7 @@ int main(int argc, char ** argv){
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	myPG.ajustar(parametros_ejecucion);
+	error_cross_val = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
 
@@ -98,7 +98,7 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de PG es: " << std::endl;
 	std::cout << myPG.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myPG.getMejorIndividuo().getFitness() << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) de: " << error_cross_val << std::endl;
 
 
 
