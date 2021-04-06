@@ -42,6 +42,10 @@ void escribir_datos(const std::string & salida, const matriz<T> & datos, const s
 template <class T>
 void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida);
 
+template <class T>
+std::pair<matriz<T>, std::vector<T> > reordenar_datos_aleatorio (matriz<T> datos, std::vector<T> etiquetas);
+
+
 }
 
 #include "preprocesado.tpp"

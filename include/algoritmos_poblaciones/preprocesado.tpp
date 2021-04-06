@@ -169,4 +169,34 @@ void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida
 
 }
 
+
+template <class T>
+std::pair<matriz<T>, std::vector<T> > reordenar_datos_aleatorio (matriz<T> datos,
+	 																				  std::vector<T> etiquetas) {
+	matriz<T> datos_reordenados;
+	std::vector<T> etiquetas_reordenados;
+
+	datos_reordenados.resize(datos.size());
+	etiquetas_reordenados.resize(etiquetas.size());
+
+	const unsigned num_elementos = datos.size();
+
+	for ( unsigned i = 0; i < num_elementos; i++) {
+		int indice = Random::getInt(0, datos.size());
+
+		datos_reordenados[i] = datos[indice];
+		etiquetas_reordenados[i] = etiquetas[indice];
+
+		auto it_datos = datos.begin() + indice;
+		auto it_etiquetas = etiquetas.begin() + indice;
+
+		datos.erase(it_datos);
+		etiquetas.erase(it_etiquetas);
+
+	}
+
+	return std::make_pair(datos_reordenados, etiquetas_reordenados);
+
+}
+
 }
