@@ -321,9 +321,6 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 	// almacenamos como resultado el valor de fitness
 	double resultado = fitness_;
 
-	double valor = 0.0;
-	double suma = 0.0;
-
 	std::vector<double> valores_predecidos;
 	valores_predecidos.resize(etiquetas.size());
 
