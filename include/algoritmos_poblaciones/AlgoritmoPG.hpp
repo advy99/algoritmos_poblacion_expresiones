@@ -50,9 +50,6 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 
 		void ajustar(const Parametros & parametros);
 
-		double ajustar(const unsigned numero_val_cruzada,
- 					 	   const Parametros & parametros);
-
 };
 
 }

@@ -3,6 +3,8 @@
 
 #include "algoritmos_poblaciones/aux_pg_algs.hpp"
 #include "algoritmos_poblaciones/Poblacion.hpp"
+#include "algoritmos_poblaciones/Parametros.hpp"
+
 
 namespace algoritmos_poblaciones {
 
@@ -180,6 +182,10 @@ class AlgoritmoPoblacion {
 		double predecir(const std::vector<double> & dato) const ;
 
 		std::vector<double> predecir(const std::vector<std::vector<double> > & datos) const;
+
+		virtual void ajustar(const Parametros & parametros) = 0;
+
+		double ajustar(const unsigned numero_val_cruzada, const Parametros & parametros);
 
 };
 

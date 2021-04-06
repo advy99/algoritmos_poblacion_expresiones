@@ -35,47 +35,6 @@ AlgoritmoPG :: ~AlgoritmoPG() {
 }
 
 
-double AlgoritmoPG :: ajustar(const unsigned numero_val_cruzada,
-				 						const Parametros & parametros) {
-
-	const std::vector<std::vector<double> > datos_originales = datos_;
-	const std::vector<double> etiquetas_originales = output_datos_;
-
-	auto resultado_datos_aleatorios = reordenar_datos_aleatorio(datos_, output_datos_);
-
-	const int NUM_DATOS_TEST_ITERACION = datos_.size() / numero_val_cruzada;
-
-	double media_error = 0.0;
-
-	// para cada iteracion de la validación cruzada;
-	for ( unsigned i = 0; i < numero_val_cruzada; i++) {
-		// tenemos que hacer la separacion en train/test para esta iteracion
-		auto train_test_separado = separar_train_test<double>(resultado_datos_aleatorios.first,
-																				resultado_datos_aleatorios.second,
-																				1.0/numero_val_cruzada,
-																				NUM_DATOS_TEST_ITERACION * i);
-
-		cargarDatos(train_test_separado.first.first, train_test_separado.first.second);
-
-		// ajustamos para estos nuevos valores
-		ajustar(parametros);
-
-		// predecimos test para mirar el error
-		auto predicciones = predecir(train_test_separado.second.first);
-
-		media_error += raiz_error_cuadratico_medio(predicciones, train_test_separado.second.second);
-
-	}
-
-	media_error /= numero_val_cruzada;
-
-	// reestablecer datos originales
-	cargarDatos(datos_originales, etiquetas_originales);
-
-	return media_error;
-
-}
-
 void AlgoritmoPG :: ajustar(const Parametros & parametros) {
 
 	const int NUM_GENERACIONES = parametros.getNumeroEvaluaciones() / static_cast<double>(poblacion_.getTamPoblacion());
