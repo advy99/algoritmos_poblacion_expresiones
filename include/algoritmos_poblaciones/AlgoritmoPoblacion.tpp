@@ -214,7 +214,7 @@ std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vec
 }
 
 template <class T>
-double AlgoritmoPoblacion<T> :: ajustar(const unsigned numero_val_cruzada,
+double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
 				 									 const Parametros & parametros) {
 
 	const std::vector<std::vector<double> > datos_originales = datos_;

@@ -185,7 +185,7 @@ class AlgoritmoPoblacion {
 
 		virtual void ajustar(const Parametros & parametros) = 0;
 
-		double ajustar(const unsigned numero_val_cruzada, const Parametros & parametros);
+		double ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
 
 };
 
