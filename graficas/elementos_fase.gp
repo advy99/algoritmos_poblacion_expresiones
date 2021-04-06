@@ -24,3 +24,11 @@ set term pngcairo dashed size 1400,1050
 set output "salidas_png/num_elementos_fase.png"
 
 plot for[i=0:9] "datos/num_elementos_fase.dat" every ::i::10 using 1:2  with boxes ls i
+
+set title "Distribución de los datos según su clase tras aplicar BorderlineSMOTE"
+set term pngcairo dashed size 1400,1050
+set output "salidas_png/num_elementos_fase_BL-SMOTE.png"
+
+set yrange [0:300]
+
+plot for[i=0:9] "datos/num_elementos_fase_over_sampling.dat" every ::i::10 using 1:2  with boxes ls i

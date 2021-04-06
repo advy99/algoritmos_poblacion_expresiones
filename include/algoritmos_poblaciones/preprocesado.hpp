@@ -14,7 +14,7 @@ namespace algoritmos_poblaciones {
 template <class T>
 std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
 	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
-							 const double PORCENTAJE_TEST = 0.2);
+							 const double PORCENTAJE_TEST = 0.2, const int COMIENZO = -1);
 
 
 /**
@@ -41,6 +41,10 @@ void escribir_datos(const std::string & salida, const matriz<T> & datos, const s
 
 template <class T>
 void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida);
+
+template <class T>
+std::pair<matriz<T>, std::vector<T> > reordenar_datos_aleatorio (matriz<T> datos, std::vector<T> etiquetas);
+
 
 }
 

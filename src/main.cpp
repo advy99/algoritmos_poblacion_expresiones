@@ -41,6 +41,7 @@ int main(int argc, char ** argv){
 
 	int num_trabajos = atoi(argv[11]);
 
+	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo, false);
 
 	// si utilizamos openMP, establecemos el número de trabajos
 	#ifdef _OPENMP
@@ -56,7 +57,7 @@ int main(int argc, char ** argv){
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	myGAP.ajustar(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo, false);
+	double error_cross_val = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
@@ -69,7 +70,7 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de GA_P es: " << std::endl;
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myGAP.getMejorIndividuo().getFitness() << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
 
 	auto predecidos = myGAP.predecir(train_test_split.second.first);
@@ -85,7 +86,7 @@ int main(int argc, char ** argv){
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	myPG.ajustar(evaluaciones, prob_cruce_gp, prob_muta_gp, tam_torneo, false);
+	error_cross_val = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
 
@@ -97,7 +98,7 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de PG es: " << std::endl;
 	std::cout << myPG.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) de: " << myPG.getMejorIndividuo().getFitness() << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) de: " << error_cross_val << std::endl;
 
 
 

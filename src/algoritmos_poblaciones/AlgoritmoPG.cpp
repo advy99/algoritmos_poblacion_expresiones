@@ -35,12 +35,9 @@ AlgoritmoPG :: ~AlgoritmoPG() {
 }
 
 
-void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
-							const double prob_mutacion,
-							const int tam_torneo,
-							const bool mostrar_evolucion) {
+void AlgoritmoPG :: ajustar(const Parametros & parametros) {
 
-	const int NUM_GENERACIONES = num_eval / static_cast<double>(poblacion_.getTamPoblacion());
+	const int NUM_GENERACIONES = parametros.getNumeroEvaluaciones() / static_cast<double>(poblacion_.getTamPoblacion());
 
 	int generacion = 0;
 	int padre, madre;
@@ -57,7 +54,7 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 	while ( generacion < NUM_GENERACIONES) {
 
 		// seleccionamos la poblacion a cruzar
-		poblacion_ = seleccionTorneo(tam_torneo);
+		poblacion_ = seleccionTorneo(parametros.getTamanioTorneo());
 
 		// aplicamos los operadores geneticos
 		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i += 2){
@@ -71,7 +68,7 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 			modificado_hijo1 = modificado_hijo2 = false;
 
 			// cruce de la parte GP
-			if ( Random::getFloat() < prob_cruce ) {
+			if ( Random::getFloat() < parametros.getProbabilidadCruceGP() ) {
 				// cruce de programacion genetica, se intercambian arboles
 
 				poblacion_[madre].cruceArbol(poblacion_[padre], hijo1, hijo2);
@@ -80,7 +77,7 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 
 			// si no hay cruce, los hijos ya estaban con el valor de los padres
 
-			auto resultado_mut_gp = aplicarMutacionesGP(hijo1, hijo2, prob_mutacion);
+			auto resultado_mut_gp = aplicarMutacionesGP(hijo1, hijo2, parametros.getProbabilidadMutacionGP());
 
 			modificado_hijo1 = modificado_hijo1 || resultado_mut_gp.first;
 			modificado_hijo2 = modificado_hijo2 || resultado_mut_gp.second;
@@ -106,7 +103,7 @@ void AlgoritmoPG :: ajustar(const int num_eval, const double prob_cruce,
 
 		mejor_individuo = poblacion_.getMejorIndividuo();
 
-		if ( mostrar_evolucion ) {
+		if ( parametros.getMostrarEvaluacion() ) {
 			// mostramos el mejor individuo
 			std::cout << generacion << "\t" << mejor_individuo.getFitness() << std::endl;
 		}
