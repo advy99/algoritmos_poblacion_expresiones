@@ -82,7 +82,7 @@ int main(int argc, char ** argv){
 
 
 	// hacemos lo mismo pero con PG
-	algoritmos_poblaciones::AlgoritmoPG myPG (std::string(argv[1]), '@', tam_pob, prob_variable, semilla, ',', prof_max_expr);
+	algoritmos_poblaciones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
