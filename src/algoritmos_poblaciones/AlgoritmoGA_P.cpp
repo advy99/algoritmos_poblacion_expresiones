@@ -16,18 +16,11 @@ AlgoritmoGA_P :: AlgoritmoGA_P(const std::string fichero_datos, const char char_
 			  const unsigned tam_poblacion, const double prob_var,
 			  const unsigned long seed, const char delimitador, const unsigned prof){
 
-	inicializarVacio();
 
 	// lemos los datos del fichero de entrada
 	leerDatos(fichero_datos, char_comentario, delimitador);
-	prof_expresiones_ = prof;
-
-
-	// inicializamos la semilla
-	Random::setSeed(seed);
-
-
-	generarPoblacion(tam_poblacion, prof, prob_var, true);
+	
+	inicializar(seed, tam_poblacion, prof, prob_var);
 
 }
 

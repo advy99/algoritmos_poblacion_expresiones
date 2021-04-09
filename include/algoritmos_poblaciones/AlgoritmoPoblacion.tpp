@@ -9,6 +9,8 @@ AlgoritmoPoblacion<T> :: AlgoritmoPoblacion() {
 template <class T>
 void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 
+	inicializarVacio();
+
 	// inicializamos la semilla
 	Random::setSeed(seed);
 

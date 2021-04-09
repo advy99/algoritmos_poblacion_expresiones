@@ -18,14 +18,10 @@ AlgoritmoPG :: AlgoritmoPG(const std::string fichero_datos, const char char_come
 		  const unsigned long seed,
 		  const char delimitador, const unsigned prof){
 
-	inicializarVacio();
 
 	leerDatos(fichero_datos, char_comentario, delimitador);
-	prof_expresiones_ = prof;
 
-	Random::setSeed(seed);
-
-	generarPoblacion(tam_poblacion, prof, prob_var, true);
+	inicializar(seed, tam_poblacion, prof, prob_var);
 
 }
 
