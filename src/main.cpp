@@ -72,13 +72,11 @@ int main(int argc, char ** argv){
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
 	std::cout << "Con un RMSE (Root Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
+	auto predecidos_GAP = myGAP.predecir(train_test_split.second.first);
 
-	auto predecidos = myGAP.predecir(train_test_split.second.first);
+	double error_test_GAP = algoritmos_poblaciones::raiz_error_cuadratico_medio(predecidos_GAP, train_test_split.second.second);
 
-
-	for (unsigned i = 0; i < predecidos.size(); i++ ) {
-		std::cout << "Valor predecido: " << predecidos[i] << " , valor real: " << train_test_split.second.second[i] << std::endl;
-	}
+	std::cout << "RMSE (Root Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
 
 
 	// hacemos lo mismo pero con PG
@@ -98,8 +96,13 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de PG es: " << std::endl;
 	std::cout << myPG.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) de: " << error_cross_val << std::endl;
+	std::cout << "Con un RMSE (Root Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
+	auto predecidos_GP = myPG.predecir(train_test_split.second.first);
+
+	double error_test_GP = algoritmos_poblaciones::raiz_error_cuadratico_medio(predecidos_GP, train_test_split.second.second);
+
+	std::cout << "RMSE (Root Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
 
 
 
