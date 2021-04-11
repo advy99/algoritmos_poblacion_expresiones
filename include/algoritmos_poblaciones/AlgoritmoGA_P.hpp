@@ -91,7 +91,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 
 
 		/**
-		  * @brief Constructor con dos parámetros
+		  * @brief Constructor con siete parámetros
 		  *
 		  * @param fichero_datos Fichero donde se almacenan los datos
 		  *
@@ -129,8 +129,9 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 
 
 		/**
-		 *  @brief Ajustar la poblacion utilizando los datos actuales
+		 *  @brief Ajustar la poblacion utilizando los datos actuales con los parametros dados
 		 *
+		 *  @param parametros Parametros a utilizar en el ajuste del algoritmo
 		 *
 		 **/
 
