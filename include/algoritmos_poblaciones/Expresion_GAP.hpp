@@ -11,6 +11,10 @@
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
+/**
+ * @brief Clases, definiciones y estructuras necesarias para la Expresion_GAP
+ *
+ */
 
 namespace algoritmos_poblaciones {
 
@@ -112,6 +116,13 @@ class Expresion_GAP : public Expresion {
 
 		double delta(const int generacion, const int max_gen, const double valor);
 
+		/**
+		  * @brief Obtener el valor numerico del nodo dado
+		  *
+		  * @param n Nodo del que obtener el valor
+		  *
+		  * @return Valor numerico del Nodo dado
+		  */
 
 		double obtenerNumero(const Nodo & n) const override;
 
