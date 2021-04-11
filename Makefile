@@ -74,7 +74,7 @@ gtestflags = -I$(gtest) $(gtestlibs)
 .PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
 
 # target por defecto
-all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) doc FIN
+all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo doc FIN
 
 
 # target para compilar solo los tests
@@ -99,6 +99,10 @@ $(OBJETIVO_PREPROCESADO): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_P
 	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJETOS_PREPROCESADO) -o $(OBJETIVO_PREPROCESADO) $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(OBJETIVO_PREPROCESADO) finalizada con exito.\e[0m\n\n"
 
+$(BIN)/main_conteo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_conteo.o
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_PREPROCESADO) a partir de $(OBJETOS_PREPROCESADO)\n"
+	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_conteo.o -o $(BIN)/main_conteo $(F_OPENMP) $(gtestflags) -I$(INC)
+	@printf "\n\e[36mCompilación de $(BIN)/main_conteo finalizada con exito.\e[0m\n\n"
 
 # funcion para compilar un objeto
 define compilar_objeto
@@ -156,6 +160,9 @@ $(OBJ)/main.o: $(SRC)/main.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/Random.hp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC_ALG_POB)/preprocesado.hpp
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/main_conteo.o: $(SRC)/main_conteo.cpp
 	$(call compilar_objeto,$<,$@)
 
 # mensaje de fin
