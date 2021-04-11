@@ -44,8 +44,28 @@ namespace algoritmos_poblaciones {
 
 bool comparar_reales(const double a, const double b, const double epsilon = 0.005);
 
+/**
+  * @brief Calcular el error cuadratico medio entre un conjunto de valores predecidos y valores reales
+  *
+  * @param valores_predecidos Valores predecidos.
+  * @param valores_reales Valores reales.
+  *
+  * @return Error cuadratico medio entre los valres predecidos y los reales
+  *
+  */
+
 double error_cuadratico_medio(const std::vector<double> & valores_predecidos,
 										const std::vector<double> & valores_reales);
+
+/**
+  * @brief Calcular la raiz del error cuadratico medio entre un conjunto de valores predecidos y valores reales
+  *
+  * @param valores_predecidos Valores predecidos.
+  * @param valores_reales Valores reales.
+  *
+  * @return Raiz del error cuadratico medio entre los valres predecidos y los reales
+  *
+  */
 
 double raiz_error_cuadratico_medio(const std::vector<double> & valores_predecidos,
 											  const std::vector<double> & valores_reales);
