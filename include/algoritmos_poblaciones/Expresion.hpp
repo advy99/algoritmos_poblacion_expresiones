@@ -39,15 +39,15 @@ class Expresion{
 		  * Un objeto valido @e rep de la clase Expresion representa
 		  * la expresion dada en
 		  *
-		  * rep.arbol
+		  * rep.arbol_
 		  *
 		  * Así como su valor de ajuste en
 		  *
-		  * rep.fitness
+		  * rep.fitness_
 		  *
 		  * Podemos saber si esta evaluada con
 		  *
-		  * rep.evaluada
+		  * rep.evaluada_
 		  *
 		  */
 
@@ -81,6 +81,10 @@ class Expresion{
 		  */
 		Arbol arbol_ = nullptr;
 
+		
+		/**
+		  * @brief Número de variables que puede tomar la expresion, que conforma el conjunto de datos.
+		  */
 		unsigned numero_variables_;
 
 		/**
@@ -151,6 +155,14 @@ class Expresion{
 
 		double evaluarDato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato) const;
+
+		/**
+		  * @brief Obtener el valor numerico del nodo dado
+		  *
+		  * @param n Nodo del que obtener el valor
+		  *
+		  * @return Valor numerico del Nodo dado
+		  */
 
 		virtual double obtenerNumero(const Nodo & n) const;
 

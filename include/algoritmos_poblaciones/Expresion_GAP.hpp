@@ -18,8 +18,48 @@
 
 namespace algoritmos_poblaciones {
 
+/**
+  *  @brief Clase Expresion_GAP
+  *
+  *  Una instancia del tipo Expresion_GAP representará una expresión matemática, así
+  * como su fitness para unos datos dados.
+  *
+  *
+  * @author Antonio David Villegas Yeguas
+  * @date Abril 2021
+  */
+
 class Expresion_GAP : public Expresion {
 	private:
+		/**
+		  * @page repExpresion_GAP Representación de la clase Expresion_GAP
+		  *
+		  * @section invExpresion_GAP Invariante de la representación
+		  *
+		  * El invariante es; profundidad_maxima > 0
+		  *
+		  * @section faExpresion_GAP Función de abstracción
+		  *
+		  * Un objeto valido @e rep de la clase Expresion_GAP representa
+		  * la expresion dada en
+		  *
+		  * rep.arbol_
+		  * 
+		  * Su cromosoma
+		  * 
+		  * rep.cromosoma_
+		  *
+		  * Así como su valor de ajuste en
+		  *
+		  * rep.fitness_
+		  *
+		  * Podemos saber si esta evaluada con
+		  *
+		  * rep.evaluada_
+		  *
+		  */
+
+
 		/**
 		  * @brief Array donde almacenaremos los valores de las constantes
 		  * numéricas para aprenderlos
