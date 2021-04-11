@@ -44,6 +44,9 @@ namespace algoritmos_poblaciones {
 
 bool comparar_reales(const double a, const double b, const double epsilon = 0.005);
 
+double error_cuadratico_medio(const std::vector<double> & valores_predecidos,
+										const std::vector<double> & valores_reales);
+
 double raiz_error_cuadratico_medio(const std::vector<double> & valores_predecidos,
 											  const std::vector<double> & valores_reales);
 
