@@ -32,11 +32,11 @@ enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 class Nodo {
 	private:
 		/**
-		  * @page repNodo Representación de la estructura nodo
+		  * @page repNodo Representación de la clase nodo
 		  *
 		  * @section faNodo Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la estructura Nodo viene dado por un
+		  * Un objeto valido @e rep de la clase Nodo viene dado por un
 		  * tipo de un nodo y su valor.
 		  *
 		  *
@@ -197,6 +197,10 @@ class Nodo {
 		bool operator!=(const Nodo & otro) const;
 
 };
+
+/**
+ * @brief Definimos el tipo Arbol como un puntero a un Nodo
+ */
 
 typedef Nodo * Arbol;
 

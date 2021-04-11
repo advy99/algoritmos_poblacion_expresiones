@@ -10,7 +10,7 @@
 /**
   *  @brief Clase Random
   *
-  * Una instancia del tipo Random será un generador de números aleatorios.
+  * Una instancia del tipo Random será un generador modular de números aleatorios.
   *
   *
   * @author Antonio David Villegas Yeguas
@@ -31,9 +31,26 @@ class Random{
 		  *
 		  */
 
+		/**
+		 * @brief Semilla a utilizar para generar aleatorios
+		 */
+
 		static unsigned long SEED;
+		
+		/**
+		 * @brief Semilla a utilizar para generar aleatorios
+		 */
 		static const unsigned long int MASK;
+
+		/**
+		 * @brief Máscara a utilizar para generar aleatorios
+		 */
 		static const unsigned long int PRIME;
+		
+		/**
+		 * @brief Escala a utilizar para generar aleatorios
+		 */
+		
 		static const double SCALE;
 		
 		/**

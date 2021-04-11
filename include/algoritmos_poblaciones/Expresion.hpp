@@ -428,7 +428,7 @@ class Expresion{
 		void mutarGP(const int num_vars);
 
 
-		/*
+		/**
 		 * @brief Operador para comparar si dos expresiones son iguales
 		 *
 		 * @param otra Expresión a comparar con la actual
@@ -437,7 +437,7 @@ class Expresion{
 
 		bool operator== (const Expresion & otra) const;
 
-		/*
+		/**
 		 * @brief Operador para comparar si dos expresiones son distintas
 		 *
 		 * @param otra Expresión a comparar con la actual
