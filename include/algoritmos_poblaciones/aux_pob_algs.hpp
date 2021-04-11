@@ -1,5 +1,5 @@
 /**
-  * @file aux_gap.hpp
+  * \@file aux_pob_algs.hpp
   * @brief Fichero con funciones auxiliares para el espacio de nombres GA_P
   *
   */

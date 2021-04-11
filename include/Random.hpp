@@ -1,5 +1,5 @@
 /**
-  * @file random.hpp
+  * \@file random.hpp
   * @brief Fichero cabecera de la clase Random
   *
   */

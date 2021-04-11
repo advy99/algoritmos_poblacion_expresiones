@@ -7,7 +7,7 @@
 #ifndef POBLACION_H_INCLUDED
 #define POBLACION_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
@@ -32,11 +32,11 @@ class Poblacion{
 		/**
 		  * @page repPoblacion Representación de la clase Poblacion
 		  *
-		  * @section invExpresion Invariante de la representación
+		  * @section invPoblacion Invariante de la representación
 		  *
 		  * El invariante es; tam_poblacion > 0
 		  *
-		  * @section faConjunto Función de abstracción
+		  * @section faPoblacion Función de abstracción
 		  *
 		  * Un objeto valido @e rep de la clase Poblacion representa la poblacion
 		  *

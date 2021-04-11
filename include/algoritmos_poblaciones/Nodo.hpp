@@ -1,5 +1,5 @@
 /**
-  * @file nodo.hpp
+  * \@file nodo.hpp
   * @brief Fichero cabecera de la clase Nodo
   *
   */
@@ -7,7 +7,7 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 namespace algoritmos_poblaciones {
 
@@ -34,7 +34,7 @@ class Nodo {
 		/**
 		  * @page repNodo Representación de la estructura nodo
 		  *
-		  * @section faConjunto Función de abstracción
+		  * @section faNodo Función de abstracción
 		  *
 		  * Un objeto valido @e rep de la estructura Nodo viene dado por un
 		  * tipo de un nodo y su valor.

@@ -1,8 +1,14 @@
+/**
+  * \@file Parametros.hpp
+  * @brief Fichero cabecera de la clase Parametros
+  *
+  */
+
 #ifndef PARAMETROS_H_INCLUDED
 #define PARAMETROS_H_INCLUDED
 
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 namespace algoritmos_poblaciones {
 

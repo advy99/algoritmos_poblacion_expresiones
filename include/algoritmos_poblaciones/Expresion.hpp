@@ -1,5 +1,5 @@
 /**
-  * @file expresion.hpp
+  * \@file expresion.hpp
   * @brief Fichero cabecera de la clase Expresion
   *
   */
@@ -8,7 +8,7 @@
 #define EXPRESION_H_INCLUDED
 
 #include "algoritmos_poblaciones/Nodo.hpp"
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 
 namespace algoritmos_poblaciones {
@@ -34,7 +34,7 @@ class Expresion{
 		  *
 		  * El invariante es; profundidad_maxima > 0
 		  *
-		  * @section faConjunto Función de abstracción
+		  * @section faExpresion Función de abstracción
 		  *
 		  * Un objeto valido @e rep de la clase Expresion representa
 		  * la expresion dada en

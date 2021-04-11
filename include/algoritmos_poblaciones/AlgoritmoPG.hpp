@@ -1,5 +1,5 @@
 /**
-  * @file GA_P.hpp
+  * \@file GA_P.hpp
   * @brief Fichero cabecera de la clase AlgoritmoPG
   *
   */
@@ -8,7 +8,7 @@
 #ifndef ALGORITMO_PG_H_INCLUDED
 #define ALGORITMO_PG_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 #include "algoritmos_poblaciones/Parametros.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"

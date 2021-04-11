@@ -1,4 +1,4 @@
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 namespace algoritmos_poblaciones {
 

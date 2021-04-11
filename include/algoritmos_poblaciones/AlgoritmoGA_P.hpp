@@ -7,7 +7,7 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Poblacion.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
@@ -27,11 +27,11 @@ namespace algoritmos_poblaciones {
   *  @brief Clase AlgoritmoGA_P
   *
   *  Una instancia del tipo AlgoritmoGA_P representará un estimador para los datos
-  *  dados, utilizando una Poblacion, conjunto de Expresion.
+  *  dados, utilizando una Poblacion, conjunto de Expresion_GAP.
   *
   *
   * @author Antonio David Villegas Yeguas
-  * @date Julio 2020
+  * @date Abril 2021
   */
 
 class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
@@ -58,7 +58,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		  *
 		  * El invariante es; datos.size > 0 y output_datos.size == datos.size
 		  *
-		  * @section faConjunto Función de abstracción
+		  * @section faGA_P Función de abstracción
 		  *
 		  * Un objeto valido @e rep de la clase AlgoritmoGA_P representa un conjunto de
 		  * datos con sus respectivas etiquetas
@@ -73,6 +73,18 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		  */
 
 	public:
+
+		/**
+		 *  @brief Contructor con 6 parametros, para utilizar el AlgoritmoGA_P dados una serie de datos con sus etiquetas asociadas
+		 * 
+		 *  @param datos Datos a utilizar para el ajuste
+		 *  @param etiquetas Etiquetas asociadas a dichos datos
+		 *  @param seed Semilla aleatoria a utilizar
+		 *  @param tam_poblacion Tamaño de la poblacion del algoritmo
+		 *  @param prof Profundidad máxima de las expresiones utilizadas
+		 *  @param prob_var Probabilidad de que un Nodo sea una variable
+		 * 
+		 */
 
 		AlgoritmoGA_P(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
 			 			  const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);

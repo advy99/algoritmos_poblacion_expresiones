@@ -1,9 +1,15 @@
+/**
+  * \@file Expresion_GAP.hpp
+  * @brief Fichero cabecera de la clase Expresion_GAP
+  *
+  */
+
 #ifndef EXPRESION_GAP_H_INCLUDED
 #define EXPRESION_GAP_H_INCLUDED
 
 
 #include "algoritmos_poblaciones/Expresion.hpp"
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 
 namespace algoritmos_poblaciones {

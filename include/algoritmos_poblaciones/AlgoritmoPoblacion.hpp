@@ -1,7 +1,7 @@
 #ifndef ALGORITMO_POBLACION_H_INCLUDED
 #define ALGORITMO_POBLACION_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 #include "algoritmos_poblaciones/Poblacion.hpp"
 #include "algoritmos_poblaciones/Parametros.hpp"
 

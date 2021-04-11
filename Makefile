@@ -48,10 +48,10 @@ OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca AlgoritmoGA_P
-OBJETOS_ALGS_POB = $(OBJ)/Parametros.o $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/AlgoritmoPG.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/Random.o $(OBJ)/aux_pg_algs.o
+OBJETOS_ALGS_POB = $(OBJ)/Parametros.o $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/AlgoritmoPG.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/Random.o $(OBJ)/aux_pob_algs.o
 CABECERAS_ALGS_POB = $(wildcard include/algoritmos_poblaciones/*.hpp)
 
-ALGS_POB_INC_COMUNES = $(INC)/Random.hpp $(INC_ALG_POB)/aux_pg_algs.hpp
+ALGS_POB_INC_COMUNES = $(INC)/Random.hpp $(INC_ALG_POB)/aux_pob_algs.hpp
 
 # objetivos de los tests
 OBJETIVO_TEST = $(BIN)/main_test
@@ -145,7 +145,7 @@ $(OBJ)/AlgoritmoGA_P.o: $(SRC_ALG_POB)/AlgoritmoGA_P.cpp $(INC_ALG_POB)/Algoritm
 $(OBJ)/AlgoritmoPG.o: $(SRC_ALG_POB)/AlgoritmoPG.cpp $(INC_ALG_POB)/AlgoritmoPG.hpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/aux_pg_algs.o: $(SRC_ALG_POB)/aux_pg_algs.cpp $(INC_ALG_POB)/aux_pg_algs.hpp
+$(OBJ)/aux_pob_algs.o: $(SRC_ALG_POB)/aux_pob_algs.cpp $(INC_ALG_POB)/aux_pob_algs.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/Random.o: $(SRC)/Random.cpp $(INC)/Random.hpp
