@@ -246,7 +246,7 @@ class Expresion_GAP : public Expresion {
  		unsigned getLongitudCromosoma() const;
 
 
-		/*
+		/**
 		 * @brief Dado un cromosoma, asignar dicho cromosoma a la expresion actual
 		 *
 		 * @param nuevo_cromosoma Cromosoma que formará la expresion
@@ -288,6 +288,7 @@ class Expresion_GAP : public Expresion {
 		/**
 		 * @brief Obtener donde está almacenado el cromosoma
 		 *
+		 * @return Puntero al cromosoma
 		 */
 
 		double * getCromosoma() const;
@@ -303,13 +304,14 @@ class Expresion_GAP : public Expresion {
 
 		void mutarGA(const int generacion, const int max_gen);
 
-		/*
+		/**
 		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
 		 * @pre Los cromosomas son de la misma longitud
 		 *
+		 * @return Verdadero si las expresiones son totalmente iguales
 		 */
 
 		bool totalmenteIguales(const Expresion_GAP & otra) const;

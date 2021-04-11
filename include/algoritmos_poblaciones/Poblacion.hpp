@@ -1,5 +1,5 @@
 /**
-  * @file poblacion.hpp
+  * \@file Poblacion.hpp
   * @brief Fichero cabecera de la clase Poblacion
   *
   */
@@ -16,9 +16,12 @@ namespace algoritmos_poblaciones {
 
 /**
   *  @brief Clase Poblacion
+  * 
+  * 
+  *  @tparam T Tipo de dato que utilizará Poblacion
   *
   *  Una instancia del tipo Poblacion representará un conjunto de individuos
-  *  que serán expresiones, también podrá indicar cual es el mejor
+  *  de tipo T, también podrá indicar cual es el mejor
   *  individuo de la población.
   *
   * @author Antonio David Villegas Yeguas
@@ -118,6 +121,8 @@ class Poblacion{
 		/**
 		  * @brief Constructor de copia.
 		  *
+		  * @param otra Poblacion a copiar
+		  * 
 		  */
 
 		Poblacion(const Poblacion & otra);
@@ -212,6 +217,11 @@ class Poblacion{
 
 		/**
 		  * @brief Evaluar todos los elementos de la población.
+		  * 
+		  * @param datos Datos con los que se evaluará la población
+		  * @param etiquetas Valores correspondientes a los datos dados
+		  * 
+		  * @pre datos.size == etiquetas.size
 		  *
 		  * @post El mejor individuo de la población se vera actualizado.
 		  *
@@ -223,7 +233,7 @@ class Poblacion{
 		/**
 		 * @brief Seleccionar un individuo de la población
 		 *
-		 *
+		 * @return Indice del individuo
 		 */
 
 		unsigned seleccionIndividuo() const;

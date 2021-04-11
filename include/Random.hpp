@@ -66,6 +66,7 @@ class Random{
 		/**
 		 * @brief Inicializar la semilla
 		 *
+		 * @param seed Nueva semilla para el generador
 		 */
 
 		static void setSeed(const unsigned long seed);

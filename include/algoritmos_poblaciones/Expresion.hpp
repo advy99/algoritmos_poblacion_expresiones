@@ -1,5 +1,5 @@
 /**
-  * \@file expresion.hpp
+  * \@file Expresion.hpp
   * @brief Fichero cabecera de la clase Expresion
   *
   */
@@ -149,6 +149,9 @@ class Expresion{
 		/**
 		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
 		  * la expresión.
+		  * 
+		  * @param pila Pila de la expresion por evaluar
+		  * @param dato Dato a evaluar
 		  *
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
@@ -263,7 +266,7 @@ class Expresion{
 
 		unsigned getLongitudArbol() const;
 
-		/*
+		/**
 		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
 		 *
 		 * @param nuevo_arbol Arbol que formará la expresion
@@ -289,6 +292,8 @@ class Expresion{
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.
+		  * 
+		  * @param dato Dato a evaluar
 		  *
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
@@ -382,6 +387,7 @@ class Expresion{
 		/**
 		 * @brief Obtener donde está almacenado el arbol
 		 *
+		 * @return Arbol de la expresion
 		 */
 
 		Arbol getArbol() const;
@@ -433,6 +439,7 @@ class Expresion{
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
+		 * @return Verdadero si la expresion this es igual a otra
 		 */
 
 		bool operator== (const Expresion & otra) const;
@@ -442,6 +449,7 @@ class Expresion{
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
+		 * @return Verdadero si la expresion this es distinta a otra
 		 */
 
 		bool operator!= (const Expresion & otra) const;

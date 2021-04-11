@@ -1,5 +1,5 @@
 /**
-  * \@file nodo.hpp
+  * \@file Nodo.hpp
   * @brief Fichero cabecera de la clase Nodo
   *
   */
@@ -144,7 +144,7 @@ class Nodo {
 		 *
 		 * @pre tipo_nodo == TipoNodo::NUMERO
 		 *
-		 * @param val Valor numerico a establecer en el Nodo.
+		 * @param valor Valor numerico a establecer en el Nodo.
 		 *
 		 */
 		void setValorNumerico(const double valor);
