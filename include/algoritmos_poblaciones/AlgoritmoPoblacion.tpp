@@ -97,7 +97,6 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 
 
 	// escojo una nueva poblacion del mismo tamaño
-	#pragma omp parallel for
 	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
 
 		std::vector<int> participantes_torneo;
@@ -127,7 +126,6 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 		}
 
 		// el ganador del torneo i es el mejor del torneo
-		#pragma omp critical
 		ganadores_torneo.push_back(mejor_torneo);
 	}
 
@@ -161,8 +159,6 @@ void AlgoritmoPoblacion<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 		mejor_encontrado = poblacion_[i] == mejor_ind_anterior;
 		i++;
 	}
-
-
 
 	// si no esta el mejor, aplico elitismo
 	if ( !mejor_encontrado ){

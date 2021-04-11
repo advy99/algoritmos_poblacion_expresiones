@@ -1,5 +1,5 @@
 /**
-  * @file nodo.hpp
+  * \@file Nodo.hpp
   * @brief Fichero cabecera de la clase Nodo
   *
   */
@@ -7,12 +7,12 @@
 #ifndef NODO_H_INCLUDED
 #define NODO_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 namespace algoritmos_poblaciones {
 
 /**
-  * @brief Posibles tipos de nodo que utilizaremos en el GA_P
+  * @brief Posibles tipos de nodo que utilizaremos 
   */
 
 // aqui faltan tipos, tengo que revisar el paper + los que use
@@ -32,16 +32,17 @@ enum class TipoNodo {NUMERO, VARIABLE, MAS, MENOS, POR, ENTRE};
 class Nodo {
 	private:
 		/**
-		  * @page repNodo Representación de la estructura nodo
+		  * @page repNodo Representación de la clase nodo
 		  *
-		  * @section faConjunto Función de abstracción
+		  * @section faNodo Función de abstracción
 		  *
-		  * Un objeto valido @e rep de la estructura Nodo viene dado por un
+		  * Un objeto valido @e rep de la clase Nodo viene dado por un
 		  * tipo de un nodo y su valor.
 		  *
 		  *
-		  * rep.tipo_nodo
-		  * rep.valor
+		  * rep.tipo_nodo_
+		  * rep.valor_
+		  * rep.valor_numerico_
 		  *
 		  */
 
@@ -51,12 +52,14 @@ class Nodo {
 		TipoNodo tipo_nodo_;
 
 		/**
-		  * @brief Valor asociado al nodo
+		  * @brief Valor de la variable asociado al nodo
 		  */
 
 		int valor_;
 
-
+		/**
+		  * @brief Valor numerico asociado al nodo
+		  */
 
 		double valor_numerico_;
 
@@ -118,15 +121,32 @@ class Nodo {
 		/**
 		 * @brief Obtener el valor asociado al Nodo.
 		 *
-		 * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
+		 * @pre tipo_nodo == TipoNodo::VARIABLE
 		 *
 		 * @return Valor asociado al nodo
 		 */
 
 		int getValor() const;
 
+		/**
+		 * @brief Obtener el valor numerico asociado al Nodo.
+		 *
+		 * @pre tipo_nodo == TipoNodo::NUMERO
+		 *
+		 * @return Valor numerico asociado al nodo
+		 */
+
 		double getValorNumerico() const;
 
+
+		/**
+		 * @brief Establecer el valor numerico del Nodo.
+		 *
+		 * @pre tipo_nodo == TipoNodo::NUMERO
+		 *
+		 * @param valor Valor numerico a establecer en el Nodo.
+		 *
+		 */
 		void setValorNumerico(const double valor);
 
 
@@ -177,6 +197,10 @@ class Nodo {
 		bool operator!=(const Nodo & otro) const;
 
 };
+
+/**
+ * @brief Definimos el tipo Arbol como un puntero a un Nodo
+ */
 
 typedef Nodo * Arbol;
 

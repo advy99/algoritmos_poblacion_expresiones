@@ -1,5 +1,5 @@
 /**
-  * @file expresion.hpp
+  * \@file Expresion.hpp
   * @brief Fichero cabecera de la clase Expresion
   *
   */
@@ -8,7 +8,7 @@
 #define EXPRESION_H_INCLUDED
 
 #include "algoritmos_poblaciones/Nodo.hpp"
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 
 namespace algoritmos_poblaciones {
@@ -34,20 +34,20 @@ class Expresion{
 		  *
 		  * El invariante es; profundidad_maxima > 0
 		  *
-		  * @section faConjunto Función de abstracción
+		  * @section faExpresion Función de abstracción
 		  *
 		  * Un objeto valido @e rep de la clase Expresion representa
 		  * la expresion dada en
 		  *
-		  * rep.arbol
+		  * rep.arbol_
 		  *
 		  * Así como su valor de ajuste en
 		  *
-		  * rep.fitness
+		  * rep.fitness_
 		  *
 		  * Podemos saber si esta evaluada con
 		  *
-		  * rep.evaluada
+		  * rep.evaluada_
 		  *
 		  */
 
@@ -81,6 +81,10 @@ class Expresion{
 		  */
 		Arbol arbol_ = nullptr;
 
+		
+		/**
+		  * @brief Número de variables que puede tomar la expresion, que conforma el conjunto de datos.
+		  */
 		unsigned numero_variables_;
 
 		/**
@@ -145,12 +149,23 @@ class Expresion{
 		/**
 		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
 		  * la expresión.
+		  * 
+		  * @param pila Pila de la expresion por evaluar
+		  * @param dato Dato a evaluar
 		  *
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
 		double evaluarDato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato) const;
+
+		/**
+		  * @brief Obtener el valor numerico del nodo dado
+		  *
+		  * @param n Nodo del que obtener el valor
+		  *
+		  * @return Valor numerico del Nodo dado
+		  */
 
 		virtual double obtenerNumero(const Nodo & n) const;
 
@@ -251,7 +266,7 @@ class Expresion{
 
 		unsigned getLongitudArbol() const;
 
-		/*
+		/**
 		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
 		 *
 		 * @param nuevo_arbol Arbol que formará la expresion
@@ -277,6 +292,8 @@ class Expresion{
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.
+		  * 
+		  * @param dato Dato a evaluar
 		  *
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
@@ -370,6 +387,7 @@ class Expresion{
 		/**
 		 * @brief Obtener donde está almacenado el arbol
 		 *
+		 * @return Arbol de la expresion
 		 */
 
 		Arbol getArbol() const;
@@ -416,20 +434,22 @@ class Expresion{
 		void mutarGP(const int num_vars);
 
 
-		/*
+		/**
 		 * @brief Operador para comparar si dos expresiones son iguales
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
+		 * @return Verdadero si la expresion this es igual a otra
 		 */
 
 		bool operator== (const Expresion & otra) const;
 
-		/*
+		/**
 		 * @brief Operador para comparar si dos expresiones son distintas
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
+		 * @return Verdadero si la expresion this es distinta a otra
 		 */
 
 		bool operator!= (const Expresion & otra) const;

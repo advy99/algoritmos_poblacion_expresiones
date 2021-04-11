@@ -49,7 +49,8 @@ double Parametros :: getProbabilidadMutacionGA() const {
 int Parametros :: getTamanioTorneo() const {
 	return tamanio_torneo_;
 }
-int Parametros :: getMostrarEvaluacion() const {
+
+bool Parametros :: getMostrarEvaluacion() const {
 	return mostrar_evolucion_;
 }
 

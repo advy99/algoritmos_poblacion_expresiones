@@ -5,8 +5,6 @@
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
-
 TEST (Expresion, IgualElMismo) {
 	algoritmos_poblaciones::Expresion exp;
 

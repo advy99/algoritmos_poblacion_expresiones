@@ -90,17 +90,7 @@ int main(int argc, char ** argv) {
 
 	auto resultado_fases = preprocesar_fases(datos, etiquetas);
 
-
-	algoritmos_poblaciones::conteo_clases(resultado_fases.second, "graficas/datos/num_elementos_fase_original.dat");
-
-
-	auto over_s = algoritmos_poblaciones::leer_datos<double>(std::string("salida_over_sampling.dat"), comentario, separador);
-
-	algoritmos_poblaciones::conteo_clases(over_s.second, "graficas/datos/num_elementos_fase_over_sampling.dat");
-
-
 	algoritmos_poblaciones::escribir_datos(salida, resultado_fases.first, resultado_fases.second, separador);
-
 
 
 }

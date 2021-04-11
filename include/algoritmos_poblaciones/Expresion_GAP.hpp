@@ -1,15 +1,65 @@
+/**
+  * \@file Expresion_GAP.hpp
+  * @brief Fichero cabecera de la clase Expresion_GAP
+  *
+  */
+
 #ifndef EXPRESION_GAP_H_INCLUDED
 #define EXPRESION_GAP_H_INCLUDED
 
 
 #include "algoritmos_poblaciones/Expresion.hpp"
-#include "algoritmos_poblaciones/aux_pg_algs.hpp"
+#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
+/**
+ * @brief Clases, definiciones y estructuras necesarias para la Expresion_GAP
+ *
+ */
 
 namespace algoritmos_poblaciones {
 
+/**
+  *  @brief Clase Expresion_GAP
+  *
+  *  Una instancia del tipo Expresion_GAP representará una expresión matemática, así
+  * como su fitness para unos datos dados.
+  *
+  *
+  * @author Antonio David Villegas Yeguas
+  * @date Abril 2021
+  */
+
 class Expresion_GAP : public Expresion {
 	private:
+		/**
+		  * @page repExpresion_GAP Representación de la clase Expresion_GAP
+		  *
+		  * @section invExpresion_GAP Invariante de la representación
+		  *
+		  * El invariante es; profundidad_maxima > 0
+		  *
+		  * @section faExpresion_GAP Función de abstracción
+		  *
+		  * Un objeto valido @e rep de la clase Expresion_GAP representa
+		  * la expresion dada en
+		  *
+		  * rep.arbol_
+		  * 
+		  * Su cromosoma
+		  * 
+		  * rep.cromosoma_
+		  *
+		  * Así como su valor de ajuste en
+		  *
+		  * rep.fitness_
+		  *
+		  * Podemos saber si esta evaluada con
+		  *
+		  * rep.evaluada_
+		  *
+		  */
+
+
 		/**
 		  * @brief Array donde almacenaremos los valores de las constantes
 		  * numéricas para aprenderlos
@@ -106,6 +156,13 @@ class Expresion_GAP : public Expresion {
 
 		double delta(const int generacion, const int max_gen, const double valor);
 
+		/**
+		  * @brief Obtener el valor numerico del nodo dado
+		  *
+		  * @param n Nodo del que obtener el valor
+		  *
+		  * @return Valor numerico del Nodo dado
+		  */
 
 		double obtenerNumero(const Nodo & n) const override;
 
@@ -189,7 +246,7 @@ class Expresion_GAP : public Expresion {
  		unsigned getLongitudCromosoma() const;
 
 
-		/*
+		/**
 		 * @brief Dado un cromosoma, asignar dicho cromosoma a la expresion actual
 		 *
 		 * @param nuevo_cromosoma Cromosoma que formará la expresion
@@ -231,6 +288,7 @@ class Expresion_GAP : public Expresion {
 		/**
 		 * @brief Obtener donde está almacenado el cromosoma
 		 *
+		 * @return Puntero al cromosoma
 		 */
 
 		double * getCromosoma() const;
@@ -246,13 +304,14 @@ class Expresion_GAP : public Expresion {
 
 		void mutarGA(const int generacion, const int max_gen);
 
-		/*
+		/**
 		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
 		 * @pre Los cromosomas son de la misma longitud
 		 *
+		 * @return Verdadero si las expresiones son totalmente iguales
 		 */
 
 		bool totalmenteIguales(const Expresion_GAP & otra) const;
