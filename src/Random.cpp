@@ -41,6 +41,6 @@ int Random :: getInt(const int HIGH){
 }
 
 const double Random :: SCALE = 0.4656612875e-9;
-const unsigned long int Random :: PRIME = 3013427L;
+const unsigned long int Random :: PRIME = 65539L;
 const unsigned long int Random :: MASK = 2147483647L;
-unsigned long Random :: SEED = std::time(NULL);
+unsigned long Random :: SEED = 0;
