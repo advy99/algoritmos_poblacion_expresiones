@@ -1,3 +1,10 @@
+/**
+  * \@file AlgoritmoPoblacion.hpp
+  * @brief Fichero cabecera de la clase AlgoritmoPoblacion
+  *
+  */
+
+
 #ifndef ALGORITMO_POBLACION_H_INCLUDED
 #define ALGORITMO_POBLACION_H_INCLUDED
 
@@ -6,13 +13,47 @@
 #include "algoritmos_poblaciones/Parametros.hpp"
 
 
+/**
+ * @brief Clases, definiciones y estructuras necesarias para el AlgoritmoPoblacion
+ *
+ */
+
 namespace algoritmos_poblaciones {
+
+/**
+  *  @brief Clase AlgoritmoPoblacion
+  *
+  *  Una instancia del tipo AlgoritmoPoblacion representará un estimador para los datos
+  *  dados, utilizando una poblacion del tipo dado.
+  * 
+  * @tparam T Tipo de la población que utilizará el algoritmo
+  *
+  *
+  * @author Antonio David Villegas Yeguas
+  * @date Abril 2021
+  */
 
 template <class T>
 class AlgoritmoPoblacion {
 	protected:
 
+		/**
+		 *  @brief Constructor vacio
+		 *
+		 */
+
 		AlgoritmoPoblacion ();
+
+		/**
+		 *  @brief Método para inicializar el algoritmo de poblacion
+		 * 
+		 *  @param seed Semilla aleatoria a utilizar
+		 *  @param tam_poblacion Tamaño de la poblacion del algoritmo
+		 *  @param prof Profundidad máxima si la poblacion es de Expresiones
+		 *  @param prob_var Probabilidad de que en la poblacion dada un Nodo sea una variable
+		 */
+
+
 		void inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 
@@ -30,13 +71,13 @@ class AlgoritmoPoblacion {
 
 		/**
 		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
-		  * GA_P
+		  *
 		  */
 		Poblacion<T> poblacion_;
 
 
 		/**
-		  * @brief Profundidad maxima de las expresiones utilizadas
+		  * @brief Profundidad máxima de las expresiones si el algoritmo es de expresiones
 		  *
 		  */
 
@@ -44,11 +85,11 @@ class AlgoritmoPoblacion {
 
 
 		/**
-		  * @brief Inicializar GA_P vacio
+		  * @brief Inicializar AlgoritmoPoblacion vacio
 		  *
 		 */
 
-		 void inicializarVacio();
+		void inicializarVacio();
 
 		/**
 		 *  @brief Selección de una nueva población por torneo a partir de
@@ -56,16 +97,37 @@ class AlgoritmoPoblacion {
 		 *
 		 * @param tam_torneo Tamaño del torneo
 		 *
+		 * @return Devuelve la poblacion con los T ganadores del torneo.
 		 */
 
-		 Poblacion<T> seleccionTorneo(const unsigned tam_torneo);
+		Poblacion<T> seleccionTorneo(const unsigned tam_torneo);
 
 
+		/**
+		 *  @brief Aplicar una mutación en la poblacion si esta es de expresiones
+		 * 
+		 * @param hijo1 Primer hijo al que aplicar la mutacion
+		 * @param hijo2 Segundo hijo al que aplicar la mutacion
+		 *
+		 * @param prob_mutacion Probabilidad con la que aplicar a cada hijo una mutacion
+		 *
+		 * @return Devuelve una pareja de booleanos, verdadero si se ha aplicado la mutacion, falso si no, uno para cada hijo
+		 */
 
-		 std::pair<bool, bool> aplicarMutacionesGP(T & hijo1, T & hijo2,
+		std::pair<bool, bool> aplicarMutacionesGP(T & hijo1, T & hijo2,
 			 													 const double prob_mutacion);
 
 	public:
+
+		/**
+		 *  @brief Método para leer los datos con los que entrenar de un fichero
+		 * 
+		 * @param fichero_datos Ruta al fichero donde leer los datos
+		 * @param char_comentario Caracter utilizado para comentarios en el fichero de datos
+		 * @param delimitador Caracter delimitador entre los datos
+		 *
+		 *
+		 */
 
 		void leerDatos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');
@@ -175,15 +237,58 @@ class AlgoritmoPoblacion {
 		unsigned getMaxProfExpresiones() const;
 
 
+		/**
+		 *  @brief Aplicar el elitismo a la poblacion actual
+		 * 
+		 * @param mejor_individuo_anterior Mejor individuo con el que comparar la Poblacion actual
+		 *
+		 *
+		 */
 
+		void aplicarElitismo(const T & mejor_individuo_anterior);
 
-		void aplicarElitismo(const T & poblacion_antigua);
+		/**
+		 *  @brief Predecir un dato tras entrenar el algoritmo
+		 * 
+		 * @param dato Dato a predecir
+		 * 
+		 * @pre Se ha entrenado el algoritmo
+		 *
+		 * @return Valor predecido por el algoritmo
+		 */
 
 		double predecir(const std::vector<double> & dato) const ;
 
+		/**
+		 *  @brief Predecir un conjunto de datos tras entrenar el algoritmo
+		 * 
+		 * @param datos Datos a predecir
+		 * 
+		 * @pre Se ha entrenado el algoritmo
+		 *
+		 * @return Valores predecido por el algoritmo
+		 */
+
 		std::vector<double> predecir(const std::vector<std::vector<double> > & datos) const;
 
+		/**
+		 *  @brief Ajustar el algoritmo con unos parametros dados
+		 * 
+		 * @param parametros Parametros con los que ajustar el algoritmo
+		 * 
+		 */
+
 		virtual void ajustar(const Parametros & parametros) = 0;
+
+		/**
+		 *  @brief Ajustar el algoritmo con unos parametros dados utilizando validación cruzada
+		 * 
+		 * @param numero_val_cruzada Número de segmentos en los que dividir el conjunto de datos para aplicar validación cruzada
+		 * @param parametros Parametros con los que ajustar el algoritmo
+		 * 
+		 * @return Error obtenido de la validación cruzada
+		 */
+
 
 		double ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
 
