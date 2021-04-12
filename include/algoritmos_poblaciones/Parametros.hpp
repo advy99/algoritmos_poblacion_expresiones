@@ -48,79 +48,89 @@ class Parametros {
 		  */
 
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Numero de evaluaciones con las que ajustar
-		 * 
+		 *
 		 */
 
 		int numero_evaluaciones_;
 
 
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Probabilidad de aplicar un cruce en la parte de programación genetica
-		 * 
+		 *
 		 */
 
 		double probabilidad_cruce_gp_;
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Probabilidad de aplicar un cruce en la parte de algoritmo genetico
-		 * 
+		 *
 		 * @pre Se utiliza el AlgoritmoGA_P
 		 */
 
 		double probabilidad_cruce_ga_;
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Probabilidad de aplicar una mutacion en la parte de programación genetica
-		 * 
+		 *
 		 */
 
 		double probabilidad_mutacion_gp_;
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Probabilidad de aplicar una mutacion en la parte de algoritmo genetico
-		 * 
+		 *
 		 * @pre Se utiliza el AlgoritmoGA_P
 		 */
 
 		double probabilidad_mutacion_ga_;
 
-		/** 
-		 * 
+
+		/**
+		 *
+		 * @brief Probabilidad de aplicar un cruce intra-nicho en GAP
+		 *
+		 */
+
+		double probabilidad_cruce_intranicho_;
+
+		/**
+		 *
 		 *  @brief Tamaño del torneo a la hora de ajustar la poblacion
-		 * 
+		 *
 		 */
 
 		int tamanio_torneo_;
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Booleano con el que controlar si se muestra la evolucion del algoritmo
-		 * 
+		 *
 		 */
 		bool mostrar_evolucion_;
 
 	public:
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Constructor con siete parámetros
-		 * 
+		 *
 		 * @param N_EVALS Numero de evaluaciones, por defecto 100000
 		 * @param PROB_CRUCE_GP Probabilidad de cruce en la parte de PG, por defecto 0.8
 		 * @param PROB_CRUCE_GA Probabilidad de cruce en la parte de GA, por defecto 0.8
 		 * @param PROB_MUTA_GP Probabilidad de mutacion en la parte de PG, por defecto 0.01
 		 * @param PROB_MUTA_GA Probabilidad de mutacion en la parte de GA, por defecto 0.01
+		 * @param PROB_CRUCE_INTRANICHO Probabilidad de cruce intranicho en GA-P, por defecto 0.4
 		 * @param TAM_TORNEO Tamaño del torneo, por defecto 15
 		 * @param MOSTRAR_EVOLUCION Mostrar evolucion del algoritmo, por defecto si.
-		 * 
+		 *
 		 */
 
 		Parametros(const int N_EVALS = 100000,
@@ -128,20 +138,21 @@ class Parametros {
 					  const double PROB_CRUCE_GA = 0.8,
 					  const double PROB_MUTA_GP = 0.01,
 					  const double PROB_MUTA_GA = 0.01,
+					  const double PROB_CRUCE_INTRANICHO = 0.4,
 					  const int TAM_TORNEO = 15,
 					  const bool MOSTRAR_EVOLUCION = true);
 
 
-		/** 
-		 * 
+		/**
+		 *
 		 *  @brief Constructor con cinco parámetros
-		 * 
+		 *
 		 * @param N_EVALS Numero de evaluaciones, por defecto 100000
 		 * @param PROB_CRUCE_GP Probabilidad de cruce en la parte de PG, por defecto 0.8
 		 * @param PROB_MUTA_GP Probabilidad de mutacion en la parte de PG, por defecto 0.01
 		 * @param TAM_TORNEO Tamaño del torneo, por defecto 15
 		 * @param MOSTRAR_EVOLUCION Mostrar evolucion del algoritmo, por defecto si.
-		 * 
+		 *
 		 */
 
 		Parametros(const int N_EVALS = 100000,
@@ -151,45 +162,51 @@ class Parametros {
 					  const bool MOSTRAR_EVOLUCION = false);
 
 
-		/** 
+		/**
 		 *  @brief Obtener el numero de evaluaciones con las que ajustar
 		 *  @return Numero de evaluaciones con las que ajustar
 		 */
 
 		int getNumeroEvaluaciones() const;
 
-		/** 
+		/**
 		 *  @brief Obtener la probabilidad de cruzar la parte GP
 		 *  @return Probabilidad de cruzar la parte GP
 		 */
 		double getProbabilidadCruceGP() const;
 
-		/** 
+		/**
 		 *  @brief Obtener la probabilidad de cruzar la parte GA
 		 *  @return Probabilidad de cruzar la parte GA
 		 */
 		double getProbabilidadCruceGA() const;
 
 
-		/** 
+		/**
 		 *  @brief Obtener la probabilidad de mutar la parte GP
 		 *  @return Probabilidad de mutar la parte GP
 		 */
 		double getProbabilidadMutacionGP() const;
 
-		/** 
+		/**
 		 *  @brief Obtener la probabilidad de mutar la parte GA
 		 *  @return Probabilidad de mutar la parte GA
 		 */
 		double getProbabilidadMutacionGA() const;
 
-		/** 
+		/**
+		 *  @brief Obtener la probabilidad de realizar un cruce intranicho en GA-P
+		 *  @return Probabilidad de realizar un cruce intranicho en GA-P
+		 */
+		double getProbabilidadCruceIntranicho() const;
+
+		/**
 		 *  @brief Obtener el tamaño del torneo
 		 *  @return Tamaño del torneo
 		 */
 		int getTamanioTorneo() const;
 
-		/** 
+		/**
 		 *  @brief Obtener si se muestra la evolucion
 		 *  @return Booleano: verdadero si se muestra la evolucion, falso si no
 		 */

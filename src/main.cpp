@@ -13,18 +13,18 @@
 
 int main(int argc, char ** argv){
 
-	if ( argc < 11 || argc > 13 ) {
+	if ( argc < 12 || argc > 14 ) {
 		std::cerr << "Error en el número de parámetros\n"
 					 << "\t Uso: " << argv[0] << " <fichero_datos> <tam_poblacion> <prob_variable> <profundidad_max> \n"
-					 << "\t\t\t" << " <num_evaluaciones> <prob_cruce_gp> <prob_cruce_ga> <prob_mutacion_gp> <prob_mutacion_ga> <tam_torneo> [num_trabajos] [semilla] "
+					 << "\t\t\t" << " <num_evaluaciones> <prob_cruce_gp> <prob_cruce_ga> <prob_mutacion_gp> <prob_mutacion_ga> <prob_cruce_intranicho> <tam_torneo> [num_trabajos] [semilla] "
 					 << std::endl;
 		exit(-1);
 	}
 
 	int semilla;
 
-	if ( argc == 13 ){
-		semilla = atoi(argv[12]);
+	if ( argc == 14 ){
+		semilla = atoi(argv[13]);
 	} else {
 		semilla = std::time(nullptr);
 	}
@@ -37,11 +37,15 @@ int main(int argc, char ** argv){
 	double prob_cruce_ga = atof(argv[7]);
 	double prob_muta_gp = atof(argv[8]);
 	double prob_muta_ga = atof(argv[9]);
-	int tam_torneo = atoi(argv[10]);
+	double prob_cruce_intra = atof(argv[10]);
+	int tam_torneo = atoi(argv[11]);
 
-	int num_trabajos = atoi(argv[11]);
+	int num_trabajos = atoi(argv[12]);
 
-	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, prob_cruce_gp, prob_cruce_ga, prob_muta_gp, prob_muta_ga, tam_torneo, false);
+	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, prob_cruce_gp,
+		 																	  prob_cruce_ga, prob_muta_gp,
+																			  prob_muta_ga, prob_cruce_intra,
+																			  tam_torneo, false);
 
 	// si utilizamos openMP, establecemos el número de trabajos
 	#ifdef _OPENMP
