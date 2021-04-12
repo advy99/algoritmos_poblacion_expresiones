@@ -16,8 +16,8 @@ namespace algoritmos_poblaciones {
 
 /**
   *  @brief Clase Poblacion
-  * 
-  * 
+  *
+  *
   *  @tparam T Tipo de dato que utilizará Poblacion
   *
   *  Una instancia del tipo Poblacion representará un conjunto de individuos
@@ -122,7 +122,7 @@ class Poblacion{
 		  * @brief Constructor de copia.
 		  *
 		  * @param otra Poblacion a copiar
-		  * 
+		  *
 		  */
 
 		Poblacion(const Poblacion & otra);
@@ -213,14 +213,14 @@ class Poblacion{
 		  *
 		  */
 
-		void setIndividuo(const unsigned indice, const Expresion n_individuo);
+		void setIndividuo(const unsigned indice, const T & n_individuo);
 
 		/**
 		  * @brief Evaluar todos los elementos de la población.
-		  * 
+		  *
 		  * @param datos Datos con los que se evaluará la población
 		  * @param etiquetas Valores correspondientes a los datos dados
-		  * 
+		  *
 		  * @pre datos.size == etiquetas.size
 		  *
 		  * @post El mejor individuo de la población se vera actualizado.
@@ -249,6 +249,34 @@ class Poblacion{
 		  */
 
 		Poblacion & operator= (const Poblacion & otra);
+
+		/**
+		  * @brief Cambiar el tamaño de la Poblacion por el dado.
+		  *
+		  * @param nuevo_tam Nuevo tamaño de la poblacion.
+		  *
+		  */
+
+		void redimensionar(const unsigned nuevo_tam);
+
+		/**
+		  * @brief Insertar un elemento en la Poblacion.
+		  *
+		  * @param nuevo_elemento Elemento a insertar.
+		  *
+		  */
+
+
+		void insertar(const T & nuevo_elemento);
+
+		/**
+		  * @brief Eliminar un elemento en la Poblacion.
+		  *
+		  * @param posicion Posicion a eliminar.
+		  *
+		  */
+
+		void eliminar(const unsigned posicion);
 
 };
 
