@@ -2,29 +2,29 @@
 
 #include "algoritmos_poblaciones/preprocesado.hpp"
 
-std::pair<std::vector<double>, std::vector<double> > preprocesar_fases(const matriz<std::string> & datos, const std::vector<std::string> etiquetas) {
-	std::vector<double> datos_resultado;
+std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<std::string> & datos, const std::vector<std::string> etiquetas) {
+	matriz<double> datos_resultado;
 	std::vector<double> etiquetas_resultado;
 
 	datos_resultado.resize(datos.size());
 	for(unsigned i = 0; i < datos.size(); i++) {
-		datos_resultado[i] = 0.0;
+		datos_resultado[i].resize(datos[i].size());
 
 		for ( unsigned j = 0; j < datos[i].size(); j++) {
-			if ( datos[i][j] == "RegularPorosity" || datos[i][j] == "Absence" || datos[i][j] == "NotDefined"
+			if ( datos[i][j] == "NoGrooves" || datos[i][j] == "Absence" || datos[i][j] == "NotDefined"
 				  || datos[i][j] == "Absent" ) {
-				datos_resultado[i] += 1;
-			} else if (  datos[i][j] == "RidgesFormation" || datos[i][j] == "Medium" || datos[i][j] == "Defined"
+				datos_resultado[i][j] = 1;
+			} else if (  datos[i][j] == "GroovesRest" || datos[i][j] == "Medium" || datos[i][j] == "Defined"
 						||	 (datos[i][j] == "Present" && j != 7 ) || datos[i][j] == "InProcess" || datos[i][j] == "PartiallyFormed"  ) {
-				datos_resultado[i] += 2;
-			} else if (  datos[i][j] == "RidgesAndGrooves" || datos[i][j] == "Much" || datos[i][j] == "Present" || datos[i][j] == "FormedWithoutRarefactions"  ) {
-				datos_resultado[i] += 3;
-			} else if (  datos[i][j] == "GroovesShallow" || datos[i][j] == "FormedWitFewRarefactions"  ) {
-				datos_resultado[i] += 4;
-			} else if (  datos[i][j] == "GroovesRest" || datos[i][j] == "FormedWithLotRecessesAndProtrusions" ) {
-				datos_resultado[i] += 5;
-			} else if (  datos[i][j] == "NoGrooves" ) {
-				datos_resultado[i] += 6;
+				datos_resultado[i][j] = 2;
+			} else if (  datos[i][j] == "GroovesShallow" || datos[i][j] == "Much" || datos[i][j] == "Present" || datos[i][j] == "FormedWithoutRarefactions"  ) {
+				datos_resultado[i][j] = 3;
+			} else if (  datos[i][j] == "RidgesAndGrooves" || datos[i][j] == "FormedWitFewRarefactions"  ) {
+				datos_resultado[i][j] = 4;
+			} else if (  datos[i][j] == "RidgesFormation" || datos[i][j] == "FormedWithLotRecessesAndProtrusions" ) {
+				datos_resultado[i][j] = 5;
+			} else if (  datos[i][j] == "RegularPorosity" ) {
+				datos_resultado[i][j] = 6;
 			}
 		}
 
@@ -90,10 +90,7 @@ int main(int argc, char ** argv) {
 
 	auto resultado_fases = preprocesar_fases(datos, etiquetas);
 
-	std::vector<std::vector<double> > resultado_datos;
-	resultado_datos.push_back(resultado_fases.first);
-
-	algoritmos_poblaciones::escribir_datos(salida, resultado_datos, resultado_fases.second, separador);
+	algoritmos_poblaciones::escribir_datos(salida, resultado_fases.first, resultado_fases.second, separador);
 
 
 }
