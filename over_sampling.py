@@ -3,34 +3,35 @@
 from imblearn.over_sampling import BorderlineSMOTE
 import pandas as pd
 import csv
+import sys
 
-conjuntos = ["salida.dat"]
-nombres_salida = ["salida_over_sampling.dat"]
+if len(sys.argv) != 3:
+	print("ERROR: Introduzca el nombre del fichero de datos y la ruta de salida")
+	exit()
 
-for conjunto, salida in zip(conjuntos, nombres_salida):
-	with open(conjunto) as archivo_csv:
-        # leemos del csv
-		reader = csv.reader(archivo_csv,  delimiter = ',')
-        # por cada linea
-		lineas = [i for i in reader]
-		X = [dato[:-1] for dato in lineas]
-		y = [dato[-1] for dato in lineas]
+conjunto = sys.argv[1]
+salida = sys.argv[2]
 
-	oversample = BorderlineSMOTE()
-	X, y = oversample.fit_resample(X, y)
+with open(conjunto) as archivo_csv:
+    # leemos del csv
+	reader = csv.reader(archivo_csv,  delimiter = ',')
+    # por cada linea
+	lineas = [i for i in reader]
+	X = [dato[:-1] for dato in lineas]
+	y = [dato[-1] for dato in lineas]
 
-	X = [ list(map(lambda x: round(x), dato)) for dato in X]
+oversample = BorderlineSMOTE()
+X, y = oversample.fit_resample(X, y)
 
-	print(len(X))
-	print(len(y))
+X = [ list(map(lambda x: round(x), dato)) for dato in X]
 
-	f = open(salida, "w")
+f = open(salida, "w")
 
-	i = 0
-	for dato in X:
-		for valor in dato:
-			f.write(str(valor))
-			f.write(',')
-		f.write(y[i])
-		f.write("\n")
-		i += 1
+i = 0
+for dato in X:
+	for valor in dato:
+		f.write(str(valor))
+		f.write(',')
+	f.write(y[i])
+	f.write("\n")
+	i += 1
