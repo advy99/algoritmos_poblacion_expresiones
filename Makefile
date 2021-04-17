@@ -74,7 +74,7 @@ gtestflags = -I$(gtest) $(gtestlibs)
 .PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
 
 # target por defecto
-all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo doc FIN
+all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_suma_caracteristicas doc FIN
 
 
 # target para compilar solo los tests
@@ -100,9 +100,14 @@ $(OBJETIVO_PREPROCESADO): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO_PREPROCESADO) finalizada con exito.\e[0m\n\n"
 
 $(BIN)/main_conteo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_conteo.o
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_PREPROCESADO) a partir de $(OBJETOS_PREPROCESADO)\n"
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_conteo a partir de $(OBJ)/main_conteo.o\n"
 	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_conteo.o -o $(BIN)/main_conteo $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(BIN)/main_conteo finalizada con exito.\e[0m\n\n"
+
+$(BIN)/main_suma_caracteristicas : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_suma_caracteristicas.o
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_suma_caracteristicas a partir de $(OBJ)/main_suma_caracteristicas.o\n"
+	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_suma_caracteristicas.o -o $(BIN)/main_suma_caracteristicas $(F_OPENMP) $(gtestflags) -I$(INC)
+	@printf "\n\e[36mCompilación de $(BIN)/main_suma_caracteristicas finalizada con exito.\e[0m\n\n"
 
 # funcion para compilar un objeto
 define compilar_objeto
@@ -162,8 +167,12 @@ $(OBJ)/main.o: $(SRC)/main.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/Random.hp
 $(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC_ALG_POB)/preprocesado.hpp
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/main_conteo.o: $(SRC)/main_conteo.cpp
+$(OBJ)/main_conteo.o: $(SRC)/main_conteo.cpp $(INC_ALG_POB)/preprocesado.hpp
 	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/main_suma_caracteristicas.o: $(SRC)/main_suma_caracteristicas.cpp $(INC_ALG_POB)/preprocesado.hpp
+	$(call compilar_objeto,$<,$@)
+
 
 # mensaje de fin
 FIN:
