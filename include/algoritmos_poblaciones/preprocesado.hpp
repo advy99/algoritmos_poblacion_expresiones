@@ -19,16 +19,16 @@ namespace algoritmos_poblaciones {
 /**
  * @brief Separar unos datos y etiquetas dadas en dos conjuntos de entrenamiento y test,
  *  de forma aleatorio o no aleatoria, si COMIENZO != 1
- * 
+ *
  * @tparam T tipo de los datos a separar
  * @param datos Características a separar
  * @param etiquetas Etiquetas de los datos a separar
  * @param PORCENTAJE_TEST Porcentaje de datos que formaran parte del conjunto de test, por defecto 0.2
  * @param COMIENZO Indice a partir de donde los datos pasaran a ser de test. Si vale -1, se escogeran los
- *  datos de test de forma aleatoria. Por defecto -1 
- * 
+ *  datos de test de forma aleatoria. Por defecto -1
+ *
  * @return Pareja de entrenamiento y test. Cada uno de estos es una pareja de datos y etiquetas
- * 
+ *
  */
 
 template <class T>
@@ -72,19 +72,6 @@ std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string & fichero_dat
 template <class T>
 void escribir_datos(const std::string & salida, const matriz<T> & datos, const std::vector<T> & etiquetas, const char delimitador = ',');
 
-
-
-/**
-  * @brief Contar el número de datos de cada clase
-  *
-  * @tparam T tipo de los datos a escribir
-  * @param etiquetas Etiquetas de donde contar el número de elementos de cada clase
-  * @param salida Nombre del fichero donde guardar el conteo
-  *
-  */
-
-template <class T>
-void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida);
 
 /**
   * @brief Reordenar de forma aleatoria los datos

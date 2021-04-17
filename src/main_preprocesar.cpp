@@ -11,19 +11,19 @@ std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<s
 		datos_resultado[i].resize(datos[i].size());
 
 		for ( unsigned j = 0; j < datos[i].size(); j++) {
-			if ( datos[i][j] == "RegularPorosity" || datos[i][j] == "Absence" || datos[i][j] == "NotDefined"
+			if ( datos[i][j] == "NoGrooves" || datos[i][j] == "Absence" || datos[i][j] == "NotDefined"
 				  || datos[i][j] == "Absent" ) {
 				datos_resultado[i][j] = 1;
-			} else if (  datos[i][j] == "RidgesFormation" || datos[i][j] == "Medium" || datos[i][j] == "Defined"
+			} else if (  datos[i][j] == "GroovesRest" || datos[i][j] == "Medium" || datos[i][j] == "Defined"
 						||	 (datos[i][j] == "Present" && j != 7 ) || datos[i][j] == "InProcess" || datos[i][j] == "PartiallyFormed"  ) {
 				datos_resultado[i][j] = 2;
-			} else if (  datos[i][j] == "RidgesAndGrooves" || datos[i][j] == "Much" || datos[i][j] == "Present" || datos[i][j] == "FormedWithoutRarefactions"  ) {
+			} else if (  datos[i][j] == "GroovesShallow" || datos[i][j] == "Much" || datos[i][j] == "Present" || datos[i][j] == "FormedWithoutRarefactions"  ) {
 				datos_resultado[i][j] = 3;
-			} else if (  datos[i][j] == "GroovesShallow" || datos[i][j] == "FormedWitFewRarefactions"  ) {
+			} else if (  datos[i][j] == "RidgesAndGrooves" || datos[i][j] == "FormedWitFewRarefactions"  ) {
 				datos_resultado[i][j] = 4;
-			} else if (  datos[i][j] == "GroovesRest" || datos[i][j] == "FormedWithLotRecessesAndProtrusions" ) {
+			} else if (  datos[i][j] == "RidgesFormation" || datos[i][j] == "FormedWithLotRecessesAndProtrusions" ) {
 				datos_resultado[i][j] = 5;
-			} else if (  datos[i][j] == "NoGrooves" ) {
+			} else if (  datos[i][j] == "RegularPorosity" ) {
 				datos_resultado[i][j] = 6;
 			}
 		}

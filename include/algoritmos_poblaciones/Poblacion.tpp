@@ -191,6 +191,57 @@ Poblacion<T> & Poblacion<T> :: operator= (const Poblacion & otra) {
 
 }
 
+template <class T>
+void Poblacion<T> :: setIndividuo(const unsigned indice, const T & n_individuo) {
+	expresiones_[indice] = n_individuo;
+}
+
+template <class T>
+void Poblacion<T> :: redimensionar(const unsigned nuevo_tam) {
+	if ( nuevo_tam == 0 ){
+		liberarMemoria();
+	} else {
+		T * antigua_poblacion = expresiones_;
+		unsigned tam_antiguo = tam_poblacion_;
+
+		reservarMemoria(nuevo_tam);
+
+		unsigned tam_a_copiar = std::min(nuevo_tam, tam_antiguo);
+
+		for ( unsigned i = 0; i < tam_a_copiar; i++) {
+			expresiones_[i] = antigua_poblacion[i];
+		}
+
+		delete [] antigua_poblacion;
+	}
+
+
+}
+
+template <class T>
+void Poblacion<T> :: insertar(const T & nuevo_elemento) {
+	redimensionar(tam_poblacion_ + 1);
+
+	expresiones_[tam_poblacion_ - 1] = nuevo_elemento;
+
+}
+
+template <class T>
+void Poblacion<T> :: eliminar(const unsigned posicion) {
+
+	T ultimo_elemento = expresiones_[tam_poblacion_ - 1];
+
+	redimensionar(tam_poblacion_ - 1);
+
+	for ( unsigned i = posicion; i < tam_poblacion_ - 1; i++) {
+		expresiones_[i] = expresiones_[i + 1];
+	}
+
+	if ( tam_poblacion_ > 0){
+		expresiones_[tam_poblacion_ - 1] = ultimo_elemento;
+	}
+
+}
 
 
 } // namespace algoritmos_poblaciones
