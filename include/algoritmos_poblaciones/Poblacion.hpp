@@ -278,6 +278,8 @@ class Poblacion{
 
 		void eliminar(const unsigned posicion);
 
+		//  TODO : Metodo ordenar poblacion por fitness
+
 };
 
 } // namespace algoritmos_poblaciones
