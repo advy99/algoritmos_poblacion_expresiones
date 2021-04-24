@@ -13,12 +13,6 @@
 namespace algoritmos_poblaciones {
 
 
-/**
- * @brief Definicion del tipo de la función de evaluacion
- *
- */
-
-typedef double (*funcion_evaluacion_t)(const std::vector<double> & datos, const std::vector<double> & etiquetas);
 
 /**
   *  @brief Clase Parametros

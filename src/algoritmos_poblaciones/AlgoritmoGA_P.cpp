@@ -42,7 +42,7 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 	bool modificado_hijo2;
 
 	// evaluo la poblacion al inicio
-	poblacion_.evaluarPoblacion(datos_, output_datos_);
+	poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 
 	Expresion_GAP mejor_individuo = poblacion_.getMejorIndividuo();
 
@@ -131,7 +131,7 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 		aplicarElitismo(mejor_individuo);
 
-		poblacion_.evaluarPoblacion(datos_, output_datos_);
+		poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 
 		mejor_individuo = poblacion_.getMejorIndividuo();
 

@@ -316,7 +316,8 @@ double Expresion :: evaluarDato(const std::vector<double> & dato) const {
 
 
 void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
-											  const std::vector<double> & etiquetas){
+											  const std::vector<double> & etiquetas,
+										  	  funcion_evaluacion_t f_evaluacion){
 
 	// almacenamos como resultado el valor de fitness
 	double resultado = fitness_;
@@ -336,7 +337,7 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 		}
 
 		// hacemos la media de los cuadrados
-		resultado = raiz_error_cuadratico_medio(valores_predecidos, etiquetas);
+		resultado = f_evaluacion(valores_predecidos, etiquetas);
 
 
 	}

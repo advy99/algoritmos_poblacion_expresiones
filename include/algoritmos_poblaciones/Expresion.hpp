@@ -81,7 +81,7 @@ class Expresion{
 		  */
 		Arbol arbol_ = nullptr;
 
-		
+
 		/**
 		  * @brief Número de variables que puede tomar la expresion, que conforma el conjunto de datos.
 		  */
@@ -149,7 +149,7 @@ class Expresion{
 		/**
 		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
 		  * la expresión.
-		  * 
+		  *
 		  * @param pila Pila de la expresion por evaluar
 		  * @param dato Dato a evaluar
 		  *
@@ -283,16 +283,18 @@ class Expresion{
 		  *
 		  * @param datos Datos con los que evaluar la expresion
 		  * @param etiquetas Etiquetas correspondientes a los datos para evaluar.
+		  * @param f_evaluacion Funcion de evaluación a utilizar
 		  *
 		  * @post fitness = Valor de ajuste de la expresión.
 		  */
 
 		void evaluarExpresion(const std::vector<std::vector<double>> & datos,
-									 const std::vector<double> & etiquetas);
+									 const std::vector<double> & etiquetas,
+								 	 funcion_evaluacion_t f_evaluacion);
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.
-		  * 
+		  *
 		  * @param dato Dato a evaluar
 		  *
 		  * @return Valor estimado de la regresión para ese dato.
