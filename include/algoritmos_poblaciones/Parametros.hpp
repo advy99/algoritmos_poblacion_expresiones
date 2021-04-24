@@ -14,6 +14,13 @@ namespace algoritmos_poblaciones {
 
 
 /**
+ * @brief Definicion del tipo de la función de evaluacion
+ *
+ */
+
+typedef double (*funcion_evaluacion_t)(const std::vector<double> & datos, const std::vector<double> & etiquetas);
+
+/**
   *  @brief Clase Parametros
   *
   * Una instancia del tipo Parametros representará los parametros que podemos utilzar
@@ -116,6 +123,15 @@ class Parametros {
 		 */
 		bool mostrar_evolucion_;
 
+
+		/**
+		 *
+		 * @brief Puntero a la función de evaluacion a utilizar
+		 *
+		 */
+
+		 funcion_evaluacion_t funcion_evaluacion_;
+
 	public:
 
 		/**
@@ -134,6 +150,7 @@ class Parametros {
 		 */
 
 		Parametros(const int N_EVALS = 100000,
+					  funcion_evaluacion_t = algoritmos_poblaciones::error_cuadratico_medio,
 			 		  const double PROB_CRUCE_GP = 0.8,
 					  const double PROB_CRUCE_GA = 0.8,
 					  const double PROB_MUTA_GP = 0.01,
@@ -156,6 +173,7 @@ class Parametros {
 		 */
 
 		Parametros(const int N_EVALS = 100000,
+					  funcion_evaluacion_t = algoritmos_poblaciones::error_cuadratico_medio,
 			 		  const double PROB_CRUCE_GP = 0.8,
 					  const double PROB_MUTA_GP = 0.1,
 					  const int TAM_TORNEO = 15,
@@ -211,6 +229,12 @@ class Parametros {
 		 *  @return Booleano: verdadero si se muestra la evolucion, falso si no
 		 */
 		bool getMostrarEvaluacion() const;
+
+		/**
+		 *  @brief Obtener la funcion de evaluacion
+		 *  @return Puntero a la función de evaluacion a utilizar
+		 */
+		funcion_evaluacion_t getFuncionEvaluacion() const;
 
 };
 
