@@ -220,6 +220,7 @@ class Poblacion{
 		  *
 		  * @param datos Datos con los que se evaluará la población
 		  * @param etiquetas Valores correspondientes a los datos dados
+		  * @param funcion_evaluacion Funcion de evaluación a utilizar
 		  *
 		  * @pre datos.size == etiquetas.size
 		  *
@@ -228,7 +229,8 @@ class Poblacion{
 		  */
 
 		void evaluarPoblacion(const std::vector<std::vector<double> > & datos,
-									 const std::vector<double> & etiquetas);
+									 const std::vector<double> & etiquetas,
+								 	 funcion_evaluacion_t funcion_evaluacion);
 
 		/**
 		 * @brief Seleccionar un individuo de la población

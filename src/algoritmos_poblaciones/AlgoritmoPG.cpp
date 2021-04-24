@@ -42,7 +42,7 @@ void AlgoritmoPG :: ajustar(const Parametros & parametros) {
 	bool modificado_hijo2;
 
 	// evaluo la poblacion al inicio
-	poblacion_.evaluarPoblacion(datos_, output_datos_);
+	poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 
 	Expresion mejor_individuo = poblacion_.getMejorIndividuo();
 
@@ -96,7 +96,7 @@ void AlgoritmoPG :: ajustar(const Parametros & parametros) {
 
 
 		// evaluamos
-		poblacion_.evaluarPoblacion(datos_, output_datos_);
+		poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 
 		mejor_individuo = poblacion_.getMejorIndividuo();
 

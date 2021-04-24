@@ -79,19 +79,20 @@ void Poblacion<T> :: copiarDatos(const Poblacion & otra){
 
 template <class T>
 void Poblacion<T> :: evaluarPoblacion(const std::vector<std::vector<double> > & datos,
-											const std::vector<double> & etiquetas){
+												  const std::vector<double> & etiquetas,
+											  	  funcion_evaluacion_t f_evaluacion){
 	// establecemos el mejor individuo al primero
 	mejor_individuo_ = 0;
 
 	if (!expresiones_[0].estaEvaluada()) {
-		expresiones_[0].evaluarExpresion(datos, etiquetas);
+		expresiones_[0].evaluarExpresion(datos, etiquetas, f_evaluacion);
 	}
 
 	// evaluamos el resto de individuos
 	#pragma omp parallel for
 	for ( unsigned i = 1; i < tam_poblacion_; i++){
 		if (!expresiones_[i].estaEvaluada()){
-			expresiones_[i].evaluarExpresion(datos, etiquetas);
+			expresiones_[i].evaluarExpresion(datos, etiquetas, f_evaluacion);
 		}
 
 		#pragma omp critical

@@ -42,7 +42,7 @@ int main(int argc, char ** argv){
 
 	int num_trabajos = atoi(argv[12]);
 
-	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, prob_cruce_gp,
+	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, algoritmos_poblaciones::error_cuadratico_medio, prob_cruce_gp,
 		 																	  prob_cruce_ga, prob_muta_gp,
 																			  prob_muta_ga, prob_cruce_intra,
 																			  tam_torneo, false);
