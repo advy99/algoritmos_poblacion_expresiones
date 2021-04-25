@@ -6,30 +6,30 @@
 
 
 TEST (Nodo, IgualElMismo) {
-	algoritmos_poblaciones::Nodo nodo;
+	algoritmos_poblacion_expresiones::Nodo nodo;
 
 	EXPECT_EQ(nodo, nodo);
 }
 
 TEST (Nodo, ConstructorCopia) {
-	algoritmos_poblaciones::Nodo nodo;
-	algoritmos_poblaciones::Nodo otro(nodo);
+	algoritmos_poblacion_expresiones::Nodo nodo;
+	algoritmos_poblacion_expresiones::Nodo otro(nodo);
 
 	EXPECT_EQ(nodo, otro);
 }
 
 TEST (Nodo, ConstructorDefecto) {
-	algoritmos_poblaciones::Nodo nodo;
-	algoritmos_poblaciones::Nodo otro;
+	algoritmos_poblacion_expresiones::Nodo nodo;
+	algoritmos_poblacion_expresiones::Nodo otro;
 
 	EXPECT_EQ(nodo, otro);
 }
 
 TEST (Nodo, Asignacion) {
-	algoritmos_poblaciones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
+	algoritmos_poblacion_expresiones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 
-	algoritmos_poblaciones::Nodo otro;
+	algoritmos_poblacion_expresiones::Nodo otro;
 
 	otro = nodo;
 
@@ -37,11 +37,11 @@ TEST (Nodo, Asignacion) {
 }
 
 TEST (Nodo, DistintosTipos) {
-	algoritmos_poblaciones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
+	algoritmos_poblacion_expresiones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 
-	algoritmos_poblaciones::Nodo otro;
-	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
+	algoritmos_poblacion_expresiones::Nodo otro;
+	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
 
 	EXPECT_NE(nodo, otro);
@@ -49,11 +49,11 @@ TEST (Nodo, DistintosTipos) {
 
 
 TEST (Nodo, MismoTipoValorDistinto) {
-	algoritmos_poblaciones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
+	algoritmos_poblacion_expresiones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
-	algoritmos_poblaciones::Nodo otro;
-	otro.setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
+	algoritmos_poblacion_expresiones::Nodo otro;
+	otro.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
 	otro.setValor(-23);
 
@@ -61,12 +61,12 @@ TEST (Nodo, MismoTipoValorDistinto) {
 }
 
 TEST (Nodo, DistintoTipoValorIgual) {
-	algoritmos_poblaciones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
+	algoritmos_poblacion_expresiones::Nodo nodo;
+	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 	nodo.setValor(1);
 
-	algoritmos_poblaciones::Nodo otro;
-	otro.setTipoNodo(algoritmos_poblaciones::TipoNodo::VARIABLE);
+	algoritmos_poblacion_expresiones::Nodo otro;
+	otro.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
 
 	otro.setValor(1);
 

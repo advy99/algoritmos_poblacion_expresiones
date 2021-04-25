@@ -21,7 +21,7 @@
  */
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   *  @brief Clase AlgoritmoGA_P
@@ -139,7 +139,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 
 };
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
 
 
 #endif

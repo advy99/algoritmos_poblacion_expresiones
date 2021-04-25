@@ -1,5 +1,5 @@
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 template <class T>
 AlgoritmoPoblacion<T> :: AlgoritmoPoblacion() {
@@ -253,4 +253,4 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones

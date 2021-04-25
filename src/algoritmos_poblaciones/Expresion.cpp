@@ -1,7 +1,7 @@
 #include "algoritmos_poblaciones/Expresion.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 Expresion :: Expresion(const unsigned prof_max){
 
@@ -684,4 +684,4 @@ bool Expresion :: operator != ( const Expresion & otra) const {
 	return !(*this == otra);
 }
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones

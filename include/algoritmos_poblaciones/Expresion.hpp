@@ -11,7 +11,7 @@
 #include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   *  @brief Clase Expresion
@@ -471,6 +471,6 @@ class Expresion{
 
 };
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
 
 #endif

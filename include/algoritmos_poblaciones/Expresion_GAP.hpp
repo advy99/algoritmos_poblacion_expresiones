@@ -16,7 +16,7 @@
  *
  */
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   *  @brief Clase Expresion_GAP

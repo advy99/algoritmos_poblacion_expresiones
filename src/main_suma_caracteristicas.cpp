@@ -42,7 +42,7 @@ int main(int argc, char ** argv) {
 		separador = argv[4][0];
 	}
 
-	auto resultado = algoritmos_poblaciones::leer_datos<double>(fichero, comentario, separador);
+	auto resultado = algoritmos_poblacion_expresiones::leer_datos<double>(fichero, comentario, separador);
 
 	matriz<double> datos = resultado.first;
 	std::vector<double> etiquetas = resultado.second;
@@ -58,7 +58,7 @@ int main(int argc, char ** argv) {
 	}
 
 
-	algoritmos_poblaciones::escribir_datos(salida, datos_finales, etiquetas, separador);
+	algoritmos_poblacion_expresiones::escribir_datos(salida, datos_finales, etiquetas, separador);
 
 
 }

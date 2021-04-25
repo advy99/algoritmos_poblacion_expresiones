@@ -6,13 +6,13 @@
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
 TEST (Expresion, IgualElMismo) {
-	algoritmos_poblaciones::Expresion exp;
+	algoritmos_poblacion_expresiones::Expresion exp;
 
 	EXPECT_EQ(exp, exp);
 }
 
 TEST (Expresion, IgualElMismoConDatos) {
-	algoritmos_poblaciones::Expresion exp;
+	algoritmos_poblacion_expresiones::Expresion exp;
 
 	exp.generarExpresionAleatoria(10, 0.3, 4);
 
@@ -21,39 +21,39 @@ TEST (Expresion, IgualElMismoConDatos) {
 
 
 TEST ( Expresion, ConstructorPorDefecto) {
-	algoritmos_poblaciones::Expresion exp1;
-	algoritmos_poblaciones::Expresion exp2;
+	algoritmos_poblacion_expresiones::Expresion exp1;
+	algoritmos_poblacion_expresiones::Expresion exp2;
 
 	EXPECT_EQ(exp1, exp2);
 }
 
 TEST ( Expresion, ConstructorCopia) {
-	algoritmos_poblaciones::Expresion exp1;
+	algoritmos_poblacion_expresiones::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	algoritmos_poblaciones::Expresion exp2(exp1);
+	algoritmos_poblacion_expresiones::Expresion exp2(exp1);
 
 	EXPECT_EQ(exp1, exp2);
 }
 
 TEST ( Expresion, OperadorAsignacion) {
-	algoritmos_poblaciones::Expresion exp1;
+	algoritmos_poblacion_expresiones::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	algoritmos_poblaciones::Expresion exp2;
+	algoritmos_poblacion_expresiones::Expresion exp2;
 	exp2 = exp1;
 
 	EXPECT_EQ(exp1, exp2);
 }
 
 // TEST ( Expresion, TotalmenteIguales) {
-// 	algoritmos_poblaciones::Expresion exp1;
+// 	algoritmos_poblacion_expresiones::Expresion exp1;
 //
 // 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 //
-// 	algoritmos_poblaciones::Expresion exp2;
+// 	algoritmos_poblacion_expresiones::Expresion exp2;
 // 	exp2 = exp1;
 //
 // 	EXPECT_TRUE(exp1.totalmenteIguales(exp2));
@@ -61,11 +61,11 @@ TEST ( Expresion, OperadorAsignacion) {
 
 
 TEST ( Expresion, AsignarArbol) {
-	algoritmos_poblaciones::Expresion exp1;
+	algoritmos_poblacion_expresiones::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	algoritmos_poblaciones::Expresion exp2;
+	algoritmos_poblacion_expresiones::Expresion exp2;
 
 	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
 
@@ -73,11 +73,11 @@ TEST ( Expresion, AsignarArbol) {
 }
 //
 // TEST ( Expresion, AsignarCromosoma) {
-// 	algoritmos_poblaciones::Expresion exp1;
+// 	algoritmos_poblacion_expresiones::Expresion exp1;
 //
 // 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 //
-// 	algoritmos_poblaciones::Expresion exp2;
+// 	algoritmos_poblacion_expresiones::Expresion exp2;
 //
 // 	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
 //
@@ -85,11 +85,11 @@ TEST ( Expresion, AsignarArbol) {
 // }
 
 TEST (Expresion, MismaCadena) {
-	algoritmos_poblaciones::Expresion exp1;
+	algoritmos_poblacion_expresiones::Expresion exp1;
 
 	exp1.generarExpresionAleatoria(10, 0.3, 3);
 
-	algoritmos_poblaciones::Expresion exp2(exp1);
+	algoritmos_poblacion_expresiones::Expresion exp2(exp1);
 
 	EXPECT_EQ(exp1.stringExpresion(), exp2.stringExpresion());
 
@@ -97,20 +97,20 @@ TEST (Expresion, MismaCadena) {
 
 TEST (Expresion, EvaluarDato) {
 
-	algoritmos_poblaciones::Expresion_GAP exp1;
+	algoritmos_poblacion_expresiones::Expresion_GAP exp1;
 
-	algoritmos_poblaciones::Arbol arbol_tmp = new algoritmos_poblaciones::Nodo[5];
+	algoritmos_poblacion_expresiones::Arbol arbol_tmp = new algoritmos_poblacion_expresiones::Nodo[5];
 
-	arbol_tmp[0].setTipoNodo(algoritmos_poblaciones::TipoNodo::MAS);
+	arbol_tmp[0].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
-	arbol_tmp[1].setTipoNodo(algoritmos_poblaciones::TipoNodo::VARIABLE);
+	arbol_tmp[1].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
 	arbol_tmp[1].setValor(0);
 
-	arbol_tmp[2].setTipoNodo(algoritmos_poblaciones::TipoNodo::POR);
+	arbol_tmp[2].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::POR);
 
-	arbol_tmp[3].setTipoNodo(algoritmos_poblaciones::TipoNodo::VARIABLE);
+	arbol_tmp[3].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
 	arbol_tmp[3].setValor(1);
-	arbol_tmp[4].setTipoNodo(algoritmos_poblaciones::TipoNodo::NUMERO);
+	arbol_tmp[4].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 	arbol_tmp[4].setValor(1);
 
 	double * n_cromosoma = new double[5];
@@ -129,7 +129,7 @@ TEST (Expresion, EvaluarDato) {
 
 	double resultado = exp1.evaluarDato(dato);
 
-	EXPECT_TRUE( algoritmos_poblaciones::comparar_reales(resultado, 9.54 ));
+	EXPECT_TRUE( algoritmos_poblacion_expresiones::comparar_reales(resultado, 9.54 ));
 
 }
 

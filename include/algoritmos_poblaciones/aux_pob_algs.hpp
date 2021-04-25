@@ -27,7 +27,7 @@
 #include <type_traits>
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
  * @brief Definicion del tipo de la función de evaluacion

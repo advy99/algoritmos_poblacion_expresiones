@@ -9,23 +9,23 @@ void conteo_clases (const std::vector<T> & etiquetas, const std::string & salida
 	std::vector<int> elementos_cada_fase(10, 0);
 
 	for ( auto it = etiquetas.begin(); it != etiquetas.end(); ++it) {
-		if ( algoritmos_poblaciones::comparar_reales((*it), 19.0) ) {
+		if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 19.0) ) {
 			elementos_cada_fase[0]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 20.5)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 20.5)) {
 			elementos_cada_fase[1]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 23.0)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 23.0)) {
 			elementos_cada_fase[2]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 25.5)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 25.5)) {
 			elementos_cada_fase[3]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 28.5)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 28.5)) {
 			elementos_cada_fase[4]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 32.5)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 32.5)) {
 			elementos_cada_fase[5]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 37.0)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 37.0)) {
 			elementos_cada_fase[6]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 42.0)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 42.0)) {
 			elementos_cada_fase[7]++;
-		} else if ( algoritmos_poblaciones::comparar_reales((*it), 47.0)) {
+		} else if ( algoritmos_poblacion_expresiones::comparar_reales((*it), 47.0)) {
 			elementos_cada_fase[8]++;
 		} else {
 			elementos_cada_fase[9]++;
@@ -64,7 +64,7 @@ int main(int argc, char ** argv) {
 		separador = argv[4][0];
 	}
 
-	auto datos = algoritmos_poblaciones::leer_datos<double>(fichero, comentario, separador);
+	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(fichero, comentario, separador);
 
 	conteo_clases(datos.second, salida);
 

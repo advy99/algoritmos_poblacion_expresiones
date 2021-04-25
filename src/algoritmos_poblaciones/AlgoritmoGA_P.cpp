@@ -1,6 +1,6 @@
 #include "algoritmos_poblaciones/AlgoritmoGA_P.hpp"
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 
 AlgoritmoGA_P :: AlgoritmoGA_P(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
@@ -146,4 +146,4 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 }
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones

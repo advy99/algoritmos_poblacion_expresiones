@@ -42,7 +42,7 @@ int main(int argc, char ** argv){
 
 	int num_trabajos = atoi(argv[12]);
 
-	algoritmos_poblaciones::Parametros parametros_ejecucion(evaluaciones, algoritmos_poblaciones::error_cuadratico_medio, prob_cruce_gp,
+	algoritmos_poblacion_expresiones::Parametros parametros_ejecucion(evaluaciones, algoritmos_poblacion_expresiones::error_cuadratico_medio, prob_cruce_gp,
 		 																	  prob_cruce_ga, prob_muta_gp,
 																			  prob_muta_ga, prob_cruce_intra,
 																			  tam_torneo, false);
@@ -53,10 +53,10 @@ int main(int argc, char ** argv){
 	#endif
 
 
-	auto datos = algoritmos_poblaciones::leer_datos<double>(std::string(argv[1]), '@', ',');
-	auto train_test_split = algoritmos_poblaciones::separar_train_test(datos.first, datos.second);
+	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(std::string(argv[1]), '@', ',');
+	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
 
-	algoritmos_poblaciones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
+	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
@@ -78,13 +78,13 @@ int main(int argc, char ** argv){
 
 	auto predecidos_GAP = myGAP.predecir(train_test_split.second.first);
 
-	double error_test_GAP = algoritmos_poblaciones::raiz_error_cuadratico_medio(predecidos_GAP, train_test_split.second.second);
+	double error_test_GAP = algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio(predecidos_GAP, train_test_split.second.second);
 
 	std::cout << "RMSE (Root Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
 
 
 	// hacemos lo mismo pero con PG
-	algoritmos_poblaciones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
+	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
@@ -104,7 +104,7 @@ int main(int argc, char ** argv){
 
 	auto predecidos_GP = myPG.predecir(train_test_split.second.first);
 
-	double error_test_GP = algoritmos_poblaciones::raiz_error_cuadratico_medio(predecidos_GP, train_test_split.second.second);
+	double error_test_GP = algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio(predecidos_GP, train_test_split.second.second);
 
 	std::cout << "RMSE (Root Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
 

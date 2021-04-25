@@ -1,4 +1,4 @@
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 template <class T>
 Poblacion<T> :: Poblacion(){
@@ -245,4 +245,4 @@ void Poblacion<T> :: eliminar(const unsigned posicion) {
 }
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones

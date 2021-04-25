@@ -1,7 +1,7 @@
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 Expresion_GAP :: Expresion_GAP(const unsigned prof_max){
 

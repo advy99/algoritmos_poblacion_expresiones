@@ -1,6 +1,6 @@
 #include "algoritmos_poblaciones/Nodo.hpp"
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 Nodo :: Nodo(){
 	tipo_nodo_ = TipoNodo::NUMERO;
@@ -89,4 +89,4 @@ bool Nodo :: operator!=(const Nodo & otro) const {
 }
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
