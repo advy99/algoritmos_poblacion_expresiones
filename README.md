@@ -42,7 +42,7 @@ Existen diversas formas de compilar, todas ellas utilizando el comando `make`.
 - Target `clean` (`make clean`): Limpiar los objetos tras una compilación.
 - Variable `OPTIMIZACION` (`make OPTIMIZACION=3`): Por defecto 3, asignar un nivel de compilación. Los posibles valores son 0, 1, 2, 3 y g.
 - Variable `OPENMP` (`make OPENMP=1`): Por defecto 1. Activar o desactivar la compilación con OpenMP, 0 desactivado, 1 activado.
-- Variable `DEBUG` (`make DEBUG=1`): Por defecto 1. Activar o desactivar la compilación con símbolos de depuración.
+- Variable `DEBUG` (`make DEBUG=0`): Por defecto 0. Activar o desactivar la compilación con símbolos de depuración.
 - Variable `GPROF` (`make GPROF=0`): Por defecto 0. Activar o desactivar la compilación con GPROF de cara a hacer profiling al software.
 
 Siempre que se compile se recompilará la documentación, de cara a posibles cambios.
