@@ -44,9 +44,9 @@ class Expresion_GAP : public Expresion {
 		  * la expresion dada en
 		  *
 		  * rep.arbol_
-		  * 
+		  *
 		  * Su cromosoma
-		  * 
+		  *
 		  * rep.cromosoma_
 		  *
 		  * Así como su valor de ajuste en
@@ -304,18 +304,38 @@ class Expresion_GAP : public Expresion {
 
 		void mutarGA(const int generacion, const int max_gen);
 
+
 		/**
-		 * @brief Operador para comparar si dos expresiones son iguales, tanto arbol como cromosoma
+		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho
+		 *
+		 * @param otra Expresion con la que comprobar si esta en el mismo nicho
+		 *
+		 * @return Verdadero si están en el mismo nicho, falso si no.
+		 *
+		 */
+
+		bool mismoNicho(const Expresion_GAP & otra) const;
+
+		/**
+		 * @brief Operador para comparar si dos expresiones tienen el mismo cromosoma
 		 *
 		 * @param otra Expresión a comparar con la actual
 		 *
-		 * @pre Los cromosomas son de la misma longitud
 		 *
-		 * @return Verdadero si las expresiones son totalmente iguales
+		 * @return Verdadero si las expresiones tienen el mismo cromosoma
 		 */
 
-		bool totalmenteIguales(const Expresion_GAP & otra) const;
+		bool mismoCromosoma(const Expresion_GAP & otra) const;
 
+		/**
+		 * @brief Operador para comparar si dos expresiones son iguales
+		 *
+		 * @param otra Expresión a comparar con la actual
+		 *
+		 * @return Verdadero si las expresiones son iguales
+		 */
+
+		bool operator== (const Expresion_GAP & otra) const;
 
 };
 

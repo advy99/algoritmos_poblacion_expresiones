@@ -374,19 +374,6 @@ class Expresion{
 
 
 		/**
-		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho
-		 *
-		 * @param otra Expresion con la que comprobar si esta en el mismo nicho
-		 *
-		 * @return Verdadero si están en el mismo nicho, falso si no.
-		 *
-		 */
-
-		bool mismoNicho(const Expresion & otra) const;
-
-
-
-		/**
 		 * @brief Obtener donde está almacenado el arbol
 		 *
 		 * @return Arbol de la expresion
@@ -394,7 +381,15 @@ class Expresion{
 
 		Arbol getArbol() const;
 
+		/**
+		 * @brief Comprobar si esta Expresion tiene el mismo Arbol que otra.
+		 *
+		 * @param otra Expresion con la que comparar el árbol
+		 *
+		 * @return Verdadero si es el mismo árbol, falso en otro caso.
+		 */
 
+		bool mismoArbol( const Expresion & otra) const;
 
 
 		/**
