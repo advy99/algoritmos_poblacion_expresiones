@@ -7,11 +7,8 @@
 #ifndef GA_P_H_INCLUDED
 #define GA_P_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pob_algs.hpp"
-#include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Poblacion.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
-#include "algoritmos_poblaciones/Parametros.hpp"
 
 #include "Random.hpp"
 
@@ -76,14 +73,14 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 
 		/**
 		 *  @brief Contructor con 6 parametros, para utilizar el AlgoritmoGA_P dados una serie de datos con sus etiquetas asociadas
-		 * 
+		 *
 		 *  @param datos Datos a utilizar para el ajuste
 		 *  @param etiquetas Etiquetas asociadas a dichos datos
 		 *  @param seed Semilla aleatoria a utilizar
 		 *  @param tam_poblacion Tamaño de la poblacion del algoritmo
 		 *  @param prof Profundidad máxima de las expresiones utilizadas
 		 *  @param prob_var Probabilidad de que un Nodo sea una variable
-		 * 
+		 *
 		 */
 
 		AlgoritmoGA_P(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,

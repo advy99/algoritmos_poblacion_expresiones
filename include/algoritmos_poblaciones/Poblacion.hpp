@@ -7,7 +7,6 @@
 #ifndef POBLACION_H_INCLUDED
 #define POBLACION_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
