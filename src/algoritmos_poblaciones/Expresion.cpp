@@ -1,7 +1,7 @@
 #include "algoritmos_poblaciones/Expresion.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 Expresion :: Expresion(const unsigned prof_max){
 
@@ -502,12 +502,6 @@ unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 
 
 
-
-
-bool Expresion :: mismoNicho(const Expresion & otra) const {
-	return (*this == otra);
-}
-
 std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 															 std::string resultado,
 															 const bool izda) const{
@@ -668,9 +662,7 @@ void Expresion :: mutarGP (const int num_vars) {
 }
 
 
-
-bool Expresion :: operator == ( const Expresion & otra) const {
-
+bool Expresion :: mismoArbol( const Expresion & otra) const {
 	bool resultado = longitud_arbol_ == otra.longitud_arbol_;
 
 	for (unsigned i = 0; i < longitud_arbol_ && resultado; i++){
@@ -680,8 +672,21 @@ bool Expresion :: operator == ( const Expresion & otra) const {
 	return resultado;
 }
 
+bool Expresion :: operator == ( const Expresion & otra) const {
+	return mismoArbol(otra);
+}
+
 bool Expresion :: operator != ( const Expresion & otra) const {
 	return !(*this == otra);
 }
 
-} // namespace algoritmos_poblaciones
+bool Expresion :: mejorFitness (const Expresion & otra) {
+	return fitness_ < otra.getFitness();
+}
+
+bool Expresion :: operator < (const Expresion & otra) {
+	return mejorFitness(otra);
+}
+
+
+} // namespace algoritmos_poblacion_expresiones

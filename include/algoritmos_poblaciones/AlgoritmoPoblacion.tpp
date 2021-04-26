@@ -1,5 +1,5 @@
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 template <class T>
 AlgoritmoPoblacion<T> :: AlgoritmoPoblacion() {
@@ -13,6 +13,7 @@ void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsign
 	Random::setSeed(seed);
 
 	prof_expresiones_ = prof;
+	probabilidad_variable_ = prob_var;
 	generarPoblacion(tam_poblacion, prof, prob_var, true);
 
 }
@@ -232,13 +233,15 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 
 		cargarDatos(train_test_separado.first.first, train_test_separado.first.second);
 
+		generarPoblacion(poblacion_.getTamPoblacion(), prof_expresiones_, probabilidad_variable_, true);
+
 		// ajustamos para estos nuevos valores
 		ajustar(parametros);
 
 		// predecimos test para mirar el error
 		auto predicciones = predecir(train_test_separado.second.first);
 
-		media_error += raiz_error_cuadratico_medio(predicciones, train_test_separado.second.second);
+		media_error += parametros.getFuncionEvaluacion()(predicciones, train_test_separado.second.second);
 
 	}
 
@@ -253,4 +256,4 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones

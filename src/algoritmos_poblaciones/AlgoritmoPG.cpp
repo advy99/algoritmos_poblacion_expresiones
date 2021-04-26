@@ -1,6 +1,6 @@
 #include "algoritmos_poblaciones/AlgoritmoPG.hpp"
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 
 

@@ -1,7 +1,7 @@
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 Expresion_GAP :: Expresion_GAP(const unsigned prof_max){
 
@@ -193,10 +193,10 @@ void Expresion_GAP :: mutarGA(const int generacion, const int max_generaciones) 
 }
 
 
-bool Expresion_GAP :: totalmenteIguales ( const Expresion_GAP & otra) const {
+bool Expresion_GAP :: mismoCromosoma ( const Expresion_GAP & otra) const {
 
 	// comprobamos si el arbol es igual
-	bool resultado = (*this) == otra;
+	bool resultado = longitud_cromosoma_ == otra.getLongitudCromosoma();
 
 	// si el arbol coincide, comparamos el cromosoma
 	if ( resultado ) {
@@ -284,5 +284,13 @@ void Expresion_GAP :: asignarCromosoma(const double * nuevo_cromosoma, const uns
 
 }
 
+bool Expresion_GAP :: mismoNicho(const Expresion_GAP & otra) const {
+	return mismoArbol(otra);
+}
+
+
+bool Expresion_GAP :: operator== (const Expresion_GAP & otra) const {
+	return mismoCromosoma(otra) && mismoArbol(otra);
+}
 
 }

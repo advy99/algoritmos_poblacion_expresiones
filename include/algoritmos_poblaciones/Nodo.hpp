@@ -9,7 +9,7 @@
 
 #include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   * @brief Posibles tipos de nodo que utilizaremos 
@@ -204,6 +204,6 @@ class Nodo {
 
 typedef Nodo * Arbol;
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
 
 #endif

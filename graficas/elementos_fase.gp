@@ -17,7 +17,7 @@ set xrange [0:11]
 set xtics 1
 set ytics 25
 set xlabel "Clase"
-
+set grid ytics mytics xtics mxtics lw 2
 
 # lateralidad 0
 set title "Distribución de los datos originales de la lateralidad izquierda según su clase"

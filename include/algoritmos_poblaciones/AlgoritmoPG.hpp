@@ -8,9 +8,7 @@
 #ifndef ALGORITMO_PG_H_INCLUDED
 #define ALGORITMO_PG_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
-#include "algoritmos_poblaciones/Parametros.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
 /**
@@ -18,7 +16,7 @@
  *
  */
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   *  @brief Clase AlgoritmoPG
@@ -78,14 +76,14 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 
 		/**
 		 *  @brief Contructor con 6 parametros, para utilizar el AlgoritmoPG dados una serie de datos con sus etiquetas asociadas
-		 * 
+		 *
 		 *  @param datos Datos a utilizar para el ajuste
 		 *  @param etiquetas Etiquetas asociadas a dichos datos
 		 *  @param seed Semilla aleatoria a utilizar
 		 *  @param tam_poblacion Tamaño de la poblacion del algoritmo
 		 *  @param prof Profundidad máxima de las expresiones utilizadas
 		 *  @param prob_var Probabilidad de que un Nodo sea una variable
-		 * 
+		 *
 		 */
 
 		AlgoritmoPG(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,

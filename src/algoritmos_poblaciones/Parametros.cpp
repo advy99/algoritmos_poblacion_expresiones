@@ -1,7 +1,7 @@
 #include "algoritmos_poblaciones/Parametros.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 
 Parametros :: Parametros(const int N_EVALS,

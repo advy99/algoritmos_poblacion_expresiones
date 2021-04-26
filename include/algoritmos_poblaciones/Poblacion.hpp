@@ -7,11 +7,10 @@
 #ifndef POBLACION_H_INCLUDED
 #define POBLACION_H_INCLUDED
 
-#include "algoritmos_poblaciones/aux_pob_algs.hpp"
 #include "algoritmos_poblaciones/Expresion.hpp"
 #include "algoritmos_poblaciones/Expresion_GAP.hpp"
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 
 /**
@@ -280,11 +279,16 @@ class Poblacion{
 
 		void eliminar(const unsigned posicion);
 
-		//  TODO : Metodo ordenar poblacion por fitness
+		/**
+		  * @brief Ordenar la Poblacion de expresiones por fitness.
+		  *
+		  */
+
+		void ordenar();
 
 };
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
 
 #include "algoritmos_poblaciones/Poblacion.tpp"
 

@@ -1,4 +1,4 @@
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 
 template <class T>

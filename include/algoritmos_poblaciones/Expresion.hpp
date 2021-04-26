@@ -11,7 +11,7 @@
 #include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   *  @brief Clase Expresion
@@ -374,19 +374,6 @@ class Expresion{
 
 
 		/**
-		 * @brief Comprobar que la Expresion y otra dada pertenecen al mismo nicho
-		 *
-		 * @param otra Expresion con la que comprobar si esta en el mismo nicho
-		 *
-		 * @return Verdadero si están en el mismo nicho, falso si no.
-		 *
-		 */
-
-		bool mismoNicho(const Expresion & otra) const;
-
-
-
-		/**
 		 * @brief Obtener donde está almacenado el arbol
 		 *
 		 * @return Arbol de la expresion
@@ -394,7 +381,15 @@ class Expresion{
 
 		Arbol getArbol() const;
 
+		/**
+		 * @brief Comprobar si esta Expresion tiene el mismo Arbol que otra.
+		 *
+		 * @param otra Expresion con la que comparar el árbol
+		 *
+		 * @return Verdadero si es el mismo árbol, falso en otro caso.
+		 */
 
+		bool mismoArbol( const Expresion & otra) const;
 
 
 		/**
@@ -469,8 +464,25 @@ class Expresion{
 		friend std::ostream & operator<< (std::ostream & os,
 													 const Expresion & exp);
 
+
+		/**
+		 *
+		 * @brief Comprobar si una expresión es menor que otra (con respecto a su ajuste)
+		 *
+		 */
+
+		 bool mejorFitness (const Expresion & otra);
+
+		 /**
+ 		 *
+ 		 * @brief Comprobar si una expresión es menor que otra
+ 		 *
+ 		 */
+
+		 bool operator < (const Expresion & otra);
+
 };
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
 
 #endif

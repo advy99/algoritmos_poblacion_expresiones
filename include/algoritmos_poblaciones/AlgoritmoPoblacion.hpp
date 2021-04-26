@@ -18,14 +18,14 @@
  *
  */
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 /**
   *  @brief Clase AlgoritmoPoblacion
   *
   *  Una instancia del tipo AlgoritmoPoblacion representará un estimador para los datos
   *  dados, utilizando una poblacion del tipo dado.
-  * 
+  *
   * @tparam T Tipo de la población que utilizará el algoritmo
   *
   *
@@ -46,7 +46,7 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Método para inicializar el algoritmo de poblacion
-		 * 
+		 *
 		 *  @param seed Semilla aleatoria a utilizar
 		 *  @param tam_poblacion Tamaño de la poblacion del algoritmo
 		 *  @param prof Profundidad máxima si la poblacion es de Expresiones
@@ -83,6 +83,14 @@ class AlgoritmoPoblacion {
 
 		unsigned prof_expresiones_;
 
+		/**
+		  * @brief Probabilidad de que un nodo sea una variable
+		  *
+		  */
+
+		double probabilidad_variable_;
+
+
 
 		/**
 		  * @brief Inicializar AlgoritmoPoblacion vacio
@@ -105,7 +113,7 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Aplicar una mutación en la poblacion si esta es de expresiones
-		 * 
+		 *
 		 * @param hijo1 Primer hijo al que aplicar la mutacion
 		 * @param hijo2 Segundo hijo al que aplicar la mutacion
 		 *
@@ -121,7 +129,7 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Método para leer los datos con los que entrenar de un fichero
-		 * 
+		 *
 		 * @param fichero_datos Ruta al fichero donde leer los datos
 		 * @param char_comentario Caracter utilizado para comentarios en el fichero de datos
 		 * @param delimitador Caracter delimitador entre los datos
@@ -239,7 +247,7 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Aplicar el elitismo a la poblacion actual
-		 * 
+		 *
 		 * @param mejor_individuo_anterior Mejor individuo con el que comparar la Poblacion actual
 		 *
 		 *
@@ -249,9 +257,9 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Predecir un dato tras entrenar el algoritmo
-		 * 
+		 *
 		 * @param dato Dato a predecir
-		 * 
+		 *
 		 * @pre Se ha entrenado el algoritmo
 		 *
 		 * @return Valor predecido por el algoritmo
@@ -261,9 +269,9 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Predecir un conjunto de datos tras entrenar el algoritmo
-		 * 
+		 *
 		 * @param datos Datos a predecir
-		 * 
+		 *
 		 * @pre Se ha entrenado el algoritmo
 		 *
 		 * @return Valores predecido por el algoritmo
@@ -273,19 +281,19 @@ class AlgoritmoPoblacion {
 
 		/**
 		 *  @brief Ajustar el algoritmo con unos parametros dados
-		 * 
+		 *
 		 * @param parametros Parametros con los que ajustar el algoritmo
-		 * 
+		 *
 		 */
 
 		virtual void ajustar(const Parametros & parametros) = 0;
 
 		/**
 		 *  @brief Ajustar el algoritmo con unos parametros dados utilizando validación cruzada
-		 * 
+		 *
 		 * @param numero_val_cruzada Número de segmentos en los que dividir el conjunto de datos para aplicar validación cruzada
 		 * @param parametros Parametros con los que ajustar el algoritmo
-		 * 
+		 *
 		 * @return Error obtenido de la validación cruzada
 		 */
 
@@ -296,7 +304,7 @@ class AlgoritmoPoblacion {
 
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
 
 
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.tpp"

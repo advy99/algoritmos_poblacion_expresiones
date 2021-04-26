@@ -1,4 +1,4 @@
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 template <class T>
 Poblacion<T> :: Poblacion(){
@@ -244,5 +244,12 @@ void Poblacion<T> :: eliminar(const unsigned posicion) {
 
 }
 
+template <class T>
+void Poblacion<T> :: ordenar() {
 
-} // namespace algoritmos_poblaciones
+	std::sort(expresiones_, expresiones_ + tam_poblacion_);
+
+}
+
+
+} // namespace algoritmos_poblacion_expresiones

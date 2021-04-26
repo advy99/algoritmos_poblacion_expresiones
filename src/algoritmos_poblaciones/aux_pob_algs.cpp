@@ -1,6 +1,6 @@
 #include "algoritmos_poblaciones/aux_pob_algs.hpp"
 
-namespace algoritmos_poblaciones {
+namespace algoritmos_poblacion_expresiones {
 
 bool comparar_reales(const double a, const double b, const double epsilon) {
 	return fabs(a - b) < epsilon;
@@ -33,4 +33,4 @@ double raiz_error_cuadratico_medio(const std::vector<double> & valores_predecido
 }
 
 
-} // namespace algoritmos_poblaciones
+} // namespace algoritmos_poblacion_expresiones
