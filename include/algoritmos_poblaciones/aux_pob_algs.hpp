@@ -12,6 +12,7 @@
 #endif
 
 #include <algorithm>
+#include <random>
 #include "Random.hpp"
 #include <cstring>
 #include <stack>
@@ -24,6 +25,7 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
+#include <set>
 #include <type_traits>
 
 

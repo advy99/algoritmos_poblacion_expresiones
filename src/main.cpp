@@ -52,11 +52,12 @@ int main(int argc, char ** argv){
 		omp_set_num_threads(num_trabajos);
 	#endif
 
-
+	Random::setSeed(semilla);
 	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(std::string(argv[1]), '@', ',');
 	datos = algoritmos_poblacion_expresiones::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
 
+	semilla = Random::getSeed();
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	// ajustamos GAP midiendo tiempo
@@ -83,7 +84,11 @@ int main(int argc, char ** argv){
 
 	std::cout << "RMSE (Root Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
 
+	for ( unsigned i = 0; i < predecidos_GAP.size(); i++) {
+		std::cout << i << "\t" << predecidos_GAP[i] << "\t" << train_test_split.second.second[i] << std::endl;
+	}
 
+	semilla = Random::getSeed();
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
@@ -109,7 +114,9 @@ int main(int argc, char ** argv){
 
 	std::cout << "RMSE (Root Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
 
-
+	for ( unsigned i = 0; i < predecidos_GP.size(); i++) {
+		std::cout << i << "\t" << predecidos_GP[i] << "\t" << train_test_split.second.second[i] << std::endl;
+	}
 
 	return 0;
 

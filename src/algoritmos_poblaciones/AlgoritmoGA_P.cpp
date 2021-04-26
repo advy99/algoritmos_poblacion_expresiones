@@ -48,7 +48,7 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 	poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 	poblacion_.ordenar();
 
-	Expresion_GAP mejor_individuo = poblacion_.getMejorIndividuo();
+	Expresion_GAP mejor_individuo = poblacion_[0];
 
 	Expresion_GAP hijo1, hijo2;
 
@@ -173,12 +173,12 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 		}
 
 		poblacion_ = nueva_poblacion;
+
+		aplicarElitismo(mejor_individuo);
 		poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 		poblacion_.ordenar();
 
-		aplicarElitismo(mejor_individuo);
-		mejor_individuo = poblacion_.getMejorIndividuo();
-
+		mejor_individuo = poblacion_[0];
 
 		if ( parametros.getMostrarEvaluacion() ) {
 			// mostramos el mejor individuo
@@ -191,24 +191,34 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 }
 
-
-
 int AlgoritmoGA_P :: seleccionIntraNicho(const int madre) const{
 
 	int padre = -1;
 
-	Poblacion<Expresion_GAP> donde_escoger = poblacion_;
+	std::vector<int> escogidos(poblacion_.getTamPoblacion(), 0);
+
+	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++ ) {
+		escogidos[i] = i;
+	}
+
+	std::random_device rd;
+	std::mt19937 g(rd());
+
+	std::shuffle(escogidos.begin(), escogidos.end(), g);
+
+	unsigned i = 0;
 
 	do {
 
-		padre = donde_escoger.seleccionIndividuo();
+		padre = i;
 
 		if ( !poblacion_[madre].mismoNicho(poblacion_[padre]) ) {
-			donde_escoger.eliminar(padre);
 			padre = -1;
 		}
 
-	} while ( padre == -1 && donde_escoger.getTamPoblacion() > 0);
+		i++;
+
+	} while ( padre == -1 && i < escogidos.size() );
 
 	return padre;
 }
