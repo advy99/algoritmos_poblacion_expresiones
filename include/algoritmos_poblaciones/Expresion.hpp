@@ -464,6 +464,23 @@ class Expresion{
 		friend std::ostream & operator<< (std::ostream & os,
 													 const Expresion & exp);
 
+
+		/**
+		 *
+		 * @brief Comprobar si una expresión es menor que otra (con respecto a su ajuste)
+		 *
+		 */
+
+		 bool mejorFitness (const Expresion & otra);
+
+		 /**
+ 		 *
+ 		 * @brief Comprobar si una expresión es menor que otra
+ 		 *
+ 		 */
+
+		 bool operator < (const Expresion & otra);
+
 };
 
 } // namespace algoritmos_poblacion_expresiones

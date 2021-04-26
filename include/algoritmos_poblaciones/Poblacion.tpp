@@ -244,5 +244,12 @@ void Poblacion<T> :: eliminar(const unsigned posicion) {
 
 }
 
+template <class T>
+void Poblacion<T> :: ordenar() {
+
+	std::sort(expresiones_, expresiones_ + tam_poblacion_);
+
+}
+
 
 } // namespace algoritmos_poblacion_expresiones

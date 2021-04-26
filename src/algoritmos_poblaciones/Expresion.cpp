@@ -680,4 +680,13 @@ bool Expresion :: operator != ( const Expresion & otra) const {
 	return !(*this == otra);
 }
 
+bool Expresion :: mejorFitness (const Expresion & otra) {
+	return fitness_ < otra.getFitness();
+}
+
+bool Expresion :: operator < (const Expresion & otra) {
+	return mejorFitness(otra);
+}
+
+
 } // namespace algoritmos_poblacion_expresiones

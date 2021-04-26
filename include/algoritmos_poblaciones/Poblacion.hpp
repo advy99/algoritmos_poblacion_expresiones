@@ -279,7 +279,12 @@ class Poblacion{
 
 		void eliminar(const unsigned posicion);
 
-		//  TODO : Metodo ordenar poblacion por fitness
+		/**
+		  * @brief Ordenar la Poblacion de expresiones por fitness.
+		  *
+		  */
+
+		void ordenar();
 
 };
 

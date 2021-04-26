@@ -134,6 +134,9 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 
 		void ajustar(const Parametros & parametros) ;
 
+		int seleccionIntraNicho(const int madre) const;
+
+
 };
 
 } // namespace algoritmos_poblacion_expresiones
