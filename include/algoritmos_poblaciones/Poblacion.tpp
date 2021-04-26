@@ -72,7 +72,7 @@ void Poblacion<T> :: copiarDatos(const Poblacion & otra){
 	// copiamos los elementos de la poblacion
 	// no podemos usar memcpy ya que estos elementos si que
 	// utilizan memoria dinamica de forma interna
-	for (unsigned i = 0; i < tam_poblacion_; i++){
+	for (int i = 0; i < tam_poblacion_; i++){
 		expresiones_[i] = otra.expresiones_[i];
 	}
 }
@@ -90,7 +90,7 @@ void Poblacion<T> :: evaluarPoblacion(const std::vector<std::vector<double> > & 
 
 	// evaluamos el resto de individuos
 	#pragma omp parallel for
-	for ( unsigned i = 1; i < tam_poblacion_; i++){
+	for ( int i = 1; i < tam_poblacion_; i++){
 		if (!expresiones_[i].estaEvaluada()){
 			expresiones_[i].evaluarExpresion(datos, etiquetas, f_evaluacion);
 		}
@@ -109,7 +109,7 @@ template <class T>
 double Poblacion<T> :: sumaFitness() const {
 	double suma = 0.0;
 
-	for (unsigned i = 0; i < tam_poblacion_; i++){
+	for (int i = 0; i < tam_poblacion_; i++){
 		suma += expresiones_[i].getFitness();
 	}
 
@@ -125,7 +125,7 @@ unsigned Poblacion<T> :: seleccionIndividuo() const {
 
 	probabilidad[0] = expresiones_[0].getFitness() / fitness_poblacion;
 
-	for (unsigned i = 1; i < tam_poblacion_; i++){
+	for (int i = 1; i < tam_poblacion_; i++){
 		probabilidad[i] = probabilidad[i-1] +
 								(expresiones_[i].getFitness() / fitness_poblacion);
 	}
@@ -134,7 +134,7 @@ unsigned Poblacion<T> :: seleccionIndividuo() const {
 
 	double aleatorio = Random::getFloat();
 
-	unsigned indice = 0;
+	int indice = 0;
 
 	while (aleatorio > probabilidad[indice] && indice < tam_poblacion_){
 		indice++;
@@ -182,7 +182,7 @@ Poblacion<T> & Poblacion<T> :: operator= (const Poblacion & otra) {
 
 	reservarMemoria(tam_poblacion_);
 
-	for ( unsigned i = 0; i < tam_poblacion_; i++ ) {
+	for ( int i = 0; i < tam_poblacion_; i++ ) {
 		expresiones_[i] = otra.expresiones_[i];
 	}
 
@@ -203,13 +203,13 @@ void Poblacion<T> :: redimensionar(const unsigned nuevo_tam) {
 		liberarMemoria();
 	} else {
 		T * antigua_poblacion = expresiones_;
-		unsigned tam_antiguo = tam_poblacion_;
+		int tam_antiguo = tam_poblacion_;
 
 		reservarMemoria(nuevo_tam);
 
-		unsigned tam_a_copiar = std::min(nuevo_tam, tam_antiguo);
+		int tam_a_copiar = std::min(static_cast<int>(nuevo_tam), tam_antiguo);
 
-		for ( unsigned i = 0; i < tam_a_copiar; i++) {
+		for ( int i = 0; i < tam_a_copiar; i++) {
 			expresiones_[i] = antigua_poblacion[i];
 		}
 
@@ -225,7 +225,35 @@ void Poblacion<T> :: insertar(const T & nuevo_elemento) {
 
 	expresiones_[tam_poblacion_ - 1] = nuevo_elemento;
 
+	if ( tam_poblacion_ == 1) {
+		mejor_individuo_ = 0;
+	} else if (expresiones_[mejor_individuo_].getFitness() > nuevo_elemento.getFitness()) {
+		mejor_individuo_ = tam_poblacion_ - 1;
+	}
+
 }
+
+template <class T>
+void Poblacion<T> :: setMejorIndividuo(const int nuevo_mejor) {
+	mejor_individuo_ = nuevo_mejor;
+}
+
+template <class T>
+void Poblacion<T> :: buscarMejorIndividuo() {
+	mejor_individuo_ = -1;
+
+	if ( tam_poblacion_ > 0) {
+		mejor_individuo_ = 0;
+
+		for ( int i = 0; i < tam_poblacion_; i++) {
+			if (expresiones_[i].getFitness() < expresiones_[mejor_individuo_].getFitness()) {
+				mejor_individuo_ = i;
+			}
+		}
+	}
+
+}
+
 
 template <class T>
 void Poblacion<T> :: eliminar(const unsigned posicion) {
@@ -234,12 +262,20 @@ void Poblacion<T> :: eliminar(const unsigned posicion) {
 
 	redimensionar(tam_poblacion_ - 1);
 
-	for ( unsigned i = posicion; i < tam_poblacion_ - 1; i++) {
+	for ( int i = posicion; i < tam_poblacion_ - 1; i++) {
 		expresiones_[i] = expresiones_[i + 1];
 	}
 
 	if ( tam_poblacion_ > 0){
 		expresiones_[tam_poblacion_ - 1] = ultimo_elemento;
+		if ( static_cast<int>(posicion) == mejor_individuo_ ) {
+			buscarMejorIndividuo();
+		} else if (static_cast<int>(posicion) < mejor_individuo_){
+			mejor_individuo_--;
+		}
+
+	} else {
+		mejor_individuo_ = -1;
 	}
 
 }
@@ -248,6 +284,7 @@ template <class T>
 void Poblacion<T> :: ordenar() {
 
 	std::sort(expresiones_, expresiones_ + tam_poblacion_);
+	mejor_individuo_ = 0;
 
 }
 

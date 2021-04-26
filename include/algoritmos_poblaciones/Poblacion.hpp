@@ -68,7 +68,7 @@ class Poblacion{
 		  *
 		  */
 
-		unsigned tam_poblacion_;
+		int tam_poblacion_;
 
 		/**
 		  * @brief Mejor individuo de la población
@@ -285,6 +285,10 @@ class Poblacion{
 		  */
 
 		void ordenar();
+
+		void setMejorIndividuo(const int nuevo_mejor);
+
+		void buscarMejorIndividuo();
 
 };
 

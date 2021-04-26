@@ -285,7 +285,16 @@ void Expresion_GAP :: asignarCromosoma(const double * nuevo_cromosoma, const uns
 }
 
 bool Expresion_GAP :: mismoNicho(const Expresion_GAP & otra) const {
-	return mismoArbol(otra);
+
+	bool resultado = longitud_arbol_ == otra.getLongitudArbol();
+
+	unsigned i = 0;
+	while (resultado && i < longitud_arbol_) {
+		resultado = arbol_[i].getTipoNodo() == otra.getArbol()[i].getTipoNodo();
+		i++;
+	}
+
+	return resultado;
 }
 
 

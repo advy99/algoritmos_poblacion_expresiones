@@ -54,6 +54,7 @@ int main(int argc, char ** argv){
 
 
 	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(std::string(argv[1]), '@', ',');
+	datos = algoritmos_poblacion_expresiones::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
 
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);

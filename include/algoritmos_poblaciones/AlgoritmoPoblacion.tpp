@@ -91,11 +91,9 @@ void AlgoritmoPoblacion<T> :: inicializarVacio() {
 template <class T>
 Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
-	Poblacion<T> resultado = poblacion_;
+	Poblacion<T> resultado;
 
 	std::vector<int> ganadores_torneo;
-
-
 
 	// escojo una nueva poblacion del mismo tamaño
 	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
@@ -132,7 +130,7 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 
 	// actualizamos el resultado con los ganadores del torneo
 	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
-		resultado[i] = poblacion_[ganadores_torneo[i]];
+		resultado.insertar(poblacion_[ganadores_torneo[i]]);
 	}
 
 	return resultado;
@@ -164,6 +162,11 @@ void AlgoritmoPoblacion<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 	// si no esta el mejor, aplico elitismo
 	if ( !mejor_encontrado ){
 		poblacion_[poblacion_.getTamPoblacion() - 1] = mejor_ind_anterior;
+
+		if (poblacion_.getMejorIndividuo().getFitness() > mejor_ind_anterior.getFitness()) {
+			poblacion_.setMejorIndividuo(poblacion_.getTamPoblacion() - 1);
+		}
+
 	}
 
 }

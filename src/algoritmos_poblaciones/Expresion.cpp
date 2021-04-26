@@ -136,6 +136,7 @@ void Expresion :: copiarDatos(const Expresion & otra){
 	numero_variables_   = otra.numero_variables_;
 
 	if ( otra.arbol_ == nullptr) {
+		liberarMemoriaArbol();
 		arbol_ = nullptr;
 	} else {
 		asignarArbol(otra.arbol_, otra.longitud_arbol_);
