@@ -137,12 +137,12 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 					// si hay algun tipo de cruce
 					if ( !cruce_gp ) {
 						// no se ha cruzado el arbol
-						hijo1.asignarArbol(poblacion_[madre].getArbol(), poblacion_[madre].getLongitudArbol());
-						hijo2.asignarArbol(poblacion_[padre].getArbol(), poblacion_[padre].getLongitudArbol());
+						hijo1.asignarArbol(poblacion_[madre].getArbol());
+						hijo2.asignarArbol(poblacion_[padre].getArbol());
 					} else {
 						// no se ha cruzado el cromosoma
-						hijo1.asignarCromosoma(poblacion_[madre].getCromosoma(), poblacion_[madre].getLongitudCromosoma());
-						hijo2.asignarCromosoma(poblacion_[padre].getCromosoma(), poblacion_[padre].getLongitudCromosoma());
+						hijo1.asignarCromosoma(poblacion_[madre].getCromosoma());
+						hijo2.asignarCromosoma(poblacion_[padre].getCromosoma());
 
 					}
 				}

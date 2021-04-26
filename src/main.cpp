@@ -80,7 +80,7 @@ int main(int argc, char ** argv){
 
 	auto predecidos_GAP = myGAP.predecir(train_test_split.second.first);
 
-	double error_test_GAP = algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio(predecidos_GAP, train_test_split.second.second);
+	double error_test_GAP = parametros_ejecucion.getFuncionEvaluacion()(predecidos_GAP, train_test_split.second.second);
 
 	std::cout << "RMSE (Root Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
 
@@ -110,7 +110,7 @@ int main(int argc, char ** argv){
 
 	auto predecidos_GP = myPG.predecir(train_test_split.second.first);
 
-	double error_test_GP = algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio(predecidos_GP, train_test_split.second.second);
+	double error_test_GP = parametros_ejecucion.getFuncionEvaluacion()(predecidos_GP, train_test_split.second.second);
 
 	std::cout << "RMSE (Root Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
 

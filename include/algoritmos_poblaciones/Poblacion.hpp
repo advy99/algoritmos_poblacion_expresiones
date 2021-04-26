@@ -59,36 +59,14 @@ class Poblacion{
 		  *
 		  */
 
-		T * expresiones_ = nullptr;
+		std::vector<T> expresiones_;
 
-
-		/**
-		  * @brief Tamaño de elementos dentro de la población
-		  *
-		  *
-		  */
-
-		int tam_poblacion_;
 
 		/**
 		  * @brief Mejor individuo de la población
 		  */
 		int mejor_individuo_;
 
-		/**
-		  * @brief Reservar memoria para una población de tam individuos.
-		  *
-		  * @param tam Tamaño a reservar para la poblacion.
-		  *
-		  */
-
-		void reservarMemoria(const unsigned tam);
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada y limpiar la poblacion.
-		  *
-		  */
-		void liberarMemoria();
 
 		/**
 		  * @brief Copiar datos de una poblacion dada a la poblacion.

@@ -65,11 +65,6 @@ class Expresion{
 
 		bool evaluada_;
 
-		/**
-		  * @brief Longitud del árbol de la expresión.
-		  */
-		unsigned longitud_arbol_;
-
 
 		/**
 		  * @brief Profundidad máxima permitida para el árbol.
@@ -79,7 +74,7 @@ class Expresion{
 		/**
 		  * @brief Conjunto de nodos que conformarán la expresión.
 		  */
-		Arbol arbol_ = nullptr;
+		std::vector<Nodo> arbol_;
 
 
 		/**
@@ -107,33 +102,6 @@ class Expresion{
 		  */
 
 		void copiarDatos(const Expresion & otra);
-
-
-		/**
-		  * @brief Reservar memoria para un árbol de expresión de tamaño tam
-		  *
-		  * @param tam Tamaño a reservar para la expresión.
-		  *
-		  * @pre arbol == nullptr
-		  *
-		  */
-
-		void reservarMemoriaArbol(const int tam);
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada y limpiar la expresión.
-		  *
-		  */
-
-		virtual void liberarMemoria();
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por el arbol.
-		  *
-		  */
-
-		void liberarMemoriaArbol();
-
 
 		/**
 		  * @brief Contar los niveles de un árbol de Expresion dado en una pila.
@@ -190,7 +158,7 @@ class Expresion{
 		  * @pre subarbol != nullptr
 		  */
 
-		Expresion(const Arbol subarbol, const unsigned prof_max = 10);
+		Expresion(const std::vector<Nodo> & subarbol, const unsigned prof_max = 10);
 
 
 
@@ -271,11 +239,10 @@ class Expresion{
 		 *
 		 * @param nuevo_arbol Arbol que formará la expresion
 		 *
-		 * @param longitud_n_arbol Longitud del nuevo arbol dado
 		 *
 		 */
 
-		void asignarArbol ( const Arbol nuevo_arbol, const unsigned longitud_n_arbol);
+		void asignarArbol ( const std::vector<Nodo> & nuevo_arbol);
 
 
 		/**
@@ -359,7 +326,7 @@ class Expresion{
 		  * @return Expresion con el subarbol
 		  */
 
-		Expresion obtenerSubarbol(const Arbol subarbol);
+		std::vector<Nodo> obtenerSubarbol(const std::vector<Nodo> & subarbol, int posicion) const;
 
 		/**
 		  * @brief Calcular la profundidad de una expresión
@@ -379,7 +346,7 @@ class Expresion{
 		 * @return Arbol de la expresion
 		 */
 
-		Arbol getArbol() const;
+		std::vector<Nodo> getArbol() const;
 
 		/**
 		 * @brief Comprobar si esta Expresion tiene el mismo Arbol que otra.
