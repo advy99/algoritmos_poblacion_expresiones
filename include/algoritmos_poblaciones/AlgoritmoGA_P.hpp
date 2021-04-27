@@ -69,6 +69,17 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		  *
 		  */
 
+		  /**
+		   * @brief Selección de un individuo intra-nicho para GA-P
+			*
+			* @param madre Indice del individuo que tiene que estar en el mismo nicho
+			*
+			* @return Indice de un individuo en el mismo nicho
+			*/
+
+		  int seleccionIntraNicho(const int madre) const;
+
+
 	public:
 
 		/**
@@ -133,8 +144,6 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		 **/
 
 		void ajustar(const Parametros & parametros) ;
-
-		int seleccionIntraNicho(const int madre) const;
 
 
 };

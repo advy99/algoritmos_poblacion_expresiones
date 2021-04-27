@@ -264,8 +264,21 @@ class Poblacion{
 
 		void ordenar();
 
+		/**
+		 * @brief Cambiar el individuo que se considera mejor
+		 *
+		 * @param nuevo_mejor Indice del nuevo mejor individuo
+		 *
+		 */
+
 		void setMejorIndividuo(const int nuevo_mejor);
 
+
+		/**
+		 * @brief Buscar el mejor individuo en la población
+		 *
+		 *
+		 */
 		void buscarMejorIndividuo();
 
 };

@@ -321,9 +321,10 @@ class Expresion{
 		/**
 		  * @brief Obtener el subarbol dado un punto de un árbol
 		  *
-		  * @param subarbol Inicio del subarbol a buscar
+		  * @param subarbol Arbol del que coger el subarbol
+		  * @param posicion Posicion donce comenzar a obtener el subarbol
 		  *
-		  * @return Expresion con el subarbol
+		  * @return subarbol expresado en pre-order
 		  */
 
 		std::vector<Nodo> obtenerSubarbol(const std::vector<Nodo> & subarbol, int posicion) const;
