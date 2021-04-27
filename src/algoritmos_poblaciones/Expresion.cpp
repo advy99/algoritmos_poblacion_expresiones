@@ -44,8 +44,6 @@ Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, int posicion) const{
 	std::vector<Nodo> sol;
 
-	unsigned tam = 0;
-
 	if ( arbol.size() > 0) {
 		// al principio comenzamos con un nodo
 		unsigned ramas_libres = 1;
@@ -61,7 +59,6 @@ std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, 
 			// en todo caso, he visitado ese nodo, y el tamaño se incrementa en uno
 			ramas_libres--;
 			sol.push_back(arbol[posicion]);
-			tam++;
 			posicion++;
 
 		}
