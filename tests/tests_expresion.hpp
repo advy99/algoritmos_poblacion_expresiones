@@ -67,22 +67,22 @@ TEST ( Expresion, AsignarArbol) {
 
 	algoritmos_poblacion_expresiones::Expresion exp2;
 
-	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
+	exp2.asignarArbol(exp1.getArbol());
 
 	EXPECT_EQ(exp1, exp2);
 }
-//
-// TEST ( Expresion, AsignarCromosoma) {
-// 	algoritmos_poblacion_expresiones::Expresion exp1;
-//
-// 	exp1.generarExpresionAleatoria(10, 0.3, 3);
-//
-// 	algoritmos_poblacion_expresiones::Expresion exp2;
-//
-// 	exp2.asignarArbol(exp1.getArbol(), exp1.getLongitudArbol());
-//
-// 	EXPECT_EQ(exp1, exp2);
-// }
+
+TEST ( Expresion, AsignarCromosoma) {
+	algoritmos_poblacion_expresiones::Expresion exp1;
+
+	exp1.generarExpresionAleatoria(10, 0.3, 3);
+
+	algoritmos_poblacion_expresiones::Expresion exp2;
+
+	exp2.asignarArbol(exp1.getArbol());
+
+	EXPECT_EQ(exp1, exp2);
+}
 
 TEST (Expresion, MismaCadena) {
 	algoritmos_poblacion_expresiones::Expresion exp1;
@@ -99,7 +99,8 @@ TEST (Expresion, EvaluarDato) {
 
 	algoritmos_poblacion_expresiones::Expresion_GAP exp1;
 
-	algoritmos_poblacion_expresiones::Arbol arbol_tmp = new algoritmos_poblacion_expresiones::Nodo[5];
+	std::vector<algoritmos_poblacion_expresiones::Nodo> arbol_tmp;
+	arbol_tmp.resize(5);
 
 	arbol_tmp[0].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
@@ -113,23 +114,109 @@ TEST (Expresion, EvaluarDato) {
 	arbol_tmp[4].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 	arbol_tmp[4].setValor(1);
 
-	double * n_cromosoma = new double[5];
+	std::vector<double> cromosoma;
+	cromosoma.resize(5);
 
 	for ( int i = 0; i < 5; i++) {
-		n_cromosoma[i] = 2.2;
+		cromosoma[i] = 2.2;
 	}
 
-	exp1.asignarArbol(arbol_tmp, 5);
-	exp1.asignarCromosoma(n_cromosoma, 5);
-
-	delete [] arbol_tmp;
-	delete [] n_cromosoma;
+	exp1.asignarArbol(arbol_tmp);
+	exp1.asignarCromosoma(cromosoma);
 
 	std::vector<double> dato = {2.5, 3.2};
 
 	double resultado = exp1.evaluarDato(dato);
 
 	EXPECT_TRUE( algoritmos_poblacion_expresiones::comparar_reales(resultado, 9.54 ));
+
+}
+
+
+TEST (Expresion, ObtenerSurarbol) {
+
+	algoritmos_poblacion_expresiones::Expresion exp1;
+
+	std::vector<algoritmos_poblacion_expresiones::Nodo> arbol_tmp;
+	arbol_tmp.resize(5);
+
+	arbol_tmp[0].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
+
+	arbol_tmp[1].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	arbol_tmp[1].setValor(0);
+
+	arbol_tmp[2].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::POR);
+
+	arbol_tmp[3].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	arbol_tmp[3].setValor(1);
+	arbol_tmp[4].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	arbol_tmp[4].setValor(2);
+
+	exp1.asignarArbol(arbol_tmp);
+
+	std::vector<algoritmos_poblacion_expresiones::Nodo> subarbol = exp1.obtenerSubarbol(exp1.getArbol(), 2);
+
+	std::vector<algoritmos_poblacion_expresiones::Nodo> subarbol_real;
+
+	for ( unsigned i = 2; i < arbol_tmp.size(); i++) {
+		subarbol_real.push_back(arbol_tmp[i]);
+	}
+
+	EXPECT_TRUE( subarbol == subarbol_real );
+
+}
+#include <iostream>
+
+TEST (Expresion, CruzarArbol) {
+
+	algoritmos_poblacion_expresiones::Expresion exp1;
+
+	std::vector<algoritmos_poblacion_expresiones::Nodo> arbol_tmp;
+	arbol_tmp.resize(5);
+
+	arbol_tmp[0].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
+
+	arbol_tmp[1].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	arbol_tmp[1].setValor(0);
+
+	arbol_tmp[2].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::POR);
+
+	arbol_tmp[3].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	arbol_tmp[3].setValor(1);
+	arbol_tmp[4].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
+	arbol_tmp[4].setValorNumerico(1.2);
+
+	std::vector<double> cromosoma;
+	cromosoma.resize(5);
+
+	for ( int i = 0; i < 5; i++) {
+		cromosoma[i] = 2.2;
+	}
+
+	exp1.asignarArbol(arbol_tmp);
+
+	std::vector<algoritmos_poblacion_expresiones::Nodo> arbol_tmp2;
+	arbol_tmp2.resize(3);
+
+	arbol_tmp2[0].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
+
+	arbol_tmp2[1].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	arbol_tmp2[1].setValor(0);
+
+	arbol_tmp2[2].setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
+	arbol_tmp2[2].setValorNumerico(1.45);
+
+	algoritmos_poblacion_expresiones::Expresion exp2;
+	exp2.asignarArbol(arbol_tmp2);
+
+	algoritmos_poblacion_expresiones::Expresion hijo = exp1;
+	algoritmos_poblacion_expresiones::Expresion hijo2 = exp1;
+
+
+	exp1.intercambiarSubarbol(exp2, 4, 0, hijo);
+	exp2.intercambiarSubarbol(exp1, 0, 4, hijo2);
+
+	EXPECT_TRUE( hijo.getLongitudArbol() == 7 && hijo2.getLongitudArbol() == 1);
 
 }
 
