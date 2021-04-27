@@ -165,7 +165,6 @@ TEST (Expresion, ObtenerSurarbol) {
 	EXPECT_TRUE( subarbol == subarbol_real );
 
 }
-#include <iostream>
 
 TEST (Expresion, CruzarArbol) {
 
