@@ -81,10 +81,6 @@ void Expresion :: inicializarVacia(){
 
 
 
-Expresion :: ~Expresion(){
-}
-
-
 void Expresion :: copiarDatos(const Expresion & otra){
 	// copiamos todos los valores
 	fitness_            = otra.fitness_;

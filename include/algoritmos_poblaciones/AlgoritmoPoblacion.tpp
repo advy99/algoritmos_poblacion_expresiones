@@ -50,6 +50,7 @@ void AlgoritmoPoblacion<T> :: generarPoblacion(const unsigned tam_poblacion, con
 									 	 getNumVariables(), getMaxProfExpresiones());
 	}
 
+
 }
 
 
@@ -93,8 +94,6 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion<T> resultado;
 
-	std::vector<int> ganadores_torneo;
-
 	// escojo una nueva poblacion del mismo tamaño
 	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
 
@@ -103,7 +102,8 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 		// generamos el inicial y lo insertamos en los generados
 		mejor_torneo = Random::getInt(poblacion_.getTamPoblacion());
 
-		std::vector<int> participantes_torneo(poblacion_.getTamPoblacion(), 0);
+		std::vector<int> participantes_torneo;
+		participantes_torneo.resize(poblacion_.getTamPoblacion());
 
 		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++ ) {
 			participantes_torneo[i] = i;
@@ -125,12 +125,7 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 
 
 		// el ganador del torneo i es el mejor del torneo
-		ganadores_torneo.push_back(mejor_torneo);
-	}
-
-	// actualizamos el resultado con los ganadores del torneo
-	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
-		resultado.insertar(poblacion_[ganadores_torneo[i]]);
+		resultado.insertar(poblacion_[mejor_torneo]);
 	}
 
 	return resultado;

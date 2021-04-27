@@ -122,7 +122,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		  *
 		  */
 
-		~AlgoritmoGA_P();
+		~AlgoritmoGA_P() = default;
 
 
 		/**

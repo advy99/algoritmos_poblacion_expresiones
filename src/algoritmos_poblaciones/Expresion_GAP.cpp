@@ -31,9 +31,6 @@ Expresion_GAP :: Expresion_GAP(const std::vector<Nodo> & subarbol, const unsigne
 
 }
 
-Expresion_GAP :: ~Expresion_GAP(){
-}
-
 
 Expresion_GAP :: Expresion_GAP(const unsigned longitud_max, const double prob_variable,
 							const unsigned num_vars, const unsigned prof_max){
@@ -42,12 +39,12 @@ Expresion_GAP :: Expresion_GAP(const unsigned longitud_max, const double prob_va
 
 	inicializarVacia();
 
-
-	// inicializamos el cromosoma el cromosoma
-	inicializarCromosoma(longitud_max);
-
 	// generamos una expresion aleatoria
 	generarExpresionAleatoria(longitud_max, prob_variable, num_vars);
+
+
+	// inicializamos el cromosoma el cromosoma
+	inicializarCromosoma(prof_max);
 }
 
 
@@ -64,12 +61,12 @@ void Expresion_GAP :: inicializarVacia(){
 
 	Expresion::inicializarVacia();
 
-	cromosoma_          = std::vector<double>();
+	cromosoma_ = std::vector<double>();
 }
 
 
 
-void Expresion_GAP :: copiarDatos(const Expresion_GAP & otra){
+void Expresion_GAP :: copiarDatos(const Expresion_GAP & otra) {
 
 	Expresion::copiarDatos(otra);
 
@@ -78,14 +75,9 @@ void Expresion_GAP :: copiarDatos(const Expresion_GAP & otra){
 
 
 Expresion_GAP :: Expresion_GAP(const Expresion_GAP & otra) : Expresion(otra){
-	// al inicializar vacia mantenemos la prfuncidad que queramos
-	profundidad_maxima_ = otra.profundidad_maxima_;
 
-	// inicializamos vacia para poner punteros a nullptr
-	inicializarVacia();
+	cromosoma_ = otra.cromosoma_;
 
-	// copiamos la otra con el operador = ya implementado
-	(*this) = otra;
 }
 
 
@@ -161,7 +153,7 @@ bool Expresion_GAP :: mismoCromosoma ( const Expresion_GAP & otra) const {
 	// si el arbol coincide, comparamos el cromosoma
 	if ( resultado ) {
 		for ( unsigned i = 0; i < getLongitudCromosoma(); i++) {
-			resultado = resultado && comparar_reales(cromosoma_[i], otra.cromosoma_[i], 0.00005);
+			resultado = resultado && comparar_reales(cromosoma_[i], otra.cromosoma_[i], 0.005);
 		}
 	}
 

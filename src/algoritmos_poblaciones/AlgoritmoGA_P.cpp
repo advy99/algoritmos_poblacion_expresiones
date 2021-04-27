@@ -26,12 +26,6 @@ AlgoritmoGA_P :: AlgoritmoGA_P(const std::string fichero_datos, const char char_
 
 }
 
-
-
-AlgoritmoGA_P :: ~AlgoritmoGA_P(){
-}
-
-
 void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 
@@ -47,6 +41,8 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 	// evaluo la poblacion al inicio
 	poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
 	poblacion_.ordenar();
+
+
 
 	Expresion_GAP mejor_individuo = poblacion_[0];
 
@@ -115,6 +111,14 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 				hijo1 = poblacion_[madre];
 				hijo2 = poblacion_[padre];
 
+				// cruce de la parte GP
+				if ( Random::getFloat() <  parametros.getProbabilidadCruceGP() ) {
+					// cruce de programacion genetica, se intercambian arboles
+
+					poblacion_[madre].cruceArbol(poblacion_[padre], hijo1, hijo2);
+					modificado_hijo1 = modificado_hijo2 = true;
+					cruce_gp = true;
+				}
 
 				// cruce de la parte GA
 				if ( Random::getFloat() < parametros.getProbabilidadCruceGA() ) {
@@ -124,14 +128,6 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 					cruce_ga = true;
 				}
 
-				// cruce de la parte GP
-				if ( Random::getFloat() <  parametros.getProbabilidadCruceGP() ) {
-					// cruce de programacion genetica, se intercambian arboles
-
-					poblacion_[madre].cruceArbol(poblacion_[padre], hijo1, hijo2);
-					modificado_hijo1 = modificado_hijo2 = true;
-					cruce_gp = true;
-				}
 
 				if ( cruce_gp || cruce_ga ) {
 					// si hay algun tipo de cruce

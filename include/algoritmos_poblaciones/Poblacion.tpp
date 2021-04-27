@@ -22,6 +22,7 @@ Poblacion<T> :: Poblacion(const unsigned tam, const unsigned lon_expre,
 	for (unsigned i = 0; i < tam; i++){
 		expresiones_[i] = T(lon_expre, prob_var, num_vars, prof_expre);
 	}
+
 }
 
 template <class T>

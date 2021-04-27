@@ -184,7 +184,7 @@ class Expresion_GAP : public Expresion {
 		  *
 		  */
 
-		~Expresion_GAP();
+		~Expresion_GAP() = default;
 
 		/**
 		  * @brief Generar la expresión de forma aleatoria.

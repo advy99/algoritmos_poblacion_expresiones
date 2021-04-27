@@ -189,7 +189,7 @@ class Expresion{
 		  *
 		  */
 
-		~Expresion();
+		~Expresion() = default;
 
 
 		/**
