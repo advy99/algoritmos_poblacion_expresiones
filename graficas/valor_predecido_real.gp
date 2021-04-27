@@ -1,5 +1,5 @@
 set style line 1 pt 2 ps 2 lc rgb "red"
-set style line 2 pt 5 ps 2 lc rgb "blue"
+set style line 2 pt 1 ps 2 lc rgb "blue"
 
 
 set key
@@ -7,6 +7,7 @@ set key
 set style fill solid
 
 set xlabel "Indice del dato en el conjunto de test"
+set ylabel "Edad"
 set grid ytics mytics xtics mxtics lw 1
 
 # lateralidad 0
@@ -24,6 +25,8 @@ plot "datos/salida_iris_gp.dat" using 1:2  with p ls 1  title "Valor predecido",
 
 
 
+set yrange [15:60]
+set xrange [0:570]
 
 set title "Valores reales y predecidos por GA-P en el conjunto de datos completo"
 set term pngcairo dashed size 1400,1050
