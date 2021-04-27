@@ -50,6 +50,7 @@ void AlgoritmoPoblacion<T> :: generarPoblacion(const unsigned tam_poblacion, con
 									 	 getNumVariables(), getMaxProfExpresiones());
 	}
 
+
 }
 
 
@@ -91,48 +92,40 @@ void AlgoritmoPoblacion<T> :: inicializarVacio() {
 template <class T>
 Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo) {
 	// partimos de una poblacion con el mismo tamaño que la actual
-	Poblacion<T> resultado = poblacion_;
-
-	std::vector<int> ganadores_torneo;
-
-
+	Poblacion<T> resultado;
 
 	// escojo una nueva poblacion del mismo tamaño
 	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
 
-		std::vector<int> participantes_torneo;
-		int nuevo_participante;
-		int mejor_torneo;
+		int mejor_torneo = 0;
 
 		// generamos el inicial y lo insertamos en los generados
 		mejor_torneo = Random::getInt(poblacion_.getTamPoblacion());
 
-		participantes_torneo.push_back(mejor_torneo);
+		std::vector<int> participantes_torneo;
+		participantes_torneo.resize(poblacion_.getTamPoblacion());
 
-		// insertamos participantes hasta llegar al tamaño indicado
-		while ( tam_torneo > participantes_torneo.size()) {
-			nuevo_participante = Random::getInt(poblacion_.getTamPoblacion());
+		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++ ) {
+			participantes_torneo[i] = i;
+		}
 
-			auto encontrado = std::find(participantes_torneo.begin(), participantes_torneo.end(), nuevo_participante);
+		std::random_device rd;
+		std::mt19937 g(rd());
 
-			// si no aparece como participante
-			if ( encontrado != participantes_torneo.end() ) {
-				participantes_torneo.push_back(nuevo_participante);
-				// si este nuevo participante tiene mejor fitness, lo cojemos como mejor
-				if ( poblacion_[nuevo_participante].getFitness() < poblacion_[mejor_torneo].getFitness() ) {
-					mejor_torneo = nuevo_participante;
-				}
+		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), g);
 
+		mejor_torneo = participantes_torneo[0];
+
+		// solo miro hasta tam_torneo, que son los escogidos aleatoriamente
+		for ( unsigned i = 1; i < tam_torneo; i++) {
+			if ( poblacion_[mejor_torneo].getFitness() > poblacion_[participantes_torneo[i]].getFitness()) {
+				mejor_torneo = participantes_torneo[i];
 			}
 		}
 
-		// el ganador del torneo i es el mejor del torneo
-		ganadores_torneo.push_back(mejor_torneo);
-	}
 
-	// actualizamos el resultado con los ganadores del torneo
-	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
-		resultado[i] = poblacion_[ganadores_torneo[i]];
+		// el ganador del torneo i es el mejor del torneo
+		resultado.insertar(poblacion_[mejor_torneo]);
 	}
 
 	return resultado;
@@ -164,6 +157,11 @@ void AlgoritmoPoblacion<T> :: aplicarElitismo(const T & mejor_ind_anterior) {
 	// si no esta el mejor, aplico elitismo
 	if ( !mejor_encontrado ){
 		poblacion_[poblacion_.getTamPoblacion() - 1] = mejor_ind_anterior;
+
+		if (poblacion_.getMejorIndividuo().getFitness() > mejor_ind_anterior.getFitness()) {
+			poblacion_.setMejorIndividuo(poblacion_.getTamPoblacion() - 1);
+		}
+
 	}
 
 }

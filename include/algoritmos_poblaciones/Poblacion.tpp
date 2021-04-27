@@ -3,8 +3,7 @@ namespace algoritmos_poblacion_expresiones {
 template <class T>
 Poblacion<T> :: Poblacion(){
 	// una poblacion vacia no tiene nada
-	expresiones_     = nullptr;
-	tam_poblacion_   = 0;
+	expresiones_     = std::vector<T>();
 	mejor_individuo_ = -1;
 }
 
@@ -13,68 +12,36 @@ Poblacion<T> :: Poblacion(const unsigned tam, const unsigned lon_expre,
 							const double prob_var, const unsigned num_vars,
 							const unsigned prof_expre){
 	// liberamos memoria para inicializar a vacio
-	expresiones_ = nullptr;
+	expresiones_ = std::vector<T>();
 
-	liberarMemoria();
 
 	// reservamos memoria para tam individuos
-	reservarMemoria(tam);
-	tam_poblacion_ = tam;
+	expresiones_.resize(tam);
 	// inicializamos todas las expresiones de la poblacion
 
-	// TODO : comprobar que T es Expresion o Expresion_GAP
 	for (unsigned i = 0; i < tam; i++){
 		expresiones_[i] = T(lon_expre, prob_var, num_vars, prof_expre);
 	}
+
 }
 
 template <class T>
 Poblacion<T> :: Poblacion ( const Poblacion & otra) {
-	expresiones_ = nullptr;
-
-	tam_poblacion_ = 0;
+	expresiones_ = std::vector<T>();
 
 	(*this) = otra;
 }
 
 template <class T>
 Poblacion<T> :: ~Poblacion(){
-	liberarMemoria();
-}
-
-template <class T>
-void Poblacion<T> :: liberarMemoria(){
-	// si tiene asignada una direccion de memoria, liberamos la poblacion
-	if (expresiones_ != nullptr){
-		delete [] expresiones_;
-	}
-
-	// establecemos los valores a nulos
-
-	tam_poblacion_   = 0;
-	mejor_individuo_ = -1;
-	expresiones_     = nullptr;
-
-}
-
-template <class T>
-void Poblacion<T> :: reservarMemoria(const unsigned tam){
-	expresiones_ = new T[tam];
-	tam_poblacion_ = tam;
 }
 
 template <class T>
 void Poblacion<T> :: copiarDatos(const Poblacion & otra){
 	// copiamos los atributos
-	tam_poblacion_ = otra.tam_poblacion_;
 	mejor_individuo_ = otra.mejor_individuo_;
 
-	// copiamos los elementos de la poblacion
-	// no podemos usar memcpy ya que estos elementos si que
-	// utilizan memoria dinamica de forma interna
-	for (unsigned i = 0; i < tam_poblacion_; i++){
-		expresiones_[i] = otra.expresiones_[i];
-	}
+	expresiones_ = otra.expresiones_;
 }
 
 template <class T>
@@ -90,7 +57,7 @@ void Poblacion<T> :: evaluarPoblacion(const std::vector<std::vector<double> > & 
 
 	// evaluamos el resto de individuos
 	#pragma omp parallel for
-	for ( unsigned i = 1; i < tam_poblacion_; i++){
+	for ( unsigned i = 1; i < expresiones_.size(); i++){
 		if (!expresiones_[i].estaEvaluada()){
 			expresiones_[i].evaluarExpresion(datos, etiquetas, f_evaluacion);
 		}
@@ -109,7 +76,7 @@ template <class T>
 double Poblacion<T> :: sumaFitness() const {
 	double suma = 0.0;
 
-	for (unsigned i = 0; i < tam_poblacion_; i++){
+	for (unsigned i = 0; i < expresiones_.size(); i++){
 		suma += expresiones_[i].getFitness();
 	}
 
@@ -119,29 +86,28 @@ double Poblacion<T> :: sumaFitness() const {
 template <class T>
 unsigned Poblacion<T> :: seleccionIndividuo() const {
 
-	double * probabilidad = new double [tam_poblacion_];
+	std::vector<double> probabilidad;
+
+	probabilidad.resize(expresiones_.size());
 
 	double fitness_poblacion = sumaFitness();
 
 	probabilidad[0] = expresiones_[0].getFitness() / fitness_poblacion;
 
-	for (unsigned i = 1; i < tam_poblacion_; i++){
+	for (unsigned i = 1; i < expresiones_.size(); i++){
 		probabilidad[i] = probabilidad[i-1] +
 								(expresiones_[i].getFitness() / fitness_poblacion);
 	}
 	// evitamos errores de redondeo
-	probabilidad[tam_poblacion_ - 1] = 1.0;
+	probabilidad[expresiones_.size() - 1] = 1.0;
 
 	double aleatorio = Random::getFloat();
 
 	unsigned indice = 0;
 
-	while (aleatorio > probabilidad[indice] && indice < tam_poblacion_){
+	while (aleatorio > probabilidad[indice] && indice < expresiones_.size()){
 		indice++;
 	}
-
-
-	delete [] probabilidad;
 
 	return indice;
 
@@ -160,7 +126,7 @@ unsigned Poblacion<T> :: getIndiceMejorIndividuo() const {
 
 template <class T>
 unsigned Poblacion<T> :: getTamPoblacion() const {
-	return tam_poblacion_;
+	return expresiones_.size();
 }
 
 template <class T>
@@ -176,17 +142,11 @@ const T & Poblacion<T> :: operator[] (const unsigned indice) const {
 template <class T>
 Poblacion<T> & Poblacion<T> :: operator= (const Poblacion & otra) {
 
-	liberarMemoria();
 
-	tam_poblacion_ = otra.tam_poblacion_;
-
-	reservarMemoria(tam_poblacion_);
-
-	for ( unsigned i = 0; i < tam_poblacion_; i++ ) {
-		expresiones_[i] = otra.expresiones_[i];
+	if (this != &otra){
+		// copiamos los datos de la otra
+		copiarDatos(otra);
 	}
-
-	mejor_individuo_ = otra.mejor_individuo_;
 
 	return (*this);
 
@@ -198,56 +158,49 @@ void Poblacion<T> :: setIndividuo(const unsigned indice, const T & n_individuo) 
 }
 
 template <class T>
-void Poblacion<T> :: redimensionar(const unsigned nuevo_tam) {
-	if ( nuevo_tam == 0 ){
-		liberarMemoria();
-	} else {
-		T * antigua_poblacion = expresiones_;
-		unsigned tam_antiguo = tam_poblacion_;
+void Poblacion<T> :: insertar(const T & nuevo_elemento) {
+	expresiones_.push_back(nuevo_elemento);
 
-		reservarMemoria(nuevo_tam);
-
-		unsigned tam_a_copiar = std::min(nuevo_tam, tam_antiguo);
-
-		for ( unsigned i = 0; i < tam_a_copiar; i++) {
-			expresiones_[i] = antigua_poblacion[i];
-		}
-
-		delete [] antigua_poblacion;
+	if ( expresiones_.size() == 1) {
+		mejor_individuo_ = 0;
+	} else if (expresiones_[mejor_individuo_].getFitness() > nuevo_elemento.getFitness()) {
+		mejor_individuo_ = expresiones_.size() - 1;
 	}
-
-
 }
 
 template <class T>
-void Poblacion<T> :: insertar(const T & nuevo_elemento) {
-	redimensionar(tam_poblacion_ + 1);
+void Poblacion<T> :: setMejorIndividuo(const int nuevo_mejor) {
+	mejor_individuo_ = nuevo_mejor;
+}
 
-	expresiones_[tam_poblacion_ - 1] = nuevo_elemento;
+template <class T>
+void Poblacion<T> :: buscarMejorIndividuo() {
+	mejor_individuo_ = -1;
+
+	if ( expresiones_.size() > 0) {
+		mejor_individuo_ = 0;
+
+		for ( unsigned i = 0; i < expresiones_.size(); i++) {
+			if (expresiones_[i].getFitness() < expresiones_[mejor_individuo_].getFitness()) {
+				mejor_individuo_ = i;
+			}
+		}
+	}
 
 }
+
 
 template <class T>
 void Poblacion<T> :: eliminar(const unsigned posicion) {
-
-	T ultimo_elemento = expresiones_[tam_poblacion_ - 1];
-
-	redimensionar(tam_poblacion_ - 1);
-
-	for ( unsigned i = posicion; i < tam_poblacion_ - 1; i++) {
-		expresiones_[i] = expresiones_[i + 1];
-	}
-
-	if ( tam_poblacion_ > 0){
-		expresiones_[tam_poblacion_ - 1] = ultimo_elemento;
-	}
-
+	expresiones_.erase(expresiones_.begin() + posicion);
+	buscarMejorIndividuo();
 }
 
 template <class T>
 void Poblacion<T> :: ordenar() {
 
-	std::sort(expresiones_, expresiones_ + tam_poblacion_);
+	std::sort(expresiones_.begin(), expresiones_.end());
+	mejor_individuo_ = 0;
 
 }
 

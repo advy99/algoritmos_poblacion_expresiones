@@ -14,16 +14,16 @@ INC_ALG_POB = $(INC)/algoritmos_poblaciones
 
 
 # flags de compilacion por defecto
-MENSAJE := "Compilando\ usando\ C++17,\ con\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
+MENSAJE := "Compilando\ usando\ C++17,\ sin\ optimización\ de\ máximo\ nivel\ y\ con\ todos\ los\ warnings\ activados"
 OPTIMIZACION ?= 3
 GPROF ?= 0
 OPENMP ?= 1
 
 ifeq ($(DEBUG), 1)
 # target para debug (cambiamos flags y el mensaje)
-OPTIMIZACION = 0 -g
+OPTIMIZACION = g -g
 OPENMP = 0
-MENSAJE = "Compilando\ usando\ C++17,\ sin\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
+MENSAJE = "Compilando\ usando\ C++17,\ con\ optimización,\ con\ todos\ los\ warnings\ activados\ y\ con\ símbolos\ de\ depuración"
 endif
 
 ifeq ($(GPROF), 1)

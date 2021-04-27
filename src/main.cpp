@@ -52,45 +52,57 @@ int main(int argc, char ** argv){
 		omp_set_num_threads(num_trabajos);
 	#endif
 
-
+	int semilla_original = semilla;
+	Random::setSeed(semilla);
 	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(std::string(argv[1]), '@', ',');
+	datos = algoritmos_poblacion_expresiones::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
 
+	semilla = Random::getSeed();
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	double error_cross_val = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
+	double error_cross_val_ej1 = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
+	double error_cross_val_ej2 = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
+
+	double error_cross_val = (error_cross_val_ej1 + error_cross_val_ej2) / 2;
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	// mostramos el resultado
+	std::cout << "Semilla utilizada: " << semilla_original << std::endl << std::endl;
 	std::cout << "Tiempo de ejecución con " << num_trabajos << " hilos en una poblacion de " << tam_pob << " individuos con tamaño máximo "
 				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
 
 
 	std::cout << "El mejor individuo de GA_P es: " << std::endl;
 	std::cout << myGAP.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
+	std::cout << "Con un MSE (Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
 	auto predecidos_GAP = myGAP.predecir(train_test_split.second.first);
 
-	double error_test_GAP = algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio(predecidos_GAP, train_test_split.second.second);
+	double error_test_GAP = parametros_ejecucion.getFuncionEvaluacion()(predecidos_GAP, train_test_split.second.second);
 
-	std::cout << "RMSE (Root Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
+	std::cout << "MSE (Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
 
-
+	semilla = Random::getSeed();
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	error_cross_val = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
+	error_cross_val_ej1 = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
+	error_cross_val_ej2 = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
+
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
+
+	error_cross_val = (error_cross_val_ej1 + error_cross_val_ej2) / 2;
+
 
 	t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
@@ -100,15 +112,13 @@ int main(int argc, char ** argv){
 
 	std::cout << "El mejor individuo de PG es: " << std::endl;
 	std::cout << myPG.getMejorIndividuo() << std::endl;
-	std::cout << "Con un RMSE (Root Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
+	std::cout << "Con un MSE (Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
 	auto predecidos_GP = myPG.predecir(train_test_split.second.first);
 
-	double error_test_GP = algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio(predecidos_GP, train_test_split.second.second);
+	double error_test_GP = parametros_ejecucion.getFuncionEvaluacion()(predecidos_GP, train_test_split.second.second);
 
-	std::cout << "RMSE (Root Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
-
-
+	std::cout << "MSE (Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
 
 	return 0;
 

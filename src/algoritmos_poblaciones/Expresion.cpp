@@ -13,7 +13,7 @@ Expresion :: Expresion(const unsigned prof_max){
 
 }
 
-Expresion :: Expresion(const Arbol subarbol, const unsigned prof_max){
+Expresion :: Expresion(const std::vector<Nodo> & subarbol, const unsigned prof_max){
 
 	// establecemos la profundidad maxima a la dada
 	profundidad_maxima_ = prof_max;
@@ -22,7 +22,7 @@ Expresion :: Expresion(const Arbol subarbol, const unsigned prof_max){
 	inicializarVacia();
 
 	// obtenemos el subarbol
-	(*this) = obtenerSubarbol(subarbol);
+	(*this) = obtenerSubarbol(subarbol, 0);
 
 }
 
@@ -41,39 +41,30 @@ Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 
 
 
-Expresion Expresion :: obtenerSubarbol(const Arbol subarbol){
-	Expresion sol;
+std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, int posicion) const{
+	std::vector<Nodo> sol;
 
-	unsigned tam = 0;
-
-	if ( subarbol == nullptr) {
-		sol.arbol_ = nullptr;
-	} else {
+	if ( arbol.size() > 0) {
 		// al principio comenzamos con un nodo
 		unsigned ramas_libres = 1;
 
 		// mientras tenga ramas que visitar
 		while(ramas_libres > 0){
 			// si no es ni un numero ni una variable
-			if (subarbol[tam].getTipoNodo() != TipoNodo::NUMERO &&
-				subarbol[tam].getTipoNodo() != TipoNodo::VARIABLE){
+			if (arbol[posicion].getTipoNodo() != TipoNodo::NUMERO &&
+				arbol[posicion].getTipoNodo() != TipoNodo::VARIABLE){
 				// es un operador, tiene dos ramas
 				ramas_libres += 2;
 			}
 			// en todo caso, he visitado ese nodo, y el tamaño se incrementa en uno
 			ramas_libres--;
-			tam++;
+			sol.push_back(arbol[posicion]);
+			posicion++;
+
 		}
-
-		// una vez sabemos el tamaño, redimensionamos la solucion
-		sol.liberarMemoriaArbol();
-
-		sol.asignarArbol(subarbol, tam);
 
 	}
 
-	// actualizamos la longitud de la solucion
-	sol.longitud_arbol_ = tam;
 
 	// y la devolvemos
 	return sol;
@@ -83,63 +74,20 @@ Expresion Expresion :: obtenerSubarbol(const Arbol subarbol){
 
 void Expresion :: inicializarVacia(){
 	// una expresion vacia no tiene arbol
-	arbol_              = nullptr;
-	longitud_arbol_     = 0;
+	arbol_ = std::vector<Nodo>();
 	numero_variables_ = 0;
 	dejaEstarEvaluada();
 }
 
 
 
-Expresion :: ~Expresion(){
-	liberarMemoria();
-}
-
-void Expresion :: liberarMemoriaArbol() {
-	// si el arbol tiene asociado alguna direccion de memoria
-	if (arbol_ != nullptr){
-		// la liberamos
-		delete [] arbol_;
-		arbol_ = nullptr;
-	}
-}
-
-
-void Expresion :: liberarMemoria(){
-
-	liberarMemoriaArbol();
-
-	// una vez esta liberada la memoria, la expresion esta vacia, luego
-	// la ponemos a vacio
-	inicializarVacia();
-
-}
-
-void Expresion :: reservarMemoriaArbol(const int tam){
-	// en todo caso la longitud reservada es cero
-	longitud_arbol_ = 0;
-
-	// si el tamaño es mayor que 0, reservamos, si no se queda a cero
-	if (tam > 0){
-		arbol_ = new Nodo[tam];
-		longitud_arbol_ = tam;
-	}
-}
-
-
 void Expresion :: copiarDatos(const Expresion & otra){
 	// copiamos todos los valores
 	fitness_            = otra.fitness_;
 	evaluada_           = otra.evaluada_;
-	longitud_arbol_     = otra.longitud_arbol_;
 	profundidad_maxima_ = otra.profundidad_maxima_;
 	numero_variables_   = otra.numero_variables_;
-
-	if ( otra.arbol_ == nullptr) {
-		arbol_ = nullptr;
-	} else {
-		asignarArbol(otra.arbol_, otra.longitud_arbol_);
-	}
+	arbol_              = otra.arbol_;
 
 }
 
@@ -158,9 +106,6 @@ Expresion :: Expresion(const Expresion & otra){
 Expresion & Expresion :: operator= (const Expresion & otra){
 	// si no es ella misma
 	if (this != &otra){
-		// liberamos la memoria de la actual
-		liberarMemoria();
-
 		// copiamos los datos de la otra
 		copiarDatos(otra);
 	}
@@ -174,12 +119,10 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 														const double prob_variable,
 														const unsigned num_variables){
 
+	profundidad_maxima_ = longitud_maxima;
 	// si no tenemos espacio, redimensionamos
-	if (longitud_maxima > longitud_arbol_){
-		liberarMemoriaArbol();
-		reservarMemoriaArbol(longitud_maxima);
-	}
-
+	arbol_ = std::vector<Nodo>();
+	arbol_.resize(longitud_maxima);
 
 	// comenzamos con una rama libre
 	int ramas_libres = 1;
@@ -218,6 +161,8 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 		i++;
 	}
 
+
+
 	// si lo hemos rellenado sin dejar ramas libres, esta bien
 	bool exito = ramas_libres == 0;
 
@@ -227,7 +172,8 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 	}
 
 	// la longitud del arbol es i, y la expresion no esta evaluada
-	longitud_arbol_ = i;
+	arbol_.resize(i);
+
 	dejaEstarEvaluada();
 
 	return exito;
@@ -326,7 +272,7 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 	valores_predecidos.resize(etiquetas.size());
 
 	// si no esta evaluada y el arbol contiene una expresion
-	if (!evaluada_ && arbol_ != nullptr){
+	if (!evaluada_ && arbol_.size() > 0){
 
 		// para cada dato
 		for (unsigned i = 0; i < datos.size(); i++){
@@ -357,7 +303,7 @@ double Expresion :: getFitness() const{
 }
 
 unsigned Expresion :: getLongitudArbol() const{
-	return longitud_arbol_;
+	return arbol_.size();
 }
 
 
@@ -366,39 +312,45 @@ bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned po
 													const unsigned cruce_padre,
 												   Expresion & hijo) const {
 
-	Expresion madre_cortada((arbol_ + pos), profundidad_maxima_);
-	Expresion padre_cortado((otra.arbol_ + cruce_padre), otra.profundidad_maxima_);
+	//Expresion madre_cortada((arbol_ + pos), profundidad_maxima_);
+
+	std::vector<Nodo> madre_cortada = obtenerSubarbol(arbol_, pos);
+
+	//Expresion padre_cortado((otra.arbol_ + cruce_padre), otra.profundidad_maxima_);
+
+	std::vector<Nodo> padre_cortado = obtenerSubarbol(otra.getArbol(), cruce_padre);
 
 	// sumamos, la parte de la madre, la longitud de la parte del padre, y lo que nos queda de madre tras el cruce
-	unsigned nueva_longitud = pos + padre_cortado.getLongitudArbol() + (getLongitudArbol() - madre_cortada.getLongitudArbol() - pos);
+	unsigned nueva_longitud = pos + padre_cortado.size() + (getLongitudArbol() - madre_cortada.size() - pos);
 
 
 	bool podido_cruzar = nueva_longitud <= profundidad_maxima_;
 
+
 	if ( podido_cruzar) {
 		// cruce
-		hijo.liberarMemoria();
-		hijo.reservarMemoriaArbol(nueva_longitud);
+		std::vector<Nodo> arbol_hijo;
+		arbol_hijo.resize(nueva_longitud);
 
 		for ( unsigned i = 0; i < pos; i++) {
-			hijo.arbol_[i] = arbol_[i];
+			arbol_hijo[i] = arbol_[i];
 		}
 
-		for ( unsigned i = 0; i < padre_cortado.getLongitudArbol(); i++) {
-			hijo.arbol_[i + pos] = padre_cortado.arbol_[i];
+		for ( unsigned i = 0; i < padre_cortado.size(); i++) {
+			arbol_hijo[i + pos] = padre_cortado[i];
 		}
 
 		unsigned indice_hijo = 0;
 
 		// i en este caso comienza en el punto donde acaba el arbol que hemos intercambiado
-		for ( unsigned i = pos + madre_cortada.getLongitudArbol(); i < getLongitudArbol(); i++) {
+		for ( unsigned i = pos + madre_cortada.size(); i < getLongitudArbol(); i++) {
 			// nos ponemos donde habiamos dejado de copiar el padre
-			indice_hijo = pos + padre_cortado.getLongitudArbol() + (i - (pos + madre_cortada.getLongitudArbol()) ) ;
-			hijo.arbol_[indice_hijo] = arbol_[i];
+			indice_hijo = pos + padre_cortado.size() + (i - (pos + madre_cortada.size()) ) ;
+			arbol_hijo[indice_hijo] = arbol_[i];
 		}
 
 		//hijo.asignarCromosoma(cromosoma, longitud_cromosoma);
-
+		hijo.asignarArbol(arbol_hijo);
 	}
 
 	return podido_cruzar;
@@ -432,15 +384,9 @@ void Expresion :: cruceArbol(const Expresion & otra, Expresion & hijo1, Expresio
 }
 
 
-void Expresion :: asignarArbol (const Arbol nuevo_arbol, const unsigned longitud_n_arbol) {
+void Expresion :: asignarArbol (const std::vector<Nodo> & nuevo_arbol) {
 
-	liberarMemoriaArbol();
-
-	reservarMemoriaArbol(longitud_n_arbol);
-
-	memcpy(arbol_, nuevo_arbol, longitud_n_arbol*sizeof(Nodo));
-
-	longitud_arbol_ = longitud_n_arbol;
+	arbol_ = nuevo_arbol;
 
 }
 
@@ -586,7 +532,7 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 
 
 
-Arbol Expresion:: getArbol () const {
+std::vector<Nodo> Expresion:: getArbol () const {
 	return arbol_;
 }
 
@@ -621,7 +567,7 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 void Expresion :: mutarGP (const int num_vars) {
 
 
-	int posicion = Random::getInt(longitud_arbol_);
+	int posicion = Random::getInt(arbol_.size());
 
 	float aleatorio = Random::getFloat();
 
@@ -655,7 +601,7 @@ void Expresion :: mutarGP (const int num_vars) {
 
 		} while (cruce_mal);
 
-		asignarArbol(hijo.arbol_, hijo.longitud_arbol_);
+		asignarArbol(hijo.arbol_);
 
 	}
 
@@ -663,9 +609,9 @@ void Expresion :: mutarGP (const int num_vars) {
 
 
 bool Expresion :: mismoArbol( const Expresion & otra) const {
-	bool resultado = longitud_arbol_ == otra.longitud_arbol_;
+	bool resultado = arbol_.size() == otra.arbol_.size();
 
-	for (unsigned i = 0; i < longitud_arbol_ && resultado; i++){
+	for (unsigned i = 0; i < arbol_.size() && resultado; i++){
 		resultado = arbol_[i] == otra.arbol_[i];
 	}
 

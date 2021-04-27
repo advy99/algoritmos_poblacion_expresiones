@@ -66,14 +66,7 @@ class Expresion_GAP : public Expresion {
 		  *
 		  */
 
-		double * cromosoma_ = nullptr;
-
-		/**
-		  * @brief Longitud del array cromosoma
-		  *
-		  */
-
-		unsigned longitud_cromosoma_;
+		std::vector<double> cromosoma_;
 
 		/**
 		  * @brief Inicializar una expresión vacia.
@@ -97,33 +90,6 @@ class Expresion_GAP : public Expresion {
 		void copiarDatos(const Expresion_GAP & otra);
 
 
-		/**
-		  * @brief Reservar memoria para un cromosoma de tamaño tam
-		  *
-		  * @param tam Tamaño a reservar para el cromosoma.
-		  *
-		  * @pre cromosoma == nullptr
-		  *
-		  */
-
-		void reservarMemoriaCromosoma(const int tam);
-
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada por el cromosoma.
-		  *
-		  */
-
-		void liberarMemoriaCromosoma();
-
-
-		/**
-		  * @brief Liberar la memoria dinámica utilizada y limpiar la expresión.
-		  *
-		  */
-
- 	  	void liberarMemoria() override;
-
 
 		/**
 		 * @brief Inicializar el cromosoma de constantes asociadas a la Expresion.
@@ -131,7 +97,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		void inicializarCromosoma();
+		void inicializarCromosoma(const unsigned longitud);
 
 		/**
 		 * @brief Copiar cromosoma dado al cromosoma de la Expresion actual
@@ -140,7 +106,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		void copiarCromosoma(const double * otro_cromosoma);
+		void copiarCromosoma(const std::vector<double> & otro_cromosoma);
 
 
 	 	/**
@@ -187,7 +153,7 @@ class Expresion_GAP : public Expresion {
 		  * @pre subarbol != nullptr
 		  */
 
-		Expresion_GAP(const Arbol subarbol, const unsigned prof_max = 10);
+		Expresion_GAP(const std::vector<Nodo> & subarbol, const unsigned prof_max = 10);
 
 
 
@@ -218,7 +184,7 @@ class Expresion_GAP : public Expresion {
 		  *
 		  */
 
-		~Expresion_GAP();
+		~Expresion_GAP() = default;
 
 		/**
 		  * @brief Generar la expresión de forma aleatoria.
@@ -251,11 +217,9 @@ class Expresion_GAP : public Expresion {
 		 *
 		 * @param nuevo_cromosoma Cromosoma que formará la expresion
 		 *
-		 * @param longitud Longitud del nuevo cromosoma dado
-		 *
 		 */
 
-		void asignarCromosoma(const double * nuevo_cromosoma, const unsigned longitud);
+		void asignarCromosoma(const std::vector<double> & nuevo_cromosoma);
 
 		/**
 		  * @brief Operador de asignación de una expresión. Asignamos una
@@ -291,7 +255,7 @@ class Expresion_GAP : public Expresion {
 		 * @return Puntero al cromosoma
 		 */
 
-		double * getCromosoma() const;
+		std::vector<double> getCromosoma() const;
 
 		/**
 		 *

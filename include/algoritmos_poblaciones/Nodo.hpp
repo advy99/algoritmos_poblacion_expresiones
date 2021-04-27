@@ -12,7 +12,7 @@
 namespace algoritmos_poblacion_expresiones {
 
 /**
-  * @brief Posibles tipos de nodo que utilizaremos 
+  * @brief Posibles tipos de nodo que utilizaremos
   */
 
 // aqui faltan tipos, tengo que revisar el paper + los que use
@@ -198,11 +198,6 @@ class Nodo {
 
 };
 
-/**
- * @brief Definimos el tipo Arbol como un puntero a un Nodo
- */
-
-typedef Nodo * Arbol;
 
 } // namespace algoritmos_poblacion_expresiones
 
