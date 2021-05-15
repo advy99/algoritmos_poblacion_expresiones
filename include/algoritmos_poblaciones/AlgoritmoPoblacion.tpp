@@ -109,10 +109,7 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 			participantes_torneo[i] = i;
 		}
 
-		std::mt19937 g;
-		g.seed(Random::getSeed());
-
-		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), g);
+		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), Random::getGenerador());
 
 		mejor_torneo = participantes_torneo[0];
 

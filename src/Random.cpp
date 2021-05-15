@@ -3,25 +3,20 @@
 #include <iostream>
 
 void Random :: setSeed(const unsigned long semilla){
-	SEED = semilla;
+	generador_.seed(semilla);
 }
-
-
-
 
 Random :: ~Random(){
 }
 
-unsigned long Random :: getSeed(){
-	return SEED;
-}
-
 float Random :: getFloat(){
-	return (( SEED = ( (SEED * PRIME) & MASK) ) * SCALE );
+	std::uniform_real_distribution<> dis(0, 1.0);
+	return dis(generador_);
 }
 
 float Random :: getFloat(const float LOW, const float HIGH){
-	return (LOW + (HIGH-(LOW))*getFloat());
+	std::uniform_real_distribution<> dis(LOW, HIGH);
+	return dis(generador_);
 }
 
 float Random :: getFloat(const float HIGH){
@@ -29,18 +24,18 @@ float Random :: getFloat(const float HIGH){
 }
 
 
-
-
-// Generar numero entre LOW y HIGH, ambos incluidos
 int Random :: getInt(const int LOW, const int HIGH){
-	return (int) (LOW + (HIGH-(LOW)) * getFloat());
+	std::uniform_int_distribution<> dis(LOW, HIGH - 1);
+	return dis(generador_);
 }
 
 int Random :: getInt(const int HIGH){
 	return getInt(0, HIGH);
 }
 
-const double Random :: SCALE = 0.4656612875e-9;
-const unsigned long int Random :: PRIME = 65539L;
-const unsigned long int Random :: MASK = 2147483647L;
-unsigned long Random :: SEED = 0;
+std::mt19937 Random :: getGenerador() {
+	return generador_;
+}
+
+
+std::mt19937 Random :: generador_;
