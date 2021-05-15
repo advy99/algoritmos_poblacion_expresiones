@@ -197,11 +197,8 @@ int AlgoritmoGA_P :: seleccionIntraNicho(const int madre) const{
 		escogidos[i] = i;
 	}
 
-	std::mt19937 g;
-	g.seed(Random::getSeed());
+	std::shuffle(escogidos.begin(), escogidos.end(), Random::getGenerador());
 
-	std::shuffle(escogidos.begin(), escogidos.end(), g);
-	
 	unsigned i = 0;
 
 	do {
