@@ -2,7 +2,7 @@
 
 #include "algoritmos_poblaciones/preprocesado.hpp"
 
-std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<std::string> & datos, const std::vector<std::string> etiquetas) {
+std::pair<matriz<double>, std::vector<double> > preprocesar_regresion(const matriz<std::string> & datos, const std::vector<std::string> etiquetas) {
 	matriz<double> datos_resultado;
 	std::vector<double> etiquetas_resultado;
 
@@ -32,27 +32,7 @@ std::pair<matriz<double>, std::vector<double> > preprocesar_fases(const matriz<s
 
 	etiquetas_resultado.resize(etiquetas.size());
 	for ( unsigned i = 0; i < etiquetas.size() ; ++i) {
-		if ( etiquetas[i] == "Ph01-19") {
-			etiquetas_resultado[i] = 19.0;
-		} else if ( etiquetas[i] == "Ph02-20-21") {
-			etiquetas_resultado[i] = 20.5;
-		} else if ( etiquetas[i] == "Ph03-22-24") {
-			etiquetas_resultado[i] = 23.0;
-		} else if ( etiquetas[i] == "Ph04-25-26") {
-			etiquetas_resultado[i] = 25.5;
-		} else if ( etiquetas[i] == "Ph05-27-30") {
-			etiquetas_resultado[i] = 28.5;
-		} else if ( etiquetas[i] == "Ph06-31-34") {
-			etiquetas_resultado[i] = 32.5;
-		} else if ( etiquetas[i] == "Ph07-35-39") {
-			etiquetas_resultado[i] = 37.0;
-		} else if ( etiquetas[i] == "Ph08-40-44") {
-			etiquetas_resultado[i] = 42.0;
-		} else if ( etiquetas[i] == "Ph09-45-49") {
-			etiquetas_resultado[i] = 47.0;
-		} else {
-			etiquetas_resultado[i] = 55.0;
-		}
+		etiquetas_resultado[i] = atof(etiquetas[i].c_str());
 	}
 
 	return std::make_pair(datos_resultado, etiquetas_resultado);
@@ -88,7 +68,7 @@ int main(int argc, char ** argv) {
 	matriz<std::string> datos = resultado.first;
 	std::vector<std::string> etiquetas = resultado.second;
 
-	auto resultado_fases = preprocesar_fases(datos, etiquetas);
+	auto resultado_fases = preprocesar_regresion(datos, etiquetas);
 
 	algoritmos_poblacion_expresiones::escribir_datos(salida, resultado_fases.first, resultado_fases.second, separador);
 
