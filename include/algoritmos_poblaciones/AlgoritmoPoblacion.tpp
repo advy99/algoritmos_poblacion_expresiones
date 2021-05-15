@@ -109,8 +109,8 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 			participantes_torneo[i] = i;
 		}
 
-		std::random_device rd;
-		std::mt19937 g(rd());
+		std::mt19937 g;
+		g.seed(Random::getSeed());
 
 		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), g);
 
@@ -231,6 +231,7 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 
 		cargarDatos(train_test_separado.first.first, train_test_separado.first.second);
 
+		// generamos una nueva población en cada iteración, para asegurarnos que cada fold es independiente
 		generarPoblacion(poblacion_.getTamPoblacion(), prof_expresiones_, probabilidad_variable_, true);
 
 		// ajustamos para estos nuevos valores

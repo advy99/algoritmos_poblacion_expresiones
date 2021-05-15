@@ -61,64 +61,57 @@ int main(int argc, char ** argv){
 	semilla = Random::getSeed();
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
+
+	double error_cross_val_gap = 0.0;
+
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	double error_cross_val_ej1 = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
-	double error_cross_val_ej2 = myGAP.ajustar_k_cross_validation(5, parametros_ejecucion);
+	// hacemos 5x2 cv
+	for (unsigned i = 0; i < 5; i++) {
+		error_cross_val_gap += myGAP.ajustar_k_cross_validation(2, parametros_ejecucion);
+	}
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	double error_cross_val = (error_cross_val_ej1 + error_cross_val_ej2) / 2;
+	error_cross_val_gap /= 5.0;
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	// mostramos el resultado
-	std::cout << "Semilla utilizada: " << semilla_original << std::endl << std::endl;
-	std::cout << "Tiempo de ejecución con " << num_trabajos << " hilos en una poblacion de " << tam_pob << " individuos con tamaño máximo "
-				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
+	std::cout << semilla_original << "\t"
+				 << error_cross_val_gap << "\t"
+				 << myGAP.getMejorIndividuo() << std::endl;
 
 
-	std::cout << "El mejor individuo de GA_P es: " << std::endl;
-	std::cout << myGAP.getMejorIndividuo() << std::endl;
-	std::cout << "Con un MSE (Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
 
-	auto predecidos_GAP = myGAP.predecir(train_test_split.second.first);
 
-	double error_test_GAP = parametros_ejecucion.getFuncionEvaluacion()(predecidos_GAP, train_test_split.second.second);
-
-	std::cout << "MSE (Mean Square Error) de GA_P sobre el conjunto de test: " << error_test_GAP << std::endl << std::endl;
-
+	// ahora con PG
 	semilla = Random::getSeed();
+	Random::setSeed(semilla_original);
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
+	double error_cross_val_pg = 0.0;
+
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	error_cross_val_ej1 = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
-	error_cross_val_ej2 = myPG.ajustar_k_cross_validation(5, parametros_ejecucion);
+	// hacemos 5x2 cv
+	for (unsigned i = 0; i < 5; i++) {
+		error_cross_val_pg += myPG.ajustar_k_cross_validation(2, parametros_ejecucion);
+	}
 
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	error_cross_val = (error_cross_val_ej1 + error_cross_val_ej2) / 2;
+	error_cross_val_pg /= 5.0;
 
 
 	t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
-	std::cout << "Tiempo de ejecución con " << num_trabajos << " hilos en una poblacion de " << tam_pob << " individuos con tamaño máximo "
-				 << prof_max_expr << " cada individuo y " << evaluaciones << " evaluaciones: " << t_ejecucion.count() << std::endl;
-
-
-	std::cout << "El mejor individuo de PG es: " << std::endl;
-	std::cout << myPG.getMejorIndividuo() << std::endl;
-	std::cout << "Con un MSE (Mean Square Error) en validacion cruzada de: " << error_cross_val << std::endl;
-
-	auto predecidos_GP = myPG.predecir(train_test_split.second.first);
-
-	double error_test_GP = parametros_ejecucion.getFuncionEvaluacion()(predecidos_GP, train_test_split.second.second);
-
-	std::cout << "MSE (Mean Square Error) de PG sobre el conjunto de test: " << error_test_GP << std::endl;
+	std::cout << semilla_original << "\t"
+				 << error_cross_val_pg << "\t"
+				 << myPG.getMejorIndividuo() << std::endl;
 
 	return 0;
 

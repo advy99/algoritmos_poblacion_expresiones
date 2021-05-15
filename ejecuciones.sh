@@ -7,7 +7,6 @@ fi
 
 TAM_POBLACION=1000
 PROB_VAR=0.3
-PROFUNDIDAD_MAX=10
 NUM_EVALS=1000000
 PROB_CRUCE_GP=0.75
 PROB_CRUCE_GA=0.75
@@ -21,11 +20,17 @@ mkdir -p salidas_ejecuciones/
 
 semillas=(12345 92034 8324 34679 34634)
 
-for semilla in ${semillas[*]}
+
+for profundidad in $(seq 20 20 60)
 do
-	./bin/main $1 $TAM_POBLACION $PROB_VAR $PROFUNDIDAD_MAX $NUM_EVALS $PROB_CRUCE_GP $PROB_CRUCE_GA $PROB_MUTACION_GP $PROB_MUTACION_GA $PROB_CRUCE_INTRANICHO $TAM_TORNEO $NUM_HILOS $semilla > salidas_ejecuciones/$(basename ${1})_${semilla}.dat &
+	printf "# semilla \t Error 5x2cv \t Mejor expresión \n" > salidas_ejecuciones/$(basename ${1})_prof_${profundidad}.dat
+	for semilla in ${semillas[*]}
+	do
+		./bin/main $1 $TAM_POBLACION $PROB_VAR $profundidad $NUM_EVALS $PROB_CRUCE_GP $PROB_CRUCE_GA $PROB_MUTACION_GP $PROB_MUTACION_GA $PROB_CRUCE_INTRANICHO $TAM_TORNEO $NUM_HILOS $semilla >> salidas_ejecuciones/$(basename ${1})_prof_${profundidad}.dat &
+	done
+	wait
+	echo "Ejecutado con profundidad $profundidad"
 done
 
-wait
 
 echo "Ejecutado"
