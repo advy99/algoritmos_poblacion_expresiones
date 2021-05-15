@@ -24,6 +24,9 @@ TEST ( Expresion_GAP, ConstructorPorDefecto) {
 	algoritmos_poblacion_expresiones::Expresion_GAP exp1;
 	algoritmos_poblacion_expresiones::Expresion_GAP exp2;
 
+	// el cromosoma es aleatorio, así que por asegurarnos que esta igual
+	exp1.asignarCromosoma(exp2.getCromosoma());
+
 	EXPECT_EQ(exp1, exp2);
 }
 
