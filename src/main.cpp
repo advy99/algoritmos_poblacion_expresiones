@@ -58,7 +58,6 @@ int main(int argc, char ** argv){
 	datos = algoritmos_poblacion_expresiones::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
 
-	semilla = Random::getSeed();
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 
@@ -81,13 +80,9 @@ int main(int argc, char ** argv){
 	// mostramos el resultado
 	std::cout << semilla_original << "\t"
 				 << error_cross_val_gap << "\t"
-				 << myGAP.getMejorIndividuo() << std::endl;
-
-
-
+				 << myGAP.getMejorIndividuo() << "\t GAP" << std::endl;
 
 	// ahora con PG
-	semilla = Random::getSeed();
 	Random::setSeed(semilla_original);
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
@@ -111,7 +106,7 @@ int main(int argc, char ** argv){
 
 	std::cout << semilla_original << "\t"
 				 << error_cross_val_pg << "\t"
-				 << myPG.getMejorIndividuo() << std::endl;
+				 << myPG.getMejorIndividuo() << "\t PG" << std::endl;
 
 	return 0;
 
