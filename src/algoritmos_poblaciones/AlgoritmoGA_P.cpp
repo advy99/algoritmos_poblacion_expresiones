@@ -197,11 +197,11 @@ int AlgoritmoGA_P :: seleccionIntraNicho(const int madre) const{
 		escogidos[i] = i;
 	}
 
-	std::random_device rd;
-	std::mt19937 g(rd());
+	std::mt19937 g;
+	g.seed(Random::getSeed());
 
 	std::shuffle(escogidos.begin(), escogidos.end(), g);
-
+	
 	unsigned i = 0;
 
 	do {
