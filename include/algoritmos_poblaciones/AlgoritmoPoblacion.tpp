@@ -231,6 +231,7 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 
 		cargarDatos(train_test_separado.first.first, train_test_separado.first.second);
 
+		// generamos una nueva población en cada iteración, para asegurarnos que cada fold es independiente
 		generarPoblacion(poblacion_.getTamPoblacion(), prof_expresiones_, probabilidad_variable_, true);
 
 		// ajustamos para estos nuevos valores
