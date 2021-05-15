@@ -24,10 +24,11 @@ Expresion_GAP :: Expresion_GAP(const std::vector<Nodo> & subarbol, const unsigne
 	// inicializamos la expresion vacia
 	inicializarVacia();
 
+	inicializarCromosoma(prof_max);
+
 	// obtenemos el subarbol
 	arbol_ = obtenerSubarbol(subarbol, 0);
 
-	inicializarCromosoma(prof_max);
 
 }
 
@@ -39,12 +40,13 @@ Expresion_GAP :: Expresion_GAP(const unsigned longitud_max, const double prob_va
 
 	inicializarVacia();
 
+	// inicializamos el cromosoma el cromosoma
+	inicializarCromosoma(prof_max);
+
 	// generamos una expresion aleatoria
 	generarExpresionAleatoria(longitud_max, prob_variable, num_vars);
 
 
-	// inicializamos el cromosoma el cromosoma
-	inicializarCromosoma(prof_max);
 }
 
 
