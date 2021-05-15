@@ -61,7 +61,7 @@ OBJETIVO_PREPROCESADO = $(BIN)/main_preprocesar
 OBJETOS_PREPROCESADO = $(OBJ)/main_preprocesar.o
 
 # variables para el contador de reglas
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) $(OBJETIVO_PREPROCESADO) $(OBJETOS_PREPROCESADO) | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) $(OBJETIVO_PREPROCESADO) $(OBJETOS_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_suma_caracteristicas $(OBJ)/main_conteo.o $(OBJ)/main_suma_caracteristicas.o | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -100,11 +100,13 @@ $(OBJETIVO_PREPROCESADO): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_P
 	@printf "\n\e[36mCompilación de $(OBJETIVO_PREPROCESADO) finalizada con exito.\e[0m\n\n"
 
 $(BIN)/main_conteo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_conteo.o
+	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_conteo a partir de $(OBJ)/main_conteo.o\n"
 	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_conteo.o -o $(BIN)/main_conteo $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(BIN)/main_conteo finalizada con exito.\e[0m\n\n"
 
 $(BIN)/main_suma_caracteristicas : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_suma_caracteristicas.o
+	@$(SUMA)
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_suma_caracteristicas a partir de $(OBJ)/main_suma_caracteristicas.o\n"
 	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_suma_caracteristicas.o -o $(BIN)/main_suma_caracteristicas $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(BIN)/main_suma_caracteristicas finalizada con exito.\e[0m\n\n"
