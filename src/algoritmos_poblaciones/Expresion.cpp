@@ -566,7 +566,7 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 
 void Expresion :: mutarGP (const int num_vars) {
 
-
+	numero_variables_ = num_vars;
 	int posicion = Random::getInt(arbol_.size());
 
 	float aleatorio = Random::getFloat();
@@ -595,7 +595,7 @@ void Expresion :: mutarGP (const int num_vars) {
 
 		do {
 
-			Expresion exp_aleatorio(profundidad_maxima_, 0.3, numero_variables_, profundidad_maxima_);
+			Expresion exp_aleatorio(profundidad_maxima_, 0.3, num_vars, profundidad_maxima_);
 
 			cruce_mal = !(intercambiarSubarbol(exp_aleatorio, posicion, 0, hijo));
 
