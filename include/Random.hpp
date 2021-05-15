@@ -17,6 +17,8 @@
   * @date Julio 2020
   */
 
+#include <random>
+
 
 class Random{
 	private:
@@ -31,28 +33,8 @@ class Random{
 		  *
 		  */
 
-		/**
-		 * @brief Semilla a utilizar para generar aleatorios
-		 */
+		static std::mt19937 generador_;
 
-		static unsigned long SEED;
-		
-		/**
-		 * @brief Semilla a utilizar para generar aleatorios
-		 */
-		static const unsigned long int MASK;
-
-		/**
-		 * @brief Máscara a utilizar para generar aleatorios
-		 */
-		static const unsigned long int PRIME;
-		
-		/**
-		 * @brief Escala a utilizar para generar aleatorios
-		 */
-		
-		static const double SCALE;
-		
 		/**
 		  * @brief Constructor sin parámetros que iniciliza la semilla a un valor aleatorio
 		  */
@@ -93,14 +75,6 @@ class Random{
 		  *
 		  */
 		Random & operator = (const Random & otro) = delete;
-
-		/**
-		  * @brief Obtener el valor de la semilla
-		  *
-		  * @return Valor actual de la semilla
-		  */
-
-		static unsigned long getSeed() ;
 
 
 		/**
@@ -154,6 +128,16 @@ class Random{
 		  */
 
 		static int getInt(const int HIGH);
+
+
+		/**
+		  * @brief Obtener el generador de aleatorios que se está utilizando
+		  *
+		  *
+		  * @return Generador de aleatorios que se está utilizando
+		  */
+
+		static std::mt19937 getGenerador();
 
 };
 
