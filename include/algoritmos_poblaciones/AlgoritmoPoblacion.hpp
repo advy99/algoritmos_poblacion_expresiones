@@ -294,11 +294,11 @@ class AlgoritmoPoblacion {
 		 * @param numero_val_cruzada Número de segmentos en los que dividir el conjunto de datos para aplicar validación cruzada
 		 * @param parametros Parametros con los que ajustar el algoritmo
 		 *
-		 * @return Error obtenido de la validación cruzada
+		 * @return Errores obtenido de los folds de validación cruzada
 		 */
 
 
-		double ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
+		std::vector<double> ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
 
 };
 
