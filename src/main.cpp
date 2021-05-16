@@ -60,26 +60,49 @@ int main(int argc, char ** argv){
 
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
+	// vector con los errores utilizando el error cuadrático medio
+	std::vector<double> errores_ecm_gap;
 
-	double error_cross_val_gap = 0.0;
+	// vector con los errores utilizando la raiz del error cuadrático medio
+	std::vector<double> errores_recm_gap;
+
+	double error_medio_ecm_gap = 0.0;
+	double error_medio_recm_gap = 0.0;
+
 
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	// hacemos 5x2 cv
 	for (unsigned i = 0; i < 5; i++) {
-		error_cross_val_gap += myGAP.ajustar_k_cross_validation(2, parametros_ejecucion);
+		auto error_fold = myGAP.ajustar_k_cross_validation(2, parametros_ejecucion);
+
+		errores_ecm_gap.push_back(error_fold[0]);
+		errores_ecm_gap.push_back(error_fold[1]);
+
+		errores_ecm_gap.push_back(std::sqrt(error_fold[0]));
+		errores_ecm_gap.push_back(std::sqrt(error_fold[1]));
+
 	}
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	error_cross_val_gap /= 5.0;
+
+	for ( unsigned i = 0; i < errores_ecm_gap.size(); i++) {
+		error_medio_ecm_gap += errores_ecm_gap[i];
+		error_medio_recm_gap += errores_recm_gap[i];
+	}
+
+	error_medio_ecm_gap /= errores_ecm_gap.size();
+	error_medio_recm_gap /= errores_recm_gap.size();
+
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	// mostramos el resultado
 	std::cout << semilla_original << "\t"
-				 << error_cross_val_gap << "\t"
+				 << error_medio_ecm_gap << "\t"
+				 << error_medio_recm_gap << "\t"
 				 << myGAP.getMejorIndividuo() << "\t GAP" << std::endl;
 
 	// ahora con PG
@@ -87,25 +110,46 @@ int main(int argc, char ** argv){
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
-	double error_cross_val_pg = 0.0;
+	// vector con los errores utilizando el error cuadrático medio
+	std::vector<double> errores_ecm_gp;
+
+	// vector con los errores utilizando la raiz del error cuadrático medio
+	std::vector<double> errores_recm_gp;
+
+	double error_medio_ecm_gp = 0.0;
+	double error_medio_recm_gp = 0.0;
+
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	// hacemos 5x2 cv
 	for (unsigned i = 0; i < 5; i++) {
-		error_cross_val_pg += myPG.ajustar_k_cross_validation(2, parametros_ejecucion);
+		auto error_fold = myPG.ajustar_k_cross_validation(2, parametros_ejecucion);
+
+		errores_ecm_gp.push_back(error_fold[0]);
+		errores_ecm_gp.push_back(error_fold[1]);
+
+		errores_ecm_gp.push_back(std::sqrt(error_fold[0]));
+		errores_ecm_gp.push_back(std::sqrt(error_fold[1]));
+
 	}
 
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	error_cross_val_pg /= 5.0;
+	for ( unsigned i = 0; i < errores_ecm_gp.size(); i++) {
+		error_medio_ecm_gp += errores_ecm_gp[i];
+		error_medio_recm_gp += errores_recm_gp[i];
+	}
 
+	error_medio_ecm_gp /= errores_ecm_gp.size();
+	error_medio_recm_gp /= errores_recm_gp.size();
 
 	t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	std::cout << semilla_original << "\t"
-				 << error_cross_val_pg << "\t"
+				 << error_medio_ecm_gp << "\t"
+				 << error_medio_recm_gp << "\t"
 				 << myPG.getMejorIndividuo() << "\t PG" << std::endl;
 
 	return 0;
