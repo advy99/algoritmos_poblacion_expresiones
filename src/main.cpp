@@ -80,13 +80,12 @@ int main(int argc, char ** argv){
 		errores_ecm_gap.push_back(error_fold[0]);
 		errores_ecm_gap.push_back(error_fold[1]);
 
-		errores_ecm_gap.push_back(std::sqrt(error_fold[0]));
-		errores_ecm_gap.push_back(std::sqrt(error_fold[1]));
+		errores_recm_gap.push_back(std::sqrt(error_fold[0]));
+		errores_recm_gap.push_back(std::sqrt(error_fold[1]));
 
 	}
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
-
 
 	for ( unsigned i = 0; i < errores_ecm_gap.size(); i++) {
 		error_medio_ecm_gap += errores_ecm_gap[i];
@@ -103,7 +102,8 @@ int main(int argc, char ** argv){
 	std::cout << semilla_original << "\t"
 				 << error_medio_ecm_gap << "\t"
 				 << error_medio_recm_gap << "\t"
-				 << myGAP.getMejorIndividuo() << "\t GAP" << std::endl;
+				 << myGAP.getMejorIndividuo() << "\t"
+				 << t_ejecucion.count() << "\t GAP" << std::endl;
 
 	// ahora con PG
 	Random::setSeed(semilla_original);
@@ -129,8 +129,8 @@ int main(int argc, char ** argv){
 		errores_ecm_gp.push_back(error_fold[0]);
 		errores_ecm_gp.push_back(error_fold[1]);
 
-		errores_ecm_gp.push_back(std::sqrt(error_fold[0]));
-		errores_ecm_gp.push_back(std::sqrt(error_fold[1]));
+		errores_recm_gp.push_back(std::sqrt(error_fold[0]));
+		errores_recm_gp.push_back(std::sqrt(error_fold[1]));
 
 	}
 
@@ -150,7 +150,8 @@ int main(int argc, char ** argv){
 	std::cout << semilla_original << "\t"
 				 << error_medio_ecm_gp << "\t"
 				 << error_medio_recm_gp << "\t"
-				 << myPG.getMejorIndividuo() << "\t PG" << std::endl;
+				 << myPG.getMejorIndividuo() << "\t"
+				 << t_ejecucion.count() << "\t PG" << std::endl;
 
 	return 0;
 
