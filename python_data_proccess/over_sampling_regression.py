@@ -31,7 +31,6 @@ plt.xlabel("Edad")
 plt.legend()
 plt.show()
 plt.clf()
-datos.to_csv(sys.argv[2], index = False, header = False)
 
 
 # buenos resultados entre 0.6 y 0.8 de rel_coef
@@ -57,3 +56,4 @@ seaborn.kdeplot(datos_over_sampling['C9'], label = "Modified")
 
 plt.legend()
 plt.show()
+datos_over_sampling.to_csv(sys.argv[2], index = False, header = False)
