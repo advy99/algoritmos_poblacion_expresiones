@@ -61,14 +61,27 @@ int main(int argc, char ** argv){
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 
+	std::vector<double> error_it;
 	double error_cross_val_gap = 0.0;
+	algoritmos_poblacion_expresiones::Expresion_GAP mejor_expresion_gap;
 
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
+	const unsigned num_cv = 2;
+
 	// hacemos 5x2 cv
 	for (unsigned i = 0; i < 5; i++) {
-		error_cross_val_gap += myGAP.ajustar_k_cross_validation(2, parametros_ejecucion);
+		auto resultado_cv = myGAP.ajustar_k_cross_validation(num_cv, parametros_ejecucion);
+
+		if ( resultado_cv.first.getFitness() < mejor_expresion_gap.getFitness()) {
+			mejor_expresion_gap = resultado_cv.first;
+		}
+
+		for ( unsigned i = 0; i < num_cv; i++) {
+			error_cross_val_gap += resultado_cv.second[i];
+		}
+
 	}
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
@@ -80,7 +93,7 @@ int main(int argc, char ** argv){
 	// mostramos el resultado
 	std::cout << semilla_original << "\t"
 				 << error_cross_val_gap << "\t"
-				 << myGAP.getMejorIndividuo() << "\t GAP" << std::endl;
+				 << mejor_expresion_gap << "\t GAP" << std::endl;
 
 	// ahora con PG
 	Random::setSeed(semilla_original);
@@ -88,12 +101,23 @@ int main(int argc, char ** argv){
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 	double error_cross_val_pg = 0.0;
+	algoritmos_poblacion_expresiones::Expresion mejor_expresion_pg;
+
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	// hacemos 5x2 cv
 	for (unsigned i = 0; i < 5; i++) {
-		error_cross_val_pg += myPG.ajustar_k_cross_validation(2, parametros_ejecucion);
+		auto resultado_cv = myPG.ajustar_k_cross_validation(num_cv, parametros_ejecucion);
+
+
+		if ( resultado_cv.first.getFitness() < mejor_expresion_pg.getFitness()) {
+			mejor_expresion_pg = resultado_cv.first;
+		}
+
+		for ( unsigned i = 0; i < num_cv; i++) {
+			error_cross_val_pg += resultado_cv.second[i];
+		}
 	}
 
 

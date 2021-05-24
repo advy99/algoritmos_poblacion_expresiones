@@ -206,7 +206,7 @@ std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vec
 }
 
 template <class T>
-double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
+std::pair<T, std::vector<double> > AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
 				 									 const Parametros & parametros) {
 
 	const std::vector<std::vector<double> > datos_originales = datos_;
@@ -216,7 +216,11 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 
 	const int NUM_DATOS_TEST_ITERACION = datos_.size() / numero_val_cruzada;
 
-	double media_error = 0.0;
+	std::vector<double> errores;
+	errores.resize(numero_val_cruzada);
+
+	double error_mejor = std::numeric_limits<double>::infinity();
+	T mejor_expresion;
 
 	// para cada iteracion de la validación cruzada;
 	for ( unsigned i = 0; i < numero_val_cruzada; i++) {
@@ -237,16 +241,18 @@ double AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero
 		// predecimos test para mirar el error
 		auto predicciones = predecir(train_test_separado.second.first);
 
-		media_error += parametros.getFuncionEvaluacion()(predicciones, train_test_separado.second.second);
+		errores[i] = parametros.getFuncionEvaluacion()(predicciones, train_test_separado.second.second);
+
+		if (errores[i] < error_mejor) {
+			mejor_expresion = getMejorIndividuo();
+		}
 
 	}
-
-	media_error /= numero_val_cruzada;
 
 	// reestablecer datos originales
 	cargarDatos(datos_originales, etiquetas_originales);
 
-	return media_error;
+	return std::make_pair(mejor_expresion, errores);
 
 }
 
