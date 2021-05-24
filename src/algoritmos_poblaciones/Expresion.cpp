@@ -557,7 +557,7 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	// obtenemos el string y lo sacamos por el flujo
 	std::string exp_string = exp.stringExpresion();
 
-	os << exp_string << std::endl;
+	os << exp_string;
 
 	return os;
 }

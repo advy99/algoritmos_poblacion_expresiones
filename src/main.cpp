@@ -61,17 +61,20 @@ int main(int argc, char ** argv){
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
 
+	double error_medio_ecm_gap = 0.0;
+	double error_medio_recm_gap = 0.0;
+
 	std::vector<double> error_it;
-	double error_cross_val_gap = 0.0;
 	algoritmos_poblacion_expresiones::Expresion_GAP mejor_expresion_gap;
 
 	// ajustamos GAP midiendo tiempo
 	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	const unsigned num_cv = 2;
+	const unsigned num_it = 5;
 
 	// hacemos 5x2 cv
-	for (unsigned i = 0; i < 5; i++) {
+	for (unsigned i = 0; i < num_it; i++) {
 		auto resultado_cv = myGAP.ajustar_k_cross_validation(num_cv, parametros_ejecucion);
 
 		if ( resultado_cv.first.getFitness() < mejor_expresion_gap.getFitness()) {
@@ -79,35 +82,41 @@ int main(int argc, char ** argv){
 		}
 
 		for ( unsigned i = 0; i < num_cv; i++) {
-			error_cross_val_gap += resultado_cv.second[i];
+			error_medio_ecm_gap += resultado_cv.second[i];
+			error_medio_recm_gap += std::sqrt(resultado_cv.second[i]);
 		}
 
 	}
 
+	error_medio_ecm_gap /= num_cv * num_it * 1.0;
+	error_medio_recm_gap /= num_cv * num_it * 1.0;
+
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	error_cross_val_gap /= 5.0;
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	// mostramos el resultado
 	std::cout << semilla_original << "\t"
-				 << error_cross_val_gap << "\t"
-				 << mejor_expresion_gap << "\t GAP" << std::endl;
+				 << error_medio_ecm_gap << "\t"
+				 << error_medio_recm_gap << "\t"
+				 << mejor_expresion_gap << "\t"
+				 << t_ejecucion.count() << "\t GAP" << std::endl;
 
 	// ahora con PG
 	Random::setSeed(semilla_original);
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
-	double error_cross_val_pg = 0.0;
+	double error_medio_ecm_gp = 0.0;
+	double error_medio_recm_gp = 0.0;
 	algoritmos_poblacion_expresiones::Expresion mejor_expresion_pg;
 
 
 	tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	// hacemos 5x2 cv
-	for (unsigned i = 0; i < 5; i++) {
+	for (unsigned i = 0; i < num_it; i++) {
 		auto resultado_cv = myPG.ajustar_k_cross_validation(num_cv, parametros_ejecucion);
 
 
@@ -116,21 +125,23 @@ int main(int argc, char ** argv){
 		}
 
 		for ( unsigned i = 0; i < num_cv; i++) {
-			error_cross_val_pg += resultado_cv.second[i];
+			error_medio_ecm_gp += resultado_cv.second[i];
+			error_medio_recm_gp += std::sqrt(resultado_cv.second[i]);
 		}
 	}
 
+	error_medio_ecm_gp /= num_cv * num_it * 1.0;
+	error_medio_recm_gp /= num_cv * num_it * 1.0;
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
-
-	error_cross_val_pg /= 5.0;
-
 
 	t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	std::cout << semilla_original << "\t"
-				 << error_cross_val_pg << "\t"
-				 << myPG.getMejorIndividuo() << "\t PG" << std::endl;
+				 << error_medio_ecm_gp << "\t"
+				 << error_medio_recm_gp << "\t"
+				 << mejor_expresion_pg << "\t"
+				 << t_ejecucion.count() << "\t PG" << std::endl;
 
 	return 0;
 
