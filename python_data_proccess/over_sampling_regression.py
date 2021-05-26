@@ -23,13 +23,13 @@ datos = pd.read_csv(sys.argv[1], header=None, names=caracteristicas)
 
 
 smogn.box_plot_stats(datos['C9'])['stats']
-seaborn.kdeplot(datos['C9'], label = "Original")
+seaborn.kdeplot(datos['C9'], label = "Conjunto original")
 
 plt.ylabel("Densidad en el conjunto de datos")
 plt.xlabel("Edad")
 
-plt.legend()
-plt.show()
+# plt.legend()
+plt.savefig("{}.png".format(sys.argv[1]), dpi=300)
 plt.clf()
 
 
@@ -51,9 +51,9 @@ plt.xlabel("Edad")
 smogn.box_plot_stats(datos['C9'])['stats']
 smogn.box_plot_stats(datos_over_sampling['C9'])['stats']
 
-seaborn.kdeplot(datos['C9'], label = "Original")
-seaborn.kdeplot(datos_over_sampling['C9'], label = "Modified")
+seaborn.kdeplot(datos['C9'], label = "Conjunto original")
+seaborn.kdeplot(datos_over_sampling['C9'], label = "Conjunto tras SMOGN")
 
 plt.legend()
-plt.show()
+plt.savefig("{}.png".format(sys.argv[2]), dpi=300)
 datos_over_sampling.to_csv(sys.argv[2], index = False, header = False)
