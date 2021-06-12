@@ -47,6 +47,10 @@ int main(int argc, char ** argv){
 																			  prob_muta_ga, prob_cruce_intra,
 																			  tam_torneo, false);
 
+	parametros_ejecucion.addFuncionError(algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio);
+	parametros_ejecucion.addFuncionError(algoritmos_poblacion_expresiones::error_absoluto_medio);
+
+
 	// si utilizamos openMP, establecemos el número de trabajos
 	#ifdef _OPENMP
 		omp_set_num_threads(num_trabajos);
@@ -63,6 +67,8 @@ int main(int argc, char ** argv){
 
 	double error_medio_ecm_gap = 0.0;
 	double error_medio_recm_gap = 0.0;
+	double error_medio_mae_gap = 0.0;
+
 
 	std::vector<double> error_it;
 	algoritmos_poblacion_expresiones::Expresion_GAP mejor_expresion_gap;
@@ -82,8 +88,9 @@ int main(int argc, char ** argv){
 		}
 
 		for ( unsigned i = 0; i < num_cv; i++) {
-			error_medio_ecm_gap += resultado_cv.second[i];
-			error_medio_recm_gap += std::sqrt(resultado_cv.second[i]);
+			error_medio_ecm_gap += resultado_cv.second[0][i];
+			error_medio_recm_gap += resultado_cv.second[1][i];
+			error_medio_mae_gap += resultado_cv.second[2][i];
 		}
 
 	}
@@ -100,6 +107,7 @@ int main(int argc, char ** argv){
 	std::cout << semilla_original << "\t"
 				 << error_medio_ecm_gap << "\t"
 				 << error_medio_recm_gap << "\t"
+				 << error_medio_mae_gap << "\t"
 				 << mejor_expresion_gap << "\t"
 				 << t_ejecucion.count() << "\t GAP" << std::endl;
 
@@ -110,6 +118,8 @@ int main(int argc, char ** argv){
 
 	double error_medio_ecm_gp = 0.0;
 	double error_medio_recm_gp = 0.0;
+	double error_medio_mae_gp = 0.0;
+
 	algoritmos_poblacion_expresiones::Expresion mejor_expresion_pg;
 
 
@@ -125,8 +135,9 @@ int main(int argc, char ** argv){
 		}
 
 		for ( unsigned i = 0; i < num_cv; i++) {
-			error_medio_ecm_gp += resultado_cv.second[i];
-			error_medio_recm_gp += std::sqrt(resultado_cv.second[i]);
+			error_medio_ecm_gp += resultado_cv.second[0][i];
+			error_medio_recm_gp += resultado_cv.second[1][i];
+			error_medio_mae_gp += resultado_cv.second[2][i];
 		}
 	}
 
@@ -140,6 +151,7 @@ int main(int argc, char ** argv){
 	std::cout << semilla_original << "\t"
 				 << error_medio_ecm_gp << "\t"
 				 << error_medio_recm_gp << "\t"
+				 << error_medio_mae_gp << "\t"
 				 << mejor_expresion_pg << "\t"
 				 << t_ejecucion.count() << "\t PG" << std::endl;
 
