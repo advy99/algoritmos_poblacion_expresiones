@@ -298,7 +298,7 @@ class AlgoritmoPoblacion {
 		 */
 
 
-		std::pair<T, std::vector<double> > ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
+		std::pair<T, std::vector<std::vector<double> > > ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
 
 };
 

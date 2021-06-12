@@ -206,7 +206,7 @@ std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vec
 }
 
 template <class T>
-std::pair<T, std::vector<double> > AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
+std::pair<T, std::vector<std::vector<double> > > AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
 				 									 const Parametros & parametros) {
 
 	const std::vector<std::vector<double> > datos_originales = datos_;
@@ -216,8 +216,12 @@ std::pair<T, std::vector<double> > AlgoritmoPoblacion<T> :: ajustar_k_cross_vali
 
 	const int NUM_DATOS_TEST_ITERACION = datos_.size() / numero_val_cruzada;
 
-	std::vector<double> errores;
-	errores.resize(numero_val_cruzada);
+	std::vector<std::vector<double >> errores;
+	errores.resize(parametros.getNumFuncionesError() + 1);
+
+	for (unsigned i = 0; i < errores.size(); i++){
+		errores[i].resize(numero_val_cruzada);
+	}
 
 	double error_mejor = std::numeric_limits<double>::infinity();
 	T mejor_expresion;
@@ -241,9 +245,15 @@ std::pair<T, std::vector<double> > AlgoritmoPoblacion<T> :: ajustar_k_cross_vali
 		// predecimos test para mirar el error
 		auto predicciones = predecir(train_test_separado.second.first);
 
-		errores[i] = parametros.getFuncionEvaluacion()(predicciones, train_test_separado.second.second);
+		// rellenamos el error de la función de evaluación con la que entrenamos
+		errores[0][i] = parametros.getFuncionEvaluacion()(predicciones, train_test_separado.second.second);
 
-		if (errores[i] < error_mejor) {
+		// calculamos todos los otros errores
+		for (unsigned i = 0; i < parametros.getNumFuncionesError(); i++) {
+			errores[i + 1] = parametros.getFuncionError(i)(predicciones, train_test_separado.second.second);
+		}
+
+		if (errores[0][i] < error_mejor) {
 			mejor_expresion = getMejorIndividuo();
 		}
 
