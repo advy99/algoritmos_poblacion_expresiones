@@ -74,7 +74,7 @@ unsigned Parametros :: getNumFuncionesError() const {
 	return funciones_evaluacion_error_.size();
 }
 
-funcion_evaluacion_t Parametros :: getFuncionError(i) const {
+funcion_evaluacion_t Parametros :: getFuncionError(const unsigned i) const {
 	return funciones_evaluacion_error_[i];
 }
 
