@@ -120,11 +120,20 @@ class Parametros {
 
 		/**
 		 *
-		 * @brief Puntero a la función de evaluacion a utilizar
+		 * @brief Puntero a la función de evaluacion a utilizar para entrenar
 		 *
 		 */
 
 		 funcion_evaluacion_t funcion_evaluacion_;
+
+		 /**
+ 		 *
+ 		 * @brief Vector de punteros a las funciones de evaluacion a utilizar para obtener el error,
+		 * además de la función de evaluación. Solo se utilizará en validación cruzada
+		 *
+ 		 */
+
+ 		 std::vector<funcion_evaluacion_t> funciones_evaluacion_error_;
 
 	public:
 
@@ -229,6 +238,34 @@ class Parametros {
 		 *  @return Puntero a la función de evaluacion a utilizar
 		 */
 		funcion_evaluacion_t getFuncionEvaluacion() const;
+
+		/**
+		 *  @brief Añadir una función de error para estimar un modelo con dicha función
+		 *
+		 *  @param func Función a añadir para devolver su error en cross-validation
+		 *
+		 */
+
+		void addFuncionError(const funcion_evaluacion_t & func);
+
+		/**
+		 *  @brief Obtener una función de error a utilizar
+		 *
+		 *  @param indice Indice de la función de error a obtener
+		 *
+		 * @return Funcion de error en la posición indice
+		 */
+
+		funcion_evaluacion_t getFuncionError(const unsigned indice) const;
+
+		/**
+		 *  @brief Obtener el numero de funciones de error a utilizar
+		 *
+		 *
+		 * @return Numero de funciones de error a utilizar
+		 */
+
+		unsigned getNumFuncionesError() const;
 
 };
 

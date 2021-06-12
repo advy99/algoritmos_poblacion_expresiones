@@ -66,5 +66,16 @@ funcion_evaluacion_t Parametros :: getFuncionEvaluacion() const {
 	return funcion_evaluacion_;
 }
 
+void Parametros :: addFuncionError(const funcion_evaluacion_t & func) {
+	funciones_evaluacion_error_.push_back(func);
+}
+
+unsigned Parametros :: getNumFuncionesError() const {
+	return funciones_evaluacion_error_.size();
+}
+
+funcion_evaluacion_t Parametros :: getFuncionError(const unsigned i) const {
+	return funciones_evaluacion_error_[i];
+}
 
 }
