@@ -50,7 +50,6 @@ int main(int argc, char ** argv){
 	parametros_ejecucion.addFuncionError(algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio);
 	parametros_ejecucion.addFuncionError(algoritmos_poblacion_expresiones::error_absoluto_medio);
 
-
 	// si utilizamos openMP, establecemos el número de trabajos
 	#ifdef _OPENMP
 		omp_set_num_threads(num_trabajos);
@@ -87,10 +86,10 @@ int main(int argc, char ** argv){
 			mejor_expresion_gap = resultado_cv.first;
 		}
 
-		for ( unsigned i = 0; i < num_cv; i++) {
-			error_medio_ecm_gap += resultado_cv.second[0][i];
-			error_medio_recm_gap += resultado_cv.second[1][i];
-			error_medio_mae_gap += resultado_cv.second[2][i];
+		for ( unsigned j = 0; j < num_cv; j++) {
+			error_medio_ecm_gap += resultado_cv.second[0][j];
+			error_medio_recm_gap += resultado_cv.second[1][j];
+			error_medio_mae_gap += resultado_cv.second[2][j];
 		}
 
 	}
@@ -135,10 +134,10 @@ int main(int argc, char ** argv){
 			mejor_expresion_pg = resultado_cv.first;
 		}
 
-		for ( unsigned i = 0; i < num_cv; i++) {
-			error_medio_ecm_gp += resultado_cv.second[0][i];
-			error_medio_recm_gp += resultado_cv.second[1][i];
-			error_medio_mae_gp += resultado_cv.second[2][i];
+		for ( unsigned j = 0; j < num_cv; j++) {
+			error_medio_ecm_gp += resultado_cv.second[0][j];
+			error_medio_recm_gp += resultado_cv.second[1][j];
+			error_medio_mae_gp += resultado_cv.second[2][j];
 		}
 	}
 
