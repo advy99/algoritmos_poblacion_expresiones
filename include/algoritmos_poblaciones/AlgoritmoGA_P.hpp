@@ -77,7 +77,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 			* @return Indice de un individuo en el mismo nicho
 			*/
 
-		  int seleccionIntraNicho(const int madre) const;
+		  int seleccionIntraNicho(const int madre, const std::vector<bool> & escogidos) const;
 
 
 	public:

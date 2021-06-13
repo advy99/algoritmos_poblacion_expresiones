@@ -90,7 +90,7 @@ void AlgoritmoPoblacion<T> :: inicializarVacio() {
 
 
 template <class T>
-Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo) {
+Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo) const {
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion<T> resultado;
 

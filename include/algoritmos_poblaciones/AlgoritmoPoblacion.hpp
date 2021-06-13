@@ -108,7 +108,7 @@ class AlgoritmoPoblacion {
 		 * @return Devuelve la poblacion con los T ganadores del torneo.
 		 */
 
-		Poblacion<T> seleccionTorneo(const unsigned tam_torneo);
+		Poblacion<T> seleccionTorneo(const unsigned tam_torneo) const;
 
 
 		/**
