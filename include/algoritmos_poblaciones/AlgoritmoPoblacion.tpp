@@ -94,20 +94,18 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccionTorneo(const unsigned tam_torneo)
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion<T> resultado;
 
+	std::vector<int> participantes_torneo;
+	participantes_torneo.resize(poblacion_.getTamPoblacion());
+
+	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++ ) {
+		participantes_torneo[i] = i;
+	}
+
+	int mejor_torneo = 0;
+	
 	// escojo una nueva poblacion del mismo tamaño
 	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++) {
 
-		int mejor_torneo = 0;
-
-		// generamos el inicial y lo insertamos en los generados
-		mejor_torneo = Random::getInt(poblacion_.getTamPoblacion());
-
-		std::vector<int> participantes_torneo;
-		participantes_torneo.resize(poblacion_.getTamPoblacion());
-
-		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++ ) {
-			participantes_torneo[i] = i;
-		}
 
 		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), Random::getGenerador());
 
