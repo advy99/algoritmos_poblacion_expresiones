@@ -62,7 +62,9 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i += 2){
 
 			madre = primero_sin_cruzar;
-			++primero_sin_cruzar;
+			do {
+				++primero_sin_cruzar;
+			} while (cruzados[primero_sin_cruzar]);
 			cruzados[madre] = true;
 
 			cruce_intra_nicho_posible = false;
@@ -80,7 +82,10 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 					// ya he escogido a ese padre
 					cruzados[padre] = true;
 					if (padre == primero_sin_cruzar) {
-						primero_sin_cruzar++;
+						do {
+							++primero_sin_cruzar;
+						} while (cruzados[primero_sin_cruzar]);
+
 					}
 
 					hijo1 = poblacion_[madre];
@@ -114,7 +119,9 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 			if ( !cruce_intra_nicho_posible ) {
 				// cruce inter-nicho
 				padre = primero_sin_cruzar;
-				primero_sin_cruzar++;
+				do {
+					++primero_sin_cruzar;
+				} while (cruzados[primero_sin_cruzar]);
 				cruzados[padre] = true;
 
 				hijo1 = poblacion_[madre];
