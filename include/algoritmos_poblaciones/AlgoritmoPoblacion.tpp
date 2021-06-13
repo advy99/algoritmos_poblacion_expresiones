@@ -249,8 +249,8 @@ std::pair<T, std::vector<std::vector<double> > > AlgoritmoPoblacion<T> :: ajusta
 		errores[0][i] = parametros.getFuncionEvaluacion()(predicciones, train_test_separado.second.second);
 
 		// calculamos todos los otros errores
-		for (unsigned i = 0; i < parametros.getNumFuncionesError(); i++) {
-			errores[i + 1][i] = parametros.getFuncionError(i)(predicciones, train_test_separado.second.second);
+		for (unsigned j = 0; j < parametros.getNumFuncionesError(); j++) {
+			errores[j + 1][i] = parametros.getFuncionError(i)(predicciones, train_test_separado.second.second);
 		}
 
 		if (errores[0][i] < error_mejor) {
