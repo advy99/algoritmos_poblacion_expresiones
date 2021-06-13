@@ -97,6 +97,7 @@ int main(int argc, char ** argv){
 
 	error_medio_ecm_gap /= num_cv * num_it * 1.0;
 	error_medio_recm_gap /= num_cv * num_it * 1.0;
+	error_medio_mae_gap /= num_cv * num_it * 1.0;
 
 	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
@@ -143,6 +144,7 @@ int main(int argc, char ** argv){
 
 	error_medio_ecm_gp /= num_cv * num_it * 1.0;
 	error_medio_recm_gp /= num_cv * num_it * 1.0;
+	error_medio_mae_gp /= num_cv * num_it * 1.0;
 
 	tiempo_fin = std::chrono::high_resolution_clock::now();
 
