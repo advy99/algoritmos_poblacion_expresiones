@@ -73,11 +73,12 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		   * @brief Selección de un individuo intra-nicho para GA-P
 			*
 			* @param madre Indice del individuo que tiene que estar en el mismo nicho
+			* @param escogidos Vector de booleanos que nos dice que elementos ya se han escogido para el cruce
 			*
 			* @return Indice de un individuo en el mismo nicho
 			*/
 
-		  int seleccionIntraNicho(const int madre) const;
+		  int seleccionIntraNicho(const int madre, const std::vector<bool> & escogidos) const;
 
 
 	public:

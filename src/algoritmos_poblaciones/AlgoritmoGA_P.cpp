@@ -40,41 +40,54 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 	// evaluo la poblacion al inicio
 	poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
-	poblacion_.ordenar();
+	// poblacion_.ordenar();
 
 
 
-	Expresion_GAP mejor_individuo = poblacion_[0];
+	Expresion_GAP mejor_individuo = poblacion_.getMejorIndividuo();
 
 	Expresion_GAP hijo1, hijo2;
-
-	bool cruce_ga;
-	bool cruce_gp;
 
 	bool cruce_intra_nicho_posible = true;
 
 	while ( generacion < NUM_GENERACIONES) {
 
-		Poblacion<Expresion_GAP> nueva_poblacion;
+		// seleccionamos la poblacion
+		poblacion_ = seleccionTorneo(parametros.getTamanioTorneo());
+
+		std::vector<bool> cruzados;
+		cruzados.resize(poblacion_.getTamPoblacion(), false);
+		int primero_sin_cruzar = 0;
 
 		for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i += 2){
 
-			// seleccionamos el individuo a cruzar
-			madre = poblacion_.seleccionIndividuo();
+			madre = primero_sin_cruzar;
+			do {
+				++primero_sin_cruzar;
+			} while (cruzados[primero_sin_cruzar]);
+			cruzados[madre] = true;
 
 			cruce_intra_nicho_posible = false;
 			modificado_hijo1 = modificado_hijo2 = false;
-			cruce_ga = cruce_gp = false;
 
 			if ( parametros.getProbabilidadCruceIntranicho() < Random::getFloat() ){
 				// cruce intra-nicho
 
-				padre = seleccionIntraNicho(madre);
+				padre = seleccionIntraNicho(madre, cruzados);
 
 				cruce_intra_nicho_posible = padre != -1;
 
 				// aplicamos el cruce
 				if ( cruce_intra_nicho_posible) {
+					// ya he escogido a ese padre
+					cruzados[padre] = true;
+					if (padre == primero_sin_cruzar) {
+						do {
+							++primero_sin_cruzar;
+						} while (cruzados[primero_sin_cruzar]);
+
+					}
+
 					hijo1 = poblacion_[madre];
 					hijo2 = poblacion_[padre];
 
@@ -83,7 +96,6 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 						// cruce del cromosoma utilizando BLX_alfa
 						poblacion_[madre].cruceBLXalfa(poblacion_[padre], hijo1, hijo2);
 						modificado_hijo1 = modificado_hijo2 = true;
-						cruce_ga = true;
 					}
 
 
@@ -106,7 +118,11 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 			// si se escoge hacer cruce inter-nicho, o si no es posible aplicarlo
 			if ( !cruce_intra_nicho_posible ) {
 				// cruce inter-nicho
-				padre = poblacion_.seleccionIndividuo();
+				padre = primero_sin_cruzar;
+				do {
+					++primero_sin_cruzar;
+				} while (cruzados[primero_sin_cruzar]);
+				cruzados[padre] = true;
 
 				hijo1 = poblacion_[madre];
 				hijo2 = poblacion_[padre];
@@ -117,7 +133,6 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 					poblacion_[madre].cruceArbol(poblacion_[padre], hijo1, hijo2);
 					modificado_hijo1 = modificado_hijo2 = true;
-					cruce_gp = true;
 				}
 
 				// cruce de la parte GA
@@ -125,23 +140,8 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 					// cruce del cromosoma utilizando BLX_alfa
 					poblacion_[madre].cruceBLXalfa(poblacion_[padre], hijo1, hijo2);
 					modificado_hijo1 = modificado_hijo2 = true;
-					cruce_ga = true;
 				}
 
-
-				if ( cruce_gp || cruce_ga ) {
-					// si hay algun tipo de cruce
-					if ( !cruce_gp ) {
-						// no se ha cruzado el arbol
-						hijo1.asignarArbol(poblacion_[madre].getArbol());
-						hijo2.asignarArbol(poblacion_[padre].getArbol());
-					} else {
-						// no se ha cruzado el cromosoma
-						hijo1.asignarCromosoma(poblacion_[madre].getCromosoma());
-						hijo2.asignarCromosoma(poblacion_[padre].getCromosoma());
-
-					}
-				}
 				// si no hay cruce, los hijos ya estaban con el valor de los padres
 				if ( Random::getFloat() < parametros.getProbabilidadMutacionGA() ) {
 					// mutacion GP en el primer hijo
@@ -163,12 +163,19 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 			}
 
-			nueva_poblacion.insertar(hijo1);
-			nueva_poblacion.insertar(hijo2);
+
+			if ( modificado_hijo1 ) {
+				poblacion_[madre] = hijo1;
+				poblacion_[madre].dejaEstarEvaluada();
+			}
+
+			if ( modificado_hijo2) {
+				poblacion_[padre] = hijo2;
+				poblacion_[padre].dejaEstarEvaluada();
+			}
 
 		}
 
-		poblacion_ = nueva_poblacion;
 
 		aplicarElitismo(mejor_individuo);
 		poblacion_.evaluarPoblacion(datos_, output_datos_, parametros.getFuncionEvaluacion());
@@ -187,17 +194,10 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 
 }
 
-int AlgoritmoGA_P :: seleccionIntraNicho(const int madre) const{
+int AlgoritmoGA_P :: seleccionIntraNicho(const int madre, const std::vector<bool> & escogidos) const{
 
 	int padre = -1;
 
-	std::vector<int> escogidos(poblacion_.getTamPoblacion(), 0);
-
-	for ( unsigned i = 0; i < poblacion_.getTamPoblacion(); i++ ) {
-		escogidos[i] = i;
-	}
-
-	std::shuffle(escogidos.begin(), escogidos.end(), Random::getGenerador());
 
 	unsigned i = 0;
 
@@ -205,7 +205,8 @@ int AlgoritmoGA_P :: seleccionIntraNicho(const int madre) const{
 
 		padre = i;
 
-		if ( !poblacion_[madre].mismoNicho(poblacion_[padre]) ) {
+		// si no estan en el mismo nicho, o si ya lo hemos escogido antes
+		if ( !poblacion_[madre].mismoNicho(poblacion_[padre]) || escogidos[padre] ) {
 			padre = -1;
 		}
 

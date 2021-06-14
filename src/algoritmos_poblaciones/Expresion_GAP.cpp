@@ -245,7 +245,7 @@ bool Expresion_GAP :: mismoNicho(const Expresion_GAP & otra) const {
 }
 
 
-bool Expresion_GAP :: operator== (const Expresion_GAP & otra) const {
+bool Expresion_GAP :: operator == (const Expresion_GAP & otra) const {
 	return mismoCromosoma(otra) && mismoArbol(otra);
 }
 
