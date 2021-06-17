@@ -26,21 +26,21 @@ set style data histogram
 set xtics rotate by -45
 
 set title "Comparación entre Programación Genética y GA-P con una profundidad máxima de árbol de 20"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_pg_gap_20.png"
 
 plot 'datos/resultados_20.dat' using 2:xtic(1) ls 1 title "PG", \
 	 '' using 3 ls 2 title "GA-P"
 
 set title "Comparación entre Programación Genética y GA-P con una profundidad máxima de árbol de 40"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_pg_gap_40.png"
 
 plot 'datos/resultados_40.dat' using 2:xtic(1) ls 1 title "PG", \
  	 '' using 3 ls 2 title "GA-P"
 
 set title "Comparación entre Programación Genética y GA-P con una profundidad máxima de árbol de 60"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_pg_gap_60.png"
 
 plot 'datos/resultados_60.dat' using 2:xtic(1) ls 1 title "PG", \

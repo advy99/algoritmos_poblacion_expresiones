@@ -26,14 +26,14 @@ set style data histogram
 set xtics rotate by -45
 
 set title "Comparación entre el conjunto de datos original y con sobremuestreo utilizando PG y una profundidad máxima de árbol de 20"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_over_pg_20.png"
 
 plot 'datos/resultados_20_over_pg.dat' using 2:xtic(1) ls 3 title "Conjunto de datos original", \
 	 '' using 3 ls 4 title "Conjunto de datos con sobremuestreo"
 
 set title "Comparación entre el conjunto de datos original y con sobremuestreo utilizando GA-P y una profundidad máxima de árbol de 20"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_over_gap_20.png"
 
 plot 'datos/resultados_20_over_gap.dat' using 2:xtic(1) ls 3 title "Conjunto de datos original", \
@@ -43,14 +43,14 @@ plot 'datos/resultados_20_over_gap.dat' using 2:xtic(1) ls 3 title "Conjunto de 
 
 
 set title "Comparación entre el conjunto de datos original y con sobremuestreo utilizando PG y una profundidad máxima de árbol de 40"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_over_pg_40.png"
 
 plot 'datos/resultados_40_over_pg.dat' using 2:xtic(1) ls 3 title "Conjunto de datos original", \
 	 '' using 3 ls 4 title "Conjunto de datos con sobremuestreo"
 
 set title "Comparación entre el conjunto de datos original y con sobremuestreo utilizando GA-P y una profundidad máxima de árbol de 40"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_over_gap_40.png"
 
 plot 'datos/resultados_40_over_gap.dat' using 2:xtic(1) ls 3 title "Conjunto de datos original", \
@@ -58,14 +58,14 @@ plot 'datos/resultados_40_over_gap.dat' using 2:xtic(1) ls 3 title "Conjunto de 
 
 
 set title "Comparación entre el conjunto de datos original y con sobremuestreo utilizando PG y una profundidad máxima de árbol de 60"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_over_pg_60.png"
 
 plot 'datos/resultados_60_over_pg.dat' using 2:xtic(1) ls 3 title "Conjunto de datos original", \
 	 '' using 3 ls 4 title "Conjunto de datos con sobremuestreo"
 
 set title "Comparación entre el conjunto de datos original y con sobremuestreo utilizando GA-P y una profundidad máxima de árbol de 60"
-set term pngcairo enhanced size 1400,1050
+set term pngcairo enhanced size 1400,1050 font "Helvetica,16"
 set output "comparacion_over_gap_60.png"
 
 plot 'datos/resultados_60_over_gap.dat' using 2:xtic(1) ls 3 title "Conjunto de datos original", \
