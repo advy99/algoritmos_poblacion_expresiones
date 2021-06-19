@@ -13,11 +13,11 @@ set key right top
 set style fill solid
 set boxwidth 1
 
-set yrange [0:*]
+set yrange [0:90]
 set xtics 1
 set ytics 5
 set xlabel "Conjunto de datos"
-set ylabel "RECM con 5x2cv"
+set ylabel "ECM con 5x2cv"
 set grid ytics mytics xtics mxtics lw 2
 
 set style fill solid 0.50 border 0
