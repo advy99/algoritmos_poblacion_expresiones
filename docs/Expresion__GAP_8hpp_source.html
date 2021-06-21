@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- HTML header for doxygen 1.8.14-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+    <meta name="generator" content="Doxygen 1.9.1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Algoritmos basados en poblaciones de expresiones: Fichero Fuente include/algoritmos_poblaciones/Expresion_GAP.hpp</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+         mermaid.initialize({theme: 'default'});
+    </script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+    <div id="titlearea">
+        <table cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr style="height: 56px;">
+                <td id="projectalign" style="padding-left: 0.5em;">
+                    <div id="projectname">Algoritmos basados en poblaciones de expresiones
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- end header part -->
+<!-- Generado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ca41dd4890eccd0b9cc29a6943e9926a.html">algoritmos_poblaciones</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Expresion_GAP.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="Expresion__GAP_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef EXPRESION_GAP_H_INCLUDED</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define EXPRESION_GAP_H_INCLUDED</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Expresion_8hpp.html">algoritmos_poblaciones/Expresion.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="aux__pob__algs_8hpp.html">algoritmos_poblaciones/aux_pob_algs.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacealgoritmos__poblacion__expresiones.html">algoritmos_poblacion_expresiones</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> : <span class="keyword">public</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html">Expresion</a> {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aa4fa8431df331bd6fe30026888f836d4">   69</a></span>&#160;      std::vector&lt;double&gt; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aa4fa8431df331bd6fe30026888f836d4">cromosoma_</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a6779bb198772bd2ad574da1bcc66b279">   79</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a6779bb198772bd2ad574da1bcc66b279">inicializarVacia</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a3fe1732754759acc6fc92f59b251b508">   90</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a3fe1732754759acc6fc92f59b251b508">copiarDatos</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a194ece495ca65bad83708863c6e7ee2c">  100</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a194ece495ca65bad83708863c6e7ee2c">inicializarCromosoma</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> longitud);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#ae50eeb066ff95e07f1238258a47567c8">  109</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#ae50eeb066ff95e07f1238258a47567c8">copiarCromosoma</a>(<span class="keyword">const</span> std::vector&lt;double&gt; &amp; otro_cromosoma);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a725b1070058aef49359de8428c9c97d3">  123</a></span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a725b1070058aef49359de8428c9c97d3">delta</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> generacion, <span class="keyword">const</span> <span class="keywordtype">int</span> max_gen, <span class="keyword">const</span> <span class="keywordtype">double</span> valor);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a5cf14041856311a754bcb6ebb021afdd">  133</a></span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a5cf14041856311a754bcb6ebb021afdd">obtenerNumero</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Nodo.html">Nodo</a> &amp; n) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a00d250e853066f621f0adbad0f12b7f9">  144</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a00d250e853066f621f0adbad0f12b7f9">Expresion_GAP</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> prof_max = 10);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a879f2380be2251f29cd9455bb492fabe">  156</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a879f2380be2251f29cd9455bb492fabe">Expresion_GAP</a>(<span class="keyword">const</span> std::vector&lt;Nodo&gt; &amp; subarbol, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> prof_max = 10);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#af02751e30f40abd6622adf7ab2c82001">  170</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#af02751e30f40abd6622adf7ab2c82001">Expresion_GAP</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> longitud_max, <span class="keyword">const</span> <span class="keywordtype">double</span> prob_variable,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_vars, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> prof_max = 10);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aceae01167e738f85e227990ae9f04fba">  180</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aceae01167e738f85e227990ae9f04fba">Expresion_GAP</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a85d10b17e4c8807542473308e3f1bdc5">  187</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a85d10b17e4c8807542473308e3f1bdc5">~Expresion_GAP</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a81fde2fdc38b14e107b00440863159f7">  202</a></span>&#160;      <span class="keywordtype">bool</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a81fde2fdc38b14e107b00440863159f7">generarExpresionAleatoria</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> longitud_max,</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                                     <span class="keyword">const</span> <span class="keywordtype">double</span> prob_variable,</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_variables) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a367e2ca9e9dfde37c7a878172af9eac2">  212</a></span>&#160;      <span class="keywordtype">unsigned</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a367e2ca9e9dfde37c7a878172af9eac2">getLongitudCromosoma</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aca77175ba80addafb7d7be48c1e3161d">  222</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aca77175ba80addafb7d7be48c1e3161d">asignarCromosoma</a>(<span class="keyword">const</span> std::vector&lt;double&gt; &amp; nuevo_cromosoma);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a91465aa28da1c86618d9d9fe8954c2eb">  233</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a91465aa28da1c86618d9d9fe8954c2eb">operator= </a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#ac826610de18a50abf2bed9d80290ae5e">  249</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#ac826610de18a50abf2bed9d80290ae5e">cruceBLXalfa</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra, <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; hijo1, <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; hijo2, <span class="keyword">const</span> <span class="keywordtype">double</span> alfa = 0.3) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a3d3b6fdabd37ff7b92911c15effe7d7a">  258</a></span>&#160;      std::vector&lt;double&gt; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a3d3b6fdabd37ff7b92911c15effe7d7a">getCromosoma</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aad1592fab0c70b86400ac93b82657416">  269</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aad1592fab0c70b86400ac93b82657416">mutarGA</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> generacion, <span class="keyword">const</span> <span class="keywordtype">int</span> max_gen);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aa9063c9e99c08b3bc87759eb37c51338">  281</a></span>&#160;      <span class="keywordtype">bool</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aa9063c9e99c08b3bc87759eb37c51338">mismoNicho</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aabebcdfda5d858a4e9160e7115a65618">  292</a></span>&#160;      <span class="keywordtype">bool</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aabebcdfda5d858a4e9160e7115a65618">mismoCromosoma</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a4b6a56ecf9e696441582e4fd680397d9">  302</a></span>&#160;      <span class="keywordtype">bool</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a4b6a56ecf9e696441582e4fd680397d9">operator== </a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">Expresion_GAP</a> &amp; otra) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;};</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;}</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aExpresion_8hpp_html"><div class="ttname"><a href="Expresion_8hpp.html">Expresion.hpp</a></div></div>
+<div class="ttc" id="aaux__pob__algs_8hpp_html"><div class="ttname"><a href="aux__pob__algs_8hpp.html">aux_pob_algs.hpp</a></div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html">algoritmos_poblacion_expresiones::Expresion_GAP</a></div><div class="ttdoc">Clase Expresion_GAP.</div><div class="ttdef"><b>Definition:</b> Expresion_GAP.hpp:32</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a00d250e853066f621f0adbad0f12b7f9"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a00d250e853066f621f0adbad0f12b7f9">algoritmos_poblacion_expresiones::Expresion_GAP::Expresion_GAP</a></div><div class="ttdeci">Expresion_GAP(const unsigned prof_max=10)</div><div class="ttdoc">Constructor con un parámetro, genera una expresión vacia.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a194ece495ca65bad83708863c6e7ee2c"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a194ece495ca65bad83708863c6e7ee2c">algoritmos_poblacion_expresiones::Expresion_GAP::inicializarCromosoma</a></div><div class="ttdeci">void inicializarCromosoma(const unsigned longitud)</div><div class="ttdoc">Inicializar el cromosoma de constantes asociadas a la Expresion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a367e2ca9e9dfde37c7a878172af9eac2"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a367e2ca9e9dfde37c7a878172af9eac2">algoritmos_poblacion_expresiones::Expresion_GAP::getLongitudCromosoma</a></div><div class="ttdeci">unsigned getLongitudCromosoma() const</div><div class="ttdoc">Consultar la longitud del cromosoma.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a3d3b6fdabd37ff7b92911c15effe7d7a"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a3d3b6fdabd37ff7b92911c15effe7d7a">algoritmos_poblacion_expresiones::Expresion_GAP::getCromosoma</a></div><div class="ttdeci">std::vector&lt; double &gt; getCromosoma() const</div><div class="ttdoc">Obtener donde está almacenado el cromosoma.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a3fe1732754759acc6fc92f59b251b508"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a3fe1732754759acc6fc92f59b251b508">algoritmos_poblacion_expresiones::Expresion_GAP::copiarDatos</a></div><div class="ttdeci">void copiarDatos(const Expresion_GAP &amp;otra)</div><div class="ttdoc">Copiar datos de una expresión dada a la expresión.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a4b6a56ecf9e696441582e4fd680397d9"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a4b6a56ecf9e696441582e4fd680397d9">algoritmos_poblacion_expresiones::Expresion_GAP::operator==</a></div><div class="ttdeci">bool operator==(const Expresion_GAP &amp;otra) const</div><div class="ttdoc">Operador para comparar si dos expresiones son iguales.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a5cf14041856311a754bcb6ebb021afdd"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a5cf14041856311a754bcb6ebb021afdd">algoritmos_poblacion_expresiones::Expresion_GAP::obtenerNumero</a></div><div class="ttdeci">double obtenerNumero(const Nodo &amp;n) const override</div><div class="ttdoc">Obtener el valor numerico del nodo dado.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a6779bb198772bd2ad574da1bcc66b279"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a6779bb198772bd2ad574da1bcc66b279">algoritmos_poblacion_expresiones::Expresion_GAP::inicializarVacia</a></div><div class="ttdeci">void inicializarVacia() override</div><div class="ttdoc">Inicializar una expresión vacia.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a725b1070058aef49359de8428c9c97d3"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a725b1070058aef49359de8428c9c97d3">algoritmos_poblacion_expresiones::Expresion_GAP::delta</a></div><div class="ttdeci">double delta(const int generacion, const int max_gen, const double valor)</div><div class="ttdoc">Función delta para la mutación no uniforme de GA.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a81fde2fdc38b14e107b00440863159f7"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a81fde2fdc38b14e107b00440863159f7">algoritmos_poblacion_expresiones::Expresion_GAP::generarExpresionAleatoria</a></div><div class="ttdeci">bool generarExpresionAleatoria(const unsigned longitud_max, const double prob_variable, const unsigned num_variables) override</div><div class="ttdoc">Generar la expresión de forma aleatoria.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a85d10b17e4c8807542473308e3f1bdc5"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a85d10b17e4c8807542473308e3f1bdc5">algoritmos_poblacion_expresiones::Expresion_GAP::~Expresion_GAP</a></div><div class="ttdeci">~Expresion_GAP()=default</div><div class="ttdoc">Destructor de la expresión.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a879f2380be2251f29cd9455bb492fabe"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a879f2380be2251f29cd9455bb492fabe">algoritmos_poblacion_expresiones::Expresion_GAP::Expresion_GAP</a></div><div class="ttdeci">Expresion_GAP(const std::vector&lt; Nodo &gt; &amp;subarbol, const unsigned prof_max=10)</div><div class="ttdoc">Constructor con un parámetro. Crear una expresion a partir del subarbol dado.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_a91465aa28da1c86618d9d9fe8954c2eb"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a91465aa28da1c86618d9d9fe8954c2eb">algoritmos_poblacion_expresiones::Expresion_GAP::operator=</a></div><div class="ttdeci">Expresion_GAP &amp; operator=(const Expresion_GAP &amp;otra)</div><div class="ttdoc">Operador de asignación de una expresión. Asignamos una expresión a otra.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_aa4fa8431df331bd6fe30026888f836d4"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aa4fa8431df331bd6fe30026888f836d4">algoritmos_poblacion_expresiones::Expresion_GAP::cromosoma_</a></div><div class="ttdeci">std::vector&lt; double &gt; cromosoma_</div><div class="ttdoc">Array donde almacenaremos los valores de las constantes numéricas para aprenderlos.</div><div class="ttdef"><b>Definition:</b> Expresion_GAP.hpp:69</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_aa9063c9e99c08b3bc87759eb37c51338"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aa9063c9e99c08b3bc87759eb37c51338">algoritmos_poblacion_expresiones::Expresion_GAP::mismoNicho</a></div><div class="ttdeci">bool mismoNicho(const Expresion_GAP &amp;otra) const</div><div class="ttdoc">Comprobar que la Expresion y otra dada pertenecen al mismo nicho.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_aabebcdfda5d858a4e9160e7115a65618"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aabebcdfda5d858a4e9160e7115a65618">algoritmos_poblacion_expresiones::Expresion_GAP::mismoCromosoma</a></div><div class="ttdeci">bool mismoCromosoma(const Expresion_GAP &amp;otra) const</div><div class="ttdoc">Operador para comparar si dos expresiones tienen el mismo cromosoma.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_aad1592fab0c70b86400ac93b82657416"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aad1592fab0c70b86400ac93b82657416">algoritmos_poblacion_expresiones::Expresion_GAP::mutarGA</a></div><div class="ttdeci">void mutarGA(const int generacion, const int max_gen)</div><div class="ttdoc">Mutación no uniforme de la parte de algoritmo genético (cromosoma)</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_ac826610de18a50abf2bed9d80290ae5e"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#ac826610de18a50abf2bed9d80290ae5e">algoritmos_poblacion_expresiones::Expresion_GAP::cruceBLXalfa</a></div><div class="ttdeci">void cruceBLXalfa(const Expresion_GAP &amp;otra, Expresion_GAP &amp;hijo1, Expresion_GAP &amp;hijo2, const double alfa=0.3) const</div><div class="ttdoc">Operador de cruce para los cromosomas de las expresiones. Al cruzar dos cromosomas obtendremos otros ...</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_aca77175ba80addafb7d7be48c1e3161d"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aca77175ba80addafb7d7be48c1e3161d">algoritmos_poblacion_expresiones::Expresion_GAP::asignarCromosoma</a></div><div class="ttdeci">void asignarCromosoma(const std::vector&lt; double &gt; &amp;nuevo_cromosoma)</div><div class="ttdoc">Dado un cromosoma, asignar dicho cromosoma a la expresion actual.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_aceae01167e738f85e227990ae9f04fba"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#aceae01167e738f85e227990ae9f04fba">algoritmos_poblacion_expresiones::Expresion_GAP::Expresion_GAP</a></div><div class="ttdeci">Expresion_GAP(const Expresion_GAP &amp;otra)</div><div class="ttdoc">Constructor de copia.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_ae50eeb066ff95e07f1238258a47567c8"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#ae50eeb066ff95e07f1238258a47567c8">algoritmos_poblacion_expresiones::Expresion_GAP::copiarCromosoma</a></div><div class="ttdeci">void copiarCromosoma(const std::vector&lt; double &gt; &amp;otro_cromosoma)</div><div class="ttdoc">Copiar cromosoma dado al cromosoma de la Expresion actual.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion__GAP_html_af02751e30f40abd6622adf7ab2c82001"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#af02751e30f40abd6622adf7ab2c82001">algoritmos_poblacion_expresiones::Expresion_GAP::Expresion_GAP</a></div><div class="ttdeci">Expresion_GAP(const unsigned longitud_max, const double prob_variable, const unsigned num_vars, const unsigned prof_max=10)</div><div class="ttdoc">Constructor con dos parámetro, generar una expresión aleatoria.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Expresion_html"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html">algoritmos_poblacion_expresiones::Expresion</a></div><div class="ttdoc">Clase Expresion.</div><div class="ttdef"><b>Definition:</b> Expresion.hpp:27</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Nodo_html"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Nodo.html">algoritmos_poblacion_expresiones::Nodo</a></div><div class="ttdoc">Clase Nodo.</div><div class="ttdef"><b>Definition:</b> Nodo.hpp:32</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html">algoritmos_poblacion_expresiones</a></div><div class="ttdoc">Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P.</div><div class="ttdef"><b>Definition:</b> AlgoritmoGA_P.hpp:21</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

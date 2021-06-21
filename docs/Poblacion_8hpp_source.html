@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- HTML header for doxygen 1.8.14-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+    <meta name="generator" content="Doxygen 1.9.1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Algoritmos basados en poblaciones de expresiones: Fichero Fuente include/algoritmos_poblaciones/Poblacion.hpp</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+         mermaid.initialize({theme: 'default'});
+    </script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+    <div id="titlearea">
+        <table cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr style="height: 56px;">
+                <td id="projectalign" style="padding-left: 0.5em;">
+                    <div id="projectname">Algoritmos basados en poblaciones de expresiones
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- end header part -->
+<!-- Generado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ca41dd4890eccd0b9cc29a6943e9926a.html">algoritmos_poblaciones</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Poblacion.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="Poblacion_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef POBLACION_H_INCLUDED</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define POBLACION_H_INCLUDED</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Expresion_8hpp.html">algoritmos_poblaciones/Expresion.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Expresion__GAP_8hpp.html">algoritmos_poblaciones/Expresion_GAP.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacealgoritmos__poblacion__expresiones.html">algoritmos_poblacion_expresiones</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">Poblacion</a>{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a2eb6ab5f1d0c101a3823a1d7640b9808">   62</a></span>&#160;      std::vector&lt;T&gt; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a2eb6ab5f1d0c101a3823a1d7640b9808">expresiones_</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8d5d5110cf15689aa9aeb98deafe65a7">   68</a></span>&#160;      <span class="keywordtype">int</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8d5d5110cf15689aa9aeb98deafe65a7">mejor_individuo_</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a7f82badf57f4adf45464ab46220b0a46">   78</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a7f82badf57f4adf45464ab46220b0a46">copiarDatos</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">Poblacion</a> &amp; otra);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#abc3d68e29eda85ae4afd0df729454b24">   87</a></span>&#160;      <span class="keywordtype">double</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#abc3d68e29eda85ae4afd0df729454b24">sumaFitness</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a16e29ff900dca6658cb75391d9164f1c">   96</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a16e29ff900dca6658cb75391d9164f1c">Poblacion</a>();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a181aab4568c57b84eb6cf56d31be079d">  105</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a181aab4568c57b84eb6cf56d31be079d">Poblacion</a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">Poblacion</a> &amp; otra);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a1e57ad8e9ffb21accf184848ed3d04fb">  126</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a1e57ad8e9ffb21accf184848ed3d04fb">Poblacion</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> tam, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> lon_expre,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> prob_var, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> num_vars,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">unsigned</span> prof_expre);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a4aa834db997c57b35708d1e2d1aa9e6b">  136</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a4aa834db997c57b35708d1e2d1aa9e6b">~Poblacion</a>();</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a47cb5eb10b119f7e6f27efa2f2700dcc">  144</a></span>&#160;      T <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a47cb5eb10b119f7e6f27efa2f2700dcc">getMejorIndividuo</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a7a1a2e4bd16c1d47aedb9505c54a9506">  152</a></span>&#160;      <span class="keywordtype">unsigned</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a7a1a2e4bd16c1d47aedb9505c54a9506">getIndiceMejorIndividuo</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a81f8af15151d890a1f6242df98af820f">  160</a></span>&#160;      <span class="keywordtype">unsigned</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a81f8af15151d890a1f6242df98af820f">getTamPoblacion</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3ba25ffb02d72504f84a4e83a76f3fec">  170</a></span>&#160;      T &amp; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3ba25ffb02d72504f84a4e83a76f3fec">operator [] </a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> indice);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8277b85b5fcd08c2f48e3096bf2b50fd">  180</a></span>&#160;      <span class="keyword">const</span> T &amp; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3ba25ffb02d72504f84a4e83a76f3fec">operator [] </a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> indice) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8e35934ec943d9104a7904ffee1ce6ff">  193</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8e35934ec943d9104a7904ffee1ce6ff">setIndividuo</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> indice, <span class="keyword">const</span> T &amp; n_individuo);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a483cac88d399c1f7fa3334b85a3cc1aa">  208</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a483cac88d399c1f7fa3334b85a3cc1aa">evaluarPoblacion</a>(<span class="keyword">const</span> std::vector&lt;std::vector&lt;double&gt; &gt; &amp; datos,</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                            <span class="keyword">const</span> std::vector&lt;double&gt; &amp; etiquetas,</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                            <a class="code" href="namespacealgoritmos__poblacion__expresiones.html#a6826a41cb841a2f0b3f5bdc8df173774">funcion_evaluacion_t</a> funcion_evaluacion);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0dbc1aee6d2cc22812f67388cff25167">  218</a></span>&#160;      <span class="keywordtype">unsigned</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0dbc1aee6d2cc22812f67388cff25167">seleccionIndividuo</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ab0f586a804e868309495023063a74bb9">  230</a></span>&#160;      <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">Poblacion</a> &amp; <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ab0f586a804e868309495023063a74bb9">operator= </a>(<span class="keyword">const</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">Poblacion</a> &amp; otra);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3f9d92e82fe4024fd69f42b22e831f07">  239</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3f9d92e82fe4024fd69f42b22e831f07">redimensionar</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> nuevo_tam);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0cb2c68b68b34dffcefb43240512a5ff">  249</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0cb2c68b68b34dffcefb43240512a5ff">insertar</a>(<span class="keyword">const</span> T &amp; nuevo_elemento);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ac3c85a9865624b3519f2c7dc2734c61f">  258</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ac3c85a9865624b3519f2c7dc2734c61f">eliminar</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> posicion);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a558be531d9ad684765641c579c146b09">  265</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a558be531d9ad684765641c579c146b09">ordenar</a>();</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ab77a635d8c471c23d4f32147de64ab6a">  274</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ab77a635d8c471c23d4f32147de64ab6a">setMejorIndividuo</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> nuevo_mejor);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a801a333c4709613b193977363bd04d7c">  282</a></span>&#160;      <span class="keywordtype">void</span> <a class="code" href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a801a333c4709613b193977363bd04d7c">buscarMejorIndividuo</a>();</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;};</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;} <span class="comment">// namespace algoritmos_poblacion_expresiones</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">#include &quot;algoritmos_poblaciones/Poblacion.tpp&quot;</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aExpresion_8hpp_html"><div class="ttname"><a href="Expresion_8hpp.html">Expresion.hpp</a></div></div>
+<div class="ttc" id="aExpresion__GAP_8hpp_html"><div class="ttname"><a href="Expresion__GAP_8hpp.html">Expresion_GAP.hpp</a></div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html">algoritmos_poblacion_expresiones::Poblacion</a></div><div class="ttdoc">Clase Poblacion.</div><div class="ttdef"><b>Definition:</b> Poblacion.hpp:31</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a0cb2c68b68b34dffcefb43240512a5ff"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0cb2c68b68b34dffcefb43240512a5ff">algoritmos_poblacion_expresiones::Poblacion::insertar</a></div><div class="ttdeci">void insertar(const T &amp;nuevo_elemento)</div><div class="ttdoc">Insertar un elemento en la Poblacion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a0dbc1aee6d2cc22812f67388cff25167"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0dbc1aee6d2cc22812f67388cff25167">algoritmos_poblacion_expresiones::Poblacion::seleccionIndividuo</a></div><div class="ttdeci">unsigned seleccionIndividuo() const</div><div class="ttdoc">Seleccionar un individuo de la población.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a16e29ff900dca6658cb75391d9164f1c"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a16e29ff900dca6658cb75391d9164f1c">algoritmos_poblacion_expresiones::Poblacion::Poblacion</a></div><div class="ttdeci">Poblacion()</div><div class="ttdoc">Constructor con sin parametros, generamos una poblacion vacia.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a181aab4568c57b84eb6cf56d31be079d"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a181aab4568c57b84eb6cf56d31be079d">algoritmos_poblacion_expresiones::Poblacion::Poblacion</a></div><div class="ttdeci">Poblacion(const Poblacion &amp;otra)</div><div class="ttdoc">Constructor de copia.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a1e57ad8e9ffb21accf184848ed3d04fb"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a1e57ad8e9ffb21accf184848ed3d04fb">algoritmos_poblacion_expresiones::Poblacion::Poblacion</a></div><div class="ttdeci">Poblacion(const unsigned tam, const unsigned lon_expre, const double prob_var, const unsigned num_vars, const unsigned prof_expre)</div><div class="ttdoc">Constructor con dos parámetros. Generar una población con tam elementos aleatorios.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a2eb6ab5f1d0c101a3823a1d7640b9808"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a2eb6ab5f1d0c101a3823a1d7640b9808">algoritmos_poblacion_expresiones::Poblacion::expresiones_</a></div><div class="ttdeci">std::vector&lt; T &gt; expresiones_</div><div class="ttdoc">Expresiones que conforman los individuos de la poblacion.</div><div class="ttdef"><b>Definition:</b> Poblacion.hpp:62</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a3ba25ffb02d72504f84a4e83a76f3fec"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3ba25ffb02d72504f84a4e83a76f3fec">algoritmos_poblacion_expresiones::Poblacion::operator[]</a></div><div class="ttdeci">T &amp; operator[](const unsigned indice)</div><div class="ttdoc">Obtener el individuo indice de la poblacion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a3f9d92e82fe4024fd69f42b22e831f07"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a3f9d92e82fe4024fd69f42b22e831f07">algoritmos_poblacion_expresiones::Poblacion::redimensionar</a></div><div class="ttdeci">void redimensionar(const unsigned nuevo_tam)</div><div class="ttdoc">Cambiar el tamaño de la Poblacion por el dado.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a47cb5eb10b119f7e6f27efa2f2700dcc"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a47cb5eb10b119f7e6f27efa2f2700dcc">algoritmos_poblacion_expresiones::Poblacion::getMejorIndividuo</a></div><div class="ttdeci">T getMejorIndividuo() const</div><div class="ttdoc">Obtener el mejor individuo de la poblacion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a483cac88d399c1f7fa3334b85a3cc1aa"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a483cac88d399c1f7fa3334b85a3cc1aa">algoritmos_poblacion_expresiones::Poblacion::evaluarPoblacion</a></div><div class="ttdeci">void evaluarPoblacion(const std::vector&lt; std::vector&lt; double &gt; &gt; &amp;datos, const std::vector&lt; double &gt; &amp;etiquetas, funcion_evaluacion_t funcion_evaluacion)</div><div class="ttdoc">Evaluar todos los elementos de la población.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a4aa834db997c57b35708d1e2d1aa9e6b"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a4aa834db997c57b35708d1e2d1aa9e6b">algoritmos_poblacion_expresiones::Poblacion::~Poblacion</a></div><div class="ttdeci">~Poblacion()</div><div class="ttdoc">Destructor de la Población.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a558be531d9ad684765641c579c146b09"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a558be531d9ad684765641c579c146b09">algoritmos_poblacion_expresiones::Poblacion::ordenar</a></div><div class="ttdeci">void ordenar()</div><div class="ttdoc">Ordenar la Poblacion de expresiones por fitness.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a7a1a2e4bd16c1d47aedb9505c54a9506"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a7a1a2e4bd16c1d47aedb9505c54a9506">algoritmos_poblacion_expresiones::Poblacion::getIndiceMejorIndividuo</a></div><div class="ttdeci">unsigned getIndiceMejorIndividuo() const</div><div class="ttdoc">Obtener el indice del mejor individuo de la poblacion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a7f82badf57f4adf45464ab46220b0a46"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a7f82badf57f4adf45464ab46220b0a46">algoritmos_poblacion_expresiones::Poblacion::copiarDatos</a></div><div class="ttdeci">void copiarDatos(const Poblacion &amp;otra)</div><div class="ttdoc">Copiar datos de una poblacion dada a la poblacion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a801a333c4709613b193977363bd04d7c"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a801a333c4709613b193977363bd04d7c">algoritmos_poblacion_expresiones::Poblacion::buscarMejorIndividuo</a></div><div class="ttdeci">void buscarMejorIndividuo()</div><div class="ttdoc">Buscar el mejor individuo en la población.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a81f8af15151d890a1f6242df98af820f"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a81f8af15151d890a1f6242df98af820f">algoritmos_poblacion_expresiones::Poblacion::getTamPoblacion</a></div><div class="ttdeci">unsigned getTamPoblacion() const</div><div class="ttdoc">Obtener el tamaño de la poblacion.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a8d5d5110cf15689aa9aeb98deafe65a7"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8d5d5110cf15689aa9aeb98deafe65a7">algoritmos_poblacion_expresiones::Poblacion::mejor_individuo_</a></div><div class="ttdeci">int mejor_individuo_</div><div class="ttdoc">Mejor individuo de la población.</div><div class="ttdef"><b>Definition:</b> Poblacion.hpp:68</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_a8e35934ec943d9104a7904ffee1ce6ff"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a8e35934ec943d9104a7904ffee1ce6ff">algoritmos_poblacion_expresiones::Poblacion::setIndividuo</a></div><div class="ttdeci">void setIndividuo(const unsigned indice, const T &amp;n_individuo)</div><div class="ttdoc">Modificar el individuo en la posición indice de la poblacion por otro individuo.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_ab0f586a804e868309495023063a74bb9"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ab0f586a804e868309495023063a74bb9">algoritmos_poblacion_expresiones::Poblacion::operator=</a></div><div class="ttdeci">Poblacion &amp; operator=(const Poblacion &amp;otra)</div><div class="ttdoc">Operador de asignación de una poblacion. Asignamos una poblacion a otra.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_ab77a635d8c471c23d4f32147de64ab6a"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ab77a635d8c471c23d4f32147de64ab6a">algoritmos_poblacion_expresiones::Poblacion::setMejorIndividuo</a></div><div class="ttdeci">void setMejorIndividuo(const int nuevo_mejor)</div><div class="ttdoc">Cambiar el individuo que se considera mejor.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_abc3d68e29eda85ae4afd0df729454b24"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#abc3d68e29eda85ae4afd0df729454b24">algoritmos_poblacion_expresiones::Poblacion::sumaFitness</a></div><div class="ttdeci">double sumaFitness() const</div><div class="ttdoc">Obtener la suma del fitness de todos los individuos.</div></div>
+<div class="ttc" id="aclassalgoritmos__poblacion__expresiones_1_1Poblacion_html_ac3c85a9865624b3519f2c7dc2734c61f"><div class="ttname"><a href="classalgoritmos__poblacion__expresiones_1_1Poblacion.html#ac3c85a9865624b3519f2c7dc2734c61f">algoritmos_poblacion_expresiones::Poblacion::eliminar</a></div><div class="ttdeci">void eliminar(const unsigned posicion)</div><div class="ttdoc">Eliminar un elemento en la Poblacion.</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html">algoritmos_poblacion_expresiones</a></div><div class="ttdoc">Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P.</div><div class="ttdef"><b>Definition:</b> AlgoritmoGA_P.hpp:21</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html_a6826a41cb841a2f0b3f5bdc8df173774"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html#a6826a41cb841a2f0b3f5bdc8df173774">algoritmos_poblacion_expresiones::funcion_evaluacion_t</a></div><div class="ttdeci">double(* funcion_evaluacion_t)(const std::vector&lt; double &gt; &amp;datos, const std::vector&lt; double &gt; &amp;etiquetas)</div><div class="ttdoc">Definicion del tipo de la función de evaluacion.</div><div class="ttdef"><b>Definition:</b> aux_pob_algs.hpp:39</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
