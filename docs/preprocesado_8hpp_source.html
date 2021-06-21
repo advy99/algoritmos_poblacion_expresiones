@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- HTML header for doxygen 1.8.14-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+    <meta name="generator" content="Doxygen 1.9.1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Algoritmos basados en poblaciones de expresiones: Fichero Fuente include/algoritmos_poblaciones/preprocesado.hpp</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+         mermaid.initialize({theme: 'default'});
+    </script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+    <div id="titlearea">
+        <table cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr style="height: 56px;">
+                <td id="projectalign" style="padding-left: 0.5em;">
+                    <div id="projectname">Algoritmos basados en poblaciones de expresiones
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- end header part -->
+<!-- Generado por Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_ca41dd4890eccd0b9cc29a6943e9926a.html">algoritmos_poblaciones</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">preprocesado.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="preprocesado_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef PREPROCESADO_H_INCLUDED</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define PREPROCESADO_H_INCLUDED</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="aux__pob__algs_8hpp.html">algoritmos_poblaciones/aux_pob_algs.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="preprocesado_8hpp.html#a4ebd4dce3619769c116b4f5ecbc551b2">   14</a></span>&#160;<span class="keyword">using</span> <a class="code" href="preprocesado_8hpp.html#a4ebd4dce3619769c116b4f5ecbc551b2">matriz</a> = std::vector&lt;std::vector&lt;T&gt;&gt;;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacealgoritmos__poblacion__expresiones.html">algoritmos_poblacion_expresiones</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;std::pair&lt;std::pair&lt;matriz&lt;T&gt;, std::vector&lt;T&gt; &gt;, std::pair&lt;matriz&lt;T&gt;, std::vector&lt;T&gt; &gt; &gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespacealgoritmos__poblacion__expresiones.html#a852f9a19e43f986abb3a5d4e3db59d8e">   36</a></span>&#160;   <a class="code" href="namespacealgoritmos__poblacion__expresiones.html#a852f9a19e43f986abb3a5d4e3db59d8e">separar_train_test</a>(<a class="code" href="preprocesado_8hpp.html#a4ebd4dce3619769c116b4f5ecbc551b2">matriz&lt;T&gt;</a> datos, std::vector&lt;T&gt; etiquetas,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">double</span> PORCENTAJE_TEST = 0.2, <span class="keyword">const</span> <span class="keywordtype">int</span> COMIENZO = -1);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="namespacealgoritmos__poblacion__expresiones.html#a1bc3417d05b1644b57484626de01f9bd">   57</a></span>&#160;std::pair&lt;matriz&lt;T&gt;, std::vector&lt;T&gt; &gt;  <a class="code" href="namespacealgoritmos__poblacion__expresiones.html#a1bc3417d05b1644b57484626de01f9bd">leer_datos</a>(<span class="keyword">const</span> std::string &amp; fichero_datos,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                            <span class="keyword">const</span> <span class="keywordtype">char</span> char_comentario, <span class="keyword">const</span> <span class="keywordtype">char</span> delimitador = <span class="charliteral">&#39;,&#39;</span>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="namespacealgoritmos__poblacion__expresiones.html#a113d048899dd18e92ace37758fbb2914">   73</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacealgoritmos__poblacion__expresiones.html#a113d048899dd18e92ace37758fbb2914">escribir_datos</a>(<span class="keyword">const</span> std::string &amp; salida, <span class="keyword">const</span> <a class="code" href="preprocesado_8hpp.html#a4ebd4dce3619769c116b4f5ecbc551b2">matriz&lt;T&gt;</a> &amp; datos, <span class="keyword">const</span> std::vector&lt;T&gt; &amp; etiquetas, <span class="keyword">const</span> <span class="keywordtype">char</span> delimitador = <span class="charliteral">&#39;,&#39;</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="namespacealgoritmos__poblacion__expresiones.html#a81e8cb85715cb32070ec2e122c706cc4">   87</a></span>&#160;std::pair&lt;matriz&lt;T&gt;, std::vector&lt;T&gt; &gt; <a class="code" href="namespacealgoritmos__poblacion__expresiones.html#a81e8cb85715cb32070ec2e122c706cc4">reordenar_datos_aleatorio</a> (<a class="code" href="preprocesado_8hpp.html#a4ebd4dce3619769c116b4f5ecbc551b2">matriz&lt;T&gt;</a> datos, std::vector&lt;T&gt; etiquetas);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#include &quot;preprocesado.tpp&quot;</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aaux__pob__algs_8hpp_html"><div class="ttname"><a href="aux__pob__algs_8hpp.html">aux_pob_algs.hpp</a></div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html">algoritmos_poblacion_expresiones</a></div><div class="ttdoc">Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P.</div><div class="ttdef"><b>Definition:</b> AlgoritmoGA_P.hpp:21</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html_a113d048899dd18e92ace37758fbb2914"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html#a113d048899dd18e92ace37758fbb2914">algoritmos_poblacion_expresiones::escribir_datos</a></div><div class="ttdeci">void escribir_datos(const std::string &amp;salida, const matriz&lt; T &gt; &amp;datos, const std::vector&lt; T &gt; &amp;etiquetas, const char delimitador=',')</div><div class="ttdoc">Escribir datos en un fichero.</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html_a1bc3417d05b1644b57484626de01f9bd"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html#a1bc3417d05b1644b57484626de01f9bd">algoritmos_poblacion_expresiones::leer_datos</a></div><div class="ttdeci">std::pair&lt; matriz&lt; T &gt;, std::vector&lt; T &gt; &gt; leer_datos(const std::string &amp;fichero_datos, const char char_comentario, const char delimitador=',')</div><div class="ttdoc">Leer datos de entrada para el algoritmo.</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html_a81e8cb85715cb32070ec2e122c706cc4"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html#a81e8cb85715cb32070ec2e122c706cc4">algoritmos_poblacion_expresiones::reordenar_datos_aleatorio</a></div><div class="ttdeci">std::pair&lt; matriz&lt; T &gt;, std::vector&lt; T &gt; &gt; reordenar_datos_aleatorio(matriz&lt; T &gt; datos, std::vector&lt; T &gt; etiquetas)</div><div class="ttdoc">Reordenar de forma aleatoria los datos.</div></div>
+<div class="ttc" id="anamespacealgoritmos__poblacion__expresiones_html_a852f9a19e43f986abb3a5d4e3db59d8e"><div class="ttname"><a href="namespacealgoritmos__poblacion__expresiones.html#a852f9a19e43f986abb3a5d4e3db59d8e">algoritmos_poblacion_expresiones::separar_train_test</a></div><div class="ttdeci">std::pair&lt; std::pair&lt; matriz&lt; T &gt;, std::vector&lt; T &gt; &gt;, std::pair&lt; matriz&lt; T &gt;, std::vector&lt; T &gt; &gt; &gt; separar_train_test(matriz&lt; T &gt; datos, std::vector&lt; T &gt; etiquetas, const double PORCENTAJE_TEST=0.2, const int COMIENZO=-1)</div><div class="ttdoc">Separar unos datos y etiquetas dadas en dos conjuntos de entrenamiento y test, de forma aleatorio o n...</div></div>
+<div class="ttc" id="apreprocesado_8hpp_html_a4ebd4dce3619769c116b4f5ecbc551b2"><div class="ttname"><a href="preprocesado_8hpp.html#a4ebd4dce3619769c116b4f5ecbc551b2">matriz</a></div><div class="ttdeci">std::vector&lt; std::vector&lt; T &gt; &gt; matriz</div><div class="ttdoc">Fichero cabecera de las funciones de preprocesado.</div><div class="ttdef"><b>Definition:</b> preprocesado.hpp:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
