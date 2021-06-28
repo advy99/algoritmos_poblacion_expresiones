@@ -30,7 +30,9 @@ Puedes compilar la documentación ejecutando:
 make doc
 ```
 
-Puedes consultarla abriendo `doc/html/index.html` en tu navegador.
+Puedes consultarla abriendo `docs/index.html` en tu navegador.
+
+También es posible consultarla en el siguiente enlace: [Documentación](https://advy99.github.io/algoritmos_poblacion_expresiones/)
 
 # Compilar
 
