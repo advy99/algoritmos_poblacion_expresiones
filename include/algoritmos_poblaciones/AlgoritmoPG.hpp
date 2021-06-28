@@ -11,10 +11,6 @@
 
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
-/**
- * @brief Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoPG
- *
- */
 
 namespace algoritmos_poblacion_expresiones {
 

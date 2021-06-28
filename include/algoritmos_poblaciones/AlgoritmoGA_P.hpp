@@ -12,10 +12,6 @@
 
 #include "Random.hpp"
 
-/**
- * @brief Clases, definiciones y estructuras necesarias para el algoritmo AlgoritmoGA_P
- *
- */
 
 
 namespace algoritmos_poblacion_expresiones {
