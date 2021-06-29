@@ -75,6 +75,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Métodos públicos</a> &#124;
 <a href="#pro-methods">Métodos protegidos</a> &#124;
+<a href="#pro-static-methods">Métodos protegidos estáticos</a> &#124;
 <a href="#pro-attribs">Atributos protegidos</a> &#124;
 <a href="#friends">Amigas</a> &#124;
 <a href="classalgoritmos__poblacion__expresiones_1_1Expresion-members.html">Lista de todos los miembros</a>  </div>
@@ -92,8 +93,8 @@ Diagrama de herencias de algoritmos_poblacion_expresiones::Expresion</div>
 <div class="dyncontent">
 <div class="center"><img src="classalgoritmos__poblacion__expresiones_1_1Expresion__inherit__graph.png" border="0" usemap="#aalgoritmos__poblacion__expresiones_1_1Expresion_inherit__map" alt="Inheritance graph"/></div>
 <map name="aalgoritmos__poblacion__expresiones_1_1Expresion_inherit__map" id="aalgoritmos__poblacion__expresiones_1_1Expresion_inherit__map">
-<area shape="rect" title="Clase Expresion." alt="" coords="8,5,203,611"/>
-<area shape="rect" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html" title="Clase Expresion_GAP." alt="" coords="5,659,205,1044"/>
+<area shape="rect" title="Clase Expresion." alt="" coords="7,5,198,655"/>
+<area shape="rect" href="classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html" title="Clase Expresion_GAP." alt="" coords="5,703,200,1088"/>
 </map>
 </div>
 <div class="dynheader">
@@ -101,7 +102,7 @@ Diagrama de colaboración para algoritmos_poblacion_expresiones::Expresion:</div
 <div class="dyncontent">
 <div class="center"><img src="classalgoritmos__poblacion__expresiones_1_1Expresion__coll__graph.png" border="0" usemap="#aalgoritmos__poblacion__expresiones_1_1Expresion_coll__map" alt="Collaboration graph"/></div>
 <map name="aalgoritmos__poblacion__expresiones_1_1Expresion_coll__map" id="aalgoritmos__poblacion__expresiones_1_1Expresion_coll__map">
-<area shape="rect" title="Clase Expresion." alt="" coords="5,5,200,611"/>
+<area shape="rect" title="Clase Expresion." alt="" coords="5,5,196,655"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -119,6 +120,9 @@ Métodos públicos</h2></td></tr>
 <tr class="memitem:ad77181645e36a7283302f569d74939b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#ad77181645e36a7283302f569d74939b7">Expresion</a> (const <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html">Expresion</a> &amp;otra)</td></tr>
 <tr class="memdesc:ad77181645e36a7283302f569d74939b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor de copia.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#ad77181645e36a7283302f569d74939b7">Más...</a><br /></td></tr>
 <tr class="separator:ad77181645e36a7283302f569d74939b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee4c5279ce67fe15d8018f54a467704"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#aaee4c5279ce67fe15d8018f54a467704">Expresion</a> (const std::string &amp;nombre_archivo, const unsigned longitud_max, const unsigned num_variables)</td></tr>
+<tr class="memdesc:aaee4c5279ce67fe15d8018f54a467704"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor con tres parametros, para leer una expresión de un fichero.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#aaee4c5279ce67fe15d8018f54a467704">Más...</a><br /></td></tr>
+<tr class="separator:aaee4c5279ce67fe15d8018f54a467704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a449890deee75a1d01d936aac1f8b6241"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a449890deee75a1d01d936aac1f8b6241">~Expresion</a> ()=default</td></tr>
 <tr class="memdesc:a449890deee75a1d01d936aac1f8b6241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor de la expresión.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a449890deee75a1d01d936aac1f8b6241">Más...</a><br /></td></tr>
 <tr class="separator:a449890deee75a1d01d936aac1f8b6241"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,6 +211,15 @@ Métodos protegidos</h2></td></tr>
 <tr class="memdesc:ac1b8964f32873d57dcf844f255fc579e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtener el valor numerico del nodo dado.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#ac1b8964f32873d57dcf844f255fc579e">Más...</a><br /></td></tr>
 <tr class="separator:ac1b8964f32873d57dcf844f255fc579e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Métodos protegidos estáticos</h2></td></tr>
+<tr class="memitem:a11bc169b23c61cdb4f9f3ba5bdb7da65"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Nodo.html">Nodo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a11bc169b23c61cdb4f9f3ba5bdb7da65">obtenerExpresion</a> (const std::string &amp;linea_expresion)</td></tr>
+<tr class="memdesc:a11bc169b23c61cdb4f9f3ba5bdb7da65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtener la expresión almacenada en un string.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a11bc169b23c61cdb4f9f3ba5bdb7da65">Más...</a><br /></td></tr>
+<tr class="separator:a11bc169b23c61cdb4f9f3ba5bdb7da65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ec47780e7b2b0d3f763c7cc1d5ab43f"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a9ec47780e7b2b0d3f763c7cc1d5ab43f">obtenerStringParentesis</a> (std::istringstream &amp;buffer_exp)</td></tr>
+<tr class="memdesc:a9ec47780e7b2b0d3f763c7cc1d5ab43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtener la subexpresión que se encuentra entre parentesis en una expresion.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a9ec47780e7b2b0d3f763c7cc1d5ab43f">Más...</a><br /></td></tr>
+<tr class="separator:a9ec47780e7b2b0d3f763c7cc1d5ab43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Atributos protegidos</h2></td></tr>
 <tr class="memitem:a9395e4c96477bf9048012a6a8e0b2338"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a9395e4c96477bf9048012a6a8e0b2338">fitness_</a></td></tr>
@@ -238,7 +251,7 @@ Amigas</h2></td></tr>
 <dl class="section date"><dt>Fecha</dt><dd>Julio 2020 </dd></dl>
 </div><h2 class="groupheader">Documentación del constructor y destructor</h2>
 <a id="a12cce3b4c6e6915a3016b2f50dc131dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12cce3b4c6e6915a3016b2f50dc131dc">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cce3b4c6e6915a3016b2f50dc131dc">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,7 +277,7 @@ Amigas</h2></td></tr>
 </div>
 </div>
 <a id="a0164478593a67ac41b572393e9036aa1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0164478593a67ac41b572393e9036aa1">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0164478593a67ac41b572393e9036aa1">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +315,7 @@ Amigas</h2></td></tr>
 </div>
 </div>
 <a id="aaef79a7aec32b0c8d8e4472240290ea6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaef79a7aec32b0c8d8e4472240290ea6">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aaef79a7aec32b0c8d8e4472240290ea6">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,7 +366,7 @@ Amigas</h2></td></tr>
 </div>
 </div>
 <a id="ad77181645e36a7283302f569d74939b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad77181645e36a7283302f569d74939b7">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad77181645e36a7283302f569d74939b7">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,6 +388,51 @@ Amigas</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aaee4c5279ce67fe15d8018f54a467704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaee4c5279ce67fe15d8018f54a467704">&#9670;&nbsp;</a></span>Expresion() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">algoritmos_poblacion_expresiones::Expresion::Expresion </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nombre_archivo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned&#160;</td>
+          <td class="paramname"><em>longitud_max</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned&#160;</td>
+          <td class="paramname"><em>num_variables</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor con tres parametros, para leer una expresión de un fichero. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nombre_archivo</td><td>Archivo donde se almacena la expresión como string. </td></tr>
+    <tr><td class="paramname">longitud_max</td><td>Longitud máxima de la <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html" title="Clase Expresion.">Expresion</a> a leer. </td></tr>
+    <tr><td class="paramname">num_variables</td><td>Número de variables utilizadas por esta <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html" title="Clase Expresion.">Expresion</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondición</dt><dd>La <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html" title="Clase Expresion.">Expresion</a> almacenada en nombre_archivo es valida. </dd></dl>
 
 </div>
 </div>
@@ -1014,6 +1072,41 @@ Amigas</h2></td></tr>
 
 </div>
 </div>
+<a id="a11bc169b23c61cdb4f9f3ba5bdb7da65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11bc169b23c61cdb4f9f3ba5bdb7da65">&#9670;&nbsp;</a></span>obtenerExpresion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::vector&lt;<a class="el" href="classalgoritmos__poblacion__expresiones_1_1Nodo.html">Nodo</a>&gt; algoritmos_poblacion_expresiones::Expresion::obtenerExpresion </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>linea_expresion</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtener la expresión almacenada en un string. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">linea_expresion</td><td>String de la <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html" title="Clase Expresion.">Expresion</a> a obtener</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Vector de nodos con la expresión representada en preorder </dd></dl>
+
+</div>
+</div>
 <a id="ac1b8964f32873d57dcf844f255fc579e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac1b8964f32873d57dcf844f255fc579e">&#9670;&nbsp;</a></span>obtenerNumero()</h2>
 
@@ -1093,6 +1186,41 @@ Amigas</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>Nuevo resultado tras leer la pila </dd></dl>
+
+</div>
+</div>
+<a id="a9ec47780e7b2b0d3f763c7cc1d5ab43f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ec47780e7b2b0d3f763c7cc1d5ab43f">&#9670;&nbsp;</a></span>obtenerStringParentesis()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::string algoritmos_poblacion_expresiones::Expresion::obtenerStringParentesis </td>
+          <td>(</td>
+          <td class="paramtype">std::istringstream &amp;&#160;</td>
+          <td class="paramname"><em>buffer_exp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Obtener la subexpresión que se encuentra entre parentesis en una expresion. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer_exp</td><td>Flujo del que se está leyendo la expresión principal</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>Subexpresión entre parentesis </dd></dl>
 
 </div>
 </div>
