@@ -137,6 +137,10 @@ class Expresion{
 
 		virtual double obtenerNumero(const Nodo & n) const;
 
+		static std::vector<Nodo> obtenerExpresion(const std::string & linea_expresion);
+
+		static std::string obtenerStringParentesis(std::istringstream & buffer_exp);
+
 		public:
 
 		/**
@@ -183,6 +187,10 @@ class Expresion{
 		  */
 
 		Expresion(const Expresion & otra);
+
+
+		Expresion ( const std::string & nombre_archivo, const unsigned longitud_max, const unsigned num_variables);
+
 
 		/**
 		  * @brief Destructor de la expresión.

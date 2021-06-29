@@ -40,6 +40,159 @@ Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 }
 
 
+Expresion :: Expresion ( const std::string & nombre_archivo, const unsigned longitud_max, const unsigned num_variables) {
+
+	profundidad_maxima_ = longitud_max;
+	numero_variables_ = num_variables;
+
+	std::ifstream is (nombre_archivo.c_str());
+
+	if ( !is.is_open() ) {
+		std::cerr << "ERROR: No se ha podido abrir " << nombre_archivo << std::endl;
+	} else {
+		std::string linea_expresion = "";
+
+		std::getline(is, linea_expresion);
+
+		std::vector<Nodo> pila_expresion;
+
+		pila_expresion = obtenerExpresion(linea_expresion);
+
+		if ( pila_expresion.size() > profundidad_maxima_) {
+			std::cerr << "ERROR: Expresion más grande del límite dado." << std::endl;
+		} else {
+			arbol_ = pila_expresion;
+		}
+
+	}
+
+}
+
+std::vector<Nodo> Expresion :: obtenerExpresion(const std::string & linea_expresion) {
+
+	std::istringstream buffer_exp (linea_expresion);
+
+	std::string part;
+
+
+	Nodo operador;
+	TipoNodo tipo_operador = TipoNodo::NUMERO;
+
+	std::vector<Nodo> parte_izquierda;
+	std::vector<Nodo> parte_derecha;
+
+	buffer_exp >> part;
+	do {
+
+		if ( part == "(" ) {
+			std::string sub_string = obtenerStringParentesis(buffer_exp);
+			parte_izquierda = obtenerExpresion(sub_string);
+		} else {
+			if (part[0] == 'x') {
+				// si es una variable
+				Nodo var;
+				var.setTipoNodo(TipoNodo::VARIABLE);
+				// elimino la x
+				part.erase(part.begin());
+				var.setValor(std::atoi(part.c_str()) );
+				parte_izquierda.push_back(var);
+			} else {
+				// si es otra cosa: un numero
+				Nodo num;
+				num.setTipoNodo(TipoNodo::NUMERO);
+				num.setValorNumerico(std::atof(part.c_str()) );
+				parte_izquierda.push_back(num);
+			}
+		}
+
+		if ( !buffer_exp.eof() ) {
+			buffer_exp >> part;
+
+			// si he leido una parte, ahora leo el operador
+			if (part == "+") {
+				tipo_operador = TipoNodo::MAS;
+			} else if ( part == "-" ) {
+				tipo_operador = TipoNodo::MENOS;
+			} else if ( part == "*" ) {
+				// si es un operador
+				tipo_operador = TipoNodo::POR;
+			} else if ( part == "/" ) {
+				// si es un operador
+				tipo_operador = TipoNodo::ENTRE;
+			}
+
+			buffer_exp >> part;
+
+			if ( part == "(" ) {
+				std::string sub_string = obtenerStringParentesis(buffer_exp);
+				parte_derecha = obtenerExpresion(sub_string);
+			} else {
+				if (part[0] == 'x') {
+					// si es una variable
+					Nodo var;
+					var.setTipoNodo(TipoNodo::VARIABLE);
+					// elimino la x
+					part.erase(part.begin());
+					var.setValor(std::atoi(part.c_str()));
+					parte_derecha.push_back(var);
+				} else {
+					// si es otra cosa: un numero
+					Nodo num;
+					num.setTipoNodo(TipoNodo::NUMERO);
+					num.setValorNumerico(std::atof(part.c_str()));
+					parte_derecha.push_back(num);
+				}
+			}
+
+		}
+
+		buffer_exp >> part;
+	} while (!buffer_exp.eof());
+
+
+	std::vector<Nodo> resultado;
+
+	if (tipo_operador != TipoNodo::NUMERO) {
+		// metemos el operador
+		operador.setTipoNodo(tipo_operador);
+		resultado.push_back(operador);
+
+		// metemos la parte izquierda
+		resultado.insert( resultado.end(), parte_izquierda.begin(), parte_izquierda.end() );
+
+		// metemos la parte derecha
+		resultado.insert( resultado.end(), parte_derecha.begin(), parte_derecha.end() );
+	} else {
+		resultado = parte_izquierda;
+	}
+
+	return resultado;
+
+}
+
+std::string Expresion :: obtenerStringParentesis(std::istringstream & buffer_exp) {
+	// si es el comienzo de una parte
+	int contador_parentesis = 1;
+
+	std::string sub_string = "";
+	std::string part = "";
+
+	while ( contador_parentesis != 0) {
+		buffer_exp >> part;
+		if (part == ")") {
+			contador_parentesis--;
+		} else if (part == "(") {
+			contador_parentesis++;
+		}
+
+		if ( contador_parentesis != 0) {
+			sub_string += part + " ";
+		}
+	}
+
+	return sub_string;
+}
+
 
 std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, int posicion) const{
 	std::vector<Nodo> sol;
