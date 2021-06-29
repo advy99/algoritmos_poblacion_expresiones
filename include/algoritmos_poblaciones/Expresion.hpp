@@ -137,6 +137,26 @@ class Expresion{
 
 		virtual double obtenerNumero(const Nodo & n) const;
 
+		/**
+		  * @brief Obtener la expresión almacenada en un string
+		  *
+		  * @param linea_expresion String de la Expresion a obtener
+		  *
+		  * @return Vector de nodos con la expresión representada en preorder
+		  */
+
+		static std::vector<Nodo> obtenerExpresion(const std::string & linea_expresion);
+
+		/**
+		  * @brief Obtener la subexpresión que se encuentra entre parentesis en una expresion
+		  *
+		  * @param buffer_exp Flujo del que se está leyendo la expresión principal
+		  *
+		  * @return Subexpresión entre parentesis
+		  */
+
+		static std::string obtenerStringParentesis(std::istringstream & buffer_exp);
+
 		public:
 
 		/**
@@ -183,6 +203,21 @@ class Expresion{
 		  */
 
 		Expresion(const Expresion & otra);
+
+
+		/**
+		  * @brief Constructor con tres parametros, para leer una expresión de un fichero.
+		  *
+		  * @param nombre_archivo Archivo donde se almacena la expresión como string.
+		  * @param longitud_max Longitud máxima de la Expresion a leer.
+		  * @param num_variables Número de variables utilizadas por esta Expresion.
+		  *
+		  * @pre La Expresion almacenada en nombre_archivo es valida.
+		  *
+		  */
+
+		Expresion ( const std::string & nombre_archivo, const unsigned longitud_max, const unsigned num_variables);
+
 
 		/**
 		  * @brief Destructor de la expresión.
