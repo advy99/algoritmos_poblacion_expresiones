@@ -14,7 +14,7 @@ TEST (Expresion, IgualElMismo) {
 TEST (Expresion, IgualElMismoConDatos) {
 	algoritmos_poblacion_expresiones::Expresion exp;
 
-	exp.generarExpresionAleatoria(10, 0.3, 4);
+	exp.generarExpresionAleatoria(20, 0.3, 4);
 
 	EXPECT_EQ(exp, exp);
 }
@@ -217,6 +217,15 @@ TEST (Expresion, CruzarArbol) {
 
 	EXPECT_TRUE( hijo.getLongitudArbol() == 7 && hijo2.getLongitudArbol() == 1);
 
+}
+
+TEST ( Expresion, LeerFichero) {
+
+	algoritmos_poblacion_expresiones::Expresion exp1(std::string("tests/expresion_prueba.txt"), 20, 9);
+
+	std::string solucion = exp1.stringExpresion();
+
+	EXPECT_EQ(solucion, std::string("( ( -0.188219  / ( x3  +  -1.088276 ) ) + ( ( -6.747766  -  9.194880 ) * ( -4.898098  * ( ( x3  /  9.770432 ) *  x0 ) ) ) )"));
 }
 
 #endif
