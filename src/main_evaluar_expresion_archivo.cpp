@@ -22,7 +22,7 @@ int main(int argc, char ** argv){
 
 	std::string fichero_exp = std::string(argv[2]);
 	unsigned longitud_max = atoi(argv[3]);
-	int num_vars = atoi(argv[4])
+	int num_vars = atoi(argv[4]);
 	int semilla;
 
 	if ( argc == 6 ){
@@ -46,15 +46,21 @@ int main(int argc, char ** argv){
 
 	algoritmos_poblacion_expresiones::Expresion expresion(fichero_exp, longitud_max, num_vars);
 
-	double error_medio_ecm = expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_cuadratico_medio);
-	double error_medio_recm = expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio);
-	double error_medio_mae = expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_absoluto_medio);
+	expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_cuadratico_medio, true);
+	double error_medio_ecm = expresion.getFitness();
+
+	expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio, true);
+	double error_medio_recm = expresion.getFitness();
+
+	expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_absoluto_medio, true);
+	double error_medio_mae = expresion.getFitness();
 
 	// mostramos el resultado
 	std::cout << semilla_original << "\t"
 				 << error_medio_ecm << "\t"
 				 << error_medio_recm << "\t"
 				 << error_medio_mae << std::endl;
+
 	return 0;
 
 }
