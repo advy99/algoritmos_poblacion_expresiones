@@ -61,7 +61,7 @@ OBJETIVO_PREPROCESADO = $(BIN)/main_preprocesar
 OBJETOS_PREPROCESADO = $(OBJ)/main_preprocesar.o
 
 # variables para el contador de reglas
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) $(OBJETIVO_PREPROCESADO) $(OBJETOS_PREPROCESADO) $(BIN)/main_conteo $(OBJ)/main_conteo.o | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) $(OBJETIVO_PREPROCESADO) $(OBJETOS_PREPROCESADO) $(BIN)/main_conteo $(OBJ)/main_conteo.o $(BIN)/main_evaluar_expresion_archivo $(OBJ)/main_evaluar_expresion_archivo.o | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -74,7 +74,7 @@ gtestflags = -I$(gtest) $(gtestlibs)
 .PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
 
 # target por defecto
-all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo doc FIN
+all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_evaluar_expresion_archivo doc FIN
 
 
 # target para compilar solo los tests
@@ -104,6 +104,12 @@ $(BIN)/main_conteo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_conte
 	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_conteo a partir de $(OBJ)/main_conteo.o\n"
 	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_conteo.o -o $(BIN)/main_conteo $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(BIN)/main_conteo finalizada con exito.\e[0m\n\n"
+
+$(BIN)/main_evaluar_expresion_archivo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_evaluar_expresion_archivo.o
+	@$(SUMA)
+	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_evaluar_expresion_archivo a partir de $(OBJ)/main_evaluar_expresion_archivo.o\n"
+	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_evaluar_expresion_archivo.o -o $(BIN)/main_evaluar_expresion_archivo $(F_OPENMP) $(gtestflags) -I$(INC)
+	@printf "\n\e[36mCompilación de $(BIN)/main_evaluar_expresion_archivo finalizada con exito.\e[0m\n\n"
 
 # funcion para compilar un objeto
 define compilar_objeto
@@ -164,6 +170,9 @@ $(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC_ALG_POB)/preprocesa
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main_conteo.o: $(SRC)/main_conteo.cpp $(INC_ALG_POB)/preprocesado.hpp
+	$(call compilar_objeto,$<,$@)
+
+$(OBJ)/main_evaluar_expresion_archivo.o: $(SRC)/main_evaluar_expresion_archivo.cpp
 	$(call compilar_objeto,$<,$@)
 
 
