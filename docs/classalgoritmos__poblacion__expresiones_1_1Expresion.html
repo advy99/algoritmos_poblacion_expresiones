@@ -141,9 +141,9 @@ Métodos públicos</h2></td></tr>
 <tr class="memitem:ae2cd6bc01571aca968314778469eb06d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#ae2cd6bc01571aca968314778469eb06d">asignarArbol</a> (const std::vector&lt; <a class="el" href="classalgoritmos__poblacion__expresiones_1_1Nodo.html">Nodo</a> &gt; &amp;nuevo_arbol)</td></tr>
 <tr class="memdesc:ae2cd6bc01571aca968314778469eb06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dado un arbol, asignar dicho arbol de nodos a la expresion actual.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#ae2cd6bc01571aca968314778469eb06d">Más...</a><br /></td></tr>
 <tr class="separator:ae2cd6bc01571aca968314778469eb06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf817c78b71a39c6c86a94940bdf7fa9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#adf817c78b71a39c6c86a94940bdf7fa9">evaluarExpresion</a> (const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;datos, const std::vector&lt; double &gt; &amp;etiquetas, <a class="el" href="namespacealgoritmos__poblacion__expresiones.html#a6826a41cb841a2f0b3f5bdc8df173774">funcion_evaluacion_t</a> f_evaluacion)</td></tr>
-<tr class="memdesc:adf817c78b71a39c6c86a94940bdf7fa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluar la expresión con los datos dados.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#adf817c78b71a39c6c86a94940bdf7fa9">Más...</a><br /></td></tr>
-<tr class="separator:adf817c78b71a39c6c86a94940bdf7fa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60131f2cee97c07bb7bce81738d8912e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a60131f2cee97c07bb7bce81738d8912e">evaluarExpresion</a> (const std::vector&lt; std::vector&lt; double &gt;&gt; &amp;datos, const std::vector&lt; double &gt; &amp;etiquetas, <a class="el" href="namespacealgoritmos__poblacion__expresiones.html#a6826a41cb841a2f0b3f5bdc8df173774">funcion_evaluacion_t</a> f_evaluacion, const bool evaluar=false)</td></tr>
+<tr class="memdesc:a60131f2cee97c07bb7bce81738d8912e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluar la expresión con los datos dados.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a60131f2cee97c07bb7bce81738d8912e">Más...</a><br /></td></tr>
+<tr class="separator:a60131f2cee97c07bb7bce81738d8912e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b62223552cce7dadff948c6945b0660"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a2b62223552cce7dadff948c6945b0660">evaluarDato</a> (const std::vector&lt; double &gt; &amp;dato) const</td></tr>
 <tr class="memdesc:a2b62223552cce7dadff948c6945b0660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluar la expresión con un dato dado.  <a href="classalgoritmos__poblacion__expresiones_1_1Expresion.html#a2b62223552cce7dadff948c6945b0660">Más...</a><br /></td></tr>
 <tr class="separator:a2b62223552cce7dadff948c6945b0660"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -755,8 +755,8 @@ Amigas</h2></td></tr>
 
 </div>
 </div>
-<a id="adf817c78b71a39c6c86a94940bdf7fa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf817c78b71a39c6c86a94940bdf7fa9">&#9670;&nbsp;</a></span>evaluarExpresion()</h2>
+<a id="a60131f2cee97c07bb7bce81738d8912e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60131f2cee97c07bb7bce81738d8912e">&#9670;&nbsp;</a></span>evaluarExpresion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -777,7 +777,13 @@ Amigas</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespacealgoritmos__poblacion__expresiones.html#a6826a41cb841a2f0b3f5bdc8df173774">funcion_evaluacion_t</a>&#160;</td>
-          <td class="paramname"><em>f_evaluacion</em>&#160;</td>
+          <td class="paramname"><em>f_evaluacion</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>evaluar</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -792,7 +798,8 @@ Amigas</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">datos</td><td>Datos con los que evaluar la expresion </td></tr>
     <tr><td class="paramname">etiquetas</td><td>Etiquetas correspondientes a los datos para evaluar. </td></tr>
-    <tr><td class="paramname">f_evaluacion</td><td>Funcion de evaluación a utilizar</td></tr>
+    <tr><td class="paramname">f_evaluacion</td><td>Funcion de evaluación a utilizar </td></tr>
+    <tr><td class="paramname">evaluar</td><td>Booleano para controlar si evaluar la expresión de nuevo, aunque ya esté considerada evaluada</td></tr>
   </table>
   </dd>
 </dl>
