@@ -286,13 +286,15 @@ class Expresion{
 		  * @param datos Datos con los que evaluar la expresion
 		  * @param etiquetas Etiquetas correspondientes a los datos para evaluar.
 		  * @param f_evaluacion Funcion de evaluación a utilizar
+		  * @param evaluar Booleano para controlar si evaluar la expresión de nuevo, aunque ya esté considerada evaluada
 		  *
 		  * @post fitness = Valor de ajuste de la expresión.
 		  */
 
 		void evaluarExpresion(const std::vector<std::vector<double>> & datos,
 									 const std::vector<double> & etiquetas,
-								 	 funcion_evaluacion_t f_evaluacion);
+								 	 funcion_evaluacion_t f_evaluacion,
+								 	 const bool evaluar = false);
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado.

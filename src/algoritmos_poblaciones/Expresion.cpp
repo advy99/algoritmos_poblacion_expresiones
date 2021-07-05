@@ -416,7 +416,8 @@ double Expresion :: evaluarDato(const std::vector<double> & dato) const {
 
 void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
 											  const std::vector<double> & etiquetas,
-										  	  funcion_evaluacion_t f_evaluacion){
+										  	  funcion_evaluacion_t f_evaluacion,
+										  	  const bool evaluar){
 
 	// almacenamos como resultado el valor de fitness
 	double resultado = fitness_;
@@ -425,14 +426,13 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 	valores_predecidos.resize(etiquetas.size());
 
 	// si no esta evaluada y el arbol contiene una expresion
-	if (!evaluada_ && arbol_.size() > 0){
+	if ( (!evaluada_ || evaluar) && arbol_.size() > 0){
 
 		// para cada dato
 		for (unsigned i = 0; i < datos.size(); i++){
 
 			// la evaluamos para el dato i
 			valores_predecidos[i] = evaluarDato(datos[i]);
-
 		}
 
 		// hacemos la media de los cuadrados
@@ -440,7 +440,6 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 
 
 	}
-
 	// actualizamos el fitness y que esta evaluada y devolvemos el resultado
 	fitness_ = resultado;
 	evaluada_ = true;
