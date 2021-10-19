@@ -71,10 +71,10 @@ gtestlibs  = /usr/lib/libgtest.so
 gtestflags = -I$(gtest) $(gtestlibs)
 
 # targets
-.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
+.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests dependencias
 
 # target por defecto
-all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_evaluar_expresion_archivo doc FIN
+all: crear-carpetas dependencias INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_evaluar_expresion_archivo doc FIN
 
 
 # target para compilar solo los tests
