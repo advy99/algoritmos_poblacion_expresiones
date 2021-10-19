@@ -47,8 +47,8 @@ int main(int argc, char ** argv){
 																			  prob_muta_ga, prob_cruce_intra,
 																			  tam_torneo, false);
 
-	parametros_ejecucion.addFuncionError(algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio);
-	parametros_ejecucion.addFuncionError(algoritmos_poblacion_expresiones::error_absoluto_medio);
+	parametros_ejecucion.add_funcion_error(algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio);
+	parametros_ejecucion.add_funcion_error(algoritmos_poblacion_expresiones::error_absoluto_medio);
 
 	// si utilizamos openMP, establecemos el número de trabajos
 	#ifdef _OPENMP
@@ -57,9 +57,9 @@ int main(int argc, char ** argv){
 
 	int semilla_original = semilla;
 	Random::setSeed(semilla);
-	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(std::string(argv[1]), '@', ',');
-	datos = algoritmos_poblacion_expresiones::reordenar_datos_aleatorio(datos.first, datos.second);
-	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
+	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double>(std::string(argv[1]), '@', ',');
+	datos = algoritmos_poblacion_expresiones::preprocesado::reordenar_datos_aleatorio(datos.first, datos.second);
+	auto train_test_split = algoritmos_poblacion_expresiones::preprocesado::separar_train_test(datos.first, datos.second);
 
 	algoritmos_poblacion_expresiones::AlgoritmoGA_P myGAP (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 
@@ -82,7 +82,7 @@ int main(int argc, char ** argv){
 	for (unsigned i = 0; i < num_it; i++) {
 		auto resultado_cv = myGAP.ajustar_k_cross_validation(num_cv, parametros_ejecucion);
 
-		if ( resultado_cv.first.getFitness() < mejor_expresion_gap.getFitness()) {
+		if ( resultado_cv.first.get_fitness() < mejor_expresion_gap.get_fitness()) {
 			mejor_expresion_gap = resultado_cv.first;
 		}
 
@@ -130,7 +130,7 @@ int main(int argc, char ** argv){
 		auto resultado_cv = myPG.ajustar_k_cross_validation(num_cv, parametros_ejecucion);
 
 
-		if ( resultado_cv.first.getFitness() < mejor_expresion_pg.getFitness()) {
+		if ( resultado_cv.first.get_fitness() < mejor_expresion_pg.get_fitness()) {
 			mejor_expresion_pg = resultado_cv.first;
 		}
 

@@ -63,14 +63,14 @@ int main(int argc, char ** argv) {
 		separador = argv[4][0];
 	}
 
-	auto resultado = algoritmos_poblacion_expresiones::leer_datos<std::string>(fichero, comentario, separador);
+	auto resultado = algoritmos_poblacion_expresiones::preprocesado::leer_datos<std::string>(fichero, comentario, separador);
 
 	matriz<std::string> datos = resultado.first;
 	std::vector<std::string> etiquetas = resultado.second;
 
 	auto resultado_fases = preprocesar_regresion(datos, etiquetas);
 
-	algoritmos_poblacion_expresiones::escribir_datos(salida, resultado_fases.first, resultado_fases.second, separador);
+	algoritmos_poblacion_expresiones::preprocesado::escribir_datos(salida, resultado_fases.first, resultado_fases.second, separador);
 
 
 }

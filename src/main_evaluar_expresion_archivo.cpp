@@ -40,20 +40,20 @@ int main(int argc, char ** argv){
 
 	int semilla_original = semilla;
 	Random::setSeed(semilla);
-	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(std::string(argv[1]), '@', ',');
-	datos = algoritmos_poblacion_expresiones::reordenar_datos_aleatorio(datos.first, datos.second);
-	auto train_test_split = algoritmos_poblacion_expresiones::separar_train_test(datos.first, datos.second);
+	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double>(std::string(argv[1]), '@', ',');
+	datos = algoritmos_poblacion_expresiones::preprocesado::reordenar_datos_aleatorio(datos.first, datos.second);
+	auto train_test_split = algoritmos_poblacion_expresiones::preprocesado::separar_train_test(datos.first, datos.second);
 
 	algoritmos_poblacion_expresiones::Expresion expresion(fichero_exp, longitud_max, num_vars);
 
-	expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_cuadratico_medio, true);
-	double error_medio_ecm = expresion.getFitness();
+	expresion.evaluar_expresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_cuadratico_medio, true);
+	double error_medio_ecm = expresion.get_fitness();
 
-	expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio, true);
-	double error_medio_recm = expresion.getFitness();
+	expresion.evaluar_expresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::raiz_error_cuadratico_medio, true);
+	double error_medio_recm = expresion.get_fitness();
 
-	expresion.evaluarExpresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_absoluto_medio, true);
-	double error_medio_mae = expresion.getFitness();
+	expresion.evaluar_expresion(train_test_split.second.first, train_test_split.second.second, algoritmos_poblacion_expresiones::error_absoluto_medio, true);
+	double error_medio_mae = expresion.get_fitness();
 
 	// mostramos el resultado
 	std::cout << semilla_original << "\t"

@@ -33,7 +33,7 @@ int Random :: getInt(const int HIGH){
 	return getInt(0, HIGH);
 }
 
-std::mt19937 Random :: getGenerador() {
+std::mt19937 Random :: get_generador() {
 	return generador_;
 }
 

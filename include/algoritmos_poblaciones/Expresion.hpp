@@ -90,7 +90,7 @@ class Expresion{
 		  * @post La expresión queda como una expresión vacia.
 		  */
 
-		virtual void inicializarVacia();
+		virtual void inicializar_vacia();
 
 		/**
 		  * @brief Copiar datos de una expresión dada a la expresión.
@@ -101,7 +101,7 @@ class Expresion{
 		  *
 		  */
 
-		void copiarDatos(const Expresion & otra);
+		void copiar_datos(const Expresion & otra);
 
 		/**
 		  * @brief Contar los niveles de un árbol de Expresion dado en una pila.
@@ -112,7 +112,7 @@ class Expresion{
 		  * @return Número de niveles de la expresión
 		  */
 
-		unsigned contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const;
+		unsigned contar_niveles(std::stack<Nodo> & pila, unsigned nivel) const;
 
 		/**
 		  * @brief Evaluar la expresión con un dato dado con la pila que contendrá
@@ -124,7 +124,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(std::stack<Nodo> & pila,
+		double evaluar_dato(std::stack<Nodo> & pila,
 								 const std::vector<double> & dato) const;
 
 		/**
@@ -135,7 +135,7 @@ class Expresion{
 		  * @return Valor numerico del Nodo dado
 		  */
 
-		virtual double obtenerNumero(const Nodo & n) const;
+		virtual double obtener_numero(const Nodo & n) const;
 
 		/**
 		  * @brief Obtener la expresión almacenada en un string
@@ -145,7 +145,7 @@ class Expresion{
 		  * @return Vector de nodos con la expresión representada en preorder
 		  */
 
-		static std::vector<Nodo> obtenerExpresion(const std::string & linea_expresion);
+		static std::vector<Nodo> obtener_expresion(const std::string & linea_expresion);
 
 		/**
 		  * @brief Obtener la subexpresión que se encuentra entre parentesis en una expresion
@@ -155,7 +155,7 @@ class Expresion{
 		  * @return Subexpresión entre parentesis
 		  */
 
-		static std::string obtenerStringParentesis(std::istringstream & buffer_exp);
+		static std::string obtener_string_parentesis(std::istringstream & buffer_exp);
 
 		public:
 
@@ -240,7 +240,7 @@ class Expresion{
 		  * correctamente, false en caso contrario
 		  */
 
-		virtual bool generarExpresionAleatoria(const unsigned longitud_max,
+		virtual bool generar_expresion_aleatoria(const unsigned longitud_max,
 					 									 	const double prob_variable,
 														 	const unsigned num_variables);
 
@@ -250,7 +250,7 @@ class Expresion{
 		  * @return Booleano: True si esta evaluada y false si no.
 		  */
 
-		bool estaEvaluada() const;
+		bool esta_evaluada() const;
 
 		/**
 		  * @brief Obtener el valor de ajuste de la expresión.
@@ -258,7 +258,7 @@ class Expresion{
 		  * @return Valor de ajuste con los datos con los que se ha evaluado.
 		  */
 
-		double getFitness() const;
+		double get_fitness() const;
 
 
 		/**
@@ -267,7 +267,7 @@ class Expresion{
 		  * @return Longitud del árbol.
 		  */
 
-		unsigned getLongitudArbol() const;
+		unsigned get_longitud_arbol() const;
 
 		/**
 		 * @brief Dado un arbol, asignar dicho arbol de nodos a la expresion actual
@@ -277,7 +277,7 @@ class Expresion{
 		 *
 		 */
 
-		void asignarArbol ( const std::vector<Nodo> & nuevo_arbol);
+		void asignar_arbol ( const std::vector<Nodo> & nuevo_arbol);
 
 
 		/**
@@ -291,7 +291,7 @@ class Expresion{
 		  * @post fitness = Valor de ajuste de la expresión.
 		  */
 
-		void evaluarExpresion(const std::vector<std::vector<double>> & datos,
+		void evaluar_expresion(const std::vector<std::vector<double>> & datos,
 									 const std::vector<double> & etiquetas,
 								 	 funcion_evaluacion_t f_evaluacion,
 								 	 const bool evaluar = false);
@@ -304,7 +304,7 @@ class Expresion{
 		  * @return Valor estimado de la regresión para ese dato.
 		  */
 
-		double evaluarDato(const std::vector<double> & dato) const ;
+		double evaluar_dato(const std::vector<double> & dato) const ;
 
 		/**
 		  * @brief Intercambiar una parte de la expresión por otra dada.
@@ -319,7 +319,7 @@ class Expresion{
 		  * @return Verdadero si se ha podido realizar el intercambio, falso si no.
 		  */
 
-		bool intercambiarSubarbol(const Expresion & otra, const unsigned pos,
+		bool intercambiar_subarbol(const Expresion & otra, const unsigned pos,
 										  const unsigned longitud_cruce,
 										  Expresion & hijo) const;
 
@@ -334,7 +334,7 @@ class Expresion{
 		  */
 
 
-		void cruceArbol(const Expresion & otra, Expresion & hijo1, Expresion & hijo2) const;
+		void cruce_arbol(const Expresion & otra, Expresion & hijo1, Expresion & hijo2) const;
 
 		/**
 		  * @brief Metodo para marcar que la evaluación del fitness de una
@@ -342,7 +342,7 @@ class Expresion{
 		  *
 		  */
 
-		void dejaEstarEvaluada();
+		void deja_estar_evaluada();
 
 		/**
 		  * @brief Operador de asignación de una expresión. Asignamos una
@@ -364,7 +364,7 @@ class Expresion{
 		  * @return subarbol expresado en pre-order
 		  */
 
-		std::vector<Nodo> obtenerSubarbol(const std::vector<Nodo> & subarbol, int posicion) const;
+		std::vector<Nodo> obtener_subarbol(const std::vector<Nodo> & subarbol, int posicion) const;
 
 		/**
 		  * @brief Calcular la profundidad de una expresión
@@ -375,7 +375,7 @@ class Expresion{
 		  * @return Profundidad de la expresión a partir del nodo dado
 		  */
 
-		unsigned calcularProfundidad(const unsigned comienzo = 0) const;
+		unsigned calcular_profundidad(const unsigned comienzo = 0) const;
 
 
 		/**
@@ -384,7 +384,7 @@ class Expresion{
 		 * @return Arbol de la expresion
 		 */
 
-		std::vector<Nodo> getArbol() const;
+		std::vector<Nodo> get_arbol() const;
 
 		/**
 		 * @brief Comprobar si esta Expresion tiene el mismo Arbol que otra.
@@ -394,7 +394,7 @@ class Expresion{
 		 * @return Verdadero si es el mismo árbol, falso en otro caso.
 		 */
 
-		bool mismoArbol( const Expresion & otra) const;
+		bool mismo_arbol( const Expresion & otra) const;
 
 
 		/**
@@ -412,7 +412,7 @@ class Expresion{
 		  */
 
 
-		std::string obtenerStringExpresion(std::stack<Nodo> & pila,
+		std::string obtener_string_expresion(std::stack<Nodo> & pila,
 													  std::string resultado,
 													  const bool izda) const;
 
@@ -422,7 +422,7 @@ class Expresion{
 		  * @return Cadena asociada a la expresión
 		  */
 
-		std::string stringExpresion() const;
+		std::string string_expresion() const;
 
 
 		/**
@@ -433,7 +433,7 @@ class Expresion{
 		 *
 		 */
 
-		void mutarGP(const int num_vars);
+		void mutar_GP(const int num_vars);
 
 
 		/**
@@ -476,7 +476,7 @@ class Expresion{
 		 *
 		 */
 
-		 bool mejorFitness (const Expresion & otra);
+		 bool mejor_fitness (const Expresion & otra);
 
 		 /**
  		 *

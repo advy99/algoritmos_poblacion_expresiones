@@ -14,7 +14,7 @@ template <class T>
 using matriz = std::vector<std::vector<T>>;
 
 
-namespace algoritmos_poblacion_expresiones {
+namespace algoritmos_poblacion_expresiones::preprocesado {
 
 /**
  * @brief Separar unos datos y etiquetas dadas en dos conjuntos de entrenamiento y test,

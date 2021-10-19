@@ -137,7 +137,7 @@ class Random{
 		  * @return Generador de aleatorios que se está utilizando
 		  */
 
-		static std::mt19937 getGenerador();
+		static std::mt19937 get_generador();
 
 };
 

@@ -81,7 +81,7 @@ class Nodo {
 		  */
 
 
-		void setTipoNodoOperadorAleatorio();
+		void set_tipo_nodo_operador_aleatorio();
 
 		/**
 		  * @brief Establecer el valor del nodo a un termino aleatorio.
@@ -94,7 +94,7 @@ class Nodo {
 		  * @pre tipo_nodo == TipoNodo::NUMERO || tipo_nodo == TipoNodo::VARIABLE
 		  */
 
-		void setTerminoAleatorio(const int num_numeros, const int num_variables);
+		void set_termino_aleatorio(const int num_numeros, const int num_variables);
 
 
 
@@ -107,7 +107,7 @@ class Nodo {
 		  * @pre tipo_nodo == TipoNodo::VARIABLE
 		  */
 
-		void setTerminoAleatorio(const int num_variables);
+		void set_termino_aleatorio(const int num_variables);
 
 		/**
 		 * @brief Obtener el tipo del nodo asociado al Nodo.
@@ -116,7 +116,7 @@ class Nodo {
 		 *
 		 */
 
-		TipoNodo getTipoNodo() const;
+		TipoNodo get_tipo_nodo() const;
 
 		/**
 		 * @brief Obtener el valor asociado al Nodo.
@@ -126,7 +126,7 @@ class Nodo {
 		 * @return Valor asociado al nodo
 		 */
 
-		int getValor() const;
+		int get_valor() const;
 
 		/**
 		 * @brief Obtener el valor numerico asociado al Nodo.
@@ -136,7 +136,7 @@ class Nodo {
 		 * @return Valor numerico asociado al nodo
 		 */
 
-		double getValorNumerico() const;
+		double get_valor_numerico() const;
 
 
 		/**
@@ -147,7 +147,7 @@ class Nodo {
 		 * @param valor Valor numerico a establecer en el Nodo.
 		 *
 		 */
-		void setValorNumerico(const double valor);
+		void set_valor_numerico(const double valor);
 
 
 		/**
@@ -159,7 +159,7 @@ class Nodo {
 		 *
 		 */
 
-		void setTipoNodo(const TipoNodo tipo);
+		void set_tipo_nodo(const TipoNodo tipo);
 
 
 		/**
@@ -171,7 +171,7 @@ class Nodo {
 		 *
 		 */
 
-		void setValor(const double val);
+		void set_valor(const int val);
 
 
 		/**
