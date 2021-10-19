@@ -75,7 +75,7 @@ class Poblacion{
 		  *
 		  */
 
-		void copiarDatos(const Poblacion & otra);
+		void copiar_datos(const Poblacion & otra);
 
 
 		/**
@@ -84,7 +84,7 @@ class Poblacion{
 		 * @return Sumatoria del fitness de todos los individuos
 		 */
 
-		double sumaFitness() const;
+		double suma_fitness() const;
 
 	public:
 
@@ -141,7 +141,7 @@ class Poblacion{
 		  * @return Mejor individuo de la población
 		  */
 
-		T getMejorIndividuo() const;
+		T get_mejor_individuo() const;
 
 		/**
 		  * @brief Obtener el indice del mejor individuo de la poblacion.
@@ -149,7 +149,7 @@ class Poblacion{
 		  * @return Indice del mejor individuo de la población
 		  */
 
-		unsigned getIndiceMejorIndividuo() const;
+		unsigned get_indice_mejor_individuo() const;
 
 		/**
 		  * @brief Obtener el tamaño de la poblacion.
@@ -157,7 +157,7 @@ class Poblacion{
 		  * @return Tamaño de la población
 		  */
 
-		unsigned getTamPoblacion() const;
+		unsigned get_tam_poblacion() const;
 
 		/**
 		  * @brief Obtener el individuo indice de la poblacion.
@@ -190,7 +190,7 @@ class Poblacion{
 		  *
 		  */
 
-		void setIndividuo(const unsigned indice, const T & n_individuo);
+		void set_individuo(const unsigned indice, const T & n_individuo);
 
 		/**
 		  * @brief Evaluar todos los elementos de la población.
@@ -205,7 +205,7 @@ class Poblacion{
 		  *
 		  */
 
-		void evaluarPoblacion(const std::vector<std::vector<double> > & datos,
+		void evaluar_poblacion(const std::vector<std::vector<double> > & datos,
 									 const std::vector<double> & etiquetas,
 								 	 funcion_evaluacion_t funcion_evaluacion);
 
@@ -215,7 +215,7 @@ class Poblacion{
 		 * @return Indice del individuo
 		 */
 
-		unsigned seleccionIndividuo() const;
+		unsigned seleccion_individuo() const;
 
 
 		/**
@@ -271,7 +271,7 @@ class Poblacion{
 		 *
 		 */
 
-		void setMejorIndividuo(const int nuevo_mejor);
+		void set_mejor_individuo(const int nuevo_mejor);
 
 
 		/**
@@ -279,7 +279,7 @@ class Poblacion{
 		 *
 		 *
 		 */
-		void buscarMejorIndividuo();
+		void buscar_mejor_individuo();
 
 };
 

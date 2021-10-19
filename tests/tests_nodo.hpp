@@ -27,7 +27,7 @@ TEST (Nodo, ConstructorDefecto) {
 
 TEST (Nodo, Asignacion) {
 	algoritmos_poblacion_expresiones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
+	nodo.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 
 	algoritmos_poblacion_expresiones::Nodo otro;
 
@@ -38,10 +38,10 @@ TEST (Nodo, Asignacion) {
 
 TEST (Nodo, DistintosTipos) {
 	algoritmos_poblacion_expresiones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
+	nodo.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
 
 	algoritmos_poblacion_expresiones::Nodo otro;
-	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
+	nodo.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
 
 	EXPECT_NE(nodo, otro);
@@ -50,25 +50,25 @@ TEST (Nodo, DistintosTipos) {
 
 TEST (Nodo, MismoTipoValorDistinto) {
 	algoritmos_poblacion_expresiones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
+	nodo.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
 	algoritmos_poblacion_expresiones::Nodo otro;
-	otro.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
+	otro.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::MAS);
 
-	otro.setValor(-23);
+	otro.set_valor(-23);
 
 	EXPECT_EQ(nodo, otro);
 }
 
 TEST (Nodo, DistintoTipoValorIgual) {
 	algoritmos_poblacion_expresiones::Nodo nodo;
-	nodo.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
-	nodo.setValor(1);
+	nodo.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::NUMERO);
+	nodo.set_valor(1);
 
 	algoritmos_poblacion_expresiones::Nodo otro;
-	otro.setTipoNodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
+	otro.set_tipo_nodo(algoritmos_poblacion_expresiones::TipoNodo::VARIABLE);
 
-	otro.setValor(1);
+	otro.set_valor(1);
 
 	EXPECT_NE(nodo, otro);
 }

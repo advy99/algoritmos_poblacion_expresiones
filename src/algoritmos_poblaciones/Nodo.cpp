@@ -8,7 +8,7 @@ Nodo :: Nodo(){
 	valor_numerico_ = Random::getFloat(-10.0, 10.0);
 }
 
-void Nodo :: setTerminoAleatorio(const int num_numeros, const int num_variables){
+void Nodo :: set_termino_aleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo_ == TipoNodo::NUMERO){
 		valor_ = Random::getInt(num_numeros);
@@ -19,12 +19,12 @@ void Nodo :: setTerminoAleatorio(const int num_numeros, const int num_variables)
 }
 
 
-void Nodo :: setTerminoAleatorio(const int num_variables){
+void Nodo :: set_termino_aleatorio(const int num_variables){
 	// si no, escogemos un aleatorio entre las posibles variables
 	valor_ = Random::getInt(num_variables);
 }
 
-void Nodo :: setTipoNodoOperadorAleatorio(){
+void Nodo :: set_tipo_nodo_operador_aleatorio(){
 	// obtenemos un aleatorio
 	float aleatorio = Random::getFloat();
 
@@ -41,28 +41,28 @@ void Nodo :: setTipoNodoOperadorAleatorio(){
 }
 
 
-TipoNodo Nodo :: getTipoNodo() const {
+TipoNodo Nodo :: get_tipo_nodo() const {
 	return tipo_nodo_;
 }
 
-int Nodo :: getValor() const {
+int Nodo :: get_valor() const {
 	return valor_;
 }
 
-double Nodo :: getValorNumerico() const {
+double Nodo :: get_valor_numerico() const {
 	return valor_numerico_;
 }
 
-void Nodo :: setValorNumerico(const double valor) {
+void Nodo :: set_valor_numerico(const double valor) {
 	valor_numerico_ = valor;
 }
 
 
-void Nodo :: setTipoNodo(const TipoNodo tipo){
+void Nodo :: set_tipo_nodo(const TipoNodo tipo){
 	tipo_nodo_ = tipo;
 }
 
-void Nodo :: setValor(const double val){
+void Nodo :: set_valor(const int val){
 	valor_ = val;
 }
 

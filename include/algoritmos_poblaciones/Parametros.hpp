@@ -188,56 +188,56 @@ class Parametros {
 		 *  @return Numero de evaluaciones con las que ajustar
 		 */
 
-		int getNumeroEvaluaciones() const;
+		int get_numero_evaluaciones() const;
 
 		/**
 		 *  @brief Obtener la probabilidad de cruzar la parte GP
 		 *  @return Probabilidad de cruzar la parte GP
 		 */
-		double getProbabilidadCruceGP() const;
+		double get_probabilidad_cruce_GP() const;
 
 		/**
 		 *  @brief Obtener la probabilidad de cruzar la parte GA
 		 *  @return Probabilidad de cruzar la parte GA
 		 */
-		double getProbabilidadCruceGA() const;
+		double get_probabilidad_cruce_GA() const;
 
 
 		/**
 		 *  @brief Obtener la probabilidad de mutar la parte GP
 		 *  @return Probabilidad de mutar la parte GP
 		 */
-		double getProbabilidadMutacionGP() const;
+		double get_probabilidad_mutacion_GP() const;
 
 		/**
 		 *  @brief Obtener la probabilidad de mutar la parte GA
 		 *  @return Probabilidad de mutar la parte GA
 		 */
-		double getProbabilidadMutacionGA() const;
+		double get_probabilidad_mutacion_GA() const;
 
 		/**
 		 *  @brief Obtener la probabilidad de realizar un cruce intranicho en GA-P
 		 *  @return Probabilidad de realizar un cruce intranicho en GA-P
 		 */
-		double getProbabilidadCruceIntranicho() const;
+		double get_probabilidad_cruce_intranicho() const;
 
 		/**
 		 *  @brief Obtener el tamaño del torneo
 		 *  @return Tamaño del torneo
 		 */
-		int getTamanioTorneo() const;
+		int get_tamanio_torneo() const;
 
 		/**
 		 *  @brief Obtener si se muestra la evolucion
 		 *  @return Booleano: verdadero si se muestra la evolucion, falso si no
 		 */
-		bool getMostrarEvaluacion() const;
+		bool get_mostrar_evaluacion() const;
 
 		/**
 		 *  @brief Obtener la funcion de evaluacion
 		 *  @return Puntero a la función de evaluacion a utilizar
 		 */
-		funcion_evaluacion_t getFuncionEvaluacion() const;
+		funcion_evaluacion_t get_funcion_evaluacion() const;
 
 		/**
 		 *  @brief Añadir una función de error para estimar un modelo con dicha función
@@ -246,7 +246,7 @@ class Parametros {
 		 *
 		 */
 
-		void addFuncionError(const funcion_evaluacion_t & func);
+		void add_funcion_error(const funcion_evaluacion_t & func);
 
 		/**
 		 *  @brief Obtener una función de error a utilizar
@@ -256,7 +256,7 @@ class Parametros {
 		 * @return Funcion de error en la posición indice
 		 */
 
-		funcion_evaluacion_t getFuncionError(const unsigned indice) const;
+		funcion_evaluacion_t get_funcion_error(const unsigned indice) const;
 
 		/**
 		 *  @brief Obtener el numero de funciones de error a utilizar
@@ -265,7 +265,7 @@ class Parametros {
 		 * @return Numero de funciones de error a utilizar
 		 */
 
-		unsigned getNumFuncionesError() const;
+		unsigned get_num_funciones_error() const;
 
 };
 

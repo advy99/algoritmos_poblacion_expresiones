@@ -97,7 +97,7 @@ class AlgoritmoPoblacion {
 		  *
 		 */
 
-		void inicializarVacio();
+		void inicializar_vacio();
 
 		/**
 		 *  @brief Selección de una nueva población por torneo a partir de
@@ -108,7 +108,7 @@ class AlgoritmoPoblacion {
 		 * @return Devuelve la poblacion con los T ganadores del torneo.
 		 */
 
-		Poblacion<T> seleccionTorneo(const unsigned tam_torneo) const;
+		Poblacion<T> seleccion_torneo(const unsigned tam_torneo) const;
 
 
 		/**
@@ -122,7 +122,7 @@ class AlgoritmoPoblacion {
 		 * @return Devuelve una pareja de booleanos, verdadero si se ha aplicado la mutacion, falso si no, uno para cada hijo
 		 */
 
-		std::pair<bool, bool> aplicarMutacionesGP(T & hijo1, T & hijo2,
+		std::pair<bool, bool> aplicar_mutaciones_GP(T & hijo1, T & hijo2,
 			 													 const double prob_mutacion);
 
 	public:
@@ -137,7 +137,7 @@ class AlgoritmoPoblacion {
 		 *
 		 */
 
-		void leerDatos(const std::string fichero_datos,
+		void leer_datos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador = ',');
 
 		/**
@@ -150,7 +150,7 @@ class AlgoritmoPoblacion {
 		  *
 		 */
 
-		void cargarDatos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
+		void cargar_datos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
 
 		/**
 		  * @brief Obtener el numero de variables de los datos
@@ -158,7 +158,7 @@ class AlgoritmoPoblacion {
 		  * @return Numero de variables del problema
 		  */
 
-		int getNumVariables() const ;
+		int get_num_variables() const ;
 
 		/**
 		  * @brief Obtener el numero de datos
@@ -166,7 +166,7 @@ class AlgoritmoPoblacion {
 		  * @return Numero de datos
 		  */
 
-		int getNumDatos() const;
+		int get_num_datos() const;
 
 		/**
 		  * @brief Generar la población en base a los datos cargados
@@ -183,7 +183,7 @@ class AlgoritmoPoblacion {
 		  *
 		  */
 
-		void generarPoblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
+		void generar_poblacion(const unsigned tam_poblacion, const unsigned profundidad_exp, const double prob_var, const bool sustituir_actual = false);
 
 
 
@@ -192,7 +192,7 @@ class AlgoritmoPoblacion {
 		  *
 		  * @return Datos.
 		  */
-		std::vector<std::vector<double> > getDatos() const;
+		std::vector<std::vector<double> > get_datos() const;
 
 
 		/**
@@ -204,7 +204,7 @@ class AlgoritmoPoblacion {
 		  *
 		  * @return Dato de la columna indice.
 		  */
-		std::vector<double > getDato(const unsigned indice) const;
+		std::vector<double > get_dato(const unsigned indice) const;
 
 
 		/**
@@ -213,7 +213,7 @@ class AlgoritmoPoblacion {
 		  * @return Etiquetas asociadas a los datos.
 		  */
 
-		std::vector<double> getOutputDatos() const;
+		std::vector<double> get_output_datos() const;
 
 
 		/**
@@ -226,7 +226,7 @@ class AlgoritmoPoblacion {
 		  * @return Etiqueta asociada al dato indice.
 		  */
 
-		double getOutputDato(const unsigned indice) const ;
+		double get_output_dato(const unsigned indice) const ;
 
 		/**
 		  * @brief Obtener el mejor individuo de la poblacion.
@@ -234,7 +234,7 @@ class AlgoritmoPoblacion {
 		  * @return Mejor individuo de la población
 		  */
 
-		T getMejorIndividuo() const;
+		T get_mejor_individuo() const;
 
 		/**
 		 * @brief Obtener la profundidad máxima de las expresiones
@@ -242,7 +242,7 @@ class AlgoritmoPoblacion {
 		 * @return Profundidad máxima de las expresiones
 		 */
 
-		unsigned getMaxProfExpresiones() const;
+		unsigned get_max_prof_expresiones() const;
 
 
 		/**
@@ -253,7 +253,7 @@ class AlgoritmoPoblacion {
 		 *
 		 */
 
-		void aplicarElitismo(const T & mejor_individuo_anterior);
+		void aplicar_elitismo(const T & mejor_individuo_anterior);
 
 		/**
 		 *  @brief Predecir un dato tras entrenar el algoritmo

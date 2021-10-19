@@ -9,7 +9,7 @@ Expresion :: Expresion(const unsigned prof_max){
 	profundidad_maxima_ = prof_max;
 
 	// inicilizamos la expresion vacia
-	inicializarVacia();
+	inicializar_vacia();
 
 }
 
@@ -19,10 +19,10 @@ Expresion :: Expresion(const std::vector<Nodo> & subarbol, const unsigned prof_m
 	profundidad_maxima_ = prof_max;
 
 	// inicializamos la expresion vacia
-	inicializarVacia();
+	inicializar_vacia();
 
 	// obtenemos el subarbol
-	(*this) = obtenerSubarbol(subarbol, 0);
+	(*this) = obtener_subarbol(subarbol, 0);
 
 }
 
@@ -33,10 +33,10 @@ Expresion :: Expresion(const unsigned longitud_max, const double prob_variable,
 
 	numero_variables_ = num_vars;
 
-	inicializarVacia();
+	inicializar_vacia();
 
 	// generamos una expresion aleatoria
-	generarExpresionAleatoria(longitud_max, prob_variable, num_vars);
+	generar_expresion_aleatoria(longitud_max, prob_variable, num_vars);
 }
 
 
@@ -56,7 +56,7 @@ Expresion :: Expresion ( const std::string & nombre_archivo, const unsigned long
 
 		std::vector<Nodo> pila_expresion;
 
-		pila_expresion = obtenerExpresion(linea_expresion);
+		pila_expresion = obtener_expresion(linea_expresion);
 
 		if ( pila_expresion.size() > profundidad_maxima_) {
 			std::cerr << "ERROR: Expresion más grande del límite dado." << std::endl;
@@ -68,7 +68,7 @@ Expresion :: Expresion ( const std::string & nombre_archivo, const unsigned long
 
 }
 
-std::vector<Nodo> Expresion :: obtenerExpresion(const std::string & linea_expresion) {
+std::vector<Nodo> Expresion :: obtener_expresion(const std::string & linea_expresion) {
 
 	std::istringstream buffer_exp (linea_expresion);
 
@@ -85,22 +85,22 @@ std::vector<Nodo> Expresion :: obtenerExpresion(const std::string & linea_expres
 	do {
 
 		if ( part == "(" ) {
-			std::string sub_string = obtenerStringParentesis(buffer_exp);
-			parte_izquierda = obtenerExpresion(sub_string);
+			std::string sub_string = obtener_string_parentesis(buffer_exp);
+			parte_izquierda = obtener_expresion(sub_string);
 		} else {
 			if (part[0] == 'x') {
 				// si es una variable
 				Nodo var;
-				var.setTipoNodo(TipoNodo::VARIABLE);
+				var.set_tipo_nodo(TipoNodo::VARIABLE);
 				// elimino la x
 				part.erase(part.begin());
-				var.setValor(std::atoi(part.c_str()) );
+				var.set_valor(std::atoi(part.c_str()) );
 				parte_izquierda.push_back(var);
 			} else {
 				// si es otra cosa: un numero
 				Nodo num;
-				num.setTipoNodo(TipoNodo::NUMERO);
-				num.setValorNumerico(std::atof(part.c_str()) );
+				num.set_tipo_nodo(TipoNodo::NUMERO);
+				num.set_valor_numerico(std::atof(part.c_str()) );
 				parte_izquierda.push_back(num);
 			}
 		}
@@ -124,22 +124,22 @@ std::vector<Nodo> Expresion :: obtenerExpresion(const std::string & linea_expres
 			buffer_exp >> part;
 
 			if ( part == "(" ) {
-				std::string sub_string = obtenerStringParentesis(buffer_exp);
-				parte_derecha = obtenerExpresion(sub_string);
+				std::string sub_string = obtener_string_parentesis(buffer_exp);
+				parte_derecha = obtener_expresion(sub_string);
 			} else {
 				if (part[0] == 'x') {
 					// si es una variable
 					Nodo var;
-					var.setTipoNodo(TipoNodo::VARIABLE);
+					var.set_tipo_nodo(TipoNodo::VARIABLE);
 					// elimino la x
 					part.erase(part.begin());
-					var.setValor(std::atoi(part.c_str()));
+					var.set_valor(std::atoi(part.c_str()));
 					parte_derecha.push_back(var);
 				} else {
 					// si es otra cosa: un numero
 					Nodo num;
-					num.setTipoNodo(TipoNodo::NUMERO);
-					num.setValorNumerico(std::atof(part.c_str()));
+					num.set_tipo_nodo(TipoNodo::NUMERO);
+					num.set_valor_numerico(std::atof(part.c_str()));
 					parte_derecha.push_back(num);
 				}
 			}
@@ -154,7 +154,7 @@ std::vector<Nodo> Expresion :: obtenerExpresion(const std::string & linea_expres
 
 	if (tipo_operador != TipoNodo::NUMERO) {
 		// metemos el operador
-		operador.setTipoNodo(tipo_operador);
+		operador.set_tipo_nodo(tipo_operador);
 		resultado.push_back(operador);
 
 		// metemos la parte izquierda
@@ -170,7 +170,7 @@ std::vector<Nodo> Expresion :: obtenerExpresion(const std::string & linea_expres
 
 }
 
-std::string Expresion :: obtenerStringParentesis(std::istringstream & buffer_exp) {
+std::string Expresion :: obtener_string_parentesis(std::istringstream & buffer_exp) {
 	// si es el comienzo de una parte
 	int contador_parentesis = 1;
 
@@ -194,7 +194,7 @@ std::string Expresion :: obtenerStringParentesis(std::istringstream & buffer_exp
 }
 
 
-std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, int posicion) const{
+std::vector<Nodo> Expresion :: obtener_subarbol(const std::vector<Nodo> & arbol, int posicion) const{
 	std::vector<Nodo> sol;
 
 	if ( arbol.size() > 0) {
@@ -204,8 +204,8 @@ std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, 
 		// mientras tenga ramas que visitar
 		while(ramas_libres > 0){
 			// si no es ni un numero ni una variable
-			if (arbol[posicion].getTipoNodo() != TipoNodo::NUMERO &&
-				arbol[posicion].getTipoNodo() != TipoNodo::VARIABLE){
+			if (arbol[posicion].get_tipo_nodo() != TipoNodo::NUMERO &&
+				arbol[posicion].get_tipo_nodo() != TipoNodo::VARIABLE){
 				// es un operador, tiene dos ramas
 				ramas_libres += 2;
 			}
@@ -225,16 +225,16 @@ std::vector<Nodo> Expresion :: obtenerSubarbol(const std::vector<Nodo> & arbol, 
 
 
 
-void Expresion :: inicializarVacia(){
+void Expresion :: inicializar_vacia(){
 	// una expresion vacia no tiene arbol
 	arbol_ = std::vector<Nodo>();
 	numero_variables_ = 0;
-	dejaEstarEvaluada();
+	deja_estar_evaluada();
 }
 
 
 
-void Expresion :: copiarDatos(const Expresion & otra){
+void Expresion :: copiar_datos(const Expresion & otra){
 	// copiamos todos los valores
 	fitness_            = otra.fitness_;
 	evaluada_           = otra.evaluada_;
@@ -250,7 +250,7 @@ Expresion :: Expresion(const Expresion & otra){
 	profundidad_maxima_ = otra.profundidad_maxima_;
 
 	// inicializamos vacia para poner punteros a nullptr
-	inicializarVacia();
+	inicializar_vacia();
 
 	// copiamos la otra con el operador = ya implementado
 	(*this) = otra;
@@ -260,7 +260,7 @@ Expresion & Expresion :: operator= (const Expresion & otra){
 	// si no es ella misma
 	if (this != &otra){
 		// copiamos los datos de la otra
-		copiarDatos(otra);
+		copiar_datos(otra);
 	}
 
 	// devolvemos el objeto actual
@@ -268,7 +268,7 @@ Expresion & Expresion :: operator= (const Expresion & otra){
 
 }
 
-bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
+bool Expresion :: generar_expresion_aleatoria(const unsigned longitud_maxima,
 														const double prob_variable,
 														const unsigned num_variables){
 
@@ -289,7 +289,7 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 
 		// si es un operador, lo generamos
 		if (Random::getFloat() > prob_operador){
-			arbol_[i].setTipoNodoOperadorAleatorio();
+			arbol_[i].set_tipo_nodo_operador_aleatorio();
 			// tenemos una rama más libre, la actual que sería el
 			// termino de la izquierda y una más para el termino de la derecha
 			ramas_libres++;
@@ -298,11 +298,11 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 			// si es un simbolo terminal, generamos un aleatorio
 			// para ver si es variable o numero
 			if (Random::getFloat() < prob_variable){
-				arbol_[i].setTipoNodo(TipoNodo::VARIABLE);
-				arbol_[i].setTerminoAleatorio(num_variables);
+				arbol_[i].set_tipo_nodo(TipoNodo::VARIABLE);
+				arbol_[i].set_termino_aleatorio(num_variables);
 			} else {
-				arbol_[i].setTipoNodo(TipoNodo::NUMERO);
-				arbol_[i].setValorNumerico(Random::getFloat(-10.0, 10.0));
+				arbol_[i].set_tipo_nodo(TipoNodo::NUMERO);
+				arbol_[i].set_valor_numerico(Random::getFloat(-10.0, 10.0));
 			}
 
 
@@ -327,17 +327,17 @@ bool Expresion :: generarExpresionAleatoria(const unsigned longitud_maxima,
 	// la longitud del arbol es i, y la expresion no esta evaluada
 	arbol_.resize(i);
 
-	dejaEstarEvaluada();
+	deja_estar_evaluada();
 
 	return exito;
 
 }
 
-double Expresion :: obtenerNumero ( const Nodo & n) const {
-	return n.getValorNumerico();
+double Expresion :: obtener_numero ( const Nodo & n) const {
+	return n.get_valor_numerico();
 }
 
-double Expresion :: evaluarDato(std::stack<Nodo> & pila,
+double Expresion :: evaluar_dato(std::stack<Nodo> & pila,
 										const std::vector<double> & dato) const {
 
 	double resultado = 0.0;
@@ -346,30 +346,30 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 	if (pila.empty()){
 		resultado = 0.0;
 
-	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
+	} else if (pila.top().get_tipo_nodo() == TipoNodo::NUMERO){
 		// si el tope de la pila es un nodo de tipo Numero, miramos su valor en la
 		// posicion del cromosoma correspondiente
-		resultado = obtenerNumero(pila.top());
+		resultado = obtener_numero(pila.top());
 
 		// eliminamos de la pila, y lo devolvemos
 		pila.pop();
 
-	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
+	} else if (pila.top().get_tipo_nodo() == TipoNodo::VARIABLE){
 		// si es una variable, la consultamos en el dato dado, eliminamos el nodo
 		// de la pila y devolvemos el valor del dato
-		resultado = dato[pila.top().getValor()];
+		resultado = dato[pila.top().get_valor()];
 		pila.pop();
 
 	} else {
 		// si es un operador, guardamos la operacion
-		TipoNodo operacion = pila.top().getTipoNodo();
+		TipoNodo operacion = pila.top().get_tipo_nodo();
 
 		// la eliminamos de la pila
 		pila.pop();
 
 		// consultamos el valor de la rama izquierda y la derecha
-		double valor_izda = evaluarDato(pila, dato);
-		double valor_dcha = evaluarDato(pila, dato);
+		double valor_izda = evaluar_dato(pila, dato);
+		double valor_dcha = evaluar_dato(pila, dato);
 
 		// aplicamos el operador con ambas ramas y devolvemos el resultado
 		if (operacion == TipoNodo::MAS){
@@ -395,26 +395,26 @@ double Expresion :: evaluarDato(std::stack<Nodo> & pila,
 
 }
 
-double Expresion :: evaluarDato(const std::vector<double> & dato) const {
+double Expresion :: evaluar_dato(const std::vector<double> & dato) const {
 	double resultado;
 
 	// pila donde almacenaremos la expresion
 	std::stack<Nodo> pila;
 
 	//volcamos la expresion en la pila
-	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+	for (int i = (int)get_longitud_arbol() - 1; i >= 0; i--){
 		pila.push(arbol_[i]);
 	}
 
 	// la evaluamos para el dato i
-	resultado = evaluarDato(pila, dato);
+	resultado = evaluar_dato(pila, dato);
 
 	return resultado;
 
 }
 
 
-void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos,
+void Expresion :: evaluar_expresion(const std::vector<std::vector<double>> &datos,
 											  const std::vector<double> & etiquetas,
 										  	  funcion_evaluacion_t f_evaluacion,
 										  	  const bool evaluar){
@@ -432,7 +432,7 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 		for (unsigned i = 0; i < datos.size(); i++){
 
 			// la evaluamos para el dato i
-			valores_predecidos[i] = evaluarDato(datos[i]);
+			valores_predecidos[i] = evaluar_dato(datos[i]);
 		}
 
 		// hacemos la media de los cuadrados
@@ -446,34 +446,34 @@ void Expresion :: evaluarExpresion(const std::vector<std::vector<double>> &datos
 
 }
 
-bool Expresion :: estaEvaluada() const{
+bool Expresion :: esta_evaluada() const{
 	return evaluada_;
 }
 
-double Expresion :: getFitness() const{
+double Expresion :: get_fitness() const{
 	return fitness_;
 }
 
-unsigned Expresion :: getLongitudArbol() const{
+unsigned Expresion :: get_longitud_arbol() const{
 	return arbol_.size();
 }
 
 
 
-bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned pos,
+bool Expresion :: intercambiar_subarbol(const Expresion & otra, const unsigned pos,
 													const unsigned cruce_padre,
 												   Expresion & hijo) const {
 
 	//Expresion madre_cortada((arbol_ + pos), profundidad_maxima_);
 
-	std::vector<Nodo> madre_cortada = obtenerSubarbol(arbol_, pos);
+	std::vector<Nodo> madre_cortada = obtener_subarbol(arbol_, pos);
 
 	//Expresion padre_cortado((otra.arbol_ + cruce_padre), otra.profundidad_maxima_);
 
-	std::vector<Nodo> padre_cortado = obtenerSubarbol(otra.getArbol(), cruce_padre);
+	std::vector<Nodo> padre_cortado = obtener_subarbol(otra.get_arbol(), cruce_padre);
 
 	// sumamos, la parte de la madre, la longitud de la parte del padre, y lo que nos queda de madre tras el cruce
-	unsigned nueva_longitud = pos + padre_cortado.size() + (getLongitudArbol() - madre_cortada.size() - pos);
+	unsigned nueva_longitud = pos + padre_cortado.size() + (get_longitud_arbol() - madre_cortada.size() - pos);
 
 
 	bool podido_cruzar = nueva_longitud <= profundidad_maxima_;
@@ -495,14 +495,14 @@ bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned po
 		unsigned indice_hijo = 0;
 
 		// i en este caso comienza en el punto donde acaba el arbol que hemos intercambiado
-		for ( unsigned i = pos + madre_cortada.size(); i < getLongitudArbol(); i++) {
+		for ( unsigned i = pos + madre_cortada.size(); i < get_longitud_arbol(); i++) {
 			// nos ponemos donde habiamos dejado de copiar el padre
 			indice_hijo = pos + padre_cortado.size() + (i - (pos + madre_cortada.size()) ) ;
 			arbol_hijo[indice_hijo] = arbol_[i];
 		}
 
-		//hijo.asignarCromosoma(cromosoma, longitud_cromosoma);
-		hijo.asignarArbol(arbol_hijo);
+		//hijo.asignar_cromosoma(cromosoma, longitud_cromosoma);
+		hijo.asignar_arbol(arbol_hijo);
 	}
 
 	return podido_cruzar;
@@ -511,7 +511,7 @@ bool Expresion :: intercambiarSubarbol(const Expresion & otra, const unsigned po
 
 
 
-void Expresion :: cruceArbol(const Expresion & otra, Expresion & hijo1, Expresion & hijo2) const {
+void Expresion :: cruce_arbol(const Expresion & otra, Expresion & hijo1, Expresion & hijo2) const {
 
 	int punto_cruce_madre;
 	int punto_cruce_padre;
@@ -521,13 +521,13 @@ void Expresion :: cruceArbol(const Expresion & otra, Expresion & hijo1, Expresio
 	// cruzamos mientras se cruce mal
 	do {
 
-		punto_cruce_madre = Random::getInt(getLongitudArbol());
-		punto_cruce_padre = Random::getInt(otra.getLongitudArbol());
+		punto_cruce_madre = Random::getInt(get_longitud_arbol());
+		punto_cruce_padre = Random::getInt(otra.get_longitud_arbol());
 
-		cruce_mal = !(intercambiarSubarbol(otra, punto_cruce_madre, punto_cruce_padre, hijo1));
+		cruce_mal = !(intercambiar_subarbol(otra, punto_cruce_madre, punto_cruce_padre, hijo1));
 
 		if ( !cruce_mal ) {
-			cruce_mal = !(otra.intercambiarSubarbol((*this), punto_cruce_padre, punto_cruce_madre, hijo2));
+			cruce_mal = !(otra.intercambiar_subarbol((*this), punto_cruce_padre, punto_cruce_madre, hijo2));
 		}
 
 	} while (cruce_mal);
@@ -536,26 +536,26 @@ void Expresion :: cruceArbol(const Expresion & otra, Expresion & hijo1, Expresio
 }
 
 
-void Expresion :: asignarArbol (const std::vector<Nodo> & nuevo_arbol) {
+void Expresion :: asignar_arbol (const std::vector<Nodo> & nuevo_arbol) {
 
 	arbol_ = nuevo_arbol;
 
 }
 
 
-void Expresion :: dejaEstarEvaluada(){
+void Expresion :: deja_estar_evaluada(){
 	// ponemos la flag a false y establecemos el fitness a NaN
 	evaluada_ = false;
 	fitness_ = std::numeric_limits<double>::infinity();
 }
 
 
-unsigned Expresion :: contarNiveles(std::stack<Nodo> & pila, unsigned nivel) const{
+unsigned Expresion :: contar_niveles(std::stack<Nodo> & pila, unsigned nivel) const{
 	// si la pila esta vacia, devolvemos el nivel actual
 	if (pila.empty()){
 		return nivel;
-	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO ||
-				  pila.top().getTipoNodo() == TipoNodo::VARIABLE) {
+	} else if (pila.top().get_tipo_nodo() == TipoNodo::NUMERO ||
+				  pila.top().get_tipo_nodo() == TipoNodo::VARIABLE) {
 		// si en el tope hay un simbolo terminal, eso cuenta como un nivel,
 		// eliminamos el nodo de la pila, y devolvemos ese valor del nivel
 		nivel++;
@@ -570,8 +570,8 @@ unsigned Expresion :: contarNiveles(std::stack<Nodo> & pila, unsigned nivel) con
 		unsigned niveles_dcha = nivel;
 
 		// miramos el numero de niveles a la derecha y a la izquierda
-		niveles_izda = contarNiveles(pila, nivel);
-		niveles_dcha = contarNiveles(pila, nivel);
+		niveles_izda = contar_niveles(pila, nivel);
+		niveles_dcha = contar_niveles(pila, nivel);
 
 		// nos quedamos con el nivel de la rama con mayor profundidad
 		nivel = niveles_izda > niveles_dcha ? niveles_izda : niveles_dcha;
@@ -580,17 +580,17 @@ unsigned Expresion :: contarNiveles(std::stack<Nodo> & pila, unsigned nivel) con
 	}
 }
 
-unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
+unsigned Expresion :: calcular_profundidad(const unsigned comienzo) const {
 
 	unsigned profundidad = 0;
 	std::stack<Nodo> pila;
 
 	//volcamos la expresion en la pila
-	for (int i = static_cast<int>(getLongitudArbol() - 1); i >= static_cast<int>(comienzo); i--){
+	for (int i = static_cast<int>(get_longitud_arbol() - 1); i >= static_cast<int>(comienzo); i--){
 		pila.push(arbol_[i]);
 	}
 	// contamos los niveles de toda la pila
-	profundidad = contarNiveles(pila, profundidad);
+	profundidad = contar_niveles(pila, profundidad);
 
 
 	return profundidad;
@@ -600,40 +600,40 @@ unsigned Expresion :: calcularProfundidad(const unsigned comienzo) const {
 
 
 
-std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
+std::string Expresion :: obtener_string_expresion(std::stack<Nodo> & pila,
 															 std::string resultado,
 															 const bool izda) const{
 	// si la pila esta vacia, devolvemos el resultado
 	if (pila.empty()){
 		return resultado;
-	} else if (pila.top().getTipoNodo() == TipoNodo::NUMERO){
+	} else if (pila.top().get_tipo_nodo() == TipoNodo::NUMERO){
 		// si es un numero, lo consultamos en el cromosoma
 		// dependiendo de si estamos mirando el nodo de la izquierda o de
 		// la derecha ponemos primero el numero y lo que llevamos
 		// o lo que llevamos y el numero
 		if (izda){
-			// resultado = std::to_string(cromosoma[pila.top().getValor()]) +
-			resultado = std::to_string(obtenerNumero(pila.top()) ) +
+			// resultado = std::to_string(cromosoma[pila.top().get_valor()]) +
+			resultado = std::to_string(obtener_numero(pila.top()) ) +
 							" " + resultado;
 		} else {
 			resultado = resultado + " " +
-							std::to_string(obtenerNumero(pila.top()));
+							std::to_string(obtener_numero(pila.top()));
 		}
 
 		// eliminamos el nodo de la pila y devolvemos el resultado
 		pila.pop();
 		return resultado;
 
-	} else if (pila.top().getTipoNodo() == TipoNodo::VARIABLE){
+	} else if (pila.top().get_tipo_nodo() == TipoNodo::VARIABLE){
 		// si es una variable, ponemos xN
 		// de nuevo, dependiendo de si miramos el nodo de la izquierda o el
 		// de la derecha lo ponemos aun ladou a otro
 		if (izda){
-			resultado = "x" + std::to_string(pila.top().getValor()) +
+			resultado = "x" + std::to_string(pila.top().get_valor()) +
 							" " + resultado;
 		} else {
 			resultado = resultado + " x" +
-							std::to_string(pila.top().getValor());
+							std::to_string(pila.top().get_valor());
 		}
 
 		// eliminamos el nodo y devolvemos el resultado
@@ -643,13 +643,13 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 
 		// sies un operador, obtenemos el valor
 		std::string valor;
-		if (pila.top().getTipoNodo() == TipoNodo::MAS){
+		if (pila.top().get_tipo_nodo() == TipoNodo::MAS){
 			valor = "+";
-		} else if (pila.top().getTipoNodo() == TipoNodo::MENOS){
+		} else if (pila.top().get_tipo_nodo() == TipoNodo::MENOS){
 			valor = "-";
-		} else if (pila.top().getTipoNodo() == TipoNodo::POR){
+		} else if (pila.top().get_tipo_nodo() == TipoNodo::POR){
 			valor = "*";
-		} else if (pila.top().getTipoNodo() == TipoNodo::ENTRE){
+		} else if (pila.top().get_tipo_nodo() == TipoNodo::ENTRE){
 			valor = "/";
 		}
 
@@ -660,8 +660,8 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 		std::string derecha;
 
 		// miramos la expresion que tienen a la izquierda y a la derecha
-		izquierda = obtenerStringExpresion(pila, "", true) ;
-		derecha = obtenerStringExpresion(pila, "", false);
+		izquierda = obtener_string_expresion(pila, "", true) ;
+		derecha = obtener_string_expresion(pila, "", false);
 
 		// la concatenamos, lo que tiene a la izquierda, el operador, y lo de la
 		// derecha, todo entre parentesis
@@ -684,30 +684,30 @@ std::string Expresion :: obtenerStringExpresion(std::stack<Nodo> & pila,
 
 
 
-std::vector<Nodo> Expresion:: getArbol () const {
+std::vector<Nodo> Expresion:: get_arbol () const {
 	return arbol_;
 }
 
 
-std::string Expresion :: stringExpresion() const {
+std::string Expresion :: string_expresion() const {
 	std::string resultado = "";
 
 	std::stack<Nodo> pila;
 
 	// volcamos la pila
-	for (int i = (int)getLongitudArbol() - 1; i >= 0; i--){
+	for (int i = (int)get_longitud_arbol() - 1; i >= 0; i--){
 		pila.push(arbol_[i]);
 	}
 
 	// obtenemos el string de toda la pila
-	resultado = obtenerStringExpresion(pila, resultado, true);
+	resultado = obtener_string_expresion(pila, resultado, true);
 
 	return resultado;
 }
 
 std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 	// obtenemos el string y lo sacamos por el flujo
-	std::string exp_string = exp.stringExpresion();
+	std::string exp_string = exp.string_expresion();
 
 	os << exp_string;
 
@@ -716,7 +716,7 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 
 
 
-void Expresion :: mutarGP (const int num_vars) {
+void Expresion :: mutar_GP (const int num_vars) {
 
 	numero_variables_ = num_vars;
 	int posicion = Random::getInt(arbol_.size());
@@ -725,19 +725,19 @@ void Expresion :: mutarGP (const int num_vars) {
 
 	if ( aleatorio < 0.5) {
 		// primera opcion, cambiar un termino por otro
-		TipoNodo tipo = arbol_[posicion].getTipoNodo();
+		TipoNodo tipo = arbol_[posicion].get_tipo_nodo();
 
 		if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
 			if ( Random::getFloat() < 0.5) {
-				arbol_[posicion].setTipoNodo(TipoNodo::VARIABLE);
-				arbol_[posicion].setTerminoAleatorio(num_vars);
+				arbol_[posicion].set_tipo_nodo(TipoNodo::VARIABLE);
+				arbol_[posicion].set_termino_aleatorio(num_vars);
 			} else {
-				arbol_[posicion].setTipoNodo(TipoNodo::NUMERO);
-				arbol_[posicion].setValorNumerico(Random::getFloat(-10.0, 10.0));
+				arbol_[posicion].set_tipo_nodo(TipoNodo::NUMERO);
+				arbol_[posicion].set_valor_numerico(Random::getFloat(-10.0, 10.0));
 			}
 
 		} else {
-			arbol_[posicion].setTipoNodoOperadorAleatorio();
+			arbol_[posicion].set_tipo_nodo_operador_aleatorio();
 		}
 	} else {
 		// generamos un arbol aleatorio en la posicion
@@ -749,18 +749,18 @@ void Expresion :: mutarGP (const int num_vars) {
 
 			Expresion exp_aleatorio(profundidad_maxima_, 0.3, num_vars, profundidad_maxima_);
 
-			cruce_mal = !(intercambiarSubarbol(exp_aleatorio, posicion, 0, hijo));
+			cruce_mal = !(intercambiar_subarbol(exp_aleatorio, posicion, 0, hijo));
 
 		} while (cruce_mal);
 
-		asignarArbol(hijo.arbol_);
+		asignar_arbol(hijo.arbol_);
 
 	}
 
 }
 
 
-bool Expresion :: mismoArbol( const Expresion & otra) const {
+bool Expresion :: mismo_arbol( const Expresion & otra) const {
 	bool resultado = arbol_.size() == otra.arbol_.size();
 
 	for (unsigned i = 0; i < arbol_.size() && resultado; i++){
@@ -771,19 +771,19 @@ bool Expresion :: mismoArbol( const Expresion & otra) const {
 }
 
 bool Expresion :: operator == ( const Expresion & otra) const {
-	return mismoArbol(otra);
+	return mismo_arbol(otra);
 }
 
 bool Expresion :: operator != ( const Expresion & otra) const {
 	return !(*this == otra);
 }
 
-bool Expresion :: mejorFitness (const Expresion & otra) {
-	return fitness_ < otra.getFitness();
+bool Expresion :: mejor_fitness (const Expresion & otra) {
+	return fitness_ < otra.get_fitness();
 }
 
 bool Expresion :: operator < (const Expresion & otra) {
-	return mejorFitness(otra);
+	return mejor_fitness(otra);
 }
 
 

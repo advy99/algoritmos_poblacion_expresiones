@@ -32,49 +32,49 @@ Parametros :: Parametros(const int N_EVALS,
 
 
 
-int Parametros :: getNumeroEvaluaciones() const {
+int Parametros :: get_numero_evaluaciones() const {
 	return numero_evaluaciones_;
 }
-double Parametros :: getProbabilidadCruceGP() const {
+double Parametros :: get_probabilidad_cruce_GP() const {
 	return probabilidad_cruce_gp_;
 }
-double Parametros :: getProbabilidadCruceGA() const {
+double Parametros :: get_probabilidad_cruce_GA() const {
 	return probabilidad_cruce_ga_;
 }
 
-double Parametros :: getProbabilidadMutacionGP() const {
+double Parametros :: get_probabilidad_mutacion_GP() const {
 	return probabilidad_mutacion_gp_;
 }
 
-double Parametros :: getProbabilidadMutacionGA() const {
+double Parametros :: get_probabilidad_mutacion_GA() const {
 	return probabilidad_mutacion_ga_;
 }
 
-double Parametros :: getProbabilidadCruceIntranicho() const {
+double Parametros :: get_probabilidad_cruce_intranicho() const {
 	return probabilidad_cruce_intranicho_;
 }
 
-int Parametros :: getTamanioTorneo() const {
+int Parametros :: get_tamanio_torneo() const {
 	return tamanio_torneo_;
 }
 
-bool Parametros :: getMostrarEvaluacion() const {
+bool Parametros :: get_mostrar_evaluacion() const {
 	return mostrar_evolucion_;
 }
 
-funcion_evaluacion_t Parametros :: getFuncionEvaluacion() const {
+funcion_evaluacion_t Parametros :: get_funcion_evaluacion() const {
 	return funcion_evaluacion_;
 }
 
-void Parametros :: addFuncionError(const funcion_evaluacion_t & func) {
+void Parametros :: add_funcion_error(const funcion_evaluacion_t & func) {
 	funciones_evaluacion_error_.push_back(func);
 }
 
-unsigned Parametros :: getNumFuncionesError() const {
+unsigned Parametros :: get_num_funciones_error() const {
 	return funciones_evaluacion_error_.size();
 }
 
-funcion_evaluacion_t Parametros :: getFuncionError(const unsigned i) const {
+funcion_evaluacion_t Parametros :: get_funcion_error(const unsigned i) const {
 	return funciones_evaluacion_error_[i];
 }
 

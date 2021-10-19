@@ -33,14 +33,14 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 		using AlgoritmoPoblacion<Expresion>::output_datos_;
 		using AlgoritmoPoblacion<Expresion>::prof_expresiones_;
 
-		using AlgoritmoPoblacion<Expresion>::leerDatos;
-		using AlgoritmoPoblacion<Expresion>::inicializarVacio;
-		using AlgoritmoPoblacion<Expresion>::getNumVariables;
-		using AlgoritmoPoblacion<Expresion>::getMaxProfExpresiones;
-		using AlgoritmoPoblacion<Expresion>::seleccionTorneo;
-		using AlgoritmoPoblacion<Expresion>::generarPoblacion;
-		using AlgoritmoPoblacion<Expresion>::aplicarElitismo;
-		using AlgoritmoPoblacion<Expresion>::aplicarMutacionesGP;
+		using AlgoritmoPoblacion<Expresion>::leer_datos;
+		using AlgoritmoPoblacion<Expresion>::inicializar_vacio;
+		using AlgoritmoPoblacion<Expresion>::get_num_variables;
+		using AlgoritmoPoblacion<Expresion>::get_max_prof_expresiones;
+		using AlgoritmoPoblacion<Expresion>::seleccion_torneo;
+		using AlgoritmoPoblacion<Expresion>::generar_poblacion;
+		using AlgoritmoPoblacion<Expresion>::aplicar_elitismo;
+		using AlgoritmoPoblacion<Expresion>::aplicar_mutaciones_GP;
 		using AlgoritmoPoblacion<Expresion>::inicializar;
 
 

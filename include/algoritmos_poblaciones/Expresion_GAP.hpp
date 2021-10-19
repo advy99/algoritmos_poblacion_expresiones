@@ -76,7 +76,7 @@ class Expresion_GAP : public Expresion {
 		  * @post La expresión queda como una expresión vacia.
 		  */
 
-		void inicializarVacia() override;
+		void inicializar_vacia() override;
 
 		/**
 		  * @brief Copiar datos de una expresión dada a la expresión.
@@ -87,7 +87,7 @@ class Expresion_GAP : public Expresion {
 		  *
 		  */
 
-		void copiarDatos(const Expresion_GAP & otra);
+		void copiar_datos(const Expresion_GAP & otra);
 
 
 
@@ -97,7 +97,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		void inicializarCromosoma(const unsigned longitud);
+		void inicializar_cromosoma(const unsigned longitud);
 
 		/**
 		 * @brief Copiar cromosoma dado al cromosoma de la Expresion actual
@@ -106,7 +106,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		void copiarCromosoma(const std::vector<double> & otro_cromosoma);
+		void copiar_cromosoma(const std::vector<double> & otro_cromosoma);
 
 
 	 	/**
@@ -130,7 +130,7 @@ class Expresion_GAP : public Expresion {
 		  * @return Valor numerico del Nodo dado
 		  */
 
-		double obtenerNumero(const Nodo & n) const override;
+		double obtener_numero(const Nodo & n) const override;
 
 
 	public:
@@ -199,7 +199,7 @@ class Expresion_GAP : public Expresion {
 		  * correctamente, false en caso contrario
 		  */
 
-		bool generarExpresionAleatoria(const unsigned longitud_max,
+		bool generar_expresion_aleatoria(const unsigned longitud_max,
 			 									 const double prob_variable,
 												 const unsigned num_variables) override;
 
@@ -209,7 +209,7 @@ class Expresion_GAP : public Expresion {
  		  * @return Longitud del cromosoma.
  		  */
 
- 		unsigned getLongitudCromosoma() const;
+ 		unsigned get_longitud_cromosoma() const;
 
 
 		/**
@@ -219,7 +219,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		void asignarCromosoma(const std::vector<double> & nuevo_cromosoma);
+		void asignar_cromosoma(const std::vector<double> & nuevo_cromosoma);
 
 		/**
 		  * @brief Operador de asignación de una expresión. Asignamos una
@@ -246,7 +246,7 @@ class Expresion_GAP : public Expresion {
 		 */
 
 
-		void cruceBLXalfa(const Expresion_GAP & otra, Expresion_GAP & hijo1, Expresion_GAP & hijo2, const double alfa = 0.3) const;
+		void cruce_BLX_alfa(const Expresion_GAP & otra, Expresion_GAP & hijo1, Expresion_GAP & hijo2, const double alfa = 0.3) const;
 
 
 		/**
@@ -255,7 +255,7 @@ class Expresion_GAP : public Expresion {
 		 * @return Puntero al cromosoma
 		 */
 
-		std::vector<double> getCromosoma() const;
+		std::vector<double> get_cromosoma() const;
 
 		/**
 		 *
@@ -266,7 +266,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		void mutarGA(const int generacion, const int max_gen);
+		void mutar_GA(const int generacion, const int max_gen);
 
 
 		/**
@@ -278,7 +278,7 @@ class Expresion_GAP : public Expresion {
 		 *
 		 */
 
-		bool mismoNicho(const Expresion_GAP & otra) const;
+		bool mismo_nicho(const Expresion_GAP & otra) const;
 
 		/**
 		 * @brief Operador para comparar si dos expresiones tienen el mismo cromosoma
@@ -289,7 +289,7 @@ class Expresion_GAP : public Expresion {
 		 * @return Verdadero si las expresiones tienen el mismo cromosoma
 		 */
 
-		bool mismoCromosoma(const Expresion_GAP & otra) const;
+		bool mismo_cromosoma(const Expresion_GAP & otra) const;
 
 		/**
 		 * @brief Operador para comparar si dos expresiones son iguales

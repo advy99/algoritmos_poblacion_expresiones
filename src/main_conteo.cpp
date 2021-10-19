@@ -64,7 +64,7 @@ int main(int argc, char ** argv) {
 		separador = argv[4][0];
 	}
 
-	auto datos = algoritmos_poblacion_expresiones::leer_datos<double>(fichero, comentario, separador);
+	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double>(fichero, comentario, separador);
 
 	conteo_clases(datos.second, salida);
 

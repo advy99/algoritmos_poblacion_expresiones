@@ -34,14 +34,14 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 		using AlgoritmoPoblacion<Expresion_GAP>::output_datos_;
 		using AlgoritmoPoblacion<Expresion_GAP>::prof_expresiones_;
 
-		using AlgoritmoPoblacion<Expresion_GAP>::leerDatos;
-		using AlgoritmoPoblacion<Expresion_GAP>::inicializarVacio;
-		using AlgoritmoPoblacion<Expresion_GAP>::getNumVariables;
-		using AlgoritmoPoblacion<Expresion_GAP>::getMaxProfExpresiones;
-		using AlgoritmoPoblacion<Expresion_GAP>::seleccionTorneo;
-		using AlgoritmoPoblacion<Expresion_GAP>::generarPoblacion;
-		using AlgoritmoPoblacion<Expresion_GAP>::aplicarElitismo;
-		using AlgoritmoPoblacion<Expresion_GAP>::aplicarMutacionesGP;
+		using AlgoritmoPoblacion<Expresion_GAP>::leer_datos;
+		using AlgoritmoPoblacion<Expresion_GAP>::inicializar_vacio;
+		using AlgoritmoPoblacion<Expresion_GAP>::get_num_variables;
+		using AlgoritmoPoblacion<Expresion_GAP>::get_max_prof_expresiones;
+		using AlgoritmoPoblacion<Expresion_GAP>::seleccion_torneo;
+		using AlgoritmoPoblacion<Expresion_GAP>::generar_poblacion;
+		using AlgoritmoPoblacion<Expresion_GAP>::aplicar_elitismo;
+		using AlgoritmoPoblacion<Expresion_GAP>::aplicar_mutaciones_GP;
 		using AlgoritmoPoblacion<Expresion_GAP>::inicializar;
 
 		/**
@@ -74,7 +74,7 @@ class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
 			* @return Indice de un individuo en el mismo nicho
 			*/
 
-		  int seleccionIntraNicho(const int madre, const std::vector<bool> & escogidos) const;
+		  int seleccion_intra_nicho(const int madre, const std::vector<bool> & escogidos) const;
 
 
 	public:
