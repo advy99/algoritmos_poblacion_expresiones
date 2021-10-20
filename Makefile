@@ -71,11 +71,18 @@ gtestlibs  = /usr/lib/libgtest.so
 gtestflags = -I$(gtest) $(gtestlibs)
 
 # targets
-.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests
+.PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests dependencias
 
 # target por defecto
-all: crear-carpetas INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_evaluar_expresion_archivo doc FIN
+all: crear-carpetas dependencias INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_evaluar_expresion_archivo doc FIN
 
+
+dependencias:
+	@printf "\n\e[36mComprobando dependencias necesarias:\e[0m\n"
+	@which $(CXX) &> /dev/null && printf "\n\t\e[32mEncontrado $(CXX).\n\e[0m" || (printf "\e[31mERROR EN LAS DEPENDENCIAS: No se ha encontrado el compilador $(CXX).\n"; false)
+	@which doxygen &> /dev/null && printf "\t\e[32mEncontrado doxygen.\n\e[0m" || (printf "\e[31mERROR EN LAS DEPENDENCIAS: No se ha encontrado doxygen.\n"; false)
+	@which dot &> /dev/null && printf "\t\e[32mEncontrado dot (graphviz).\n\e[0m"  || (printf "\e[31mERROR EN LAS DEPENDENCIAS: No se ha encontrado dot (graphviz).\n"; false)
+	@[ -d $(gtest) ] && printf "\t\e[32mEncontrado gtest.\n\n\e[0m" || (printf "\e[31mERROR EN LAS DEPENDENCIAS: No se ha encontrado gtest en la ruta $(gtest). \nCambie la ruta donde tiene instalado gtest dentro de este Makefile o instalelo en dicha dirección.\n"; false)
 
 # target para compilar solo los tests
 tests: clean crear-carpetas INICIO $(OBJETIVO_TEST) ejecutar-tests FIN
