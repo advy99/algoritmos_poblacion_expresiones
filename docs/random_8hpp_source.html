@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!-- HTML header for doxygen 1.8.14-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+    <meta name="generator" content="Doxygen 1.9.2"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Algoritmos basados en poblaciones de expresiones: Fichero Fuente include/random.hpp</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="dynsections.js"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+         mermaid.initialize({theme: 'default'});
+    </script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+    <div id="titlearea">
+        <table cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr style="height: 56px;">
+                <td id="projectalign" style="padding-left: 0.5em;">
+                    <div id="projectname">Algoritmos basados en poblaciones de expresiones
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- end header part -->
+<!-- Generado por Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">random.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="random_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef RANDOM_H_INCLUDED</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define RANDOM_H_INCLUDED</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;random&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classRandom.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="classRandom.html">Random</a>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>   <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">   19</a></span>      <span class="keyword">static</span> <span class="keyword">inline</span> std::mt19937 <a class="code hl_variable" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">generator_</a>{std::random_device()()};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classRandom.html#aaf270d08fecf46d504ceee4696942eee">   20</a></span>      <a class="code hl_function" href="classRandom.html#aaf270d08fecf46d504ceee4696942eee">Random</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>   <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>      <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRandom.html#a771a2993df5e54acecd3f390ab5fee8e">set_seed</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classRandom.html#a3d95f93ea26f7f91dea0bcb46a165778">   31</a></span>      <a class="code hl_function" href="classRandom.html#a3d95f93ea26f7f91dea0bcb46a165778">~Random</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classRandom.html#a1a60bc82c3c9135c07624ed53c1b719a">   33</a></span>      <a class="code hl_function" href="classRandom.html#a1a60bc82c3c9135c07624ed53c1b719a">Random</a>(<span class="keyword">const</span> <a class="code hl_class" href="classRandom.html">Random</a> &amp; otro) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classRandom.html#a238c3cdcfdcbb04efd052e99eaba9450">   34</a></span>      <a class="code hl_class" href="classRandom.html">Random</a> &amp; <a class="code hl_function" href="classRandom.html#a238c3cdcfdcbb04efd052e99eaba9450">operator = </a>(<span class="keyword">const</span> <a class="code hl_class" href="classRandom.html">Random</a> &amp; otro) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">next_double</a>();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">next_double</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> LOW, <span class="keyword">const</span> <span class="keywordtype">double</span> HIGH);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">next_double</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> HIGH);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">next_int</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> LOW, <span class="keyword">const</span> <span class="keywordtype">int</span> HIGH);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">next_int</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> HIGH);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <span class="keyword">static</span> <span class="keyword">inline</span> std::mt19937 <a class="code hl_function" href="classRandom.html#aeb35c89e7acf17551d8c6ccb76e09bc8">get_generator</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classRandom.html#a771a2993df5e54acecd3f390ab5fee8e">   73</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classRandom.html#a771a2993df5e54acecd3f390ab5fee8e">Random :: set_seed</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed){</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>   <a class="code hl_variable" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">generator_</a>.seed(seed);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">   77</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">Random :: next_double</a>(){</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>   std::uniform_real_distribution&lt;&gt; dis(0, 1.0);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>   <span class="keywordflow">return</span> dis(<a class="code hl_variable" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">generator_</a>);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classRandom.html#a5a8e23b1f8ad4a55d822d285ab626d36">   82</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">Random :: next_double</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> LOW, <span class="keyword">const</span> <span class="keywordtype">double</span> HIGH){</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>   std::uniform_real_distribution&lt;&gt; dis(LOW, HIGH);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>   <span class="keywordflow">return</span> dis(<a class="code hl_variable" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">generator_</a>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>}</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classRandom.html#a8fd89fe1e36400c21534861cec0de0ea">   87</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">Random :: next_double</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> HIGH){</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>   <span class="keywordflow">return</span> <a class="code hl_function" href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">next_double</a>(0, HIGH);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">   91</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">Random :: next_int</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> LOW, <span class="keyword">const</span> <span class="keywordtype">int</span> HIGH){</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>   std::uniform_int_distribution&lt;&gt; dis(LOW, HIGH - 1);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>   <span class="keywordflow">return</span> dis(<a class="code hl_variable" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">generator_</a>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classRandom.html#ae3751bd055a046e668d44dd4f0fea983">   96</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">Random :: next_int</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> HIGH){</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>   <span class="keywordflow">return</span> <a class="code hl_function" href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">next_int</a>(0, HIGH);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classRandom.html#aeb35c89e7acf17551d8c6ccb76e09bc8">  100</a></span>std::mt19937 <a class="code hl_function" href="classRandom.html#aeb35c89e7acf17551d8c6ccb76e09bc8">Random :: get_generator</a>() {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>   <span class="keywordflow">return</span> <a class="code hl_variable" href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">generator_</a>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassRandom_html"><div class="ttname"><a href="classRandom.html">Random</a></div><div class="ttdoc">A Random type instance will be a random number generator.</div><div class="ttdef"><b>Definition:</b> random.hpp:17</div></div>
+<div class="ttc" id="aclassRandom_html_a1a60bc82c3c9135c07624ed53c1b719a"><div class="ttname"><a href="classRandom.html#a1a60bc82c3c9135c07624ed53c1b719a">Random::Random</a></div><div class="ttdeci">Random(const Random &amp;otro)=delete</div></div>
+<div class="ttc" id="aclassRandom_html_a238c3cdcfdcbb04efd052e99eaba9450"><div class="ttname"><a href="classRandom.html#a238c3cdcfdcbb04efd052e99eaba9450">Random::operator=</a></div><div class="ttdeci">Random &amp; operator=(const Random &amp;otro)=delete</div></div>
+<div class="ttc" id="aclassRandom_html_a39a58cb1e12e9fa6f6caa3d49b168043"><div class="ttname"><a href="classRandom.html#a39a58cb1e12e9fa6f6caa3d49b168043">Random::next_int</a></div><div class="ttdeci">static int next_int(const int LOW, const int HIGH)</div><div class="ttdoc">Generate a new random int in the interval [LOW, HIGH[.</div><div class="ttdef"><b>Definition:</b> random.hpp:91</div></div>
+<div class="ttc" id="aclassRandom_html_a3d95f93ea26f7f91dea0bcb46a165778"><div class="ttname"><a href="classRandom.html#a3d95f93ea26f7f91dea0bcb46a165778">Random::~Random</a></div><div class="ttdeci">~Random()=default</div></div>
+<div class="ttc" id="aclassRandom_html_a4784838548f6674f3ab7bb2f33cd4fea"><div class="ttname"><a href="classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea">Random::generator_</a></div><div class="ttdeci">static std::mt19937 generator_</div><div class="ttdef"><b>Definition:</b> random.hpp:19</div></div>
+<div class="ttc" id="aclassRandom_html_a771a2993df5e54acecd3f390ab5fee8e"><div class="ttname"><a href="classRandom.html#a771a2993df5e54acecd3f390ab5fee8e">Random::set_seed</a></div><div class="ttdeci">static void set_seed(const unsigned long seed)</div><div class="ttdoc">Seed initialisation.</div><div class="ttdef"><b>Definition:</b> random.hpp:73</div></div>
+<div class="ttc" id="aclassRandom_html_aaf270d08fecf46d504ceee4696942eee"><div class="ttname"><a href="classRandom.html#aaf270d08fecf46d504ceee4696942eee">Random::Random</a></div><div class="ttdeci">Random()=delete</div></div>
+<div class="ttc" id="aclassRandom_html_ab2cac1f2466dead51c3628061a2853d3"><div class="ttname"><a href="classRandom.html#ab2cac1f2466dead51c3628061a2853d3">Random::next_double</a></div><div class="ttdeci">static double next_double()</div><div class="ttdoc">Generate a new random double in the interval [0, 1[.</div><div class="ttdef"><b>Definition:</b> random.hpp:77</div></div>
+<div class="ttc" id="aclassRandom_html_aeb35c89e7acf17551d8c6ccb76e09bc8"><div class="ttname"><a href="classRandom.html#aeb35c89e7acf17551d8c6ccb76e09bc8">Random::get_generator</a></div><div class="ttdeci">static std::mt19937 get_generator()</div><div class="ttdoc">Returs the inner generator.</div><div class="ttdef"><b>Definition:</b> random.hpp:100</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+</small></address>
+</body>
+</html>
