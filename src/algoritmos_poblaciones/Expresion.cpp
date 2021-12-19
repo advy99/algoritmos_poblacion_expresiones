@@ -288,7 +288,7 @@ bool Expresion :: generar_expresion_aleatoria(const unsigned longitud_maxima,
 									 static_cast<float>(longitud_maxima-i);
 
 		// si es un operador, lo generamos
-		if (Random::getFloat() > prob_operador){
+		if (Random::next_double() > prob_operador){
 			arbol_[i].set_tipo_nodo_operador_aleatorio();
 			// tenemos una rama más libre, la actual que sería el
 			// termino de la izquierda y una más para el termino de la derecha
@@ -297,12 +297,12 @@ bool Expresion :: generar_expresion_aleatoria(const unsigned longitud_maxima,
 		} else {
 			// si es un simbolo terminal, generamos un aleatorio
 			// para ver si es variable o numero
-			if (Random::getFloat() < prob_variable){
+			if (Random::next_double() < prob_variable){
 				arbol_[i].set_tipo_nodo(TipoNodo::VARIABLE);
 				arbol_[i].set_termino_aleatorio(num_variables);
 			} else {
 				arbol_[i].set_tipo_nodo(TipoNodo::NUMERO);
-				arbol_[i].set_valor_numerico(Random::getFloat(-10.0, 10.0));
+				arbol_[i].set_valor_numerico(Random::next_double(-10.0, 10.0));
 			}
 
 
@@ -521,8 +521,8 @@ void Expresion :: cruce_arbol(const Expresion & otra, Expresion & hijo1, Expresi
 	// cruzamos mientras se cruce mal
 	do {
 
-		punto_cruce_madre = Random::getInt(get_longitud_arbol());
-		punto_cruce_padre = Random::getInt(otra.get_longitud_arbol());
+		punto_cruce_madre = Random::next_int(get_longitud_arbol());
+		punto_cruce_padre = Random::next_int(otra.get_longitud_arbol());
 
 		cruce_mal = !(intercambiar_subarbol(otra, punto_cruce_madre, punto_cruce_padre, hijo1));
 
@@ -719,21 +719,21 @@ std::ostream & operator<< (std::ostream & os, const Expresion & exp){
 void Expresion :: mutar_GP (const int num_vars) {
 
 	numero_variables_ = num_vars;
-	int posicion = Random::getInt(arbol_.size());
+	int posicion = Random::next_int(arbol_.size());
 
-	float aleatorio = Random::getFloat();
+	float aleatorio = Random::next_double();
 
 	if ( aleatorio < 0.5) {
 		// primera opcion, cambiar un termino por otro
 		TipoNodo tipo = arbol_[posicion].get_tipo_nodo();
 
 		if ( tipo == TipoNodo::NUMERO || tipo == TipoNodo::VARIABLE){
-			if ( Random::getFloat() < 0.5) {
+			if ( Random::next_double() < 0.5) {
 				arbol_[posicion].set_tipo_nodo(TipoNodo::VARIABLE);
 				arbol_[posicion].set_termino_aleatorio(num_vars);
 			} else {
 				arbol_[posicion].set_tipo_nodo(TipoNodo::NUMERO);
-				arbol_[posicion].set_valor_numerico(Random::getFloat(-10.0, 10.0));
+				arbol_[posicion].set_valor_numerico(Random::next_double(-10.0, 10.0));
 			}
 
 		} else {

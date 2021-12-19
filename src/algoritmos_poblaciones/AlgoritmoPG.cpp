@@ -65,7 +65,7 @@ void AlgoritmoPG :: ajustar(const Parametros & parametros) {
 			modificado_hijo1 = modificado_hijo2 = false;
 
 			// cruce de la parte GP
-			if ( Random::getFloat() < parametros.get_probabilidad_cruce_GP() ) {
+			if ( Random::next_double() < parametros.get_probabilidad_cruce_GP() ) {
 				// cruce de programacion genetica, se intercambian arboles
 
 				poblacion_[madre].cruce_arbol(poblacion_[padre], hijo1, hijo2);

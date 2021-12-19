@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['generador_5f_0',['generador_',['../classRandom.html#a350b5f214879727bce0f1e25a658a1a1',1,'Random']]],
-  ['generar_5fexpresion_5faleatoria_1',['generar_expresion_aleatoria',['../classalgoritmos__poblacion__expresiones_1_1Expresion.html#a4f756cebed55ddea20c9cdcf9938c06e',1,'algoritmos_poblacion_expresiones::Expresion::generar_expresion_aleatoria()'],['../classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a227ab9840e5303706b19bc8cab4f358f',1,'algoritmos_poblacion_expresiones::Expresion_GAP::generar_expresion_aleatoria()']]],
-  ['generar_5fpoblacion_2',['generar_poblacion',['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#a2b29b85a4fd079f48f8093fc66fcdd97',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion']]],
+  ['generar_5fexpresion_5faleatoria_0',['generar_expresion_aleatoria',['../classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a227ab9840e5303706b19bc8cab4f358f',1,'algoritmos_poblacion_expresiones::Expresion_GAP::generar_expresion_aleatoria()'],['../classalgoritmos__poblacion__expresiones_1_1Expresion.html#a4f756cebed55ddea20c9cdcf9938c06e',1,'algoritmos_poblacion_expresiones::Expresion::generar_expresion_aleatoria()']]],
+  ['generar_5fpoblacion_1',['generar_poblacion',['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#a2b29b85a4fd079f48f8093fc66fcdd97',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion']]],
+  ['generator_5f_2',['generator_',['../classRandom.html#a4784838548f6674f3ab7bb2f33cd4fea',1,'Random']]],
   ['get_5farbol_3',['get_arbol',['../classalgoritmos__poblacion__expresiones_1_1Expresion.html#ad7ae643abc9853f4f22391ae2e23e190',1,'algoritmos_poblacion_expresiones::Expresion']]],
   ['get_5fcromosoma_4',['get_cromosoma',['../classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a74d2a9607181b0b98749cce179aaed80',1,'algoritmos_poblacion_expresiones::Expresion_GAP']]],
   ['get_5fdato_5',['get_dato',['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#a67f392debc4986f533992b6aa250f52d',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion']]],
@@ -10,12 +10,12 @@ var searchData=
   ['get_5ffitness_7',['get_fitness',['../classalgoritmos__poblacion__expresiones_1_1Expresion.html#a6ed239624eb90c0d515da82aab5ecf37',1,'algoritmos_poblacion_expresiones::Expresion']]],
   ['get_5ffuncion_5ferror_8',['get_funcion_error',['../classalgoritmos__poblacion__expresiones_1_1Parametros.html#a870ffdbf2be70714121f3269cfff9051',1,'algoritmos_poblacion_expresiones::Parametros']]],
   ['get_5ffuncion_5fevaluacion_9',['get_funcion_evaluacion',['../classalgoritmos__poblacion__expresiones_1_1Parametros.html#a19bc5a41fc556daf2b0e2600d0e1c6cd',1,'algoritmos_poblacion_expresiones::Parametros']]],
-  ['get_5fgenerador_10',['get_generador',['../classRandom.html#ad522a198709ccc1181d532a097c7826f',1,'Random']]],
+  ['get_5fgenerator_10',['get_generator',['../classRandom.html#aeb35c89e7acf17551d8c6ccb76e09bc8',1,'Random']]],
   ['get_5findice_5fmejor_5findividuo_11',['get_indice_mejor_individuo',['../classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a0ff8e01892d322ed50a120efc2a09552',1,'algoritmos_poblacion_expresiones::Poblacion']]],
   ['get_5flongitud_5farbol_12',['get_longitud_arbol',['../classalgoritmos__poblacion__expresiones_1_1Expresion.html#ab15fad3caa123383bf23a1b803c253da',1,'algoritmos_poblacion_expresiones::Expresion']]],
   ['get_5flongitud_5fcromosoma_13',['get_longitud_cromosoma',['../classalgoritmos__poblacion__expresiones_1_1Expresion__GAP.html#a312dbfed92c5026b207b6aae68f4f73a',1,'algoritmos_poblacion_expresiones::Expresion_GAP']]],
   ['get_5fmax_5fprof_5fexpresiones_14',['get_max_prof_expresiones',['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#a4ac2bbe260ad76aece59be12dfe22770',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion']]],
-  ['get_5fmejor_5findividuo_15',['get_mejor_individuo',['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#adad5118b2b28bebd84e3d57398563732',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion::get_mejor_individuo()'],['../classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a511562b8b39c6d512e3a2b7be7c711ef',1,'algoritmos_poblacion_expresiones::Poblacion::get_mejor_individuo()']]],
+  ['get_5fmejor_5findividuo_15',['get_mejor_individuo',['../classalgoritmos__poblacion__expresiones_1_1Poblacion.html#a511562b8b39c6d512e3a2b7be7c711ef',1,'algoritmos_poblacion_expresiones::Poblacion::get_mejor_individuo()'],['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#adad5118b2b28bebd84e3d57398563732',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion::get_mejor_individuo()']]],
   ['get_5fmostrar_5fevaluacion_16',['get_mostrar_evaluacion',['../classalgoritmos__poblacion__expresiones_1_1Parametros.html#a20e342e6ce3641b511fcdac0205eb88b',1,'algoritmos_poblacion_expresiones::Parametros']]],
   ['get_5fnum_5fdatos_17',['get_num_datos',['../classalgoritmos__poblacion__expresiones_1_1AlgoritmoPoblacion.html#a193cdce2b870a10965b89d0b53c9b488',1,'algoritmos_poblacion_expresiones::AlgoritmoPoblacion']]],
   ['get_5fnum_5ffunciones_5ferror_18',['get_num_funciones_error',['../classalgoritmos__poblacion__expresiones_1_1Parametros.html#af9632fb978c16a32313f94425d2a2210',1,'algoritmos_poblacion_expresiones::Parametros']]],
@@ -32,7 +32,5 @@ var searchData=
   ['get_5ftamanio_5ftorneo_29',['get_tamanio_torneo',['../classalgoritmos__poblacion__expresiones_1_1Parametros.html#a4f797b2543976ef74e1344f3d4573d14',1,'algoritmos_poblacion_expresiones::Parametros']]],
   ['get_5ftipo_5fnodo_30',['get_tipo_nodo',['../classalgoritmos__poblacion__expresiones_1_1Nodo.html#ae5298afa0906e0e81e062af764b3fae1',1,'algoritmos_poblacion_expresiones::Nodo']]],
   ['get_5fvalor_31',['get_valor',['../classalgoritmos__poblacion__expresiones_1_1Nodo.html#a89316bdc5fb0b59626aa02ef108f69f7',1,'algoritmos_poblacion_expresiones::Nodo']]],
-  ['get_5fvalor_5fnumerico_32',['get_valor_numerico',['../classalgoritmos__poblacion__expresiones_1_1Nodo.html#a80d6133f49ac952a225a392de0c3fd15',1,'algoritmos_poblacion_expresiones::Nodo']]],
-  ['getfloat_33',['getFloat',['../classRandom.html#a8562fec70892abb647bb92bcc5d00982',1,'Random::getFloat()'],['../classRandom.html#ab3efdf7d11a00b183e684373f640a86d',1,'Random::getFloat(const float LOW, const float HIGH)'],['../classRandom.html#a699ebac61845668698919bc3fe8863b0',1,'Random::getFloat(const float HIGH)']]],
-  ['getint_34',['getInt',['../classRandom.html#ac6e7b90a27dbe0737f774e93f564fe34',1,'Random::getInt(const int LOW, const int HIGH)'],['../classRandom.html#a1d38b553154bf98c313664ef3ae39c1e',1,'Random::getInt(const int HIGH)']]]
+  ['get_5fvalor_5fnumerico_32',['get_valor_numerico',['../classalgoritmos__poblacion__expresiones_1_1Nodo.html#a80d6133f49ac952a225a392de0c3fd15',1,'algoritmos_poblacion_expresiones::Nodo']]]
 ];

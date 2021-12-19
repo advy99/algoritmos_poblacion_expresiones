@@ -3,7 +3,7 @@
 #include "algoritmos_poblaciones/AlgoritmoPG.hpp"
 
 #include <ctime>
-#include "Random.hpp"
+#include "random.hpp"
 #include <chrono>
 
 #ifdef _OPENMP
@@ -56,7 +56,7 @@ int main(int argc, char ** argv){
 	#endif
 
 	int semilla_original = semilla;
-	Random::setSeed(semilla);
+	Random::set_seed(semilla);
 	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double>(std::string(argv[1]), '@', ',');
 	datos = algoritmos_poblacion_expresiones::preprocesado::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::preprocesado::separar_train_test(datos.first, datos.second);
@@ -112,7 +112,7 @@ int main(int argc, char ** argv){
 				 << t_ejecucion.count() << "\t GAP" << std::endl;
 
 	// ahora con PG
-	Random::setSeed(semilla_original);
+	Random::set_seed(semilla_original);
 	// hacemos lo mismo pero con PG
 	algoritmos_poblacion_expresiones::AlgoritmoPG myPG (train_test_split.first.first, train_test_split.first.second, semilla, tam_pob, prof_max_expr, prob_variable);
 

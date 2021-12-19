@@ -10,7 +10,7 @@
 #include "algoritmos_poblaciones/Poblacion.hpp"
 #include "algoritmos_poblaciones/AlgoritmoPoblacion.hpp"
 
-#include "Random.hpp"
+#include "random.hpp"
 
 
 

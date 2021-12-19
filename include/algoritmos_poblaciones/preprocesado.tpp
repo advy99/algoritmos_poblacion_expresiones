@@ -103,7 +103,7 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
 	for ( unsigned i = 0; i < NUM_DATOS_TEST; i++) {
 
 		if (aleatorio ) {
-			indice = Random::getInt(0, datos.size());
+			indice = Random::next_int(0, datos.size());
 		}
 
 		datos_test[i] = datos[indice];
@@ -149,7 +149,7 @@ std::pair<matriz<T>, std::vector<T> > reordenar_datos_aleatorio (matriz<T> datos
 	const unsigned num_elementos = datos.size();
 
 	for ( unsigned i = 0; i < num_elementos; i++) {
-		int indice = Random::getInt(0, datos.size());
+		int indice = Random::next_int(0, datos.size());
 
 		datos_reordenados[i] = datos[indice];
 		etiquetas_reordenados[i] = etiquetas[indice];

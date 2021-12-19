@@ -70,7 +70,7 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 			cruce_intra_nicho_posible = false;
 			modificado_hijo1 = modificado_hijo2 = false;
 
-			if ( parametros.get_probabilidad_cruce_intranicho() < Random::getFloat() ){
+			if ( parametros.get_probabilidad_cruce_intranicho() < Random::next_double() ){
 				// cruce intra-nicho
 
 				padre = seleccion_intra_nicho(madre, cruzados);
@@ -92,20 +92,20 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 					hijo2 = poblacion_[padre];
 
 					// cruce de la parte GA
-					if ( Random::getFloat() < parametros.get_probabilidad_cruce_GA() ) {
+					if ( Random::next_double() < parametros.get_probabilidad_cruce_GA() ) {
 						// cruce del cromosoma utilizando BLX_alfa
 						poblacion_[madre].cruce_BLX_alfa(poblacion_[padre], hijo1, hijo2);
 						modificado_hijo1 = modificado_hijo2 = true;
 					}
 
 
-					if ( Random::getFloat() < parametros.get_probabilidad_mutacion_GA() ) {
+					if ( Random::next_double() < parametros.get_probabilidad_mutacion_GA() ) {
 						// mutacion GP en el primer hijo
 						hijo1.mutar_GA(generacion, NUM_GENERACIONES);
 						modificado_hijo1 = true;
 					}
 
-					if ( Random::getFloat() < parametros.get_probabilidad_mutacion_GA() ) {
+					if ( Random::next_double() < parametros.get_probabilidad_mutacion_GA() ) {
 						// mutacion GP en el segundo hijo
 						hijo2.mutar_GA(generacion, NUM_GENERACIONES);
 						modificado_hijo2 = true;
@@ -128,7 +128,7 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 				hijo2 = poblacion_[padre];
 
 				// cruce de la parte GP
-				if ( Random::getFloat() <  parametros.get_probabilidad_cruce_GP() ) {
+				if ( Random::next_double() <  parametros.get_probabilidad_cruce_GP() ) {
 					// cruce de programacion genetica, se intercambian arboles
 
 					poblacion_[madre].cruce_arbol(poblacion_[padre], hijo1, hijo2);
@@ -136,20 +136,20 @@ void AlgoritmoGA_P :: ajustar(const Parametros & parametros) {
 				}
 
 				// cruce de la parte GA
-				if ( Random::getFloat() < parametros.get_probabilidad_cruce_GA() ) {
+				if ( Random::next_double() < parametros.get_probabilidad_cruce_GA() ) {
 					// cruce del cromosoma utilizando BLX_alfa
 					poblacion_[madre].cruce_BLX_alfa(poblacion_[padre], hijo1, hijo2);
 					modificado_hijo1 = modificado_hijo2 = true;
 				}
 
 				// si no hay cruce, los hijos ya estaban con el valor de los padres
-				if ( Random::getFloat() < parametros.get_probabilidad_mutacion_GA() ) {
+				if ( Random::next_double() < parametros.get_probabilidad_mutacion_GA() ) {
 					// mutacion GP en el primer hijo
 					hijo1.mutar_GA(generacion, NUM_GENERACIONES);
 					modificado_hijo1 = true;
 				}
 
-				if ( Random::getFloat() < parametros.get_probabilidad_mutacion_GA() ) {
+				if ( Random::next_double() < parametros.get_probabilidad_mutacion_GA() ) {
 					// mutacion GP en el segundo hijo
 					hijo2.mutar_GA(generacion, NUM_GENERACIONES);
 					modificado_hijo2 = true;

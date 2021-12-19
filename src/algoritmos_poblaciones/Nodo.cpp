@@ -5,28 +5,28 @@ namespace algoritmos_poblacion_expresiones {
 Nodo :: Nodo(){
 	tipo_nodo_ = TipoNodo::NUMERO;
 	valor_ = 0;
-	valor_numerico_ = Random::getFloat(-10.0, 10.0);
+	valor_numerico_ = Random::next_double(-10.0, 10.0);
 }
 
 void Nodo :: set_termino_aleatorio(const int num_numeros, const int num_variables){
 	// si es un numero, escogemos un aleatorio entre todos los posibles valores
 	if (tipo_nodo_ == TipoNodo::NUMERO){
-		valor_ = Random::getInt(num_numeros);
+		valor_ = Random::next_int(num_numeros);
 	} else {
 		// si no, escogemos un aleatorio entre las posibles variables
-		valor_ = Random::getInt(num_variables);
+		valor_ = Random::next_int(num_variables);
 	}
 }
 
 
 void Nodo :: set_termino_aleatorio(const int num_variables){
 	// si no, escogemos un aleatorio entre las posibles variables
-	valor_ = Random::getInt(num_variables);
+	valor_ = Random::next_int(num_variables);
 }
 
 void Nodo :: set_tipo_nodo_operador_aleatorio(){
 	// obtenemos un aleatorio
-	float aleatorio = Random::getFloat();
+	float aleatorio = Random::next_double();
 
 	// le damos la misma probabilidad a cada operador
 	if (aleatorio < 1.0/4.0){
