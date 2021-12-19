@@ -10,7 +10,7 @@ template <class T>
 void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 
 	// inicializamos la semilla
-	Random::setSeed(seed);
+	Random::set_seed(seed);
 
 	prof_expresiones_ = prof;
 	probabilidad_variable_ = prob_var;
@@ -107,7 +107,7 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccion_torneo(const unsigned tam_torneo
 	for ( unsigned i = 0; i < poblacion_.get_tam_poblacion(); i++) {
 
 
-		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), Random::get_generador());
+		std::shuffle(participantes_torneo.begin(), participantes_torneo.end(), Random::get_generator());
 
 		mejor_torneo = participantes_torneo[0];
 
@@ -165,13 +165,13 @@ template <class T>
 std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicar_mutaciones_GP(T & hijo1, T & hijo2, const double prob_mutacion) {
 	std::pair<bool, bool> resultado = std::make_pair(false, false);
 
-	if ( Random::getFloat() < prob_mutacion ) {
+	if ( Random::next_double() < prob_mutacion ) {
 		// mutacion GP en el primer hijo
 		hijo1.mutar_GP(get_num_variables());
 		resultado.first = true;
 	}
 
-	if ( Random::getFloat() < prob_mutacion ) {
+	if ( Random::next_double() < prob_mutacion ) {
 		// mutacion GP en el segundo hijo
 		hijo2.mutar_GP(get_num_variables());
 		resultado.second = true;

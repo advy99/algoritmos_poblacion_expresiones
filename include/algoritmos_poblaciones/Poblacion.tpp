@@ -101,7 +101,7 @@ unsigned Poblacion<T> :: seleccion_individuo() const {
 	// evitamos errores de redondeo
 	probabilidad[expresiones_.size() - 1] = 1.0;
 
-	double aleatorio = Random::getFloat();
+	double aleatorio = Random::next_double();
 
 	unsigned indice = 0;
 

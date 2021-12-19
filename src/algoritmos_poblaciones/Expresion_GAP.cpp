@@ -54,7 +54,7 @@ void Expresion_GAP :: inicializar_cromosoma(const unsigned longitud){
 	cromosoma_.resize(longitud);
 	// para cada elemento escogemos un numero aleatorio en [-10, 10]
 	for (unsigned i = 0; i < cromosoma_.size(); i++){
-		cromosoma_[i] = Random::getFloat(-10.0f, 10.0f);
+		cromosoma_[i] = Random::next_double(-10.0f, 10.0f);
 	}
 
 }
@@ -124,7 +124,7 @@ double Expresion_GAP :: obtener_numero ( const Nodo & n) const {
 
 
 double Expresion_GAP :: delta(const int generacion, const int max_generaciones, const double valor) {
-	double aleatorio = Random::getFloat();
+	double aleatorio = Random::next_double();
 
 	double sub = 1.0 - ((double)generacion / (double)(max_generaciones));
 	// TODO: parametrizar B
@@ -137,9 +137,9 @@ double Expresion_GAP :: delta(const int generacion, const int max_generaciones, 
 
 void Expresion_GAP :: mutar_GA(const int generacion, const int max_generaciones) {
 
-	int pos_mutacion = Random::getInt(cromosoma_.size());
+	int pos_mutacion = Random::next_int(cromosoma_.size());
 
-	if ( Random::getFloat() < 0.5) {
+	if ( Random::next_double() < 0.5) {
 		cromosoma_[pos_mutacion] += delta(generacion, max_generaciones, 1.0 - cromosoma_[pos_mutacion]);
 	} else {
 		cromosoma_[pos_mutacion] -= delta(generacion, max_generaciones, cromosoma_[pos_mutacion]);
@@ -206,10 +206,10 @@ void Expresion_GAP :: cruce_BLX_alfa(const Expresion_GAP & otra, Expresion_GAP &
 			punto_padre = 1.0;
 		}
 
-		cromosoma_actual[i] = punto_madre + Random::getFloat() *
+		cromosoma_actual[i] = punto_madre + Random::next_double() *
 														(punto_padre - punto_madre);
 
-		cromosoma_otro[i] = punto_madre + Random::getFloat() *
+		cromosoma_otro[i] = punto_madre + Random::next_double() *
 														(punto_padre - punto_madre);
 	}
 
