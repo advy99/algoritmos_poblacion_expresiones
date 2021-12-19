@@ -3,7 +3,7 @@
 #include "algoritmos_poblaciones/AlgoritmoPG.hpp"
 
 #include <ctime>
-#include "Random.hpp"
+#include "random.hpp"
 #include <chrono>
 
 #ifdef _OPENMP

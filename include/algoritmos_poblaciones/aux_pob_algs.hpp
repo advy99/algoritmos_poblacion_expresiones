@@ -13,7 +13,7 @@
 
 #include <algorithm>
 #include <random>
-#include "Random.hpp"
+#include "random.hpp"
 #include <cstring>
 #include <stack>
 #include <limits>
