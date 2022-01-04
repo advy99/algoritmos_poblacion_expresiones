@@ -1,5 +1,6 @@
 library(tidyverse)
 library(ggplot2)
+library(GGally)
 
 datos <- read.csv("datos/completo.arff", comment.char = "@", header = FALSE)
 
@@ -42,4 +43,35 @@ summary(datos)
 
 # Todos en dorsal margin son Present, no aporta información!
 which(datos$DorsalMargin != "Present")
+
+ggplot(datos, aes(x = ToddPhase)) +
+	geom_bar(stat = "count")
+
+
+ggplot(datos, aes(x = ArticularFace, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = IrregularPorosity, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = UpperSymphysialExtremity, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = BonyNodule, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = LowerSymphysialExtremity, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = DorsalMargin, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = DorsalPlaeau, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = VentralBevel, fill = ToddPhase)) +
+	geom_bar(stat = "count")
+
+ggplot(datos, aes(x = VentralMargin, fill = ToddPhase)) +
+	geom_bar(stat = "count")
 
