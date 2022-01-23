@@ -3,17 +3,14 @@ library(ggplot2)
 library(GGally)
 library(RColorBrewer)
 
-comprobar_distribuciones <- function(nombre_fichero, nombre_dataset = nombre_fichero) {
-	
+leer_datos <- function(nombre_fichero) {
 	datos <- read.csv(nombre_fichero, comment.char = "@", header = FALSE)
 	
 	names(datos) <- c("ArticularFace", "IrregularPorosity", "UpperSymphysialExtremity",
 					  "BonyNodule", "LowerSymphysialExtremity", "DorsalMargin", 
 					  "DorsalPlaeau", "VentralBevel", "VentralMargin", "ToddPhase")
 	
-	
-	str(datos)
-	
+
 	datos$ArticularFace <- as.ordered(datos$ArticularFace)
 	levels(datos$ArticularFace) <- c("RegularPorosity","RidgesFormation","RidgesAndGrooves",
 									 "GroovesShallow","GroovesRest","NoGrooves")
@@ -38,6 +35,11 @@ comprobar_distribuciones <- function(nombre_fichero, nombre_dataset = nombre_fic
 	levels(datos$ToddPhase) <- c("Ph01-19","Ph02-20-21","Ph03-22-24","Ph04-25-26",
 								 "Ph05-27-30","Ph06-31-34","Ph07-35-39","Ph08-40-44",
 								 "Ph09-45-49","Ph10-50-")
+	
+	datos
+}
+
+comprobar_distribuciones <- function(datos, nombre_dataset) {
 	
 	str(datos)
 	
@@ -68,8 +70,40 @@ comprobar_distribuciones <- function(nombre_fichero, nombre_dataset = nombre_fic
 	
 }
 
-comprobar_distribuciones("datos/completo.arff", "completo")
-comprobar_distribuciones("datos/lateralidad0-original.arff", "lateralidad izquierda")
-comprobar_distribuciones("datos/lateralidad1-original.arff", "lateralidad derecha")
+train_test_split <- function(datos, porcentaje_test = 0.2){
+	indices_test <- sample(1:nrow(datos), nrow(datos) * porcentaje_test)
+	
+	resultado <- list(train = datos[-indices_test, ], test = datos[indices_test, ])
+	resultado
+}
 
+completo <- leer_datos("datos/completo.arff")
+lateralidad0 <- leer_datos("datos/lateralidad0-original.arff")
+lateralidad1 <- leer_datos("datos/lateralidad1-original.arff")
+
+
+comprobar_distribuciones(completo, "completo")
+comprobar_distribuciones(lateralidad0, "lateralidad izquierda")
+comprobar_distribuciones(lateralidad1, "lateralidad derecha")
+
+
+
+
+
+
+
+separacion_completo <- train_test_split(completo, 0.2)
+separacion_l0 <- train_test_split(lateralidad0, 0.2)
+separacion_l1 <- train_test_split(lateralidad1, 0.2)
+
+
+write.csv(separacion_completo$train, "datos/completo_train.csv", quote = FALSE, row.names = FALSE)
+write.csv(separacion_completo$test, "datos/completo_test.csv", quote = FALSE, row.names = FALSE)
+
+
+write.csv(separacion_l0$train, "datos/lateralidad0_train.csv", quote = FALSE, row.names = FALSE)
+write.csv(separacion_l0$test, "datos/lateralidad0_test.csv", quote = FALSE, row.names = FALSE)
+
+write.csv(separacion_l1$train, "datos/lateralidad1_train.csv", quote = FALSE, row.names = FALSE)
+write.csv(separacion_l1$test, "datos/lateralidad1_test.csv", quote = FALSE, row.names = FALSE)
 
