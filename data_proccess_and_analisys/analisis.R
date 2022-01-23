@@ -96,6 +96,7 @@ separacion_completo <- train_test_split(completo, 0.2)
 separacion_l0 <- train_test_split(lateralidad0, 0.2)
 separacion_l1 <- train_test_split(lateralidad1, 0.2)
 
+set.seed(1)
 
 write.csv(separacion_completo$train, "datos/completo_train.csv", quote = FALSE, row.names = FALSE)
 write.csv(separacion_completo$test, "datos/completo_test.csv", quote = FALSE, row.names = FALSE)
