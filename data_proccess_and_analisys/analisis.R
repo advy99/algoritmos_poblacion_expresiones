@@ -3,12 +3,20 @@ library(ggplot2)
 library(GGally)
 library(RColorBrewer)
 
-leer_datos <- function(nombre_fichero) {
-	datos <- read.csv(nombre_fichero, comment.char = "@", header = FALSE)
+leer_datos <- function(nombre_fichero, has_header = FALSE) {
+	datos <- read.csv(nombre_fichero, comment.char = "@", header = has_header)
 	
-	names(datos) <- c("ArticularFace", "IrregularPorosity", "UpperSymphysialExtremity",
-					  "BonyNodule", "LowerSymphysialExtremity", "DorsalMargin", 
-					  "DorsalPlaeau", "VentralBevel", "VentralMargin", "ToddPhase")
+	if (ncol(datos) == 10) {
+		names(datos) <- c("ArticularFace", "IrregularPorosity", "UpperSymphysialExtremity",
+						  "BonyNodule", "LowerSymphysialExtremity", "DorsalMargin", 
+						  "DorsalPlaeau", "VentralBevel", "VentralMargin", "ToddPhase")
+		
+	} else {
+		names(datos) <- c("ArticularFace", "IrregularPorosity", "UpperSymphysialExtremity",
+						  "BonyNodule", "LowerSymphysialExtremity",
+						  "DorsalPlaeau", "VentralBevel", "VentralMargin", "ToddPhase")
+	}
+	 
 	
 
 	datos$ArticularFace <- as.ordered(datos$ArticularFace)
@@ -21,7 +29,11 @@ leer_datos <- function(nombre_fichero) {
 	datos$UpperSymphysialExtremity <- as.factor(datos$UpperSymphysialExtremity)
 	datos$BonyNodule <- as.factor(datos$BonyNodule)
 	datos$LowerSymphysialExtremity <- as.factor(datos$LowerSymphysialExtremity)
-	datos$DorsalMargin <- as.factor(datos$DorsalMargin)
+	
+	if ("DorsalMargin" %in% names(datos) ) {
+		datos$DorsalMargin <- as.factor(datos$DorsalMargin)
+	}
+	
 	datos$DorsalPlaeau <- as.factor(datos$DorsalPlaeau)
 	
 	datos$VentralBevel <- as.ordered(datos$VentralBevel)
@@ -58,7 +70,8 @@ comprobar_distribuciones <- function(datos, nombre_dataset) {
 	ggsave(paste("graficas/datos/distribucion_clases_", nombre_dataset, ".png", sep = ""), device = png, width = 1920, height = 1080, units = "px", dpi = 150)
 	
 	
-	for (nombre in names(datos)[-10]) {
+	
+	for (nombre in names(datos)[-ncol(datos)]) {
 		ggplot(datos, aes_string(x = nombre, fill = "ToddPhase")) +
 			geom_bar(stat = "count") + 
 			scale_fill_brewer(palette = "BrBG", direction = -1) +
@@ -108,4 +121,16 @@ write.csv(separacion_l0$test, "datos/lateralidad0_test.csv", quote = FALSE, row.
 
 write.csv(separacion_l1$train, "datos/lateralidad1_train.csv", quote = FALSE, row.names = FALSE)
 write.csv(separacion_l1$test, "datos/lateralidad1_test.csv", quote = FALSE, row.names = FALSE)
+
+
+
+completo_SMOTE <- leer_datos("datos/completo_train_SMOTE.csv", has_header = TRUE)
+
+
+comprobar_distribuciones(completo_SMOTE, "completo_SMOTE")
+
+completo_BLSMOTE <- leer_datos("datos/completo_train_BL.csv", has_header = TRUE)
+
+
+comprobar_distribuciones(completo_BLSMOTE, "completo_BL_SMOTE")
 
