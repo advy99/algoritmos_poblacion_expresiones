@@ -38,6 +38,7 @@ X = encoder.inverse_transform(X)
 
 f = open(salida, "w")
 f.write(",".join(csv_header))
+f.write("\n")
 
 i = 0
 for dato in X:

@@ -29,6 +29,7 @@ X, y = oversample.fit_resample(X, y)
 
 f = open(salida, "w")
 f.write(",".join(csv_header))
+f.write("\n")
 
 i = 0
 for dato in X:
