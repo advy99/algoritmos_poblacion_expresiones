@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from imblearn.over_sampling import BorderlineSMOTE
+import imblearn.over_sampling
 import pandas as pd
 import csv
 import sys
@@ -12,20 +12,23 @@ if len(sys.argv) != 3:
 conjunto = sys.argv[1]
 salida = sys.argv[2]
 
+csv_header = ""
+
 with open(conjunto) as archivo_csv:
     # leemos del csv
 	reader = csv.reader(archivo_csv,  delimiter = ',')
+	csv_header = next(reader) 
     # por cada linea
 	lineas = [i for i in reader]
 	X = [dato[:-1] for dato in lineas]
 	y = [dato[-1] for dato in lineas]
 
-oversample = BorderlineSMOTE()
+
+oversample = imblearn.over_sampling.SMOTEN(random_state = 2)
 X, y = oversample.fit_resample(X, y)
 
-X = [ list(map(lambda x: round(x), dato)) for dato in X]
-
 f = open(salida, "w")
+f.write(",".join(csv_header))
 
 i = 0
 for dato in X:
