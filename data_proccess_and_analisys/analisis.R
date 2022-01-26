@@ -83,20 +83,21 @@ lateralidad1 <- leer_datos("datos/lateralidad1-original.arff")
 
 
 comprobar_distribuciones(completo, "completo")
-comprobar_distribuciones(lateralidad0, "lateralidad izquierda")
-comprobar_distribuciones(lateralidad1, "lateralidad derecha")
+comprobar_distribuciones(lateralidad0, "lateralidad_izquierda")
+comprobar_distribuciones(lateralidad1, "lateralidad_derecha")
 
 
+completo <- completo %>% select(!DorsalMargin)
+lateralidad0 <- lateralidad0 %>% select(!DorsalMargin)
+lateralidad1 <- lateralidad1 %>% select(!DorsalMargin)
 
-
-
+set.seed(1)
 
 
 separacion_completo <- train_test_split(completo, 0.2)
 separacion_l0 <- train_test_split(lateralidad0, 0.2)
 separacion_l1 <- train_test_split(lateralidad1, 0.2)
 
-set.seed(1)
 
 write.csv(separacion_completo$train, "datos/completo_train.csv", quote = FALSE, row.names = FALSE)
 write.csv(separacion_completo$test, "datos/completo_test.csv", quote = FALSE, row.names = FALSE)
