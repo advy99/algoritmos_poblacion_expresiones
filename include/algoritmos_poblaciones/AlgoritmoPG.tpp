@@ -4,7 +4,7 @@ namespace algoritmos_poblacion_expresiones {
 
 
 template <class DataType, class ClassType>
-AlgoritmoPG :: AlgoritmoPG(const std::vector<std::vector<DataType> > & datos, const std::vector<ClassType> & etiquetas,
+AlgoritmoPG<DataType, ClassType> :: AlgoritmoPG(const std::vector<std::vector<DataType> > & datos, const std::vector<ClassType> & etiquetas,
 									const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var){
 	inicializar_vacio();
 	cargar_datos(datos, etiquetas);
@@ -14,7 +14,7 @@ AlgoritmoPG :: AlgoritmoPG(const std::vector<std::vector<DataType> > & datos, co
 
 
 template <class DataType, class ClassType>
-AlgoritmoPG :: AlgoritmoPG(const std::string fichero_datos, const char char_comentario,
+AlgoritmoPG<DataType, ClassType> :: AlgoritmoPG(const std::string fichero_datos, const char char_comentario,
 		  const unsigned tam_poblacion, const double prob_var,
 		  const unsigned long seed,
 		  const char delimitador, const unsigned prof){
@@ -27,12 +27,12 @@ AlgoritmoPG :: AlgoritmoPG(const std::string fichero_datos, const char char_come
 }
 
 template <class DataType, class ClassType>
-AlgoritmoPG :: ~AlgoritmoPG() {
+AlgoritmoPG<DataType, ClassType> :: ~AlgoritmoPG() {
 
 }
 
 template <class DataType, class ClassType>
-void AlgoritmoPG :: ajustar(const Parametros & parametros) {
+void AlgoritmoPG<DataType, ClassType> :: ajustar(const Parametros & parametros) {
 
 	const int NUM_GENERACIONES = parametros.get_numero_evaluaciones() / static_cast<double>(poblacion_.get_tam_poblacion());
 

@@ -27,22 +27,22 @@ namespace algoritmos_poblacion_expresiones {
   * @date Abril 2021
   */
 
-class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP> {
+class AlgoritmoGA_P : public AlgoritmoPoblacion<Expresion_GAP, double, double> {
 	private:
-		using AlgoritmoPoblacion<Expresion_GAP>::poblacion_;
-		using AlgoritmoPoblacion<Expresion_GAP>::datos_;
-		using AlgoritmoPoblacion<Expresion_GAP>::output_datos_;
-		using AlgoritmoPoblacion<Expresion_GAP>::prof_expresiones_;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::poblacion_;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::datos_;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::output_datos_;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::prof_expresiones_;
 
-		using AlgoritmoPoblacion<Expresion_GAP>::leer_datos;
-		using AlgoritmoPoblacion<Expresion_GAP>::inicializar_vacio;
-		using AlgoritmoPoblacion<Expresion_GAP>::get_num_variables;
-		using AlgoritmoPoblacion<Expresion_GAP>::get_max_prof_expresiones;
-		using AlgoritmoPoblacion<Expresion_GAP>::seleccion_torneo;
-		using AlgoritmoPoblacion<Expresion_GAP>::generar_poblacion;
-		using AlgoritmoPoblacion<Expresion_GAP>::aplicar_elitismo;
-		using AlgoritmoPoblacion<Expresion_GAP>::aplicar_mutaciones_GP;
-		using AlgoritmoPoblacion<Expresion_GAP>::inicializar;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::leer_datos;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::inicializar_vacio;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::get_num_variables;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::get_max_prof_expresiones;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::seleccion_torneo;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::generar_poblacion;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::aplicar_elitismo;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::aplicar_mutaciones_GP;
+		using AlgoritmoPoblacion<Expresion_GAP, double, double>::inicializar;
 
 		/**
 		  * @page repGA_P Representación de la clase AlgoritmoGA_P

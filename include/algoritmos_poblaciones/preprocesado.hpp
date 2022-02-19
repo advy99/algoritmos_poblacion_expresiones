@@ -32,7 +32,7 @@ namespace algoritmos_poblacion_expresiones::preprocesado {
  *
  */
 
-template <class DataType, ClassType>
+template <class DataType, class ClassType>
 std::pair<std::pair<matriz<DataType>, std::vector<ClassType> >, std::pair<matriz<DataType>, std::vector<ClassType> > >
 	separar_train_test(matriz<DataType> datos, std::vector<ClassType> etiquetas,
 							 const double PORCENTAJE_TEST = 0.2, const int COMIENZO = -1);

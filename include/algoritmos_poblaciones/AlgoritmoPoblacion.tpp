@@ -61,23 +61,23 @@ int AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_num_variables() cons
 }
 
 template <class AlgType, class DataType, class ClassType>
-std::vector<std::vector<double> > AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_datos() const {
+std::vector<std::vector<DataType> > AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_datos() const {
 	return datos_;
 }
 
 template <class AlgType, class DataType, class ClassType>
-std::vector<double> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_dato(const unsigned i) const {
+std::vector<DataType> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_dato(const unsigned i) const {
 	return datos_[i];
 }
 
 template <class AlgType, class DataType, class ClassType>
-std::vector<double> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_output_datos() const {
+std::vector<ClassType> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_output_datos() const {
 	return output_datos_;
 }
 
 
 template <class AlgType, class DataType, class ClassType>
-double AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_output_dato(const unsigned indice) const {
+ClassType AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_output_dato(const unsigned indice) const {
 	return output_datos_[indice];
 }
 
@@ -90,7 +90,7 @@ void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: inicializar_vacio() {
 
 
 template <class AlgType, class DataType, class ClassType>
-Poblacion<T> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: seleccion_torneo(const unsigned tam_torneo) const {
+Poblacion<AlgType> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: seleccion_torneo(const unsigned tam_torneo) const {
 	// partimos de una poblacion con el mismo tamaño que la actual
 	Poblacion<AlgType> resultado;
 
@@ -162,7 +162,7 @@ void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: aplicar_elitismo(const 
 }
 
 template <class AlgType, class DataType, class ClassType>
-std::pair<bool, bool> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: aplicar_mutaciones_GP(T & hijo1, T & hijo2, const double prob_mutacion) {
+std::pair<bool, bool> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: aplicar_mutaciones_GP(AlgType & hijo1, AlgType & hijo2, const double prob_mutacion) {
 	std::pair<bool, bool> resultado = std::make_pair(false, false);
 
 	if ( Random::next_double() < prob_mutacion ) {

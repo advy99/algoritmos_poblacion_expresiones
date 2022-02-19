@@ -1,7 +1,7 @@
 namespace algoritmos_poblacion_expresiones::preprocesado {
 
 
-template <class DataType, ClassType>
+template <class DataType, class ClassType>
 std::pair<matriz<DataType>, std::vector<ClassType> > leer_datos(const std::string & fichero_datos,
 												const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
@@ -85,7 +85,7 @@ std::pair<matriz<DataType>, std::vector<ClassType> > leer_datos(const std::strin
 }
 
 
-template <class DataType, ClassType>
+template <class DataType, class ClassType>
 std::pair<std::pair<matriz<DataType>, std::vector<ClassType> >, std::pair<matriz<DataType>, std::vector<ClassType> > >
 	separar_train_test(matriz<DataType> datos, std::vector<ClassType> etiquetas,
 							 const double PORCENTAJE_TEST, const int COMIENZO) {
@@ -123,7 +123,7 @@ std::pair<std::pair<matriz<DataType>, std::vector<ClassType> >, std::pair<matriz
 
 }
 
-template <class DataType, ClassType>
+template <class DataType, class ClassType>
 void escribir_datos(const std::string & salida, const matriz<DataType> & datos, const std::vector<ClassType> & etiquetas, const char DELIMITADOR) {
 	std::ofstream salida_datos(salida);
 
@@ -139,7 +139,7 @@ void escribir_datos(const std::string & salida, const matriz<DataType> & datos, 
 
 
 
-template <class DataType, ClassType>
+template <class DataType, class ClassType>
 std::pair<matriz<DataType>, std::vector<ClassType> > reordenar_datos_aleatorio (matriz<DataType> datos,
 	 																				  					 std::vector<ClassType> etiquetas) {
 	matriz<DataType> datos_reordenados;
