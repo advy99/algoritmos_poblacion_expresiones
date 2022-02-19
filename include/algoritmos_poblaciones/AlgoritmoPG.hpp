@@ -21,11 +21,15 @@ namespace algoritmos_poblacion_expresiones {
   *  dados, utilizando una Poblacion, conjunto de AlgoritmoPG.
   *
   *
+  * @tparam DataType Tipo de dato utilizado por los datos que usará el algoritmo.
+  * @tparam ClassType Tipo de dato utilizado para representar la clase asociada a una observación.
+  *
   * @author Antonio David Villegas Yeguas
   * @date Abril 2021
   */
 
-class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
+template <class DataType, class ClassType>
+class AlgoritmoPG : public AlgoritmoPoblacion<Expresion, DataType, ClassType> {
 	private:
 
 		using AlgoritmoPoblacion<Expresion>::poblacion_;
@@ -82,7 +86,7 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 		 *
 		 */
 
-		AlgoritmoPG(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
+		AlgoritmoPG(const std::vector<std::vector<DataType> > & datos, const std::vector<ClassType> & etiquetas,
 						const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 
