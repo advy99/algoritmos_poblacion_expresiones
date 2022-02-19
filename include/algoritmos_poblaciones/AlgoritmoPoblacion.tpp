@@ -1,13 +1,13 @@
 
 namespace algoritmos_poblacion_expresiones {
 
-template <class T>
-AlgoritmoPoblacion<T> :: AlgoritmoPoblacion() {
+template <class AlgType, class DataType, class ClassType>
+AlgoritmoPoblacion<AlgType, DataType, ClassType> :: AlgoritmoPoblacion() {
 
 }
 
-template <class T>
-void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
+template <class AlgType, class DataType, class ClassType>
+void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: inicializar(const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var) {
 
 	// inicializamos la semilla
 	Random::set_seed(seed);
@@ -19,17 +19,17 @@ void AlgoritmoPoblacion<T> :: inicializar(const unsigned long seed, const unsign
 }
 
 
-template <class T>
-void AlgoritmoPoblacion<T> :: cargar_datos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas ) {
+template <class AlgType, class DataType, class ClassType>
+void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: cargar_datos(const std::vector< std::vector<DataType> > & caracteristicas, const std::vector<ClassType> & etiquetas ) {
 	datos_ = caracteristicas;
 	output_datos_ = etiquetas;
 }
 
-template <class T>
-void AlgoritmoPoblacion<T> :: leer_datos(const std::string fichero_datos,
+template <class AlgType, class DataType, class ClassType>
+void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: leer_datos(const std::string fichero_datos,
 							const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
-	auto resultado = preprocesado::leer_datos<double>(fichero_datos, char_comentario, delimitador);
+	auto resultado = preprocesado::leer_datos<DataType, ClassType>(fichero_datos, char_comentario, delimitador);
 
 	datos_ = resultado.first;
 	output_datos_ = resultado.second;
@@ -37,16 +37,16 @@ void AlgoritmoPoblacion<T> :: leer_datos(const std::string fichero_datos,
 }
 
 
-template <class T>
-int AlgoritmoPoblacion<T> :: get_num_datos() const {
+template <class AlgType, class DataType, class ClassType>
+int AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_num_datos() const {
 	return datos_.size();
 }
 
-template <class T>
-void AlgoritmoPoblacion<T> :: generar_poblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
+template <class AlgType, class DataType, class ClassType>
+void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: generar_poblacion(const unsigned tam_poblacion, const unsigned profundidad_exp,
 									 const double prob_var, const bool sustituir_actual) {
 	if ( sustituir_actual ) {
-		poblacion_ = Poblacion<T>(tam_poblacion, profundidad_exp, prob_var,
+		poblacion_ = Poblacion<AlgType>(tam_poblacion, profundidad_exp, prob_var,
 									 	 get_num_variables(), get_max_prof_expresiones());
 	}
 
@@ -55,44 +55,44 @@ void AlgoritmoPoblacion<T> :: generar_poblacion(const unsigned tam_poblacion, co
 
 
 
-template <class T>
-int AlgoritmoPoblacion<T> :: get_num_variables() const {
+template <class AlgType, class DataType, class ClassType>
+int AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_num_variables() const {
 	return datos_[0].size();
 }
 
-template <class T>
-std::vector<std::vector<double> > AlgoritmoPoblacion<T> :: get_datos() const {
+template <class AlgType, class DataType, class ClassType>
+std::vector<std::vector<double> > AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_datos() const {
 	return datos_;
 }
 
-template <class T>
-std::vector<double> AlgoritmoPoblacion<T> :: get_dato(const unsigned i) const {
+template <class AlgType, class DataType, class ClassType>
+std::vector<double> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_dato(const unsigned i) const {
 	return datos_[i];
 }
 
-template <class T>
-std::vector<double> AlgoritmoPoblacion<T> :: get_output_datos() const {
+template <class AlgType, class DataType, class ClassType>
+std::vector<double> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_output_datos() const {
 	return output_datos_;
 }
 
 
-template <class T>
-double AlgoritmoPoblacion<T> :: get_output_dato(const unsigned indice) const {
+template <class AlgType, class DataType, class ClassType>
+double AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_output_dato(const unsigned indice) const {
 	return output_datos_[indice];
 }
 
-template <class T>
-void AlgoritmoPoblacion<T> :: inicializar_vacio() {
+template <class AlgType, class DataType, class ClassType>
+void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: inicializar_vacio() {
 	prof_expresiones_ = 0;
 	datos_.clear();
 	output_datos_.clear();
 }
 
 
-template <class T>
-Poblacion<T> AlgoritmoPoblacion<T> :: seleccion_torneo(const unsigned tam_torneo) const {
+template <class AlgType, class DataType, class ClassType>
+Poblacion<T> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: seleccion_torneo(const unsigned tam_torneo) const {
 	// partimos de una poblacion con el mismo tamaño que la actual
-	Poblacion<T> resultado;
+	Poblacion<AlgType> resultado;
 
 	std::vector<int> participantes_torneo;
 	participantes_torneo.resize(poblacion_.get_tam_poblacion());
@@ -126,20 +126,20 @@ Poblacion<T> AlgoritmoPoblacion<T> :: seleccion_torneo(const unsigned tam_torneo
 	return resultado;
 }
 
-template <class T>
-T AlgoritmoPoblacion<T> :: get_mejor_individuo() const {
+template <class AlgType, class DataType, class ClassType>
+AlgType AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_mejor_individuo() const {
 	return poblacion_.get_mejor_individuo();
 }
 
-template <class T>
-unsigned AlgoritmoPoblacion<T> :: get_max_prof_expresiones() const {
+template <class AlgType, class DataType, class ClassType>
+unsigned AlgoritmoPoblacion<AlgType, DataType, ClassType> :: get_max_prof_expresiones() const {
 	return prof_expresiones_;
 }
 
 
 
-template <class T>
-void AlgoritmoPoblacion<T> :: aplicar_elitismo(const T & mejor_ind_anterior) {
+template <class AlgType, class DataType, class ClassType>
+void AlgoritmoPoblacion<AlgType, DataType, ClassType> :: aplicar_elitismo(const AlgType & mejor_ind_anterior) {
 	// elitismo
 	bool mejor_encontrado = false;
 	unsigned i = 0;
@@ -161,8 +161,8 @@ void AlgoritmoPoblacion<T> :: aplicar_elitismo(const T & mejor_ind_anterior) {
 
 }
 
-template <class T>
-std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicar_mutaciones_GP(T & hijo1, T & hijo2, const double prob_mutacion) {
+template <class AlgType, class DataType, class ClassType>
+std::pair<bool, bool> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: aplicar_mutaciones_GP(T & hijo1, T & hijo2, const double prob_mutacion) {
 	std::pair<bool, bool> resultado = std::make_pair(false, false);
 
 	if ( Random::next_double() < prob_mutacion ) {
@@ -180,18 +180,19 @@ std::pair<bool, bool> AlgoritmoPoblacion<T> :: aplicar_mutaciones_GP(T & hijo1, 
 	return resultado;
 }
 
-
-template <class T>
-double AlgoritmoPoblacion<T> :: predecir(const std::vector<double> & dato) const {
-	double resultado = poblacion_.get_mejor_individuo().evaluar_dato(dato);
+// TODO: Lo mismo esta función de predecir varia dependiendo del algoritmo y
+// hay que revisarla
+template <class AlgType, class DataType, class ClassType>
+ClassType AlgoritmoPoblacion<AlgType, DataType, ClassType> :: predecir(const std::vector<DataType> & dato) const {
+	ClassType resultado = poblacion_.get_mejor_individuo().evaluar_dato(dato);
 
 	return resultado;
 }
 
-template <class T>
-std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vector<double> > & datos) const {
+template <class AlgType, class DataType, class ClassType>
+std::vector<ClassType> AlgoritmoPoblacion<AlgType, DataType, ClassType> :: predecir(const std::vector<std::vector<DataType> > & datos) const {
 
-	std::vector<double> resultado;
+	std::vector<ClassType> resultado;
 
 	resultado.resize(datos.size());
 
@@ -203,12 +204,12 @@ std::vector<double> AlgoritmoPoblacion<T> :: predecir(const std::vector<std::vec
 	return resultado;
 }
 
-template <class T>
-std::pair<T, std::vector<std::vector<double> > > AlgoritmoPoblacion<T> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
+template <class AlgType, class DataType, class ClassType>
+std::pair<AlgType, std::vector<std::vector<double> > > AlgoritmoPoblacion<AlgType, DataType, ClassType> :: ajustar_k_cross_validation(const unsigned numero_val_cruzada,
 				 									 const Parametros & parametros) {
 
-	const std::vector<std::vector<double> > datos_originales = datos_;
-	const std::vector<double> etiquetas_originales = output_datos_;
+	const std::vector<std::vector<DataType> > datos_originales = datos_;
+	const std::vector<ClassType> etiquetas_originales = output_datos_;
 
 	auto resultado_datos_aleatorios = preprocesado::reordenar_datos_aleatorio(datos_, output_datos_);
 
@@ -222,12 +223,12 @@ std::pair<T, std::vector<std::vector<double> > > AlgoritmoPoblacion<T> :: ajusta
 	}
 
 	double error_mejor = std::numeric_limits<double>::infinity();
-	T mejor_expresion;
+	AlgType mejor_expresion;
 
 	// para cada iteracion de la validación cruzada;
 	for ( unsigned i = 0; i < numero_val_cruzada; i++) {
 		// tenemos que hacer la separacion en train/test para esta iteracion
-		auto train_test_separado = preprocesado::separar_train_test<double>(resultado_datos_aleatorios.first,
+		auto train_test_separado = preprocesado::separar_train_test<DataType, ClassType>(resultado_datos_aleatorios.first,
 																				resultado_datos_aleatorios.second,
 																				1.0/numero_val_cruzada,
 																				NUM_DATOS_TEST_ITERACION * i);

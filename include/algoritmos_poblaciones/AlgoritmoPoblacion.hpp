@@ -26,14 +26,16 @@ namespace algoritmos_poblacion_expresiones {
   *  Una instancia del tipo AlgoritmoPoblacion representará un estimador para los datos
   *  dados, utilizando una poblacion del tipo dado.
   *
-  * @tparam T Tipo de la población que utilizará el algoritmo
+  * @tparam AlgType Tipo de la población que utilizará el algoritmo
+  * @tparam DataType Tipo de dato utilizado por los datos que usará el algoritmo de tipo T.
+  * @tparam ClassType Tipo de dato utilizado para representar la clase asociada a una observación.
   *
   *
   * @author Antonio David Villegas Yeguas
   * @date Abril 2021
   */
 
-template <class T>
+template <class AlgType, class DataType, class ClassType>
 class AlgoritmoPoblacion {
 	protected:
 
@@ -61,19 +63,19 @@ class AlgoritmoPoblacion {
 		  * @brief Datos con los que ajustar el algoritmo
 		  *
 		  */
-		std::vector<std::vector<double> > datos_;
+		std::vector<std::vector<DataType> > datos_;
 
 		/**
 		  * @brief Etiquetas para comprobar el error de la estimación.
 		  */
-		std::vector<double> output_datos_;
+		std::vector<ClassType> output_datos_;
 
 
 		/**
 		  * @brief Poblacion de expresiones con el que aplicaremos el algoritmo
 		  *
 		  */
-		Poblacion<T> poblacion_;
+		Poblacion<AlgType> poblacion_;
 
 
 		/**
@@ -108,7 +110,7 @@ class AlgoritmoPoblacion {
 		 * @return Devuelve la poblacion con los T ganadores del torneo.
 		 */
 
-		Poblacion<T> seleccion_torneo(const unsigned tam_torneo) const;
+		Poblacion<AlgType> seleccion_torneo(const unsigned tam_torneo) const;
 
 
 		/**
@@ -122,7 +124,7 @@ class AlgoritmoPoblacion {
 		 * @return Devuelve una pareja de booleanos, verdadero si se ha aplicado la mutacion, falso si no, uno para cada hijo
 		 */
 
-		std::pair<bool, bool> aplicar_mutaciones_GP(T & hijo1, T & hijo2,
+		std::pair<bool, bool> aplicar_mutaciones_GP(AlgType & hijo1, AlgType & hijo2,
 			 													 const double prob_mutacion);
 
 	public:
@@ -150,7 +152,8 @@ class AlgoritmoPoblacion {
 		  *
 		 */
 
-		void cargar_datos(const std::vector< std::vector<double> > & caracteristicas, const std::vector<double> & etiquetas );
+		void cargar_datos(const std::vector< std::vector<DataType> > & caracteristicas,
+								const std::vector<ClassType> & etiquetas );
 
 		/**
 		  * @brief Obtener el numero de variables de los datos
@@ -192,7 +195,7 @@ class AlgoritmoPoblacion {
 		  *
 		  * @return Datos.
 		  */
-		std::vector<std::vector<double> > get_datos() const;
+		std::vector<std::vector<DataType> > get_datos() const;
 
 
 		/**
@@ -204,7 +207,7 @@ class AlgoritmoPoblacion {
 		  *
 		  * @return Dato de la columna indice.
 		  */
-		std::vector<double > get_dato(const unsigned indice) const;
+		std::vector<DataType> get_dato(const unsigned indice) const;
 
 
 		/**
@@ -213,7 +216,7 @@ class AlgoritmoPoblacion {
 		  * @return Etiquetas asociadas a los datos.
 		  */
 
-		std::vector<double> get_output_datos() const;
+		std::vector<ClassType> get_output_datos() const;
 
 
 		/**
@@ -226,7 +229,7 @@ class AlgoritmoPoblacion {
 		  * @return Etiqueta asociada al dato indice.
 		  */
 
-		double get_output_dato(const unsigned indice) const ;
+		ClassType get_output_dato(const unsigned indice) const ;
 
 		/**
 		  * @brief Obtener el mejor individuo de la poblacion.
@@ -234,7 +237,7 @@ class AlgoritmoPoblacion {
 		  * @return Mejor individuo de la población
 		  */
 
-		T get_mejor_individuo() const;
+		AlgType get_mejor_individuo() const;
 
 		/**
 		 * @brief Obtener la profundidad máxima de las expresiones
@@ -253,7 +256,7 @@ class AlgoritmoPoblacion {
 		 *
 		 */
 
-		void aplicar_elitismo(const T & mejor_individuo_anterior);
+		void aplicar_elitismo(const AlgType & mejor_individuo_anterior);
 
 		/**
 		 *  @brief Predecir un dato tras entrenar el algoritmo
@@ -265,7 +268,7 @@ class AlgoritmoPoblacion {
 		 * @return Valor predecido por el algoritmo
 		 */
 
-		double predecir(const std::vector<double> & dato) const ;
+		ClassType predecir(const std::vector<DataType> & dato) const ;
 
 		/**
 		 *  @brief Predecir un conjunto de datos tras entrenar el algoritmo
@@ -277,7 +280,7 @@ class AlgoritmoPoblacion {
 		 * @return Valores predecido por el algoritmo
 		 */
 
-		std::vector<double> predecir(const std::vector<std::vector<double> > & datos) const;
+		std::vector<ClassType> predecir(const std::vector<std::vector<DataType> > & datos) const;
 
 		/**
 		 *  @brief Ajustar el algoritmo con unos parametros dados
@@ -298,7 +301,7 @@ class AlgoritmoPoblacion {
 		 */
 
 
-		std::pair<T, std::vector<std::vector<double> > > ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
+		std::pair<AlgType, std::vector<std::vector<double> > > ajustar_k_cross_validation(const unsigned numero_val_cruzada, const Parametros & parametros);
 
 };
 
