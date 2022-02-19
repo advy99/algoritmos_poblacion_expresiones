@@ -20,7 +20,8 @@ namespace algoritmos_poblacion_expresiones::preprocesado {
  * @brief Separar unos datos y etiquetas dadas en dos conjuntos de entrenamiento y test,
  *  de forma aleatorio o no aleatoria, si COMIENZO != 1
  *
- * @tparam T tipo de los datos a separar
+ * @tparam DataType tipo de los datos a separar
+ * @tparam ClassType tipo de las etiquetas a separar
  * @param datos Características a separar
  * @param etiquetas Etiquetas de los datos a separar
  * @param PORCENTAJE_TEST Porcentaje de datos que formaran parte del conjunto de test, por defecto 0.2
@@ -31,9 +32,9 @@ namespace algoritmos_poblacion_expresiones::preprocesado {
  *
  */
 
-template <class T>
-std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
-	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
+template <class DataType, ClassType>
+std::pair<std::pair<matriz<DataType>, std::vector<ClassType> >, std::pair<matriz<DataType>, std::vector<ClassType> > >
+	separar_train_test(matriz<DataType> datos, std::vector<ClassType> etiquetas,
 							 const double PORCENTAJE_TEST = 0.2, const int COMIENZO = -1);
 
 
@@ -53,8 +54,8 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
   *
   */
 
-template <class T>
-std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string & fichero_datos,
+template <class DataType, class ClassType>
+std::pair<matriz<DataType>, std::vector<ClassType> >	leer_datos(const std::string & fichero_datos,
 				  								  		  const char char_comentario, const char delimitador = ',');
 
 
@@ -69,8 +70,8 @@ std::pair<matriz<T>, std::vector<T> >	leer_datos(const std::string & fichero_dat
   *
   */
 
-template <class T>
-void escribir_datos(const std::string & salida, const matriz<T> & datos, const std::vector<T> & etiquetas, const char delimitador = ',');
+template <class DataType, class ClassType>
+void escribir_datos(const std::string & salida, const matriz<DataType> & datos, const std::vector<ClassType> & etiquetas, const char delimitador = ',');
 
 
 /**
@@ -83,8 +84,8 @@ void escribir_datos(const std::string & salida, const matriz<T> & datos, const s
   * @return Pareja de datos y etiquetas, reordenados de forma aleatoria
   */
 
-template <class T>
-std::pair<matriz<T>, std::vector<T> > reordenar_datos_aleatorio (matriz<T> datos, std::vector<T> etiquetas);
+template <class DataType, class ClassType>
+std::pair<matriz<DataType>, std::vector<ClassType> > reordenar_datos_aleatorio (matriz<DataType> datos, std::vector<ClassType> etiquetas);
 
 
 }
