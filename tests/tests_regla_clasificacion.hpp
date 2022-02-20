@@ -63,6 +63,51 @@ TEST (ReglaClasificacion, ConvertirString) {
 }
 
 
+TEST (ReglaClasificacion, DatoCoincideConRegla) {
+	algoritmos_poblacion_expresiones::ReglaClasificacion regla;
+
+	regla.modificar_antecedente("ANT1", "VALOR1");
+	regla.modificar_antecedente("ANT2", "VALOR2");
+
+	regla.cambiar_clase("Clase1");
+
+	std::map<std::string, std::string> dato1;
+
+	dato1["ANT1"] = "VALOR1";
+	dato1["ANT2"] = "VALOR2";
+
+	EXPECT_TRUE(regla.coincide_regla(dato1));
+
+}
+
+
+TEST (ReglaClasificacion, DatoNoCoincideConRegla) {
+	algoritmos_poblacion_expresiones::ReglaClasificacion regla;
+
+	regla.modificar_antecedente("ANT1", "VALOR1");
+	regla.modificar_antecedente("ANT2", "VALOR2");
+
+	regla.cambiar_clase("Clase1");
+
+	std::map<std::string, std::string> dato1;
+
+	dato1["ANT1"] = "VALOR1";
+	dato1["ANT2"] = "VALOR2";
+
+	std::map<std::string, std::string> dato2 = dato1;
+
+	dato2["ANT3"] = "VALOR1";
+
+	std::map<std::string, std::string> dato3 = dato1;
+
+	dato3["ANT1"] = "VALOR0";
+
+	EXPECT_FALSE(regla.coincide_regla(dato2));
+	EXPECT_FALSE(regla.coincide_regla(dato3));
+
+}
+
+
 TEST (ReglaClasificacion, ConstructorCopia) {
 	algoritmos_poblacion_expresiones::ReglaClasificacion regla;
 
