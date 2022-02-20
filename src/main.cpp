@@ -57,7 +57,7 @@ int main(int argc, char ** argv){
 
 	int semilla_original = semilla;
 	Random::set_seed(semilla);
-	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double>(std::string(argv[1]), '@', ',');
+	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double, double>(std::string(argv[1]), '@', ',');
 	datos = algoritmos_poblacion_expresiones::preprocesado::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::preprocesado::separar_train_test(datos.first, datos.second);
 

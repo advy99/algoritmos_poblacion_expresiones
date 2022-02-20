@@ -1,14 +1,14 @@
 namespace algoritmos_poblacion_expresiones::preprocesado {
 
 
-template <class T>
-std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_datos,
+template <class DataType, class ClassType>
+std::pair<matriz<DataType>, std::vector<ClassType> > leer_datos(const std::string & fichero_datos,
 												const char char_comentario, const char delimitador){
 	// abrimos el fichero de lectura
 	std::ifstream file(fichero_datos);
 
-	matriz<T> datos;
-	std::vector<T> output_datos;
+	matriz<DataType> datos;
+	std::vector<ClassType> output_datos;
 
 	// mostramos un error si no podemos abrirlo
 	if (!file){
@@ -26,7 +26,7 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_dat
 			if (linea.size() > 0 && linea[0] != char_comentario &&
 				 !isblank(linea[0]) ) {
 				// leemos por linea
-				std::vector<T> datos_linea;
+				std::vector<DataType> datos_linea;
 				ss.str(linea);
 
 				std::string str_valor;
@@ -36,9 +36,9 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_dat
 				// mientras queden valores en la linea
 				while (!ss.eof()){
 
-					T dato_a_insertar;
+					DataType dato_a_insertar;
 
-					if constexpr ( std::is_same<T, double>::value ) {
+					if constexpr ( std::is_same<DataType, double>::value ) {
 						dato_a_insertar = strtod(str_valor.c_str(), nullptr);
 					} else {
 						dato_a_insertar = str_valor;
@@ -50,9 +50,11 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_dat
 
 				}
 
-				T dato_a_insertar;
+				// El último elemento leido es la clase
 
-				if constexpr ( std::is_same<T, double>::value ) {
+				ClassType dato_a_insertar;
+
+				if constexpr ( std::is_same<ClassType, double>::value ) {
 					dato_a_insertar = strtod(str_valor.c_str(), nullptr);
 				} else {
 					dato_a_insertar = str_valor;
@@ -83,14 +85,14 @@ std::pair<matriz<T>, std::vector<T> > leer_datos(const std::string & fichero_dat
 }
 
 
-template <class T>
-std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vector<T> > >
-	separar_train_test(matriz<T> datos, std::vector<T> etiquetas,
+template <class DataType, class ClassType>
+std::pair<std::pair<matriz<DataType>, std::vector<ClassType> >, std::pair<matriz<DataType>, std::vector<ClassType> > >
+	separar_train_test(matriz<DataType> datos, std::vector<ClassType> etiquetas,
 							 const double PORCENTAJE_TEST, const int COMIENZO) {
 
 
-	matriz<T> datos_test;
-	std::vector<T> etiquetas_test;
+	matriz<DataType> datos_test;
+	std::vector<ClassType> etiquetas_test;
 
 	const unsigned NUM_DATOS_TEST = datos.size() * PORCENTAJE_TEST;
 
@@ -121,8 +123,8 @@ std::pair<std::pair<matriz<T>, std::vector<T> >, std::pair<matriz<T>, std::vecto
 
 }
 
-template <class T>
-void escribir_datos(const std::string & salida, const matriz<T> & datos, const std::vector<T> & etiquetas, const char DELIMITADOR) {
+template <class DataType, class ClassType>
+void escribir_datos(const std::string & salida, const matriz<DataType> & datos, const std::vector<ClassType> & etiquetas, const char DELIMITADOR) {
 	std::ofstream salida_datos(salida);
 
 	for ( unsigned i = 0; i < datos.size(); i++) {
@@ -137,11 +139,11 @@ void escribir_datos(const std::string & salida, const matriz<T> & datos, const s
 
 
 
-template <class T>
-std::pair<matriz<T>, std::vector<T> > reordenar_datos_aleatorio (matriz<T> datos,
-	 																				  std::vector<T> etiquetas) {
-	matriz<T> datos_reordenados;
-	std::vector<T> etiquetas_reordenados;
+template <class DataType, class ClassType>
+std::pair<matriz<DataType>, std::vector<ClassType> > reordenar_datos_aleatorio (matriz<DataType> datos,
+	 																				  					 std::vector<ClassType> etiquetas) {
+	matriz<DataType> datos_reordenados;
+	std::vector<ClassType> etiquetas_reordenados;
 
 	datos_reordenados.resize(datos.size());
 	etiquetas_reordenados.resize(etiquetas.size());

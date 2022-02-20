@@ -48,7 +48,7 @@ OBJETIVO = $(BIN)/main
 OBJETOS = $(OBJ)/main.o
 
 # objetivos de la biblioteca AlgoritmoGA_P
-OBJETOS_ALGS_POB = $(OBJ)/Parametros.o $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/AlgoritmoPG.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/aux_pob_algs.o
+OBJETOS_ALGS_POB = $(OBJ)/Parametros.o $(OBJ)/Nodo.o $(OBJ)/Expresion.o $(OBJ)/Expresion_GAP.o $(OBJ)/AlgoritmoGA_P.o $(OBJ)/aux_pob_algs.o
 CABECERAS_ALGS_POB = $(wildcard include/algoritmos_poblaciones/*.hpp)
 
 ALGS_POB_INC_COMUNES = $(INC)/random.hpp $(INC_ALG_POB)/aux_pob_algs.hpp
@@ -57,11 +57,8 @@ ALGS_POB_INC_COMUNES = $(INC)/random.hpp $(INC_ALG_POB)/aux_pob_algs.hpp
 OBJETIVO_TEST = $(BIN)/main_test
 OBJETOS_TEST = $(OBJ)/main_test.o
 
-OBJETIVO_PREPROCESADO = $(BIN)/main_preprocesar
-OBJETOS_PREPROCESADO = $(OBJ)/main_preprocesar.o
-
 # variables para el contador de reglas
-N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) $(OBJETIVO_PREPROCESADO) $(OBJETOS_PREPROCESADO) $(BIN)/main_conteo $(OBJ)/main_conteo.o $(BIN)/main_evaluar_expresion_archivo $(OBJ)/main_evaluar_expresion_archivo.o | wc -w )
+N := $(shell echo $(OBJETIVO) $(OBJETOS) $(OBJETOS_ALGS_POB) $(OBJETIVO_TEST) $(OBJETOS_TEST) $(BIN)/main_evaluar_expresion_archivo $(OBJ)/main_evaluar_expresion_archivo.o | wc -w )
 X := 0
 SUMA = $(eval X=$(shell echo $$(($(X)+1))))
 
@@ -74,7 +71,7 @@ gtestflags = -I$(gtest) $(gtestlibs)
 .PHONY: all crear-carpetas debug INICIO FIN doc clean-doc mrproper help tests ejecutar-tests dependencias
 
 # target por defecto
-all: crear-carpetas dependencias INICIO ejecutar-tests $(OBJETIVO) $(OBJETIVO_PREPROCESADO) $(BIN)/main_conteo $(BIN)/main_evaluar_expresion_archivo doc FIN
+all: crear-carpetas dependencias INICIO ejecutar-tests $(OBJETIVO) $(BIN)/main_evaluar_expresion_archivo doc FIN
 
 
 dependencias:
@@ -100,17 +97,6 @@ $(OBJETIVO_TEST): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_TEST)
 	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJETOS_TEST) -o $(OBJETIVO_TEST) $(F_OPENMP) $(gtestflags) -I$(INC)
 	@printf "\n\e[36mCompilación de $(OBJETIVO_TEST) finalizada con exito.\e[0m\n\n"
 
-$(OBJETIVO_PREPROCESADO): $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB)  $(OBJETOS_PREPROCESADO)
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(OBJETIVO_PREPROCESADO) a partir de $(OBJETOS_PREPROCESADO)\n"
-	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJETOS_PREPROCESADO) -o $(OBJETIVO_PREPROCESADO) $(F_OPENMP) $(gtestflags) -I$(INC)
-	@printf "\n\e[36mCompilación de $(OBJETIVO_PREPROCESADO) finalizada con exito.\e[0m\n\n"
-
-$(BIN)/main_conteo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_conteo.o
-	@$(SUMA)
-	@printf "\e[31m[$(X)/$(N)] \e[32mCreando el binario $(BIN)/main_conteo a partir de $(OBJ)/main_conteo.o\n"
-	@$(CXX) $(OBJETOS_ALGS_POB) $(OBJ)/main_conteo.o -o $(BIN)/main_conteo $(F_OPENMP) $(gtestflags) -I$(INC)
-	@printf "\n\e[36mCompilación de $(BIN)/main_conteo finalizada con exito.\e[0m\n\n"
 
 $(BIN)/main_evaluar_expresion_archivo : $(OBJETOS_ALGS_POB) $(CABECERAS_ALGS_POB) $(OBJ)/main_evaluar_expresion_archivo.o
 	@$(SUMA)
@@ -156,24 +142,13 @@ $(OBJ)/Expresion_GAP.o: $(SRC_ALG_POB)/Expresion_GAP.cpp $(INC_ALG_POB)/Expresio
 $(OBJ)/AlgoritmoGA_P.o: $(SRC_ALG_POB)/AlgoritmoGA_P.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC_ALG_POB)/Expresion_GAP.hpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
 	$(call compilar_objeto,$<,$@)
 
-$(OBJ)/AlgoritmoPG.o: $(SRC_ALG_POB)/AlgoritmoPG.cpp $(INC_ALG_POB)/AlgoritmoPG.hpp $(INC_ALG_POB)/Expresion.hpp $(INC_ALG_POB)/Nodo.hpp $(ALGS_POB_INC_COMUNES)
-	$(call compilar_objeto,$<,$@)
-
 $(OBJ)/aux_pob_algs.o: $(SRC_ALG_POB)/aux_pob_algs.cpp $(INC_ALG_POB)/aux_pob_algs.hpp
 	$(call compilar_objeto,$<,$@)
-
-
 
 $(OBJ)/main_test.o: $(SRC)/main_test.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/random.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main.o: $(SRC)/main.cpp $(INC_ALG_POB)/AlgoritmoGA_P.hpp $(INC)/random.hpp
-	$(call compilar_objeto,$<,$@)
-
-$(OBJ)/main_preprocesar.o: $(SRC)/main_preprocesar.cpp $(INC_ALG_POB)/preprocesado.hpp
-	$(call compilar_objeto,$<,$@)
-
-$(OBJ)/main_conteo.o: $(SRC)/main_conteo.cpp $(INC_ALG_POB)/preprocesado.hpp
 	$(call compilar_objeto,$<,$@)
 
 $(OBJ)/main_evaluar_expresion_archivo.o: $(SRC)/main_evaluar_expresion_archivo.cpp

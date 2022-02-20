@@ -21,27 +21,32 @@ namespace algoritmos_poblacion_expresiones {
   *  dados, utilizando una Poblacion, conjunto de AlgoritmoPG.
   *
   *
+  * @tparam DataType Tipo de dato utilizado por los datos que usará el algoritmo.
+  * @tparam ClassType Tipo de dato utilizado para representar la clase asociada a una observación.
+  *
   * @author Antonio David Villegas Yeguas
   * @date Abril 2021
   */
 
-class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
+template <class DataType, class ClassType>
+class AlgoritmoPG : public AlgoritmoPoblacion<Expresion, DataType, ClassType> {
 	private:
 
-		using AlgoritmoPoblacion<Expresion>::poblacion_;
-		using AlgoritmoPoblacion<Expresion>::datos_;
-		using AlgoritmoPoblacion<Expresion>::output_datos_;
-		using AlgoritmoPoblacion<Expresion>::prof_expresiones_;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::poblacion_;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::datos_;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::output_datos_;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::prof_expresiones_;
 
-		using AlgoritmoPoblacion<Expresion>::leer_datos;
-		using AlgoritmoPoblacion<Expresion>::inicializar_vacio;
-		using AlgoritmoPoblacion<Expresion>::get_num_variables;
-		using AlgoritmoPoblacion<Expresion>::get_max_prof_expresiones;
-		using AlgoritmoPoblacion<Expresion>::seleccion_torneo;
-		using AlgoritmoPoblacion<Expresion>::generar_poblacion;
-		using AlgoritmoPoblacion<Expresion>::aplicar_elitismo;
-		using AlgoritmoPoblacion<Expresion>::aplicar_mutaciones_GP;
-		using AlgoritmoPoblacion<Expresion>::inicializar;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::leer_datos;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::cargar_datos;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::inicializar_vacio;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::get_num_variables;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::get_max_prof_expresiones;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::seleccion_torneo;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::generar_poblacion;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::aplicar_elitismo;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::aplicar_mutaciones_GP;
+		using AlgoritmoPoblacion<Expresion, DataType, ClassType>::inicializar;
 
 
 
@@ -82,7 +87,7 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 		 *
 		 */
 
-		AlgoritmoPG(const std::vector<std::vector<double> > & datos, const std::vector<double> & etiquetas,
+		AlgoritmoPG(const std::vector<std::vector<DataType> > & datos, const std::vector<ClassType> & etiquetas,
 						const unsigned long seed, const unsigned tam_poblacion, const unsigned prof, const double prob_var);
 
 
@@ -138,6 +143,8 @@ class AlgoritmoPG : public AlgoritmoPoblacion<Expresion> {
 
 }
 
+
+#include "algoritmos_poblaciones/AlgoritmoPG.tpp"
 
 
 #endif
