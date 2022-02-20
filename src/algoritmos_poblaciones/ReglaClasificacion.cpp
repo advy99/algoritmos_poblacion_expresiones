@@ -13,6 +13,10 @@ void ReglaClasificacion :: cambiar_clase(const std::string & nueva_clase) {
 	clase_ = nueva_clase;
 }
 
+std::string ReglaClasificacion :: consultar_clase() const {
+	return clase_;
+}
+
 void ReglaClasificacion :: modificar_antecedente(const std::string & clave,
 																 const std::string & valor) {
 
@@ -30,7 +34,7 @@ void ReglaClasificacion :: eliminar_antecedente(const std::string & clave) {
 
 
 std::string ReglaClasificacion :: consultar_antecedente(const std::string & clave) const {
-	return antecedentes_[clave];
+	return antecedentes_.at(clave);
 }
 
 
@@ -50,6 +54,10 @@ std::string ReglaClasificacion :: como_string() const {
 
 	return regla;
 
+}
+
+bool ReglaClasificacion :: operator== (const ReglaClasificacion & otra) const {
+	return antecedentes_ == otra.antecedentes_ && clase_ == otra.clase_;
 }
 
 
