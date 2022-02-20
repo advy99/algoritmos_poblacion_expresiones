@@ -132,6 +132,12 @@ class ReglaClasificacion {
 
 		std::string como_string() const;
 
+		bool coincide_regla(const std::map<std::string, std::string> valores) const;
+
+		std::string operator[](const std::string & clave) const;
+
+		std::string & operator[](const std::string & clave);
+
 
 		friend std::ostream & operator<< (std::ostream & os,
 													 const ReglaClasificacion & exp);

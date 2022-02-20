@@ -56,9 +56,34 @@ std::string ReglaClasificacion :: como_string() const {
 
 }
 
+bool ReglaClasificacion :: coincide_regla(const std::map<std::string, std::string> valores) const {
+	// coinciden si tienen el mismo numero de antecedentes, y todos ellos son iguales
+	bool coincide = num_antecedentes() == valores.size();
+
+	auto it = antecedentes_.cbegin();
+
+	// si tienen el mismo tamaño, comprobamos todos los valores
+	while(it != antecedentes_.cend() && coincide) {
+		coincide = valores.at(it->first) == it->second;
+		++it;
+	}
+
+	return coincide;
+}
+
 bool ReglaClasificacion :: operator== (const ReglaClasificacion & otra) const {
 	return antecedentes_ == otra.antecedentes_ && clase_ == otra.clase_;
 }
+
+
+std::string ReglaClasificacion :: operator[](const std::string & clave) const {
+	return antecedentes_.at(clave);
+}
+
+std::string & ReglaClasificacion :: operator[](const std::string & clave) {
+	return antecedentes_[clave];
+}
+
 
 
 std::ostream & operator<< (std::ostream & os, const ReglaClasificacion & regla){
