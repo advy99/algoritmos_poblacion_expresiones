@@ -9,6 +9,8 @@
 #define REGLA_CLASIFICACION_H_INCLUDED
 
 #include <map>
+#include <string>
+#include <utility>
 
 
 namespace algoritmos_poblacion_expresiones {
@@ -94,7 +96,8 @@ class ReglaClasificacion {
 		  *
 		  */
 
-		void modificar_antecedente(const std::string & clave, const std::string & valor);
+		void modificar_antecedente(const std::string & clave,
+											const std::string & valor);
 
 		/**
 		  * @brief Modificar un antecedente con un nuevo valor.
@@ -122,7 +125,10 @@ class ReglaClasificacion {
 		  *
 		  */
 
-		std::string consultar_antecedente(const std::string & clave);
+		std::string consultar_antecedente(const std::string & clave) const;
+
+
+		std::string como_string() const;
 
 
 		friend std::ostream & operator<< (std::ostream & os,
