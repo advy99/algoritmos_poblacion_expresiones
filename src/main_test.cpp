@@ -1,6 +1,7 @@
 #include "tests/tests_nodo.hpp"
 #include "tests/tests_expresion.hpp"
 #include "tests/tests_expresion_gap.hpp"
+#include "tests/tests_regla_clasificacion.hpp"
 
 #include <gtest/gtest.h>
 
