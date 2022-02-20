@@ -1,6 +1,6 @@
 /**
   * \@file ReglaClasificacion.hpp
-  * @brief Fichero cabecera de la clase AlgoritmoPG
+  * @brief Fichero cabecera de la clase ReglaClasificacion
   *
   */
 
@@ -71,7 +71,7 @@ class ReglaClasificacion {
 		  * @brief Operador de igualdad
 		  */
 
-		bool operator== (const ReglaClasificacion & otra_regla) = default;
+		bool operator== (const ReglaClasificacion & otra_regla) const;
 
 		/**
 		  * @brief Consultar el número de antecedentes que conforma la regla
@@ -87,6 +87,8 @@ class ReglaClasificacion {
 		  */
 
 		void cambiar_clase(const std::string & nueva_clase);
+
+		std::string consultar_clase() const;
 
 		/**
 		  * @brief Modificar un antecedente con un nuevo valor.
@@ -135,11 +137,11 @@ class ReglaClasificacion {
 													 const ReglaClasificacion & exp);
 
 
-}
+};
 
 
 
 
 } // namespace algoritmos_poblacion_expresiones
 
-#enfif
+#endif
