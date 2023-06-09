@@ -75,10 +75,12 @@ algoritmos_poblacion_expresiones_dep = declare_dependency(
 #
 #
 
+argparse_dep = dependency('argparse', required : true)
+
 main = executable(
 	'main',
 	'src/main.cpp',
-	dependencies : algoritmos_poblacion_expresiones_dep
+	dependencies : [algoritmos_poblacion_expresiones_dep, argparse_dep]
 )
 
 

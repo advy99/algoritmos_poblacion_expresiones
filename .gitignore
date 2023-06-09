@@ -22,3 +22,7 @@ CMakeFiles/
 datos/
 salidas_png/
 salidas_ejecuciones/
+
+*conan*.sh
+conan_meson_native.ini
+*.pc
