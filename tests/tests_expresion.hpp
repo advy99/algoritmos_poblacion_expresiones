@@ -221,7 +221,7 @@ TEST (Expresion, CruzarArbol) {
 
 TEST ( Expresion, LeerFichero) {
 
-	algoritmos_poblacion_expresiones::Expresion exp1(std::string("tests/expresion_prueba.txt"), 20, 9);
+	algoritmos_poblacion_expresiones::Expresion exp1(std::string("../tests/expresion_prueba.txt"), 20, 9);
 
 	std::string solucion = exp1.string_expresion();
 
