@@ -1,0 +1,3 @@
+option('gprof', type : 'boolean', value : false)
+option('openmp', type : 'boolean', value : true)
+option('docs', type : 'boolean', value : true)
