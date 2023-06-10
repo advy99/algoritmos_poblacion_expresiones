@@ -10,37 +10,107 @@
 	#include <omp.h>
 #endif
 
+#include <argparse/argparse.hpp>
 
 int main(int argc, char ** argv){
 
-	if ( argc < 12 || argc > 14 ) {
-		std::cerr << "Error en el número de parámetros\n"
-					 << "\t Uso: " << argv[0] << " <fichero_datos> <tam_poblacion> <prob_variable> <profundidad_max> \n"
-					 << "\t\t\t" << " <num_evaluaciones> <prob_cruce_gp> <prob_cruce_ga> <prob_mutacion_gp> <prob_mutacion_ga> <prob_cruce_intranicho> <tam_torneo> [num_trabajos] [semilla] "
-					 << std::endl;
-		exit(-1);
+	argparse::ArgumentParser program("Algoritmos poblacion expresiones");
+
+
+	program.add_argument("--data_path")
+			.help("Path to the data")
+			.required();
+
+	program.add_argument("--seed")
+			.help("Random seed to use")
+			.scan<'i', int>()
+			.default_value(42);
+
+	program.add_argument("--poblation_size")
+			.help("Poblation size")
+			.scan<'i', int>()
+			.default_value(50);
+
+	program.add_argument("--variable_prob")
+			.help("Probability of a node to be a variable")
+			.scan<'g', double>()
+			.default_value(0.3);
+
+	program.add_argument("--max_depth")
+			.help("Max. depth for the tree")
+			.scan<'i', int>()
+			.default_value(20);
+
+	program.add_argument("--max_evaluations")
+			.help("Max. number of evaluations")
+			.scan<'i', int>()
+			.default_value(100000);
+
+	program.add_argument("--gp_offspring_prob")
+			.help("Probability of generate offspring from a pair of indidivuals in GP")
+			.scan<'g', double>()
+			.default_value(0.75);
+
+	program.add_argument("--gap_offspring_prob")
+			.help("Probability of generate offspring from a pair of indidivuals in GA-P")
+			.scan<'g', double>()
+			.default_value(0.75);
+
+	program.add_argument("--gp_mutation_prob")
+			.help("Probability of mutate an indidivual in GP")
+			.scan<'g', double>()
+			.default_value(0.05);
+
+	program.add_argument("--gap_mutation_prob")
+			.help("Probability of mutate an indidivual in GA-P")
+			.scan<'g', double>()
+			.default_value(0.05);
+
+	program.add_argument("--in_niche_offspring_prob")
+			.help("Probability for an offspring to be generated inside a niche")
+			.scan<'g', double>()
+			.default_value(0.3);
+
+	program.add_argument("--tournament_size")
+			.help("Tournament size")
+			.scan<'i', int>()
+			.default_value(100);
+
+	program.add_argument("--num_threads")
+			.help("Number of threads to use")
+			.scan<'i', int>()
+			.default_value(2);
+
+
+
+	try {
+		program.parse_args(argc, argv);
+	}
+		catch (const std::runtime_error& err) {
+		std::cerr << err.what() << std::endl;
+		std::cerr << program;
+		return 1;
 	}
 
-	int semilla;
 
-	if ( argc == 14 ){
-		semilla = atoi(argv[13]);
-	} else {
-		semilla = std::time(nullptr);
-	}
+	std::string data_path = program.get<std::string>("--data_path");
 
-	int tam_pob = atoi(argv[2]);
-	double prob_variable = atof(argv[3]);
-	int prof_max_expr = atoi(argv[4]);
-	int evaluaciones = atoi(argv[5]);
-	double prob_cruce_gp = atof(argv[6]);
-	double prob_cruce_ga = atof(argv[7]);
-	double prob_muta_gp = atof(argv[8]);
-	double prob_muta_ga = atof(argv[9]);
-	double prob_cruce_intra = atof(argv[10]);
-	int tam_torneo = atoi(argv[11]);
+	int semilla = program.get<int>("--seed");
 
-	int num_trabajos = atoi(argv[12]);
+	int tam_pob = program.get<int>("--poblation_size");
+	double prob_variable = program.get<double>("--variable_prob");
+	int prof_max_expr = program.get<int>("--max_depth");
+	int evaluaciones = program.get<int>("--max_evaluations");
+	double prob_cruce_gp = program.get<double>("--gp_offspring_prob");
+	double prob_cruce_ga = program.get<double>("--gap_offspring_prob");
+	double prob_muta_gp = program.get<double>("--gp_mutation_prob");
+	double prob_muta_ga = program.get<double>("--gap_mutation_prob");
+	double prob_cruce_intra = program.get<double>("--in_niche_offspring_prob");
+	int tam_torneo = program.get<int>("--tournament_size");
+
+	int num_trabajos = program.get<int>("--num_threads");
+
+
 
 	algoritmos_poblacion_expresiones::Parametros parametros_ejecucion(evaluaciones, algoritmos_poblacion_expresiones::error_cuadratico_medio, prob_cruce_gp,
 		 																	  prob_cruce_ga, prob_muta_gp,
@@ -57,7 +127,7 @@ int main(int argc, char ** argv){
 
 	int semilla_original = semilla;
 	Random::set_seed(semilla);
-	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double, double>(std::string(argv[1]), '@', ',');
+	auto datos = algoritmos_poblacion_expresiones::preprocesado::leer_datos<double, double>(data_path, '@', ',');
 	datos = algoritmos_poblacion_expresiones::preprocesado::reordenar_datos_aleatorio(datos.first, datos.second);
 	auto train_test_split = algoritmos_poblacion_expresiones::preprocesado::separar_train_test(datos.first, datos.second);
 
